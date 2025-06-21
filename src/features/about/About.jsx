@@ -23,7 +23,7 @@ function About() {
               Front-End <br /> React Developer
             </h1>
             <h2 className="text-xl max-sm:hidden">
-              Hi, I'm Shiv Shankar Singh. A passionate Front-end React Developer{" "}
+              Hi, I&apos;m Shiv Shankar Singh. A passionate Front-end React Developer{" "}
               <br /> based in Varanasi,India. 📍
             </h2>
           </div>
