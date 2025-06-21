@@ -1,35 +1,35 @@
 function ContactSocials() {
   const socials = [
     {
-      social: "email",
-      un: "shetemanav38@gmail.com",
-      href: "mailto:shetemanav38@gmail.com",
+      social: "Email",
+      un: "singhshiv0427@gmail.com",
+      href: "mailto:singhshiv0427@gmail.com",
     },
     {
-      social: "github",
-      un: "manavss",
-      href: "https://www.github.com/manavss/",
+      social: "Linkedin",
+      un: "shiv-shankar-singh-",
+      href: "https://www.linkedin.com/in/shiv-shankar-singh-/",
     },
     {
-      social: "linkedin",
-      un: "manavshete",
-      href: "https://www.linkedin.com/in/manav-shete-aa600a194/",
+      social: "Github",
+      un: "sh1v-max",
+      href: "https://www.github.com/sh1v-max/",
     },
     {
-      social: "instagram",
-      un: "mannaavvv_",
-      href: "https://www.instagram.com/mannaavvv_",
+      social: "Instagram",
+      un: "singh-shiv",
+      href: "https://www.instagram.com/wiwiwiwi.exe/",
     },
     {
-      social: "frontend mentor",
-      un: "manavss",
-      href: "https://www.frontendmentor.io/profile/manavss",
+      social: "MonkeyType",
+      un: "wazir",
+      href: "https://monkeytype.com/profile/wazir",
     },
-{
-social:"dev.to",
-un:"manavss",
-href:"https://www.dev.to"
-}
+    {
+      social: "LeetCode",
+      un: "shiv0427",
+      href: "https://leetcode.com/u/shiv0427/",
+    },
   ];
   return (
     <div className="line-container flex flex-col">
