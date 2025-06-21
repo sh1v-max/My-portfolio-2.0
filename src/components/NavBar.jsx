@@ -1,9 +1,9 @@
-/* eslint-disable react/prop-types */
 import vscode from "../assets/icons/vscode.ico";
+
 const list = ["File", "Edit", "View", "Go", "Run", "Terminal", "Help"];
 function NavBar() {
   return (
-    <header className={`  bg-titlebarBg text-textColor `}>
+    <header className={`border bg-titlebarBg text-textColor `}>
       <nav
         className={`mx-3 flex h-8 items-center justify-between  text-center`}
       >
@@ -19,7 +19,7 @@ function NavBar() {
             })}
           </ul>
         </div>
-        <h1 className=" md:mr-auto">Manav Shete-Visual Studio Code</h1>
+        <h1 className=" md:mr-auto">Singh Shiv - Visual Studio Code</h1>
         <div className="ml-auto flex gap-x-2">
           <div className="h-3 w-3 rounded-full bg-yellow-200 md:h-4 md:w-4"></div>
           <div className="h-3 w-3 rounded-full bg-green-500 md:h-4 md:w-4"></div>

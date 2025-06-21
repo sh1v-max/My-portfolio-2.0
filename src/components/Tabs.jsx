@@ -38,6 +38,7 @@ const TabsItems = [
     icon: `${markdown_icon}`,
   },
 ];
+
 function Tabs() {
   const location = useLocation();
   // console.log(location);
