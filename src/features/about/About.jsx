@@ -4,21 +4,14 @@ import html_icon from "../../assets/icons/html_icon.svg";
 import css_icon from "../../assets/icons/css_icon.svg";
 import js_icon from "../../assets/icons/js_icon.svg";
 import tailwind_icon from "../../assets/icons/tw-icon.svg";
-import python_icon from "../../assets/icons/python-5.svg";
+
 function About() {
-  const techStack = [
-    html_icon,
-    css_icon,
-    js_icon,
-    react_icon,
-    tailwind_icon,
-    python_icon,
-  ];
+  const techStack = [html_icon, css_icon, js_icon, react_icon, tailwind_icon];
 
   return (
     <HelmetProvider>
       <Helmet>
-        <title>Manav Shete | About</title>
+        <title>Shiv | About</title>
       </Helmet>
       <div className=" flex flex-col  items-center justify-center gap-y-4 p-8 text-textColor xl:gap-y-8 ">
         <div className="flex flex-col items-center gap-x-48 xl:flex-row">
@@ -30,8 +23,8 @@ function About() {
               Front-End <br /> React Developer
             </h1>
             <h2 className="text-xl max-sm:hidden">
-              Hi, I'm Manav Shete. A passionate Front-end React Developer <br />{" "}
-              based in Mumbai,India. 📍
+              Hi, I'm Shiv Shankar Singh. A passionate Front-end React Developer{" "}
+              <br /> based in Varanasi,India. 📍
             </h2>
           </div>
         </div>
