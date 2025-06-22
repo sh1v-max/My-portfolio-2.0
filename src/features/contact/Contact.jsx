@@ -10,7 +10,7 @@ function Contact() {
       name: "",
       email: "",
       subject: "",
-      textmessage: "",
+      message: "",
     },
   });
 
@@ -55,7 +55,7 @@ function Contact() {
           <p className="text-3xl text-textColor">Let&apos;s Connect</p>
           <form
             ref={formData}
-            className="space-y-4 pt-5 text-textColor"
+            className="space-y-4 pt-5 text-textColor" 
             onSubmit={handleSubmit(sendEmail)}
           >
             <div className="flex flex-col  ">
@@ -132,17 +132,17 @@ function Contact() {
             <div className="flex flex-col">
               <label
                 className="text-base font-semibold md:text-lg"
-                htmlFor="textmessage"
+                htmlFor="message"
               >
                 MESSAGE
               </label>
               <textarea
                 className="w-full  bg-articleBg p-2  text-xl focus:border-accentColor focus:outline-none focus:ring-1 focus:ring-accentColor"
-                id="textmessage"
-                name="textmessage"
+                id="message"
+                name="message"
                 cols="30"
                 rows="6"
-                {...register("textmessage", {
+                {...register("message", {
                   required: {
                     value: true,
                     message: "Message is required",
@@ -158,7 +158,7 @@ function Contact() {
                 })}
               ></textarea>
               <p className="error text-sm text-red-600">
-                {errors.textmessage?.message}{" "}
+                {errors.message?.message}{" "}
               </p>
             </div>
             <button
