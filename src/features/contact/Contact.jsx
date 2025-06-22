@@ -55,7 +55,7 @@ function Contact() {
           <p className="text-3xl text-textColor">Let&apos;s Connect</p>
           <form
             ref={formData}
-            className="space-y-4 pt-5 text-textColor" 
+            className="space-y-4 pt-5 text-textColor"
             onSubmit={handleSubmit(sendEmail)}
           >
             <div className="flex flex-col  ">
