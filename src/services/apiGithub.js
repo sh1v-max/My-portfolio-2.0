@@ -1,6 +1,6 @@
 import axios from "axios";
 const API_USER_URL = "";
-const API_REPOS_URL = "https://api.github.com/users/sh1v-max/repos";
+const API_REPOS_URL = "";
 
 export async function getUser() {
   try {
