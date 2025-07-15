@@ -7,6 +7,11 @@ function ArticleCard({ url, image, title, desc }) {
       target="_blank"
       rel="noreferrer"
     >
+      <img
+        src={image}
+        className=" h-[160px] rounded-b-xl rounded-t-lg "
+        alt=""
+      />
     </a>
   );
 }
