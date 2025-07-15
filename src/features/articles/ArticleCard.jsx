@@ -12,6 +12,11 @@ function ArticleCard({ url, image, title, desc }) {
         className=" h-[160px] rounded-b-xl rounded-t-lg "
         alt=""
       />
+
+      <div className="flex flex-col gap-y-2 p-4">
+        <h2 className=" text-2xl font-semibold text-accentColor">{title}</h2>
+        <p className=" text-base font-medium text-white">{desc}</p>
+      </div>
     </a>
   );
 }
