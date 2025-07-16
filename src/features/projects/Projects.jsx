@@ -7,7 +7,7 @@ function projects() {
       <Helmet>
         <title>Manav Shete | Projects</title>
       </Helmet>
-      <div className=" bg-mainBg p-8">
+      {/* <div className=" bg-mainBg p-8">
         <h1 className="pb-5 text-3xl text-textColor">
           Stuff I&apos;ve Built So Far
         </h1>
@@ -26,7 +26,7 @@ function projects() {
             );
           })}
         </div>
-      </div>
+      </div> */}
     </HelmetProvider>
   );
 }

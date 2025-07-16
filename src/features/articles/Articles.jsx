@@ -10,7 +10,7 @@ function Articles() {
       <Helmet>
         <title>Manav Shete | Articles</title>
       </Helmet>
-      <div className="p-8">
+      {/* <div className="p-8">
         <h1 className="pb-8 text-3xl font-semibold text-textColor">
           Recent posts from{" "}
           <a
@@ -36,7 +36,7 @@ function Articles() {
               );
             })}
         </div>
-      </div>
+      </div> */}
     </HelmetProvider>
   );
 }
