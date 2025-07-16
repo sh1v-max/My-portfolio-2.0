@@ -5,7 +5,7 @@ function projects() {
   return (
     <HelmetProvider>
       <Helmet>
-        <title>Manav Shete | Projects</title>
+        <title>Shiv | Projects</title>
       </Helmet>
       {/* <div className=" bg-mainBg p-8">
         <h1 className="pb-5 text-3xl text-textColor">

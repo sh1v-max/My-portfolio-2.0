@@ -14,7 +14,7 @@ function Github() {
   return (
     <HelmetProvider>
       <Helmet>
-        <title>Manav Shete | Github</title>
+        <title>Shiv | Github</title>
       </Helmet>
       <div className="space-y-8 bg-mainBg p-4 md:p-8">
         <div className="flex h-24 max-w-full items-center justify-center gap-x-5 divide-x-2 divide-accentColor  rounded-lg bg-articleBg">
