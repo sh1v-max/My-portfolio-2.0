@@ -6,6 +6,20 @@ import { useLoaderData } from "react-router";
 
 function Github() {
   const [user, repos] = useLoaderData();
+
+  if (!user || !repos) {
+    return (
+      <HelmetProvider>
+        <Helmet>
+          <title>Shiv | Github</title>
+        </Helmet>
+        <div className="flex h-full w-full items-center justify-center p-8 text-xl text-textColor">
+          Failed to load GitHub data. Please try again later.
+        </div>
+      </HelmetProvider>
+    );
+  }
+
   const repoInfo = repos.filter((r) => r.stargazers_count > 0);
   const theme = {
     dark: ["#161B22", "#0e4429", "#006d32", "#26a641", "#39d353"],
@@ -59,7 +73,7 @@ function Github() {
         </div>
         <div className="h-full w-full  text-textColor">
           <ActivityCalendar
-            username="manavss"
+            username="sh1v-max"
             fontSize={17}
             theme={theme}
             hideColorLegend
@@ -72,7 +86,7 @@ function Github() {
 }
 
 export async function loader() {
-  const github = getUser();
+  const github = await getUser();
   return github;
 }
 

@@ -12,6 +12,8 @@ dist
 dist-ssr
 *.local
 .env
+portfolio_analysis_before_update.md
+portfolio_file_reference_before_update.md
 
 # Editor directories and files
 .vscode/*

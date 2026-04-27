@@ -1,6 +1,7 @@
 import axios from "axios";
 const API_USER_URL = "https://api.github.com/users/sh1v-max";
-const API_REPOS_URL = "https://api.github.com/users/sh1v-max/repos";
+const API_REPOS_URL =
+  "https://api.github.com/users/sh1v-max/repos?per_page=100";
 
 export async function getUser() {
   try {
@@ -10,6 +11,6 @@ export async function getUser() {
     return [responseUser.data, responseRepos.data];
   } catch (error) {
     console.error("Error fetching user:", error);
-    return null;
+    return [null, null];
   }
 }
