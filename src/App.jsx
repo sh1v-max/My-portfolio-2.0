@@ -6,7 +6,9 @@ import Projects from "./features/projects/Projects";
 import Articles, {
   loader as ArticlesLoader,
 } from "./features/articles/Articles";
-import Github, { loader as GithubLoader } from "./features/github/Github";
+// import Github, { loader as GithubLoader } from "./features/github/Github";
+import Github from "./features/github/Github";
+import { githubLoader } from "./features/github/githubLoader";
 import Settings from "./features/settings/Settings";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
@@ -41,7 +43,7 @@ const router = createBrowserRouter([
       {
         path: "/github",
         element: <Github />,
-        loader: GithubLoader,
+        loader: githubLoader,
       },
       {
         path: "/settings",

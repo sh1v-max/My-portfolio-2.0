@@ -1,7 +1,8 @@
 import RepoCard from "./RepoCard";
 import ActivityCalendar from "react-github-calendar";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { getUser } from "../../services/apiGithub";
+// i moved this in a separate component call
+// import { getUser } from "../../services/apiGithub";
 import { useLoaderData } from "react-router";
 
 function Github() {
@@ -85,9 +86,9 @@ function Github() {
   );
 }
 
-export async function loader() {
-  const github = await getUser();
-  return github;
-}
+// export async function loader() {
+//   const github = await getUser();
+//   return github;
+// }
 
 export default Github;
