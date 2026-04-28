@@ -3,7 +3,7 @@ import Tag from "./Tag";
 
 function ProjectCard({ img, title, desc, tags, srcCode, demo }) {
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-explorerBorder bg-articleBg transition-all duration-500 hover:-translate-y-2 hover:border-accentColor/50 hover:shadow-[0_8px_40px_rgba(0,0,0,0.4)]">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-explorerBorder bg-articleBg transition-all duration-500 hover:border-accentColor/50 hover:shadow-[0_8px_40px_rgba(0,0,0,0.4)]">
       {/* Image Section */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 z-10 bg-gradient-to-t from-articleBg/80 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
