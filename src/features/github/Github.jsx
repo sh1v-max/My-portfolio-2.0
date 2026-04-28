@@ -94,7 +94,7 @@ export default function Github() {
         <title>Shiv | Github Dashboard</title>
       </Helmet>
 
-      <div className="mx-auto max-w-7xl space-y-12 bg-mainBg p-4 pb-20 md:p-8">
+      <div className="mx-auto w-full max-w-7xl space-y-12 overflow-hidden bg-mainBg p-4 pb-20 md:p-8">
         {/* hero profile header */}
         <div className="relative overflow-hidden rounded-2xl border border-explorerBorder bg-articleBg p-8 shadow-lg">
           <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-accentColor opacity-5 blur-3xl"></div>
