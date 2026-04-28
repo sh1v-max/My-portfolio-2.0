@@ -1,18 +1,18 @@
 import ProjectCard from "./ProjectCard";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { project } from "./project";
-function projects() {
+import { projects } from "./project";
+function Projects() {
   return (
     <HelmetProvider>
       <Helmet>
         <title>Shiv | Projects</title>
       </Helmet>
-      {/* <div className=" bg-mainBg p-8">
+      <div className=" bg-mainBg p-8">
         <h1 className="pb-5 text-3xl text-textColor">
           Stuff I&apos;ve Built So Far
         </h1>
         <div className=" grid gap-y-5 md:grid-cols-2 md:gap-x-5 xl:grid-cols-4">
-          {project.map((p) => {
+          {projects.map((p) => {
             return (
               <ProjectCard
                 key={p.title}
@@ -26,9 +26,9 @@ function projects() {
             );
           })}
         </div>
-      </div> */}
+      </div>
     </HelmetProvider>
   );
 }
 
-export default projects;
+export default Projects;
