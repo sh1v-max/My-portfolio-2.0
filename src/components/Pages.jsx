@@ -6,7 +6,7 @@ function Pages() {
   const isLoading = navigation.state === "loading";
 
   return (
-    <div className="w-full overflow-x-auto bg-mainBg">
+    <div className="w-full overflow-x-hidden bg-mainBg">
       <Tabs />
       <section className="relative min-h-[85vh] bg-mainBg">
         {isLoading && (
