@@ -2,6 +2,8 @@
 
 A personal portfolio website inspired by the Visual Studio Code editor, designed to showcase my skills, projects, and articles. 
 
+**Live Demo:** [singhshiv.netlify.app](https://singhshiv.netlify.app/)
+
 ## 🚀 Features
 
 - **VS Code Inspired UI:** Familiar layout including an Explorer, Sidebar, Tabs, and Bottom Bar.
@@ -79,3 +81,13 @@ You can easily switch between the following themes:
 ## 👨‍💼 About Me
 
 I'm **Shiv Shankar Singh**, a passionate Front-End React Developer based in Varanasi, India. I specialize in building responsive, accessible, and performant web applications using modern web technologies.
+
+## 📬 Contact
+
+- **Email:** [singhshiv0427@gmail.com](mailto:singhshiv0427@gmail.com)
+- **LinkedIn:** [shiv-shankar-singh-](https://www.linkedin.com/in/shiv-shankar-singh-/)
+- **GitHub:** [sh1v-max](https://github.com/sh1v-max/)
+
+## 📄 License
+
+This project is open-source and available under the [MIT License](LICENSE).
