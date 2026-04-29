@@ -1,4 +1,5 @@
 import ProjectCard from "./ProjectCard";
+import MiniProjectsCarousel from "./MiniProjectsCarousel";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { projects } from "./project";
 
@@ -51,6 +52,9 @@ function Projects() {
           </div>
         </div>
       </section>
+
+      {/* Mini Projects Carousel */}
+      <MiniProjectsCarousel />
     </HelmetProvider>
   );
 }
