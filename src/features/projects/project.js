@@ -1,42 +1,52 @@
-import dictionary from "../../assets/images/dictionary.jpg";
-import rest from "../../assets/images/rest.jpg";
-import vscode from "../../assets/images/vscode.jpg";
-import pizza from "../../assets/images/pizzapic.jpg";
-export const project = [
+import netflix from "../../assets/images/netflix.png";
+import biteswift from "../../assets/images/biteswift.png";
+import bookverse from "../../assets/images/bookverse.png";
+import portfolio from "../../assets/images/portfolio.png";
+
+export const projects = [
   {
-    title: "Vs-Code Portfolio",
+    title: "Netflix-GPT",
     description:
-      "A Vscode themed developer portfolio website built with React.js and TailwindCSS.",
-    image: vscode,
-    tags: ["react", "tailwind", "axios"],
-    sourceCode: "https://github.com/manavss/vscode-portfolio-main",
-    demo: "https://vscode-portfolio-main.vercel.app/",
+      "AI-powered streaming platform with Firebase auth, dynamic movie carousels, and GPT-driven semantic search.",
+    image: netflix,
+    tags: ["react", "redux-toolkit", "firebase", "openai", "tailwind", "react-router", "tmdb-api", "vite"],
+    sourceCode: "https://github.com/sh1v-max/Netflix-GPT",
+    demo: "https://netflixgpt-e671d.firebaseapp.com/",
   },
   {
-    title: "Fast React Pizza",
+    title: "BiteSwift",
     description:
-      " This pizza store prioritize UX and clean UI, making it easy for customers to order pizzas.",
-    image: pizza,
-    tags: ["react", "tailwind", "redux"],
-    sourceCode: "https://github.com/manavss/fast-react-pizza",
-    demo: "https://fast-reactredux-pizza.netlify.app/",
+      "High-fidelity food delivery app with real-time cart management, shimmer UI, and lazy-loaded routes.",
+    image: biteswift,
+    tags: ["react", "redux-toolkit", "tailwind", "vite", "react-router", "swiggy-api", "custom-hooks"],
+    sourceCode: "https://github.com/sh1v-max/BiteSwift",
+    demo: "https://yourbiteswift.netlify.app/",
   },
   {
-    title: "Rest Countries",
+    title: "BookVerse",
     description:
-      "A webapp that allows you to search for countries an thier details .",
-    image: rest,
-    tags: ["react", "tailwind", "context-api"],
-    sourceCode: "https://github.com/manavss/restCountries",
-    demo: "https://restcountrydetails.netlify.app/",
+      "Modern book discovery platform with search, trending sections, and detailed book pages via Open Library API.",
+    image: bookverse,
+    tags: ["react", "tailwind", "react-router", "open-library-api", "vite", "custom-hooks"],
+    sourceCode: "https://github.com/sh1v-max/BookVerse",
+    demo: "https://bookversedot.netlify.app/",
   },
   {
-    title: "Dictionary App",
+    title: "Portfolio",
     description:
-      "A Dictionary app that lets you search words in and bookmark them for future reference.",
-    image: dictionary,
-    tags: ["react", "axios", "material-ui"],
-    sourceCode: "https://github.com/manavss/dictionary",
-    demo: "https://mydictionarysearch.netlify.app/",
+      "A developer portfolio with multiple themes, a beautiful UI, and smooth animations.",
+    image: portfolio,
+    tags: ["react", "tailwind", "vite", "react-router", "context-api", "tw-colors", "react-helmet-async"],
+    sourceCode: "https://github.com/sh1v-max/My-portfolio-2.0",
+    demo: "https://singhshiv.netlify.app/",
+  },
+  {
+    title: "Coming Soon...",
+    description:
+      "I'm currently brewing up something exciting! Stay tuned for my next big project.",
+    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Coming+Soon",
+    tags: ["top-secret", "cooking", "stay-tuned"],
+    sourceCode: "#",
+    demo: "#",
   },
 ];
