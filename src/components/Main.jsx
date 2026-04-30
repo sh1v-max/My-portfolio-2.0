@@ -8,7 +8,7 @@ import { useTheme } from "../context/ThemeContext";
 function Main() {
   const { theme } = useTheme();
   return (
-    <div className={ ` theme-${theme}`}>
+    <div className={` theme-${theme}`}>
       <NavBar />
       <main className=" flex">
         <SideBar />

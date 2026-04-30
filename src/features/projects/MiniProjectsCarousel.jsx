@@ -113,7 +113,7 @@ function MiniProjectsCarousel() {
           {/* explore all mini projects */}
           <div className="mt-12 flex flex-col items-center gap-3">
             <Link
-              to="#"
+              to="/frontend-lab"
               className="group inline-flex items-center gap-3 rounded-xl border border-accentColor/30 bg-accentColor/5 px-7 py-3.5 text-sm font-semibold text-accentColor backdrop-blur-sm transition-all duration-300 hover:border-accentColor/60 hover:bg-accentColor/15 hover:shadow-[0_0_24px_rgba(136,192,208,0.15)] active:scale-[0.97]"
             >
               Explore All Mini Projects
