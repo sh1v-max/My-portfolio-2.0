@@ -28,14 +28,19 @@ const TabsItems = [
     icon: `${js_icon}`,
   },
   {
-    name: "articles.json",
-    path: "/articles",
-    icon: `${json_icon}`,
+    name: "frontend-lab.jsx",
+    path: "/frontend-lab",
+    icon: `${react_icon}`,
   },
   {
     name: "github.md",
     path: "/github",
     icon: `${markdown_icon}`,
+  },
+  {
+    name: "articles.json",
+    path: "/articles",
+    icon: `${json_icon}`,
   },
 ];
 

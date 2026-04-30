@@ -30,21 +30,26 @@ const explorerItems = [
     icon: `${js_icon}`,
   },
   {
-    name: "articles.json",
-    path: "/articles",
-    icon: `${json_icon}`,
+    name: "frontend-lab.jsx",
+    path: "/frontend-lab",
+    icon: `${react_icon}`,
   },
   {
     name: "github.md",
     path: "/github",
     icon: `${markdown_icon}`,
   },
+  {
+    name: "articles.json",
+    path: "/articles",
+    icon: `${json_icon}`,
+  },
 ];
 
 function Explorer() {
   const [show, setShow] = useState(true);
   return (
-    <div className="border border-cyan-500 flex flex-col items-start  bg-explorerBg text-white max-sm:hidden">
+    <div className="flex flex-col items-start border border-cyan-500  bg-explorerBg text-white max-sm:hidden">
       <h1 className="pl-2 text-2xl font-medium  uppercase">Explorer</h1>
       <div className="flex min-w-[15vw]  flex-col">
         <div

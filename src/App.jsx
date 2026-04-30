@@ -10,6 +10,7 @@ import Articles, {
 import Github from "./features/github/Github";
 import { githubLoader } from "./features/github/githubLoader";
 import Settings from "./features/settings/Settings";
+import UIExperiments from "./features/frontend-lab/UIExperiments";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
 import ErrorPage from "./features/error/ErrorPage";
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
         path: "/github",
         element: <Github />,
         loader: githubLoader,
+      },
+      {
+        path: "/frontend-lab",
+        element: <UIExperiments />,
       },
       {
         path: "/settings",
