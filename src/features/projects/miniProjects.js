@@ -1,9 +1,20 @@
+import countdownTimer from "../../assets/frontend-lab-images/countdown-timer.png"
+import fileExplorer from "../../assets/frontend-lab-images/file-explorer.png"
+import interactiveGrid from "../../assets/frontend-lab-images/interactive-grid.png"
+import typingEffect from "../../assets/frontend-lab-images/typing-effect.png"
+import dragAndDropUpload from "../../assets/frontend-lab-images/drag-and-drop-file.png"
+import indeterminateCheckbox from "../../assets/frontend-lab-images/indeterminate-checkbox.png"
+import trafficLight from "../../assets/frontend-lab-images/traffic-light.png"
+import multiSelectSearch from "../../assets/frontend-lab-images/multi-select-search.png"
+import quizGuru from "../../assets/frontend-lab-images/quiz-guru.png"
+import selectableGrid from "../../assets/frontend-lab-images/selectable-grid.png"
+
 export const miniProjects = [
   {
     title: "Countdown Timer",
     description:
       "Configurable countdown component with real-time tick, pause/resume controls, and smooth circular progress ring.",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Countdown+Timer",
+    image: countdownTimer,
     tags: ["react", "setInterval", "time-calc"],
     sourceCode:
       "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/12-Countdown-timer",
@@ -13,7 +24,7 @@ export const miniProjects = [
     title: "File Explorer",
     description:
       "Hierarchical file system UI with recursive tree rendering, expand/collapse, and file-type icons.",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=File+Explorer",
+    image: fileExplorer,
     tags: ["react", "recursion", "tree-structure"],
     sourceCode:
       "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/13-File-explorer",
@@ -23,7 +34,7 @@ export const miniProjects = [
     title: "Interactive Grid",
     description:
       "Click-to-select grid system with multi-select, highlight states, and useRef-driven grid state management.",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Interactive+Grid",
+    image: interactiveGrid,
     tags: ["react", "useRef", "grid-state"],
     sourceCode:
       "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/14-Interactive-grid",
@@ -33,7 +44,7 @@ export const miniProjects = [
     title: "Typing Effect",
     description:
       "Animated typing text simulation with configurable speed, looping, and backspace deletion effect.",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Typing+Effect",
+    image: typingEffect,
     tags: ["react", "string-manipulation", "timers"],
     sourceCode:
       "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/25-Typing-effect",
@@ -43,7 +54,7 @@ export const miniProjects = [
     title: "Drag & Drop Upload",
     description:
       "File upload zone with drag-and-drop support, file previews, and File API integration.",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Drag+%26+Drop",
+    image: dragAndDropUpload,
     tags: ["react", "file-api", "drag-events"],
     sourceCode:
       "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/26-File-uploader",
@@ -53,8 +64,7 @@ export const miniProjects = [
     title: "Indeterminate Checkbox",
     description:
       "Hierarchical checkbox system with DFS-powered indeterminate states, parent-child sync logic.",
-    image:
-      "https://placehold.co/600x400/1f2428/88c0d0?text=Indeterminate+Checkbox",
+    image: indeterminateCheckbox,
     tags: ["react", "dfs", "refs"],
     sourceCode:
       "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/27-Indeterminate-checkbox",
@@ -64,7 +74,7 @@ export const miniProjects = [
     title: "Traffic Light",
     description:
       "Animated traffic light simulator with state machine transitions, configurable durations per phase.",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Traffic+Light",
+    image: trafficLight,
     tags: ["react", "state-machines", "timers"],
     sourceCode:
       "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/28-Traffic-light",
@@ -74,8 +84,7 @@ export const miniProjects = [
     title: "Multi Select Search",
     description:
       "Advanced user search with pill-style selections, API integration, and full keyboard navigation support.",
-    image:
-      "https://placehold.co/600x400/1f2428/88c0d0?text=Multi+Select+Search",
+    image: multiSelectSearch,
     tags: ["react", "api", "keyboard-nav"],
     sourceCode:
       "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/40-Multi-select-search",
@@ -85,7 +94,7 @@ export const miniProjects = [
     title: "QuizGuru",
     description:
       "Interactive quiz app with scoring, progress tracking, timed questions, and result breakdown.",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=QuizGuru",
+    image: quizGuru,
     tags: ["react", "quiz-logic", "progress"],
     sourceCode:
       "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/41-Quiz-app",
@@ -95,7 +104,7 @@ export const miniProjects = [
     title: "Selectable Grid",
     description:
       "Multi-select grid with drag-to-select, shift-click range selection, and complex selection state logic.",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Selectable+Grid",
+    image: selectableGrid,
     tags: ["react", "drag-select", "complex-state"],
     sourceCode:
       "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/42-Selectable-grid",
