@@ -9,14 +9,14 @@ export default function QuickLinks({ user }) {
         href={user.html_url}
         target="_blank"
         rel="noreferrer"
-        className="flex items-center gap-2 rounded-lg border border-explorerBorder bg-articleBg px-6 py-3 font-semibold text-textColor shadow-sm transition-all hover:-translate-y-1 hover:border-accentColor"
+        className="flex items-center gap-2 rounded-lg border border-explorerBorder bg-articleBg px-6 py-3 font-semibold text-textColor shadow-sm transition-all hover:border-accentColor"
       >
         <GitHubSvg className="h-5 w-5" />
         Visit GitHub Profile
       </a>
       <Link
         to="/contact"
-        className="flex items-center gap-2 rounded-lg bg-accentColor px-6 py-3 font-semibold text-mainBg shadow-sm transition-all hover:-translate-y-1 hover:bg-opacity-90 hover:shadow-md"
+        className="flex items-center gap-2 rounded-lg bg-accentColor px-6 py-3 font-semibold text-mainBg shadow-sm transition-all hover:bg-opacity-90 hover:shadow-md"
       >
         <svg
           width="20"

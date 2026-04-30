@@ -1,3 +1,37 @@
+import toastNotification from "../../../assets/frontend-lab-images/toast-notification.png";
+import starRating from "../../../assets/frontend-lab-images/star-rating.png";
+import wallheaven from "../../../assets/frontend-lab-images/wall-heaven.png";
+import otpInput from "../../../assets/frontend-lab-images/otp-input.png";
+import imageCarousel from "../../../assets/frontend-lab-images/image-carousel.png";
+import searchBar from "../../../assets/frontend-lab-images/search-bar.png";
+import infiniteScrolling from "../../../assets/frontend-lab-images/infinite-scrolling.png";
+import countdownTimer from "../../../assets/frontend-lab-images/countdown-timer.png";
+import fileExplorer from "../../../assets/frontend-lab-images/file-explorer.png";
+import interactiveGrid from "../../../assets/frontend-lab-images/interactive-grid.png";
+import tictactoe from "../../../assets/frontend-lab-images/tic-tac-toe.png";
+import snakeGame from "../../../assets/frontend-lab-images/snake-game.png";
+import multiStepForm from "../../../assets/frontend-lab-images/multi-step-form.png";
+import myDashboard from "../../../assets/frontend-lab-images/my-dashboard.png";
+import memoryGame from "../../../assets/frontend-lab-images/memory-game.png";
+import calendar from "../../../assets/frontend-lab-images/calendar.png";
+import nestedComments from "../../../assets/frontend-lab-images/nested-comments.png";
+import cryptoConverter from "../../../assets/frontend-lab-images/crypto-converter.png";
+import typingEffect from "../../../assets/frontend-lab-images/typing-effect.png";
+import dragAndDropFile from "../../../assets/frontend-lab-images/drag-and-drop-file.png";
+import indeterminateCheckbox from "../../../assets/frontend-lab-images/indeterminate-checkbox.png";
+import trafficLight from "../../../assets/frontend-lab-images/traffic-light.png";
+import faqAccordion from "../../../assets/frontend-lab-images/faq-accordion.png";
+import stopwatch from "../../../assets/frontend-lab-images/stopwatch.png";
+import digitalClock from "../../../assets/frontend-lab-images/digital-clock.png";
+import overlappingCircles from "../../../assets/frontend-lab-images/overlapping-circles.png";
+import calculator from "../../../assets/frontend-lab-images/calculator.png";
+import dialogPopup from "../../../assets/frontend-lab-images/dialog-popup.png";
+import switchComponent from "../../../assets/frontend-lab-images/switch-component.png";
+import roadsideStore from "../../../assets/frontend-lab-images/roadside-store.png";
+import multiSelectSearch from "../../../assets/frontend-lab-images/multi-select-search.png";
+import quizGuru from "../../../assets/frontend-lab-images/quiz-guru.png";
+import selectableGrid from "../../../assets/frontend-lab-images/selectable-grid.png";
+
 export const uiExperiments = [
   // BEGINNER
   {
@@ -5,7 +39,7 @@ export const uiExperiments = [
     description: "Dynamic toast messages with auto-dismiss",
     level: "Beginner",
     category: "UI",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Toast+Notification",
+    image: toastNotification,
     tags: ["useState", "event handling"],
     demo: "https://youtoastnotificationhere.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/05-Toast"
@@ -15,7 +49,7 @@ export const uiExperiments = [
     description: "Interactive 5-star rating system",
     level: "Beginner",
     category: "UI",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Star+Rating",
+    image: starRating,
     tags: ["Click events", "state management"],
     demo: "https://rate-my-star.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/06-Star-rating"
@@ -25,7 +59,7 @@ export const uiExperiments = [
     description: "Image pagination with API integration",
     level: "Beginner",
     category: "API",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=WallHeaven",
+    image: wallheaven,
     tags: ["API calls", "pagination logic"],
     demo: "https://astranoutintheocean.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/07-React-pagination"
@@ -35,7 +69,7 @@ export const uiExperiments = [
     description: "Multi-digit OTP input field",
     level: "Beginner",
     category: "Forms",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=OTP+Input",
+    image: otpInput,
     tags: ["Input focus", "validation"],
     demo: "https://enteryourotp.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/08-React-OTP-Input"
@@ -45,7 +79,7 @@ export const uiExperiments = [
     description: "Responsive image slider",
     level: "Beginner",
     category: "UI",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Image+Carousel",
+    image: imageCarousel,
     tags: ["Array manipulation", "navigation"],
     demo: "https://delightimagecarousel.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/09-Image-carousel"
@@ -55,7 +89,7 @@ export const uiExperiments = [
     description: "Live search with filtering",
     level: "Beginner",
     category: "Forms",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Search+Bar",
+    image: searchBar,
     tags: ["onChange", "array filtering"],
     demo: "https://searchthebar.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS"
@@ -65,7 +99,7 @@ export const uiExperiments = [
     description: "Load more content on scroll",
     level: "Beginner",
     category: "API",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Infinite+Scrolling",
+    image: infiniteScrolling,
     tags: ["Scroll events", "API pagination"],
     demo: "https://keepscrollingthis.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/11-Infinite-scroll"
@@ -75,7 +109,7 @@ export const uiExperiments = [
     description: "Configurable countdown component",
     level: "Beginner",
     category: "Logic",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Countdown+Timer",
+    image: countdownTimer,
     tags: ["setInterval", "time calculations"],
     demo: "https://countdowntimerhere.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/12-Countdown-timer"
@@ -85,7 +119,7 @@ export const uiExperiments = [
     description: "Hierarchical file system UI",
     level: "Beginner",
     category: "UI",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=File+Explorer",
+    image: fileExplorer,
     tags: ["Tree structure", "recursion"],
     demo: "https://fileexplorerjs.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/13-File-explorer"
@@ -95,7 +129,7 @@ export const uiExperiments = [
     description: "Click-to-select grid system",
     level: "Beginner",
     category: "UI",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Interactive+Grid",
+    image: interactiveGrid,
     tags: ["useRef", "grid state management"],
     demo: "https://interactivegridis.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/14-Interactive-grid"
@@ -107,7 +141,7 @@ export const uiExperiments = [
     description: "Classic game with win detection",
     level: "Intermediate",
     category: "Games",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Tic+Tac+Toe",
+    image: tictactoe,
     tags: ["Game logic", "state patterns"],
     demo: "https://magictictactoe.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/15-Tic-Tac-Toe"
@@ -117,7 +151,7 @@ export const uiExperiments = [
     description: "Arrow-key controlled snake game",
     level: "Intermediate",
     category: "Games",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Snake+Game",
+    image: snakeGame,
     tags: ["Keyboard events", "game loops"],
     demo: "https://killmysnake.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/16-Snake-game"
@@ -127,7 +161,7 @@ export const uiExperiments = [
     description: "Progress-based form stepper",
     level: "Intermediate",
     category: "Forms",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Multi-Step+Form",
+    image: multiStepForm,
     tags: ["Form validation", "multi-step UI"],
     demo: "https://multistepstepper.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/19-React-stepper"
@@ -137,7 +171,7 @@ export const uiExperiments = [
     description: "Data visualization dashboard",
     level: "Intermediate",
     category: "UI",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Dashboard+Tabs",
+    image: myDashboard,
     tags: ["Tab navigation", "data display"],
     demo: "https://reactdashboardtab.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/20-React-tab"
@@ -147,7 +181,7 @@ export const uiExperiments = [
     description: "Card-matching memory challenge",
     level: "Intermediate",
     category: "Games",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Memory+Game",
+    image: memoryGame,
     tags: ["Game state", "animations"],
     demo: "https://doyourmemory.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/21-Memory-game"
@@ -157,7 +191,7 @@ export const uiExperiments = [
     description: "Interactive calendar component",
     level: "Intermediate",
     category: "UI",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Simple+Calendar",
+    image: calendar,
     tags: ["Date manipulation", "rendering"],
     demo: "https://reactcalendarme.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/22-Calendar"
@@ -167,7 +201,7 @@ export const uiExperiments = [
     description: "Reddit-style comment system",
     level: "Intermediate",
     category: "UI",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Nested+Comments",
+    image: nestedComments,
     tags: ["Recursive components", "threading"],
     demo: "https://discusskarma.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/23-Nested-comments"
@@ -177,7 +211,7 @@ export const uiExperiments = [
     description: "Real-time cryptocurrency converter",
     level: "Intermediate",
     category: "API",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Crypto+Converter",
+    image: cryptoConverter,
     tags: ["API integration", "calculations"],
     demo: "https://striffcrypto.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/24-Crypto-converter"
@@ -187,7 +221,7 @@ export const uiExperiments = [
     description: "Animated typing text simulation",
     level: "Intermediate",
     category: "UI",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Typing+Effect",
+    image: typingEffect,
     tags: ["String manipulation", "timers"],
     demo: "https://typingeffecthere.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/25-Typing-effect"
@@ -197,7 +231,7 @@ export const uiExperiments = [
     description: "File upload with drag-and-drop",
     level: "Intermediate",
     category: "Forms",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Drag+%26+Drop",
+    image: dragAndDropFile,
     tags: ["File API", "drag events"],
     demo: "https://uploadfilehere.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/26-File-uploader"
@@ -207,7 +241,7 @@ export const uiExperiments = [
     description: "Hierarchical checkbox system",
     level: "Intermediate",
     category: "Logic",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Indeterminate+Checkbox",
+    image: indeterminateCheckbox,
     tags: ["DFS algorithm", "refs"],
     demo: "https://indeterminate-checkbox.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/27-Indeterminate-checkbox"
@@ -217,7 +251,7 @@ export const uiExperiments = [
     description: "Animated traffic light simulator",
     level: "Intermediate",
     category: "Logic",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Traffic+Light",
+    image: trafficLight,
     tags: ["State machines", "timers"],
     demo: "https://trafficlighthere.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/28-Traffic-light"
@@ -229,7 +263,7 @@ export const uiExperiments = [
     description: "Expandable FAQ with bulk operations",
     level: "Advanced",
     category: "UI",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=FAQ+Accordion",
+    image: faqAccordion,
     tags: ["Complex state management"],
     demo: "https://faq-accordiondot.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/29-FAQ-component"
@@ -239,7 +273,7 @@ export const uiExperiments = [
     description: "Precision stopwatch with lap timing",
     level: "Advanced",
     category: "Logic",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Stopwatch",
+    image: stopwatch,
     tags: ["High-precision timing", "persistence"],
     demo: "https://isyourstopwatch.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/30-Stopwatch"
@@ -249,7 +283,7 @@ export const uiExperiments = [
     description: "Live system-synced digital clock",
     level: "Advanced",
     category: "UI",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Digital+Clock",
+    image: digitalClock,
     tags: ["Real-time updates", "formatting"],
     demo: "https://sync-clock.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/31-Digital-clock"
@@ -259,7 +293,7 @@ export const uiExperiments = [
     description: "2D collision detection system",
     level: "Advanced",
     category: "Logic",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Overlapping+Circles",
+    image: overlappingCircles,
     tags: ["Geometry calculations", "interactions"],
     demo: "https://overlappingcircles.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/32-Overlapping-circles"
@@ -269,7 +303,7 @@ export const uiExperiments = [
     description: "Full-featured arithmetic calculator",
     level: "Advanced",
     category: "Logic",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Calculator",
+    image: calculator,
     tags: ["Expression parsing", "operations"],
     demo: "https://npmcalculator.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/34-Calculator"
@@ -279,7 +313,7 @@ export const uiExperiments = [
     description: "Accessible modal with React Portals",
     level: "Advanced",
     category: "UI",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Dialog+Popup",
+    image: dialogPopup,
     tags: ["Portals", "accessibility", "focus trap"],
     demo: "https://dialogpopup.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/36-Dialog"
@@ -289,7 +323,7 @@ export const uiExperiments = [
     description: "Accessible theme/settings switch",
     level: "Advanced",
     category: "UI",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Switch+Component",
+    image: switchComponent,
     tags: ["ARIA compliance", "accessibility"],
     demo: "https://reactswitch.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/37-Switch"
@@ -299,7 +333,7 @@ export const uiExperiments = [
     description: "eCommerce with breadcrumbs navigation",
     level: "Advanced",
     category: "UI",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=RoadsideStore",
+    image: roadsideStore,
     tags: ["Routing", "state management"],
     demo: "https://roadsidestore.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/39-Breadcrumbs"
@@ -309,7 +343,7 @@ export const uiExperiments = [
     description: "Advanced user search with pills",
     level: "Advanced",
     category: "API",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Multi+Select+Search",
+    image: multiSelectSearch,
     tags: ["API integration", "keyboard nav"],
     demo: "https://multiselectusersearch.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/40-Multi-select-search"
@@ -319,7 +353,7 @@ export const uiExperiments = [
     description: "Interactive quiz with scoring",
     level: "Advanced",
     category: "Logic",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=QuizGuru",
+    image: quizGuru,
     tags: ["Quiz logic", "progress tracking"],
     demo: "https://yourquizguru.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/41-Quiz-app"
@@ -329,7 +363,7 @@ export const uiExperiments = [
     description: "Multi-select grid with drag selection",
     level: "Advanced",
     category: "Logic",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Selectable+Grid",
+    image: selectableGrid,
     tags: ["Complex selection logic"],
     demo: "https://selectablegrid.netlify.app/",
     sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/42-Selectable-grid"

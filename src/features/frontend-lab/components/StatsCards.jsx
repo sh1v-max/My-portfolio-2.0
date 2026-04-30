@@ -15,7 +15,7 @@ export default function StatsCards() {
         return (
           <div
             key={index}
-            className="group flex flex-col items-start gap-3 rounded-xl border border-explorerBorder bg-articleBg/50 p-5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-accentColor/40 hover:shadow-[0_8px_30px_rgba(136,192,208,0.1)]"
+            className="group flex flex-col items-start gap-3 rounded-xl border border-explorerBorder bg-articleBg/50 p-5 backdrop-blur-sm transition-all duration-300 hover:border-accentColor/40 hover:shadow-[0_8px_30px_rgba(136,192,208,0.1)]"
           >
             <div className="rounded-lg bg-accentColor/10 p-2 text-accentColor transition-colors group-hover:bg-accentColor/20">
               <Icon size={20} />

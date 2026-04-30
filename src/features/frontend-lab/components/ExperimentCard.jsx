@@ -18,7 +18,7 @@ export default function ExperimentCard({ project }) {
   };
 
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-explorerBorder bg-articleBg/60 backdrop-blur-sm transition-all duration-500 hover:-translate-y-1.5 hover:border-accentColor/50 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-explorerBorder bg-articleBg/60 backdrop-blur-sm transition-all duration-500 hover:border-accentColor/50 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
       {/* Top subtle glow line */}
       <div className="absolute left-0 top-0 z-10 h-[2px] w-full bg-gradient-to-r from-transparent via-accentColor to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 

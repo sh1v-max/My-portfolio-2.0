@@ -4,7 +4,7 @@ import ForkIcon from "../../../components/icons/ForkIcon";
 import GitHubSvg from "./GitHubSvg";
 
 const RepoCardItem = ({ repo }) => (
-  <div className="flex flex-col justify-between rounded-xl border border-explorerBorder bg-articleBg p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-accentColor hover:shadow-md">
+  <div className="flex flex-col justify-between rounded-xl border border-explorerBorder bg-articleBg p-6 shadow-sm transition-all hover:border-accentColor hover:shadow-md">
     <div className="min-w-0">
       <div className="flex items-start justify-between gap-3">
         <a
