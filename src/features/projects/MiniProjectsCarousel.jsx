@@ -15,7 +15,7 @@ import { miniProjects } from "./miniProjects";
 function MiniProjectsCarousel() {
   return (
     <>
-      {/* Swiper theme overrides — scoped to this section */}
+      {/* swiper theme css override */}
       <style>{`
         .mini-swiper .swiper-button-next,
         .mini-swiper .swiper-button-prev {
@@ -60,30 +60,29 @@ function MiniProjectsCarousel() {
       <section className="mt-24 px-6 sm:px-10 md:px-16 lg:px-20">
         <div className="mx-auto max-w-6xl">
 
-          {/* ── Section Header ── */}
+          {/* section header, UI experiments */}
           <div className="mb-10 flex flex-col items-start gap-3">
-            {/* Accent pill */}
             <span className="inline-flex items-center gap-2 rounded-full border border-accentColor/30 bg-accentColor/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accentColor">
               <span className="h-1.5 w-1.5 rounded-full bg-accentColor animate-pulse" />
               UI Experiments
             </span>
 
-            {/* Heading */}
+            {/* heading */}
             <h2 className="text-3xl font-extrabold tracking-tight text-textColor sm:text-4xl">
               Mini Projects &amp; Creative Builds
             </h2>
 
-            {/* Subtitle */}
+            {/* subtitle */}
             <p className="max-w-xl text-sm leading-relaxed text-textColor/60">
               A collection of focused UI experiments, interactive components,
               and creative builds — each one sharpening a specific skill.
             </p>
 
-            {/* Decorative accent line */}
+            {/* line */}
             <div className="mt-1 h-1 w-16 rounded-full bg-gradient-to-r from-accentColor to-accentColor/30" />
           </div>
 
-          {/* ── Swiper Carousel ── */}
+          {/* swiper carousel */}
           <Swiper
             className="mini-swiper !overflow-visible pb-2"
             modules={[Navigation, Pagination, A11y, FreeMode, Autoplay]}
@@ -104,19 +103,21 @@ function MiniProjectsCarousel() {
           >
             {miniProjects.map((project) => (
               <SwiperSlide key={project.title} className="!h-auto">
+                {/* ignoring swiper default height */}
+                {/* important modifier for height, set as auto */}
                 <MiniProjectCard {...project} />
               </SwiperSlide>
             ))}
           </Swiper>
 
-          {/* ── View More CTA ── */}
+          {/* explore all mini projects */}
           <div className="mt-12 flex flex-col items-center gap-3">
             <Link
               to="#"
               className="group inline-flex items-center gap-3 rounded-xl border border-accentColor/30 bg-accentColor/5 px-7 py-3.5 text-sm font-semibold text-accentColor backdrop-blur-sm transition-all duration-300 hover:border-accentColor/60 hover:bg-accentColor/15 hover:shadow-[0_0_24px_rgba(136,192,208,0.15)] active:scale-[0.97]"
             >
               Explore All Mini Projects
-              {/* Arrow icon */}
+              {/* arrow svg */}
               <svg
                 className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
                 viewBox="0 0 24 24"
@@ -131,9 +132,9 @@ function MiniProjectsCarousel() {
               </svg>
             </Link>
 
-            {/* Helper text */}
-            <p className="text-xs text-textColor/40 tracking-wide">
-              33 projects &nbsp;·&nbsp; Beginner &nbsp;·&nbsp; Intermediate &nbsp;·&nbsp; Advanced
+            {/* more details */}
+            <p className="text-xs text-textColor/40 tracking-wide mb-12">
+              33+ projects &nbsp;·&nbsp; Beginner &nbsp;·&nbsp; Intermediate &nbsp;·&nbsp; Advanced
             </p>
           </div>
 

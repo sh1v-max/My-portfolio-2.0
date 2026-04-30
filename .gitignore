@@ -14,6 +14,7 @@ dist-ssr
 .env
 portfolio_analysis_before_update.md
 portfolio_file_reference_before_update.md
+mini_projects_walkthrough_using_swiperjs.md
 
 # Editor directories and files
 .vscode/*
