@@ -6,7 +6,7 @@ export default function FeaturedRepos({ featuredRepos }) {
   return (
     <div>
       <SectionTitle
-        title="Featured Projects"
+        title="Featured Repositories"
         subtitle="Pinned repositories from my portfolio"
       />
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
