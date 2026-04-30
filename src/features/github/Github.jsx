@@ -9,8 +9,8 @@ import ContributionGraph from "./components/ContributionGraph";
 import QuickLinks from "./components/QuickLinks";
 
 export default function Github() {
-  const [user, repos] = useLoaderData();
-
+  const {user, repos} = useLoaderData();
+  
   if (!user || !repos) {
     return (
       <HelmetProvider>

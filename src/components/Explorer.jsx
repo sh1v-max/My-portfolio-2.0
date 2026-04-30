@@ -39,11 +39,11 @@ const explorerItems = [
     path: "/github",
     icon: `${markdown_icon}`,
   },
-  {
-    name: "articles.json",
-    path: "/articles",
-    icon: `${json_icon}`,
-  },
+  // {
+  //   name: "articles.json",
+  //   path: "/articles",
+  //   icon: `${json_icon}`,
+  // },
 ];
 
 function Explorer() {

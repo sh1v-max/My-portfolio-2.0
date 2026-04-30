@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://dev.to/api/articles?username=manavss";
+const API_URL = "https://dev.to/api/articles?username=username";
 export async function getArticles() {
   try {
     const response = await axios.get(`${API_URL}`);

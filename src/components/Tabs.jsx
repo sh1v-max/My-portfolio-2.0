@@ -2,7 +2,7 @@ import react_icon from "../assets/icons/react_icon.svg";
 import html_icon from "../assets/icons/html_icon.svg";
 import css_icon from "../assets/icons/css_icon.svg";
 import js_icon from "../assets/icons/js_icon.svg";
-import json_icon from "../assets/icons/json_icon.svg";
+// import json_icon from "../assets/icons/json_icon.svg";
 import markdown_icon from "../assets/icons/markdown_icon.svg";
 import { Link, useLocation } from "react-router-dom";
 
@@ -37,11 +37,11 @@ const TabsItems = [
     path: "/github",
     icon: `${markdown_icon}`,
   },
-  {
-    name: "articles.json",
-    path: "/articles",
-    icon: `${json_icon}`,
-  },
+  // {
+  //   name: "articles.json",
+  //   path: "/articles",
+  //   icon: `${json_icon}`,
+  // },
 ];
 
 function Tabs() {

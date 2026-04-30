@@ -5,12 +5,16 @@ const API_REPOS_URL =
 
 export async function getUser() {
   try {
-    const responseUser = await axios.get(`${API_USER_URL}`);
-    const responseRepos = await axios.get(`${API_REPOS_URL}`);
-    // console.log(responseUser.data, responseRepos.data);
-    return [responseUser.data, responseRepos.data];
+    const [userRes, reposRes] = await Promise.all([
+      axios.get(API_USER_URL),
+      axios.get(API_REPOS_URL),
+    ]);
+
+    return {
+      user: userRes.data,
+      repos: reposRes.data,
+    };
   } catch (error) {
-    console.error("Error fetching user:", error);
-    return [null, null];
+    throw new Error("Failed to fetch GitHub data");
   }
 }

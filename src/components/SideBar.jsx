@@ -1,7 +1,8 @@
 import Code from "./icons/CodeIcon";
 import Files from "./icons/FilesIcon";
+import HomeIcon from "./icons/HomeIcon";
 import Github from "./icons/GithubIcon";
-import Pencil from "./icons/Pencil";
+// import Pencil from "./icons/Pencil";
 import Mail from "./icons/MailIcon";
 import Account from "./icons/AccountIcon";
 import Settings from "./icons/SettingsIcon";
@@ -9,32 +10,36 @@ import { Link, useLocation } from "react-router-dom";
 
 const sidebarTopItems = [
   {
-    Icon: Files,
+    Icon: HomeIcon,
     path: "/",
   },
   {
-    Icon: Github,
-    path: "/github",
+    Icon: Account,
+    path: "/about",
+  },
+  {
+    Icon: Mail,
+    path: "/contact",
   },
   {
     Icon: Code,
     path: "/projects",
   },
   {
-    Icon: Pencil,
-    path: "/articles",
+    Icon: Files,
+    path: "/frontend-lab",
   },
   {
-    Icon: Mail,
-    path: "/contact",
+    Icon: Github,
+    path: "/github",
   },
+  // {
+  //   Icon: Pencil,
+  //   path: "/articles",
+  // },
 ];
 
 const sidebarBottomItems = [
-  {
-    Icon: Account,
-    path: "/about",
-  },
   {
     Icon: Settings,
     path: "/settings",

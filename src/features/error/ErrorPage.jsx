@@ -8,7 +8,7 @@ function ErrorPage() {
       className={` flex h-[100vh] items-center justify-center theme-${theme} bg-mainBg text-textColor`}
     >
       <p className=" text-2xl font-bold">
-        Seems like API has reached its Limit😢.Try again after an hour.
+        Something went wrong. Try again later.
       </p>
     </div>
   );
