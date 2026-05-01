@@ -60,9 +60,21 @@ const router = createBrowserRouter([
   },
 ]);
 
+import { Toaster } from "react-hot-toast";
+
 function App() {
   return (
     <ThemeProvider>
+      <Toaster
+        position="bottom-right"
+        toastOptions={{
+          style: {
+            background: "#1f2428",
+            color: "#88c0d0",
+            border: "1px solid #30363d",
+          },
+        }}
+      />
       <RouterProvider router={router} />
     </ThemeProvider>
   );
