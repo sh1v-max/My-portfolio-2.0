@@ -9,7 +9,7 @@ import {
   multiSelectSearch,
   quizGuru,
   selectableGrid,
-} from "../../assets/frontend-lab-images";
+} from "../../assets/frontend-lab";
 
 export const miniProjects = [
   {
