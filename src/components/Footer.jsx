@@ -7,7 +7,7 @@ import ReactIcon from "./icons/ReactIcon";
 
 function Footer() {
   return (
-    <div className="border border-fuchsia-700 flex h-8 justify-between  bg-bottombarBg px-4 text-lg text-textColor max-sm:text-sm">
+    <div className="flex h-8 justify-between  bg-bottombarBg px-4 text-lg text-textColor max-sm:text-sm">
       <div className="flex items-center gap-x-3">
         <a
           className="flex items-center hover:bg-bottombarHoverBg"

@@ -52,14 +52,7 @@ function Home() {
             initial="hidden"
             animate="show"
           >
-            {/* Social Proof Badge */}
-            <motion.span 
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-accentColor/30 bg-accentColor/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accentColor shadow-[0_0_15px_rgba(136,192,208,0.1)]"
-              variants={itemVariants}
-            >
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accentColor" />
-              33+ Projects Built
-            </motion.span>
+
 
             <motion.h1 
               className="mb-2 text-4xl font-bold text-textColor sm:text-5xl md:text-6xl xl:text-8xl"

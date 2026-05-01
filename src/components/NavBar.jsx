@@ -3,7 +3,7 @@ import vscode from "../assets/icons/vscode.ico";
 const list = ["File", "Edit", "View", "Go", "Run", "Terminal", "Help"];
 function NavBar() {
   return (
-    <header className={`border bg-titlebarBg text-textColor `}>
+    <header className={`bg-titlebarBg text-textColor `}>
       <nav
         className={`mx-3 flex h-8 items-center justify-between  text-center`}
       >

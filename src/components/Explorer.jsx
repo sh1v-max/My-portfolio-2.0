@@ -4,7 +4,7 @@ import react_icon from "../assets/icons/react_icon.svg";
 import html_icon from "../assets/icons/html_icon.svg";
 import css_icon from "../assets/icons/css_icon.svg";
 import js_icon from "../assets/icons/js_icon.svg";
-import json_icon from "../assets/icons/json_icon.svg";
+// import json_icon from "../assets/icons/json_icon.svg";
 import markdown_icon from "../assets/icons/markdown_icon.svg";
 import { Link } from "react-router-dom";
 
@@ -18,11 +18,6 @@ const explorerItems = [
     name: "about.html",
     path: "/about",
     icon: `${html_icon}`,
-  },
-  {
-    name: "contact.css",
-    path: "/contact",
-    icon: `${css_icon}`,
   },
   {
     name: "projects.js",
@@ -39,6 +34,11 @@ const explorerItems = [
     path: "/github",
     icon: `${markdown_icon}`,
   },
+  {
+    name: "contact.css",
+    path: "/contact",
+    icon: `${css_icon}`,
+  },
   // {
   //   name: "articles.json",
   //   path: "/articles",
@@ -49,7 +49,7 @@ const explorerItems = [
 function Explorer() {
   const [show, setShow] = useState(true);
   return (
-    <div className="flex flex-col items-start border border-cyan-500  bg-explorerBg text-white max-sm:hidden">
+    <div className="flex flex-col items-start bg-explorerBg text-white max-sm:hidden">
       <h1 className="pl-2 text-2xl font-medium  uppercase">Explorer</h1>
       <div className="flex min-w-[15vw]  flex-col">
         <div

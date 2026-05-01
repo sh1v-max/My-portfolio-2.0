@@ -18,11 +18,6 @@ const TabsItems = [
     icon: `${html_icon}`,
   },
   {
-    name: "contact.css",
-    path: "/contact",
-    icon: `${css_icon}`,
-  },
-  {
     name: "projects.js",
     path: "/projects",
     icon: `${js_icon}`,
@@ -36,6 +31,11 @@ const TabsItems = [
     name: "github.md",
     path: "/github",
     icon: `${markdown_icon}`,
+  },
+  {
+    name: "contact.css",
+    path: "/contact",
+    icon: `${css_icon}`,
   },
   // {
   //   name: "articles.json",

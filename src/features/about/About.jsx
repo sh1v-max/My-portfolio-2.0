@@ -62,6 +62,15 @@ function About() {
           </motion.div>
 
           <motion.div className="flex-1 text-center lg:text-left" variants={itemVariants}>
+            {/* Social Proof Badge */}
+            <motion.span 
+              className="mb-4 inline-flex items-center gap-2 rounded-full border border-accentColor/30 bg-accentColor/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accentColor shadow-[0_0_15px_rgba(136,192,208,0.1)]"
+              variants={itemVariants}
+            >
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accentColor" />
+              33+ Projects Built
+            </motion.span>
+
             <h1 className="mb-4 text-4xl font-extrabold text-white sm:text-6xl lg:text-7xl">
               Front-End <span className="text-accentColor">Developer</span>
             </h1>
