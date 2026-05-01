@@ -44,7 +44,8 @@ export const uiExperiments = [
     image: toastNotification,
     tags: ["useState", "event handling"],
     demo: "https://youtoastnotificationhere.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/05-Toast"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/05-Toast",
   },
   {
     title: "Star Rating",
@@ -54,7 +55,8 @@ export const uiExperiments = [
     image: starRating,
     tags: ["Click events", "state management"],
     demo: "https://rate-my-star.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/06-Star-rating"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/06-Star-rating",
   },
   {
     title: "WallHeaven",
@@ -64,7 +66,8 @@ export const uiExperiments = [
     image: wallheaven,
     tags: ["API calls", "pagination logic"],
     demo: "https://astranoutintheocean.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/07-React-pagination"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/07-React-pagination",
   },
   {
     title: "OTP Input",
@@ -74,7 +77,8 @@ export const uiExperiments = [
     image: otpInput,
     tags: ["Input focus", "validation"],
     demo: "https://enteryourotp.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/08-React-OTP-Input"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/08-React-OTP-Input",
   },
   {
     title: "Image Carousel",
@@ -84,7 +88,8 @@ export const uiExperiments = [
     image: imageCarousel,
     tags: ["Array manipulation", "navigation"],
     demo: "https://delightimagecarousel.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/09-Image-carousel"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/09-Image-carousel",
   },
   {
     title: "Search Bar",
@@ -94,7 +99,7 @@ export const uiExperiments = [
     image: searchBar,
     tags: ["onChange", "array filtering"],
     demo: "https://searchthebar.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS"
+    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS",
   },
   {
     title: "Infinite Scrolling",
@@ -104,7 +109,8 @@ export const uiExperiments = [
     image: infiniteScrolling,
     tags: ["Scroll events", "API pagination"],
     demo: "https://keepscrollingthis.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/11-Infinite-scroll"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/11-Infinite-scroll",
   },
   {
     title: "Countdown Timer",
@@ -114,7 +120,8 @@ export const uiExperiments = [
     image: countdownTimer,
     tags: ["setInterval", "time calculations"],
     demo: "https://countdowntimerhere.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/12-Countdown-timer"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/12-Countdown-timer",
   },
   {
     title: "File Explorer",
@@ -124,7 +131,8 @@ export const uiExperiments = [
     image: fileExplorer,
     tags: ["Tree structure", "recursion"],
     demo: "https://fileexplorerjs.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/13-File-explorer"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/13-File-explorer",
   },
   {
     title: "Interactive Grid",
@@ -134,7 +142,8 @@ export const uiExperiments = [
     image: interactiveGrid,
     tags: ["useRef", "grid state management"],
     demo: "https://interactivegridis.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/14-Interactive-grid"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/14-Interactive-grid",
   },
 
   // INTERMEDIATE
@@ -146,7 +155,8 @@ export const uiExperiments = [
     image: tictactoe,
     tags: ["Game logic", "state patterns"],
     demo: "https://magictictactoe.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/15-Tic-Tac-Toe"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/15-Tic-Tac-Toe",
   },
   {
     title: "Snake Game",
@@ -156,7 +166,8 @@ export const uiExperiments = [
     image: snakeGame,
     tags: ["Keyboard events", "game loops"],
     demo: "https://killmysnake.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/16-Snake-game"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/16-Snake-game",
   },
   {
     title: "Multi-Step Form",
@@ -166,7 +177,8 @@ export const uiExperiments = [
     image: multiStepForm,
     tags: ["Form validation", "multi-step UI"],
     demo: "https://multistepstepper.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/19-React-stepper"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/19-React-stepper",
   },
   {
     title: "Dashboard Tabs",
@@ -176,7 +188,8 @@ export const uiExperiments = [
     image: myDashboard,
     tags: ["Tab navigation", "data display"],
     demo: "https://reactdashboardtab.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/20-React-tab"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/20-React-tab",
   },
   {
     title: "Memory Game",
@@ -186,7 +199,8 @@ export const uiExperiments = [
     image: memoryGame,
     tags: ["Game state", "animations"],
     demo: "https://doyourmemory.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/21-Memory-game"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/21-Memory-game",
   },
   {
     title: "Simple Calendar",
@@ -196,7 +210,8 @@ export const uiExperiments = [
     image: calendar,
     tags: ["Date manipulation", "rendering"],
     demo: "https://reactcalendarme.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/22-Calendar"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/22-Calendar",
   },
   {
     title: "Nested Comments",
@@ -206,7 +221,8 @@ export const uiExperiments = [
     image: nestedComments,
     tags: ["Recursive components", "threading"],
     demo: "https://discusskarma.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/23-Nested-comments"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/23-Nested-comments",
   },
   {
     title: "Crypto Converter",
@@ -216,7 +232,8 @@ export const uiExperiments = [
     image: cryptoConverter,
     tags: ["API integration", "calculations"],
     demo: "https://striffcrypto.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/24-Crypto-converter"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/24-Crypto-converter",
   },
   {
     title: "Typing Effect",
@@ -226,7 +243,8 @@ export const uiExperiments = [
     image: typingEffect,
     tags: ["String manipulation", "timers"],
     demo: "https://typingeffecthere.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/25-Typing-effect"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/25-Typing-effect",
   },
   {
     title: "Drag & Drop Upload",
@@ -236,7 +254,8 @@ export const uiExperiments = [
     image: dragAndDropFile,
     tags: ["File API", "drag events"],
     demo: "https://uploadfilehere.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/26-File-uploader"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/26-File-uploader",
   },
   {
     title: "Indeterminate Checkbox",
@@ -246,7 +265,8 @@ export const uiExperiments = [
     image: indeterminateCheckbox,
     tags: ["DFS algorithm", "refs"],
     demo: "https://indeterminate-checkbox.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/27-Indeterminate-checkbox"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/27-Indeterminate-checkbox",
   },
   {
     title: "Traffic Light",
@@ -256,7 +276,8 @@ export const uiExperiments = [
     image: trafficLight,
     tags: ["State machines", "timers"],
     demo: "https://trafficlighthere.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/28-Traffic-light"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/28-Traffic-light",
   },
 
   // ADVANCED
@@ -268,7 +289,8 @@ export const uiExperiments = [
     image: faqAccordion,
     tags: ["Complex state management"],
     demo: "https://faq-accordiondot.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/29-FAQ-component"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/29-FAQ-component",
   },
   {
     title: "Stopwatch",
@@ -278,7 +300,8 @@ export const uiExperiments = [
     image: stopwatch,
     tags: ["High-precision timing", "persistence"],
     demo: "https://isyourstopwatch.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/30-Stopwatch"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/30-Stopwatch",
   },
   {
     title: "Digital Clock",
@@ -288,7 +311,8 @@ export const uiExperiments = [
     image: digitalClock,
     tags: ["Real-time updates", "formatting"],
     demo: "https://sync-clock.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/31-Digital-clock"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/31-Digital-clock",
   },
   {
     title: "Overlapping Circles",
@@ -298,7 +322,8 @@ export const uiExperiments = [
     image: overlappingCircles,
     tags: ["Geometry calculations", "interactions"],
     demo: "https://overlappingcircles.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/32-Overlapping-circles"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/32-Overlapping-circles",
   },
   {
     title: "Calculator",
@@ -308,7 +333,8 @@ export const uiExperiments = [
     image: calculator,
     tags: ["Expression parsing", "operations"],
     demo: "https://npmcalculator.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/34-Calculator"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/34-Calculator",
   },
   {
     title: "Dialog Popup",
@@ -318,7 +344,8 @@ export const uiExperiments = [
     image: dialogPopup,
     tags: ["Portals", "accessibility", "focus trap"],
     demo: "https://dialogpopup.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/36-Dialog"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/36-Dialog",
   },
   {
     title: "Switch Component",
@@ -328,7 +355,8 @@ export const uiExperiments = [
     image: switchComponent,
     tags: ["ARIA compliance", "accessibility"],
     demo: "https://reactswitch.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/37-Switch"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/37-Switch",
   },
   {
     title: "RoadsideStore",
@@ -338,7 +366,8 @@ export const uiExperiments = [
     image: roadsideStore,
     tags: ["Routing", "state management"],
     demo: "https://roadsidestore.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/39-Breadcrumbs"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/39-Breadcrumbs",
   },
   {
     title: "Multi Select Search",
@@ -348,7 +377,8 @@ export const uiExperiments = [
     image: multiSelectSearch,
     tags: ["API integration", "keyboard nav"],
     demo: "https://multiselectusersearch.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/40-Multi-select-search"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/40-Multi-select-search",
   },
   {
     title: "QuizGuru",
@@ -358,7 +388,8 @@ export const uiExperiments = [
     image: quizGuru,
     tags: ["Quiz logic", "progress tracking"],
     demo: "https://yourquizguru.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/41-Quiz-app"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/41-Quiz-app",
   },
   {
     title: "Selectable Grid",
@@ -368,7 +399,8 @@ export const uiExperiments = [
     image: selectableGrid,
     tags: ["Complex selection logic"],
     demo: "https://selectablegrid.netlify.app/",
-    sourceCode: "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/42-Selectable-grid"
+    sourceCode:
+      "https://github.com/sh1v-max/Practice-UI-design-React-and-JS/tree/main/42-Selectable-grid",
   },
   {
     title: "Coming Soon...",
@@ -378,6 +410,6 @@ export const uiExperiments = [
     image: "https://placehold.co/600x400/1f2428/88c0d0?text=Work+In+Progress",
     tags: ["react", "frontend", "magic"],
     demo: "#",
-    sourceCode: "#"
-  }
+    sourceCode: "#",
+  },
 ];
