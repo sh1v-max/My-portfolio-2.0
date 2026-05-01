@@ -1,60 +1,131 @@
 import { Link } from "react-router-dom";
 import Illustration from "./Illustration";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { motion } from "framer-motion";
+
 function Home() {
+  // Variants for staggered text entry
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 15 },
+    show: { opacity: 1, y: 0 },
+  };
+
   return (
     <HelmetProvider>
       <Helmet>
         <title>Shiv | Home</title>
       </Helmet>
 
-      <div className="relative border flex  min-h-[75svh]  items-center overflow-hidden ">
-        <div className="absolute left-10 z-10   gap-y-0 text-[12rem] font-extrabold leading-none text-bgText max-sm:hidden">
-          <h1>I BUILD</h1>
-          <h1>PRETTY</h1>
-          <h1>WEBSITES</h1>
-        </div>
-        <div className="relative z-20 flex flex-col items-center gap-y-10 p-4 md:w-full md:flex-row md:items-center md:justify-between md:px-28">
-          <div>
-            <h2 className="text-3xl font-bold text-[#eee] md:text-5xl  xl:text-8xl">
-              Shiv Shankar Singh
-            </h2>
-            <div className=" typewriter w-max">
-              <h2 className="text-xl font-bold text-[#eee] md:text-3xl ">
-                Front End Web Developer
-              </h2>
-            </div>
-            <Link to={`${"/projects"}`}>
-              <button className=" mt-10 bg-accentColor px-6 py-2.5 font-medium text-white md:px-9 md:text-xl xl:ml-16">
-                View Work
-              </button>
-            </Link>
-            <Link to={`${"/contact"}`}>
-              <button className=" ml-3 border-2 border-accentColor px-5 py-2 text-textColor md:ml-6 md:px-8 md:text-xl">
-                Contact Me
-              </button>
-            </Link>
-          </div>
-          <Illustration />
-        </div>
-      </div>
+      <section className="relative flex min-h-[75svh] items-center justify-center overflow-hidden bg-mainBg px-6 py-12 sm:px-10 md:px-16 lg:px-28">
+        {/* Background Decorative Text */}
+        <motion.div 
+          className="absolute left-10 z-0 flex select-none flex-col gap-y-2 text-[12rem] font-extrabold leading-none text-bgText max-lg:hidden"
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 0.05, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <span>I BUILD</span>
+          <span>PRETTY</span>
+          <span>WEBSITES</span>
+        </motion.div>
+
+        <motion.div 
+          className="relative z-10 flex w-full max-w-7xl flex-col items-center justify-between gap-12 lg:flex-row"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          {/* Left: Text Content */}
+          <motion.div 
+            className="flex flex-col items-center text-center lg:items-start lg:text-left"
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+          >
+            {/* Social Proof Badge */}
+            <motion.span 
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-accentColor/30 bg-accentColor/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accentColor shadow-[0_0_15px_rgba(136,192,208,0.1)]"
+              variants={itemVariants}
+            >
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accentColor" />
+              33+ Projects Built
+            </motion.span>
+
+            <motion.h1 
+              className="mb-2 text-4xl font-bold text-textColor sm:text-5xl md:text-6xl xl:text-8xl"
+              variants={itemVariants}
+            >
+              Hi, I&apos;m Shiv
+            </motion.h1>
+
+            <motion.h2 
+              className="mb-6 text-xl font-semibold text-accentColor md:text-2xl xl:text-4xl"
+              variants={itemVariants}
+            >
+              Frontend Developer
+            </motion.h2>
+
+            <motion.p 
+              className="mb-10 max-w-lg text-lg leading-relaxed text-textColor/70 md:text-xl"
+              variants={itemVariants}
+            >
+              I build fast, scalable, and user-focused web applications.
+            </motion.p>
+
+            {/* CTA Buttons */}
+            <motion.div 
+              className="flex flex-col items-center gap-4 sm:flex-row lg:justify-start"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4, duration: 0.3 }}
+            >
+              <Link to="/projects">
+                <motion.button 
+                  className="rounded-lg bg-accentColor px-8 py-3 text-lg font-bold text-white transition-all duration-300 hover:bg-accentColor/90 hover:shadow-[0_0_20px_rgba(136,192,208,0.3)] active:scale-[0.98]"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  View Work
+                </motion.button>
+              </Link>
+              <motion.a
+                href="/assets/docs/resume.pdf"
+                download
+                className="rounded-lg border-2 border-accentColor/50 px-8 py-3 text-lg font-bold text-textColor transition-all duration-300 hover:border-accentColor hover:bg-accentColor/10 active:scale-[0.98]"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                Download Resume
+              </motion.a>
+            </motion.div>
+          </motion.div>
+
+          {/* Right: Illustration */}
+          <motion.div 
+            className="w-full max-w-md lg:max-w-xl"
+            animate={{ y: [0, -8, 0] }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <Illustration />
+          </motion.div>
+        </motion.div>
+      </section>
     </HelmetProvider>
   );
 }
 
 export default Home;
-
-{
-  /* <Link
-className=" border-2 border-black px-4 py-3 font-medium   md:px-12 md:text-xl"
-to={`${"/projects"}`}
->
-View Work
-</Link>
-<Link
-className="  border-2 border-black px-4 py-3 font-medium   md:px-12 md:text-xl"
-to={`${"/contact"}`}
->
-Contact Me
-</Link> */
-}
