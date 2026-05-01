@@ -1,13 +1,15 @@
-import countdownTimer from "../../assets/frontend-lab-images/countdown-timer.png"
-import fileExplorer from "../../assets/frontend-lab-images/file-explorer.png"
-import interactiveGrid from "../../assets/frontend-lab-images/interactive-grid.png"
-import typingEffect from "../../assets/frontend-lab-images/typing-effect.png"
-import dragAndDropUpload from "../../assets/frontend-lab-images/drag-and-drop-file.png"
-import indeterminateCheckbox from "../../assets/frontend-lab-images/indeterminate-checkbox.png"
-import trafficLight from "../../assets/frontend-lab-images/traffic-light.png"
-import multiSelectSearch from "../../assets/frontend-lab-images/multi-select-search.png"
-import quizGuru from "../../assets/frontend-lab-images/quiz-guru.png"
-import selectableGrid from "../../assets/frontend-lab-images/selectable-grid.png"
+import {
+  countdownTimer,
+  fileExplorer,
+  interactiveGrid,
+  typingEffect,
+  dragAndDropFile as dragAndDropUpload,
+  indeterminateCheckbox,
+  trafficLight,
+  multiSelectSearch,
+  quizGuru,
+  selectableGrid,
+} from "@/assets/frontend-lab-images";
 
 export const miniProjects = [
   {

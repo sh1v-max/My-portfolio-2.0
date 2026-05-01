@@ -1,36 +1,38 @@
-import toastNotification from "../../../assets/frontend-lab-images/toast-notification.png";
-import starRating from "../../../assets/frontend-lab-images/star-rating.png";
-import wallheaven from "../../../assets/frontend-lab-images/wall-heaven.png";
-import otpInput from "../../../assets/frontend-lab-images/otp-input.png";
-import imageCarousel from "../../../assets/frontend-lab-images/image-carousel.png";
-import searchBar from "../../../assets/frontend-lab-images/search-bar.png";
-import infiniteScrolling from "../../../assets/frontend-lab-images/infinite-scrolling.png";
-import countdownTimer from "../../../assets/frontend-lab-images/countdown-timer.png";
-import fileExplorer from "../../../assets/frontend-lab-images/file-explorer.png";
-import interactiveGrid from "../../../assets/frontend-lab-images/interactive-grid.png";
-import tictactoe from "../../../assets/frontend-lab-images/tic-tac-toe.png";
-import snakeGame from "../../../assets/frontend-lab-images/snake-game.png";
-import multiStepForm from "../../../assets/frontend-lab-images/multi-step-form.png";
-import myDashboard from "../../../assets/frontend-lab-images/my-dashboard.png";
-import memoryGame from "../../../assets/frontend-lab-images/memory-game.png";
-import calendar from "../../../assets/frontend-lab-images/calendar.png";
-import nestedComments from "../../../assets/frontend-lab-images/nested-comments.png";
-import cryptoConverter from "../../../assets/frontend-lab-images/crypto-converter.png";
-import typingEffect from "../../../assets/frontend-lab-images/typing-effect.png";
-import dragAndDropFile from "../../../assets/frontend-lab-images/drag-and-drop-file.png";
-import indeterminateCheckbox from "../../../assets/frontend-lab-images/indeterminate-checkbox.png";
-import trafficLight from "../../../assets/frontend-lab-images/traffic-light.png";
-import faqAccordion from "../../../assets/frontend-lab-images/faq-accordion.png";
-import stopwatch from "../../../assets/frontend-lab-images/stopwatch.png";
-import digitalClock from "../../../assets/frontend-lab-images/digital-clock.png";
-import overlappingCircles from "../../../assets/frontend-lab-images/overlapping-circles.png";
-import calculator from "../../../assets/frontend-lab-images/calculator.png";
-import dialogPopup from "../../../assets/frontend-lab-images/dialog-popup.png";
-import switchComponent from "../../../assets/frontend-lab-images/switch-component.png";
-import roadsideStore from "../../../assets/frontend-lab-images/roadside-store.png";
-import multiSelectSearch from "../../../assets/frontend-lab-images/multi-select-search.png";
-import quizGuru from "../../../assets/frontend-lab-images/quiz-guru.png";
-import selectableGrid from "../../../assets/frontend-lab-images/selectable-grid.png";
+import {
+  toastNotification,
+  starRating,
+  wallheaven,
+  otpInput,
+  imageCarousel,
+  searchBar,
+  infiniteScrolling,
+  countdownTimer,
+  fileExplorer,
+  interactiveGrid,
+  tictactoe,
+  snakeGame,
+  multiStepForm,
+  myDashboard,
+  memoryGame,
+  calendar,
+  nestedComments,
+  cryptoConverter,
+  typingEffect,
+  dragAndDropFile,
+  indeterminateCheckbox,
+  trafficLight,
+  faqAccordion,
+  stopwatch,
+  digitalClock,
+  overlappingCircles,
+  calculator,
+  dialogPopup,
+  switchComponent,
+  roadsideStore,
+  multiSelectSearch,
+  quizGuru,
+  selectableGrid,
+} from "@/assets/frontend-lab-images";
 
 export const uiExperiments = [
   // BEGINNER
