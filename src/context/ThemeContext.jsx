@@ -8,7 +8,7 @@ const ThemeContext = createContext();
 function ThemeProvider({ children }) {
   // Load initial theme from localStorage or default to "nightOwl"
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("portfolio-theme") || "nightOwl";
+    return localStorage.getItem("portfolio-theme") || "github";
   });
 
   // Update localStorage whenever the theme changes
