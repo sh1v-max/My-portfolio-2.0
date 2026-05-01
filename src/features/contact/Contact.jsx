@@ -3,6 +3,7 @@ import ContactSocials from "./ContactSocials";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import emailjs from "@emailjs/browser";
 import { useRef } from "react";
+import toast from "react-hot-toast";
 
 function Contact() {
   const form = useForm({
@@ -23,23 +24,27 @@ function Contact() {
   } = form;
 
   const sendEmail = () => {
-    emailjs
-      .sendForm(
-        `${import.meta.env.VITE_SERVICE_ID}`,
-        `${import.meta.env.VITE_TEMPLATE_ID}`,
-        formData.current,
-        `${import.meta.env.VITE_EMAILJS_KEY}`,
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        },
-      );
-    reset();
-    alert("Mail Sent😁.Thankyou for Contacting.");
+    const sendPromise = emailjs.sendForm(
+      `${import.meta.env.VITE_SERVICE_ID}`,
+      `${import.meta.env.VITE_TEMPLATE_ID}`,
+      formData.current,
+      `${import.meta.env.VITE_EMAILJS_KEY}`,
+    );
+
+    toast.promise(sendPromise, {
+      loading: "Sending message...",
+      success: "Message sent! Thank you for contacting. 😁",
+      error: "Failed to send message. ❌",
+    });
+
+    sendPromise.then(
+      () => {
+        reset();
+      },
+      (error) => {
+        console.log(error.text);
+      }
+    );
   };
 
   return (
