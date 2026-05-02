@@ -69,9 +69,9 @@ function App() {
         position="bottom-right"
         toastOptions={{
           style: {
-            background: "#1f2428",
-            color: "#88c0d0",
-            border: "1px solid #30363d",
+            background: "var(--articleBg)",
+            color: "var(--accentColor)",
+            border: "1px solid var(--explorerBorder)",
           },
         }}
       />
