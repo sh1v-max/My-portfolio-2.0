@@ -86,7 +86,7 @@ function Home() {
             >
               {/* Status Badge */}
               <motion.div variants={itemVariants}>
-                <span className="border-accentColor/20 bg-accentColor/5 text-accentColor mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest">
+                <span className="border-accentColor/20 bg-accentColor/5 text-accentColor mb-5 inline-flex items-center gap-2 rounded-full border px-3.5 py-1 text-[10px] font-semibold uppercase tracking-widest">
                   <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
                   Available for work
                 </span>
@@ -94,7 +94,7 @@ function Home() {
 
               {/* Main Heading */}
               <motion.h1
-                className="text-textColor mt-2 text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
+                className="text-textColor mt-1 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
                 variants={itemVariants}
               >
                 Hi, I&apos;m{" "}
@@ -110,7 +110,7 @@ function Home() {
 
               {/* Subheading */}
               <motion.h2
-                className="text-accentColor/80 mb-4 mt-2 text-xl font-semibold sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl"
+                className="text-accentColor/80 mb-3 mt-1.5 text-base font-semibold sm:text-lg md:text-xl lg:text-2xl"
                 variants={itemVariants}
               >
                 Frontend Developer
@@ -118,7 +118,7 @@ function Home() {
 
               {/* Description with highlighted keywords */}
               <motion.p
-                className="text-textColor/60 mb-10 max-w-xl text-lg leading-relaxed md:text-xl xl:text-2xl"
+                className="text-textColor/60 mb-8 max-w-md text-sm leading-relaxed md:text-base lg:text-lg"
                 variants={itemVariants}
               >
                 I build{" "}
@@ -140,7 +140,7 @@ function Home() {
               >
                 <Link to="/projects">
                   <motion.button
-                    className="bg-accentColor text-mainBg rounded-xl px-8 py-4 text-lg font-bold shadow-lg transition-all duration-200 ease-out hover:shadow-[0_0_25px_rgba(136,192,208,0.25)] xl:px-10 xl:text-xl"
+                    className="bg-accentColor text-mainBg rounded-lg px-6 py-2.5 text-sm font-bold shadow-lg transition-all duration-200 ease-out hover:shadow-[0_0_25px_rgba(136,192,208,0.25)]"
                     style={{
                       boxShadow:
                         "0 4px 20px color-mix(in srgb, var(--accentColor) 30%, transparent)",
@@ -155,7 +155,7 @@ function Home() {
                 <motion.a
                   href="/assets/docs/resume.pdf"
                   download
-                  className="border-accentColor/40 text-textColor hover:border-accentColor hover:bg-accentColor/10 rounded-xl border-2 px-8 py-4 text-lg font-bold transition-all duration-200 ease-out xl:px-10 xl:text-xl"
+                  className="border-accentColor/40 text-textColor hover:border-accentColor hover:bg-accentColor/10 rounded-lg border-2 px-6 py-2.5 text-sm font-bold transition-all duration-200 ease-out"
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.97 }}
                 >
@@ -165,7 +165,7 @@ function Home() {
 
               {/* Quick Stats */}
               <motion.div
-                className="border-textColor/10 mt-10 flex items-center gap-6 border-t pt-6 text-center sm:gap-8 lg:text-left"
+                className="border-textColor/10 mt-8 flex items-center gap-6 border-t pt-5 text-center sm:gap-8 lg:text-left"
                 variants={itemVariants}
               >
                 {[
@@ -173,10 +173,10 @@ function Home() {
                   { value: "6", label: "Themes" },
                 ].map((stat) => (
                   <div key={stat.label} className="flex flex-col">
-                    <span className="text-accentColor text-3xl font-bold sm:text-4xl xl:text-5xl">
+                    <span className="text-accentColor text-2xl font-bold sm:text-3xl">
                       {stat.value}
                     </span>
-                    <span className="text-textColor/50 mt-1 text-sm font-medium uppercase tracking-wider xl:text-base">
+                    <span className="text-textColor/50 mt-0.5 text-[10px] font-medium uppercase tracking-wider">
                       {stat.label}
                     </span>
                   </div>
