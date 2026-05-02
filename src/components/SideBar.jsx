@@ -2,88 +2,60 @@ import Code from "./icons/CodeIcon";
 import Files from "./icons/FilesIcon";
 import HomeIcon from "./icons/HomeIcon";
 import Github from "./icons/GithubIcon";
-// import Pencil from "./icons/Pencil";
 import Mail from "./icons/MailIcon";
 import Account from "./icons/AccountIcon";
 import Settings from "./icons/SettingsIcon";
 import { Link, useLocation } from "react-router-dom";
 
 const sidebarTopItems = [
-  {
-    Icon: HomeIcon,
-    path: "/",
-  },
-  {
-    Icon: Account,
-    path: "/about",
-  },
-  {
-    Icon: Code,
-    path: "/projects",
-  },
-  {
-    Icon: Files,
-    path: "/frontend-lab",
-  },
-  {
-    Icon: Github,
-    path: "/github",
-  },
-  {
-    Icon: Mail,
-    path: "/contact",
-  },
-  // {
-  //   Icon: Pencil,
-  //   path: "/articles",
-  // },
+  { Icon: HomeIcon, path: "/" },
+  { Icon: Account, path: "/about" },
+  { Icon: Code, path: "/projects" },
+  { Icon: Files, path: "/frontend-lab" },
+  { Icon: Github, path: "/github" },
+  { Icon: Mail, path: "/contact" },
 ];
 
 const sidebarBottomItems = [
-  {
-    Icon: Settings,
-    path: "/settings",
-  },
+  { Icon: Settings, path: "/settings" },
 ];
 
 function SideBar() {
   const location = useLocation();
+
   return (
-    <aside className="flex w-[4.2vw] min-w-[40px] flex-col justify-between bg-sidebarBg  py-2 md:min-h-[calc(100vh-65px)]">
-      <div className="flex flex-col items-start justify-center gap-y-1 md:gap-y-3 ">
+    <aside className="flex h-full w-12 flex-shrink-0 flex-col items-center justify-between bg-sidebarBg py-4 border-r border-explorerBorder select-none">
+      <div className="flex w-full flex-col items-center gap-y-4">
         {sidebarTopItems.map(({ Icon, path }) => {
+          const isActive = location.pathname === path;
           return (
-            <Link to={`${path}`} key={path}>
-              <div
-                className={`${
-                  location.pathname === path
-                    ? "border-l-2 border-accentColor"
-                    : ""
-                }  p-2  max-sm:pl-2`}
-              >
+            <Link to={path} key={path} className="group relative flex w-full justify-center">
+              {isActive && (
+                <div className="absolute left-0 top-0 h-full w-0.5 bg-accentColor" />
+              )}
+              <div className={`cursor-pointer p-2 transition-colors duration-200 ${isActive ? "opacity-100" : "opacity-40 group-hover:opacity-80"}`}>
                 <Icon
-                  fill={
-                    location.pathname === path
-                      ? "rgb(225, 228, 232)"
-                      : "rgb(106, 115, 125)"
-                  }
+                  fill={isActive ? "rgb(225, 228, 232)" : "rgb(106, 115, 125)"}
+                  className="w-7 h-7"
                 />
               </div>
             </Link>
           );
         })}
       </div>
-      <div className="flex flex-col items-center justify-center gap-y-3  ">
+
+      <div className="flex w-full flex-col items-center">
         {sidebarBottomItems.map(({ Icon, path }) => {
+          const isActive = location.pathname === path;
           return (
-            <Link to={`${path}`} key={path}>
-              <div className="p-2  max-sm:pl-2">
+            <Link to={path} key={path} className="group relative flex w-full justify-center">
+              {isActive && (
+                <div className="absolute left-0 top-0 h-full w-0.5 bg-accentColor" />
+              )}
+              <div className={`cursor-pointer p-2 transition-colors duration-200 ${isActive ? "opacity-100" : "opacity-40 group-hover:opacity-80"}`}>
                 <Icon
-                  fill={
-                    location.pathname === path
-                      ? "rgb(225, 228, 232)"
-                      : "rgb(106, 115, 125)"
-                  }
+                  fill={isActive ? "rgb(225, 228, 232)" : "rgb(106, 115, 125)"}
+                  className="w-7 h-7"
                 />
               </div>
             </Link>
@@ -93,5 +65,5 @@ function SideBar() {
     </aside>
   );
 }
-// h-[calc(100vh-38.5px)]
+
 export default SideBar;

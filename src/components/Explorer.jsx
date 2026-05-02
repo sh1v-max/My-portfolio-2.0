@@ -39,42 +39,43 @@ const explorerItems = [
     path: "/contact",
     icon: `${css_icon}`,
   },
-  // {
-  //   name: "articles.json",
-  //   path: "/articles",
-  //   icon: `${json_icon}`,
-  // },
 ];
 
 function Explorer() {
   const [show, setShow] = useState(true);
+
   return (
-    <div className="flex flex-col items-start bg-explorerBg text-white max-sm:hidden">
-      <h1 className="pl-2 text-2xl font-medium  uppercase">Explorer</h1>
-      <div className="flex min-w-[15vw]  flex-col">
+    <div className="flex h-full w-64 flex-shrink-0 flex-col bg-explorerBg text-textColor select-none">
+      <h2 className="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-textColor/50">
+        Explorer
+      </h2>
+      
+      <div className="flex flex-col">
         <div
-          className="flex cursor-pointer items-center pl-1 pt-2 "
+          className="flex cursor-pointer items-center px-2 py-1 hover:bg-explorerHoverBg transition-colors duration-200"
           onClick={() => setShow(!show)}
         >
-          <ChevronRight style={show ? { transform: "rotate(90deg)" } : {}} />
-          <p htmlFor="portfolio-checkbox" className=" text-lg font-semibold">
+          <ChevronRight 
+            className="w-4 h-4 transition-transform duration-200" 
+            style={show ? { transform: "rotate(90deg)" } : {}} 
+          />
+          <span className="ml-1 text-sm font-bold tracking-wide">
             PORTFOLIO
-          </p>
+          </span>
         </div>
+
         {show && (
-          <div className="px-5">
-            {explorerItems.map((item) => {
-              return (
-                <Link
-                  to={`${item.path}`}
-                  key={item.name}
-                  className=" flex  gap-x-1 hover:bg-explorerHoverBg"
-                >
-                  <img src={item.icon} alt={item.name} height={20} width={20} />
-                  <p className=" text-lg font-medium">{item.name}</p>
-                </Link>
-              );
-            })}
+          <div className="flex flex-col">
+            {explorerItems.map((item) => (
+              <Link
+                to={item.path}
+                key={item.name}
+                className="flex items-center gap-x-2 px-6 py-1 text-sm hover:bg-explorerHoverBg transition-colors duration-200"
+              >
+                <img src={item.icon} alt="" className="w-4 h-4" />
+                <span className="font-medium">{item.name}</span>
+              </Link>
+            ))}
           </div>
         )}
       </div>
