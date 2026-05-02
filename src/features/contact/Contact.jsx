@@ -43,7 +43,7 @@ function Contact() {
       },
       (error) => {
         console.log(error.text);
-      }
+      },
     );
   };
 
@@ -52,15 +52,15 @@ function Contact() {
       <Helmet>
         <title>Shiv | Contact</title>
       </Helmet>
-      <div className="flex w-full flex-col gap-x-8 gap-y-8 px-8 pt-5 xl:flex-row xl:divide-x-2 xl:divide-accentColor">
+      <div className="xl:divide-accentColor flex w-full flex-col gap-x-8 gap-y-8 px-8 pt-5 xl:flex-row xl:divide-x-2">
         <div className="xl:w-1/2 ">
           <ContactSocials />
         </div>
         <div className="flex flex-col xl:w-1/2  xl:pl-10">
-          <p className="text-3xl text-textColor">Let&apos;s Connect</p>
+          <p className="text-textColor text-3xl">Let&apos;s Connect</p>
           <form
             ref={formData}
-            className="space-y-4 pt-5 text-textColor"
+            className="text-textColor space-y-4 pt-5"
             onSubmit={handleSubmit(sendEmail)}
           >
             <div className="flex flex-col  ">
@@ -142,7 +142,7 @@ function Contact() {
                 MESSAGE
               </label>
               <textarea
-                className="w-full  bg-articleBg p-2  text-xl focus:border-accentColor focus:outline-none focus:ring-1 focus:ring-accentColor"
+                className="bg-articleBg  focus:border-accentColor focus:ring-accentColor  w-full p-2 text-xl focus:outline-none focus:ring-1"
                 id="message"
                 name="message"
                 cols="30"

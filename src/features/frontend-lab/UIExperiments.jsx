@@ -40,15 +40,18 @@ export default function UIExperiments() {
       </Helmet>
 
       <section className="min-h-screen px-6 py-12 sm:px-10 md:px-16 lg:px-20">
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-6xl">
           <HeroSection />
-          
+
           <StatsCards />
 
           {/* Dashboard Controls Area */}
-          <div className="mb-8 rounded-2xl border border-explorerBorder bg-articleBg/30 p-6 backdrop-blur-md shadow-lg">
-            <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-            
+          <div className="border-explorerBorder bg-articleBg/30 mb-8 rounded-2xl border p-6 shadow-lg backdrop-blur-md">
+            <SearchBar
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+            />
+
             <FilterTabs
               levels={LEVELS}
               selectedLevel={selectedLevel}

@@ -9,15 +9,15 @@ import ContributionGraph from "./components/ContributionGraph";
 import QuickLinks from "./components/QuickLinks";
 
 export default function Github() {
-  const {user, repos} = useLoaderData();
-  
+  const { user, repos } = useLoaderData();
+
   if (!user || !repos) {
     return (
       <HelmetProvider>
         <Helmet>
           <title>Shiv | Github Dashboard</title>
         </Helmet>
-        <div className="flex h-[80vh] w-full flex-col items-center justify-center p-8 text-textColor">
+        <div className="text-textColor flex h-[80vh] w-full flex-col items-center justify-center p-8">
           <svg
             width="64"
             height="64"
@@ -92,9 +92,13 @@ export default function Github() {
         <title>Shiv | Github Dashboard</title>
       </Helmet>
 
-      <div className="mx-auto w-full max-w-7xl space-y-12 overflow-hidden p-4 pb-20 md:p-8">
+      <div className="mx-auto w-full max-w-6xl space-y-12 overflow-hidden p-4 pb-20 md:p-8">
         <HeroProfile user={user} />
-        <StatsGrid user={user} totalStars={totalStars} totalForks={totalForks} />
+        <StatsGrid
+          user={user}
+          totalStars={totalStars}
+          totalForks={totalForks}
+        />
         <SkillsAndLearning skills={skills} learningItems={learningItems} />
         <FeaturedRepos featuredRepos={featuredRepos} />
         <ContributionGraph theme={theme} />
