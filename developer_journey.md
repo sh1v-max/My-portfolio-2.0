@@ -84,6 +84,11 @@ This document chronicles the evolution of the "My-portfolio-vsc" project—a hig
 *   **Solution:** Methodical verification of each config file. We deleted the now-redundant `tailwind.config.js` and `postcss.config.js` and moved all logic into `vite.config.js` and `index.css`.
 *   **Lesson Learned:** Modernizing a stack isn't just about "updating versions"—it's about re-learning the philosophy of the tools. Moving from JS-config to CSS-config is a mindset shift that leads to cleaner, more standard-compliant code.
 
+### 5. The Vite Asset Caching Glitch (The "White Screen of Death")
+*   **Problem:** A mysterious `Invalid left-hand side in assignment` syntax error on an image import (`countdown-timer.png?import`) causing a complete white screen, despite the code being 100% correct.
+*   **Solution:** Performing a hard browser refresh and restarting the Vite dev server with the `--force` flag.
+*   **Lesson Learned:** Browsers and build tools (like Vite) can aggressively cache assets in weird ways. In this case, the browser cached the raw PNG binary and tried to parse it as a JavaScript module because of the `?import` URL, leading to the bizarre syntax error. When the code looks flawless but the browser complains about an image syntax error, always "turn it off and on again" by clearing the cache!
+
 ---
 
 ## 🌟 The Result
