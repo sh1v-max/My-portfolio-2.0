@@ -92,7 +92,7 @@ export default function Github() {
         <title>Shiv | Github Dashboard</title>
       </Helmet>
 
-      <div className="mx-auto w-full max-w-7xl space-y-12 overflow-hidden bg-mainBg p-4 pb-20 md:p-8">
+      <div className="mx-auto w-full max-w-7xl space-y-12 overflow-hidden p-4 pb-20 md:p-8">
         <HeroProfile user={user} />
         <StatsGrid user={user} totalStars={totalStars} totalForks={totalForks} />
         <SkillsAndLearning skills={skills} learningItems={learningItems} />

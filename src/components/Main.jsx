@@ -11,7 +11,7 @@ function Main() {
 
   return (
     <div
-      className={`theme-${theme} flex h-screen w-full flex-col overflow-hidden bg-mainBg text-textColor`}
+      className={`theme-${theme} bg-mainBg text-textColor flex h-screen w-full flex-col overflow-hidden`}
     >
       {/* Top Title Bar */}
       <NavBar />
@@ -21,7 +21,7 @@ function Main() {
         <SideBar />
 
         {/* Sidebar Explorer - Hidden on mobile */}
-        <div className="hidden border-r border-explorerBorder md:block">
+        <div className="border-explorerBorder hidden border-r md:block">
           <Explorer />
         </div>
 

@@ -10,7 +10,7 @@ function Projects() {
         <title>Shiv | Projects</title>
       </Helmet>
 
-      <section className="min-h-[85vh] bg-mainBg px-6 py-16 sm:px-10 md:px-16 lg:px-20">
+      <section className="min-h-[85vh] px-6 py-16 sm:px-10 md:px-16 lg:px-20">
         {/* Section Header */}
         <div className="mx-auto max-w-6xl">
           <div className="mb-14 flex flex-col items-start gap-3">
