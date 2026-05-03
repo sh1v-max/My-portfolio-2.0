@@ -92,18 +92,20 @@ export default function Github() {
         <title>Shiv | Github Dashboard</title>
       </Helmet>
 
-      <div className="mx-auto w-full max-w-6xl space-y-12 overflow-hidden p-4 pb-20 md:p-8">
-        <HeroProfile user={user} />
-        <StatsGrid
-          user={user}
-          totalStars={totalStars}
-          totalForks={totalForks}
-        />
-        <SkillsAndLearning skills={skills} learningItems={learningItems} />
-        <FeaturedRepos featuredRepos={featuredRepos} />
-        <ContributionGraph theme={theme} />
-        <QuickLinks user={user} />
-      </div>
+      <section className="min-h-[85vh] px-6 py-16 sm:px-10 md:px-16 lg:px-20">
+        <div className="mx-auto max-w-6xl space-y-12 overflow-hidden">
+          <HeroProfile user={user} />
+          <StatsGrid
+            user={user}
+            totalStars={totalStars}
+            totalForks={totalForks}
+          />
+          <SkillsAndLearning skills={skills} learningItems={learningItems} />
+          <FeaturedRepos featuredRepos={featuredRepos} />
+          <ContributionGraph theme={theme} />
+          <QuickLinks user={user} />
+        </div>
+      </section>
     </HelmetProvider>
   );
 }

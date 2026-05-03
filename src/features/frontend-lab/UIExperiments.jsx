@@ -39,7 +39,7 @@ export default function UIExperiments() {
         <title>Shiv | Frontend Lab</title>
       </Helmet>
 
-      <section className="min-h-screen px-6 py-12 sm:px-10 md:px-16 lg:px-20">
+      <section className="min-h-screen px-6 py-16 sm:px-10 md:px-16 lg:px-20">
         <div className="mx-auto max-w-6xl">
           <HeroSection />
 

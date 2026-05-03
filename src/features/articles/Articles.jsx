@@ -10,33 +10,35 @@ function Articles() {
       <Helmet>
         <title>Shiv | Articles</title>
       </Helmet>
-      {/* <div className="p-8">
-        <h1 className="pb-8 text-3xl font-semibold text-textColor">
-          Recent posts from{" "}
-          <a
-            className=" underline decoration-accentColor"
-            href="https://dev.to"
-            target="_blank"
-            rel="noreferrer"
-          >
-            dev.to
-          </a>
-        </h1>
-        <div className="grid gap-x-5 gap-y-5 md:grid-cols-2 xl:grid-cols-4">
-          {articles &&
-            articles.map((article) => {
-              return (
-                <ArticleCard
-                  key={article.id}
-                  url={article.canonical_url}
-                  image={article.cover_image}
-                  title={article.title}
-                  desc={article.description}
-                />
-              );
-            })}
+      <section className="min-h-[85vh] px-6 py-16 sm:px-10 md:px-16 lg:px-20">
+        <div className="mx-auto max-w-6xl">
+          <h1 className="pb-8 text-3xl font-semibold text-textColor">
+            Recent posts from{" "}
+            <a
+              className=" underline decoration-accentColor"
+              href="https://dev.to"
+              target="_blank"
+              rel="noreferrer"
+            >
+              dev.to
+            </a>
+          </h1>
+          <div className="grid gap-x-5 gap-y-5 md:grid-cols-2 xl:grid-cols-4">
+            {articles &&
+              articles.map((article) => {
+                return (
+                  <ArticleCard
+                    key={article.id}
+                    url={article.canonical_url}
+                    image={article.cover_image}
+                    title={article.title}
+                    desc={article.description}
+                  />
+                );
+              })}
+          </div>
         </div>
-      </div> */}
+      </section>
     </HelmetProvider>
   );
 }

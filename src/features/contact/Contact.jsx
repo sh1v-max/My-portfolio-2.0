@@ -52,129 +52,133 @@ function Contact() {
       <Helmet>
         <title>Shiv | Contact</title>
       </Helmet>
-      <div className="xl:divide-accentColor flex w-full flex-col gap-x-8 gap-y-8 px-8 pt-5 xl:flex-row xl:divide-x-2">
-        <div className="xl:w-1/2 ">
-          <ContactSocials />
+      <section className="min-h-[85vh] px-6 py-16 sm:px-10 md:px-16 lg:px-20">
+        <div className="mx-auto max-w-6xl">
+          <div className="xl:divide-accentColor flex w-full flex-col gap-x-8 gap-y-8 xl:flex-row xl:divide-x-2">
+            <div className="xl:w-1/2 ">
+              <ContactSocials />
+            </div>
+            <div className="flex flex-col xl:w-1/2  xl:pl-10">
+              <p className="text-textColor text-3xl">Let&apos;s Connect</p>
+              <form
+                ref={formData}
+                className="text-textColor space-y-4 pt-5"
+                onSubmit={handleSubmit(sendEmail)}
+              >
+                <div className="flex flex-col  ">
+                  <label
+                    className="text-base font-semibold  md:text-lg"
+                    htmlFor="name"
+                  >
+                    NAME
+                  </label>
+                  <input
+                    className="input "
+                    name="name"
+                    type="text"
+                    id="name"
+                    {...register("name", {
+                      required: { value: true, message: "Name is required" },
+                    })}
+                  />
+                  <p className="error text-sm text-red-600">
+                    {errors.name?.message}{" "}
+                  </p>
+                </div>
+                <div className="flex flex-col">
+                  <label
+                    className="text-base font-semibold md:text-lg"
+                    htmlFor="email"
+                  >
+                    EMAIL
+                  </label>
+                  <input
+                    className="input"
+                    type="email"
+                    id="email"
+                    name="email"
+                    {...register("email", {
+                      pattern: {
+                        value:
+                          /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                        message: "Invalid email format",
+                      },
+                      required: {
+                        value: true,
+                        message: "Email is required",
+                      },
+                    })}
+                  />
+                  <p className="error text-sm text-red-600">
+                    {errors.email?.message}{" "}
+                  </p>
+                </div>
+                <div className="flex flex-col">
+                  <label
+                    className="text-base font-semibold md:text-lg"
+                    htmlFor="subject"
+                  >
+                    SUBJECT
+                  </label>
+                  <input
+                    className="input"
+                    type="text"
+                    name="subject"
+                    id="subject"
+                    {...register("subject", {
+                      required: {
+                        value: true,
+                        message: "Subject is required",
+                      },
+                    })}
+                  />
+                  <p className="error text-sm text-red-600">
+                    {errors.subject?.message}{" "}
+                  </p>
+                </div>
+                <div className="flex flex-col">
+                  <label
+                    className="text-base font-semibold md:text-lg"
+                    htmlFor="message"
+                  >
+                    MESSAGE
+                  </label>
+                  <textarea
+                    className="bg-articleBg  focus:border-accentColor focus:ring-accentColor  w-full p-2 text-xl focus:outline-none focus:ring-1"
+                    id="message"
+                    name="message"
+                    cols="30"
+                    rows="6"
+                    {...register("message", {
+                      required: {
+                        value: true,
+                        message: "Message is required",
+                      },
+                      validate: {
+                        isLessThanfiveChar: (fieldValue) => {
+                          return (
+                            fieldValue.length > 4 ||
+                            "Should be of minimum 5 characters"
+                          );
+                        },
+                      },
+                    })}
+                  ></textarea>
+                  <p className="error text-sm text-red-600">
+                    {errors.message?.message}{" "}
+                  </p>
+                </div>
+                <button
+                  type="submit"
+                  className=" bg-accentColor px-6 py-1 text-lg font-medium text-black"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col xl:w-1/2  xl:pl-10">
-          <p className="text-textColor text-3xl">Let&apos;s Connect</p>
-          <form
-            ref={formData}
-            className="text-textColor space-y-4 pt-5"
-            onSubmit={handleSubmit(sendEmail)}
-          >
-            <div className="flex flex-col  ">
-              <label
-                className="text-base font-semibold  md:text-lg"
-                htmlFor="name"
-              >
-                NAME
-              </label>
-              <input
-                className="input "
-                name="name"
-                type="text"
-                id="name"
-                {...register("name", {
-                  required: { value: true, message: "Name is required" },
-                })}
-              />
-              <p className="error text-sm text-red-600">
-                {errors.name?.message}{" "}
-              </p>
-            </div>
-            <div className="flex flex-col">
-              <label
-                className="text-base font-semibold md:text-lg"
-                htmlFor="email"
-              >
-                EMAIL
-              </label>
-              <input
-                className="input"
-                type="email"
-                id="email"
-                name="email"
-                {...register("email", {
-                  pattern: {
-                    value:
-                      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                    message: "Invalid email format",
-                  },
-                  required: {
-                    value: true,
-                    message: "Email is required",
-                  },
-                })}
-              />
-              <p className="error text-sm text-red-600">
-                {errors.email?.message}{" "}
-              </p>
-            </div>
-            <div className="flex flex-col">
-              <label
-                className="text-base font-semibold md:text-lg"
-                htmlFor="subject"
-              >
-                SUBJECT
-              </label>
-              <input
-                className="input"
-                type="text"
-                name="subject"
-                id="subject"
-                {...register("subject", {
-                  required: {
-                    value: true,
-                    message: "Subject is required",
-                  },
-                })}
-              />
-              <p className="error text-sm text-red-600">
-                {errors.subject?.message}{" "}
-              </p>
-            </div>
-            <div className="flex flex-col">
-              <label
-                className="text-base font-semibold md:text-lg"
-                htmlFor="message"
-              >
-                MESSAGE
-              </label>
-              <textarea
-                className="bg-articleBg  focus:border-accentColor focus:ring-accentColor  w-full p-2 text-xl focus:outline-none focus:ring-1"
-                id="message"
-                name="message"
-                cols="30"
-                rows="6"
-                {...register("message", {
-                  required: {
-                    value: true,
-                    message: "Message is required",
-                  },
-                  validate: {
-                    isLessThanfiveChar: (fieldValue) => {
-                      return (
-                        fieldValue.length > 4 ||
-                        "Should be of minimum 5 characters"
-                      );
-                    },
-                  },
-                })}
-              ></textarea>
-              <p className="error text-sm text-red-600">
-                {errors.message?.message}{" "}
-              </p>
-            </div>
-            <button
-              type="submit"
-              className=" bg-accentColor px-6 py-1 text-lg font-medium text-black"
-            >
-              Submit
-            </button>
-          </form>
-        </div>
-      </div>
+      </section>
     </HelmetProvider>
   );
 }

@@ -39,26 +39,28 @@ function Settings() {
 
   return (
     <HelmetProvider>
-      <div className="p-8">
-        <Helmet>
-          <title> Shiv | Settings</title>
-        </Helmet>
-        <h2 className="text-3xl font-semibold text-textColor">Manage Themes</h2>
-        <div className="grid gap-5 pt-8 md:grid-cols-3 xl:grid-cols-4">
-          {themeInfo.map((th) => {
-            return (
-              <ThemeCard
-                key={th.name}
-                name={th.name}
-                img={th.img}
-                publisher={th.publisher}
-                theme={th.theme}
-                // changeTheme={changeTheme}
-              />
-            );
-          })}
+      <section className="min-h-[85vh] px-6 py-16 sm:px-10 md:px-16 lg:px-20">
+        <div className="mx-auto max-w-6xl">
+          <Helmet>
+            <title> Shiv | Settings</title>
+          </Helmet>
+          <h2 className="text-3xl font-semibold text-textColor">Manage Themes</h2>
+          <div className="grid gap-5 pt-8 md:grid-cols-3 xl:grid-cols-4">
+            {themeInfo.map((th) => {
+              return (
+                <ThemeCard
+                  key={th.name}
+                  name={th.name}
+                  img={th.img}
+                  publisher={th.publisher}
+                  theme={th.theme}
+                  // changeTheme={changeTheme}
+                />
+              );
+            })}
+          </div>
         </div>
-      </div>
+      </section>
     </HelmetProvider>
   );
 }

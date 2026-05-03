@@ -41,8 +41,9 @@ function About() {
         <title>Shiv | About</title>
       </Helmet>
 
-      <motion.div
-        className="mx-auto max-w-6xl p-6 text-textColor md:p-12"
+      <section className="min-h-[85vh] px-6 py-16 sm:px-10 md:px-16 lg:px-20">
+        <motion.div
+          className="mx-auto max-w-6xl text-textColor"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -159,7 +160,8 @@ function About() {
             ))}
           </div>
         </motion.div>
-      </motion.div>
+        </motion.div>
+      </section>
     </HelmetProvider>
   );
 }
