@@ -3,6 +3,7 @@ import Tag from "./Tag";
 import { ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import ProjectButton from "../../components/ProjectButton";
+import { motion } from "framer-motion";
 
 function MiniProjectCard({
   title,
@@ -11,9 +12,20 @@ function MiniProjectCard({
   tags,
   sourceCode,
   demo,
+  index = 0,
 }) {
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-explorerBorder bg-articleBg/80 backdrop-blur-sm transition-all duration-500 hover:border-accentColor/50 hover:shadow-[0_8px_40px_rgba(0,0,0,0.45)]">
+    <motion.article 
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ 
+        duration: 0.8, 
+        delay: (index % 4) * 0.15, // Staggers up to 4 visible cards
+        ease: [0.25, 0.1, 0.25, 1] 
+      }}
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-explorerBorder bg-articleBg/80 backdrop-blur-sm transition-all duration-500 hover:border-accentColor/50 hover:shadow-[0_8px_40px_rgba(0,0,0,0.45)]"
+    >
       {/* top glow line */}
       <div className="absolute left-0 top-0 z-10 h-[2px] w-full bg-gradient-to-r from-transparent via-accentColor to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
@@ -70,7 +82,7 @@ function MiniProjectCard({
           </ProjectButton>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }
 

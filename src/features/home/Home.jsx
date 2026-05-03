@@ -135,7 +135,7 @@ function Home() {
 
               {/* CTA Buttons */}
               <motion.div
-                className="flex flex-col items-center gap-4 sm:flex-row lg:justify-start"
+                className="flex flex-col py-8 items-center gap-4 sm:flex-row lg:justify-start"
                 variants={ctaVariants}
               >
                 <Link to="/projects">

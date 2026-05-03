@@ -2,6 +2,27 @@ import ProjectCard from "./ProjectCard";
 import MiniProjectsCarousel from "./MiniProjectsCarousel";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { projects } from "./project";
+import { motion } from "framer-motion";
+
+// ─── Header Animation ────────────────────────────────────
+const headerContainer = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2, // Slower stagger for header elements
+    },
+  },
+};
+
+const headerItem = {
+  hidden: { opacity: 0, y: 30 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
 
 function Projects() {
   return (
@@ -11,43 +32,73 @@ function Projects() {
       </Helmet>
 
       <section className="min-h-[85vh] px-6 py-16 sm:px-10 md:px-16 lg:px-20">
-        {/* Section Header */}
         <div className="mx-auto max-w-6xl">
-          <div className="mb-14 flex flex-col items-start gap-3">
+          {/* ─── Animated Header ─── */}
+          <motion.div
+            variants={headerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-50px" }}
+            className="mb-14 flex flex-col items-start gap-3"
+          >
             {/* Accent tag */}
-            <span className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest">
+            <motion.span
+              variants={headerItem}
+              className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
+            >
               <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
               Featured Work
-            </span>
+            </motion.span>
 
             {/* Heading */}
-            <h1 className="text-textColor text-4xl font-extrabold tracking-tight sm:text-5xl">
+            <motion.h1
+              variants={headerItem}
+              className="text-textColor text-4xl font-extrabold tracking-tight sm:text-5xl"
+            >
               Projects
-            </h1>
+            </motion.h1>
 
             {/* Subtitle */}
-            <p className="text-textColor/60 max-w-xl text-base leading-relaxed">
+            <motion.p
+              variants={headerItem}
+              className="text-textColor/60 max-w-xl text-base leading-relaxed"
+            >
               A selection of projects I&apos;ve built — from AI-powered
               platforms to full-stack applications. Each one crafted with
               attention to detail, performance, and user experience.
-            </p>
+            </motion.p>
 
             {/* Decorative accent line */}
-            <div className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-gradient-to-r" />
-          </div>
+            <motion.div
+              variants={headerItem}
+              className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-gradient-to-r"
+            />
+          </motion.div>
 
-          {/* Project Cards Grid */}
+          {/* ─── True Scroll-triggered Grid ─── */}
+          {/* We do NOT use parent stagger here. Each card tracks itself. */}
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {projects.map((p) => (
-              <ProjectCard
+            {projects.map((p, i) => (
+              <motion.div
                 key={p.title}
-                title={p.title}
-                desc={p.description}
-                img={p.image}
-                srcCode={p.sourceCode}
-                demo={p.demo}
-                tags={p.tags}
-              />
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{
+                  duration: 0.8,
+                  delay: (i % 3) * 0.2, // Stagger rows: 0s, 0.2s, 0.4s
+                  ease: [0.25, 0.1, 0.25, 1],
+                }}
+              >
+                <ProjectCard
+                  title={p.title}
+                  desc={p.description}
+                  img={p.image}
+                  srcCode={p.sourceCode}
+                  demo={p.demo}
+                  tags={p.tags}
+                />
+              </motion.div>
             ))}
           </div>
         </div>

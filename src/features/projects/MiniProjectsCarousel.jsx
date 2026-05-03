@@ -3,11 +3,12 @@ import {
   Navigation,
   Pagination,
   A11y,
-  FreeMode,
+  // FreeMode,
   Autoplay,
 } from "swiper/modules";
 import "swiper/css/bundle";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import MiniProjectCard from "./MiniProjectCard";
 import { miniProjects } from "./miniProjects";
@@ -54,14 +55,28 @@ function MiniProjectsCarousel() {
         }
         .mini-swiper .swiper-slide {
           height: auto;
+          transition: all 0.5s ease;
+          opacity: 0.3;
+          transform: scale(0.85);
+          pointer-events: none;
+        }
+        .mini-swiper .swiper-slide-active {
+          opacity: 1;
+          transform: scale(1);
+          pointer-events: auto;
         }
       `}</style>
 
-      <section className="mt-24 px-6 sm:px-10 md:px-16 lg:px-20">
+      <section className="mt-24 px-6 sm:px-10 md:px-16 lg:px-20 overflow-hidden">
         <div className="mx-auto max-w-6xl">
-
           {/* section header, UI experiments */}
-          <div className="mb-10 flex flex-col items-start gap-3">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+            className="mb-10 flex flex-col items-start gap-3"
+          >
             <span className="inline-flex items-center gap-2 rounded-full border border-accentColor/30 bg-accentColor/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accentColor">
               <span className="h-1.5 w-1.5 rounded-full bg-accentColor animate-pulse" />
               UI Experiments
@@ -80,38 +95,47 @@ function MiniProjectsCarousel() {
 
             {/* line */}
             <div className="mt-1 h-1 w-16 rounded-full bg-gradient-to-r from-accentColor to-accentColor/30" />
-          </div>
+          </motion.div>
 
           {/* swiper carousel */}
-          <Swiper
-            className="mini-swiper !overflow-visible pb-2"
-            modules={[Navigation, Pagination, A11y, FreeMode, Autoplay]}
-            spaceBetween={20}
-            slidesPerView={1.15}
-            freeMode={{ enabled: true, momentum: true, momentumRatio: 0.6 }}
-            navigation
-            pagination={{ clickable: true, dynamicBullets: true }}
-            grabCursor={true}
-            a11y={{ enabled: true }}
-            autoplay={{ delay: 3500, disableOnInteraction: true, pauseOnMouseEnter: true }}
-            breakpoints={{
-              540:  { slidesPerView: 1.5,  spaceBetween: 20 },
-              768:  { slidesPerView: 2.2,  spaceBetween: 22 },
-              1024: { slidesPerView: 3.1,  spaceBetween: 24 },
-              1280: { slidesPerView: 3.4,  spaceBetween: 24 },
-            }}
-          >
-            {miniProjects.map((project) => (
-              <SwiperSlide key={project.title} className="!h-auto">
-                {/* ignoring swiper default height */}
-                {/* important modifier for height, set as auto */}
-                <MiniProjectCard {...project} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          <div className="mt-8">
+            <Swiper
+              className="mini-swiper pb-8 pt-4 -mt-4 px-2 -mx-2"
+              modules={[Navigation, Pagination, A11y, Autoplay]}
+              spaceBetween={30}
+              slidesPerView={1.2}
+              centeredSlides={true}
+              loop={true}
+              navigation
+              pagination={{ clickable: true, dynamicBullets: true }}
+              grabCursor={true}
+              a11y={{ enabled: true }}
+              autoplay={{ delay: 3500, disableOnInteraction: true, pauseOnMouseEnter: true }}
+              breakpoints={{
+                540: { slidesPerView: 1.5, spaceBetween: 20 },
+                768: { slidesPerView: 2.5, spaceBetween: 30 },
+                1024: { slidesPerView: 3.5, spaceBetween: 40 },
+                1280: { slidesPerView: 3.5, spaceBetween: 40 },
+              }}
+            >
+              {miniProjects.map((project, index) => (
+                <SwiperSlide key={project.title} className="!h-auto">
+                  {/* ignoring swiper default height */}
+                  {/* important modifier for height, set as auto */}
+                  <MiniProjectCard index={index} {...project} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
 
           {/* explore all mini projects */}
-          <div className="mt-12 flex flex-col items-center gap-3">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10px" }}
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+            className="mt-12 flex flex-col items-center gap-3"
+          >
             <Link
               to="/frontend-lab"
               className="group inline-flex items-center gap-3 rounded-xl border border-accentColor/30 bg-accentColor/5 px-7 py-3.5 text-sm font-semibold text-accentColor backdrop-blur-sm transition-all duration-300 hover:border-accentColor/60 hover:bg-accentColor/15 hover:shadow-[0_0_24px_rgba(136,192,208,0.15)] active:scale-[0.97]"
@@ -136,8 +160,7 @@ function MiniProjectsCarousel() {
             <p className="text-xs text-textColor/40 tracking-wide mb-12">
               33+ projects &nbsp;·&nbsp; Beginner &nbsp;·&nbsp; Intermediate &nbsp;·&nbsp; Advanced
             </p>
-          </div>
-
+          </motion.div>
         </div>
       </section>
     </>

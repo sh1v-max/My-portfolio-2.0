@@ -3,17 +3,30 @@ import Tag from "./Tag";
 import { ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import ProjectButton from "../../components/ProjectButton";
+import { motion } from "framer-motion";
 
 function ProjectCard({ img, title, desc, tags, srcCode, demo }) {
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-explorerBorder bg-articleBg transition-all duration-500 hover:border-accentColor/50 hover:shadow-[0_8px_40px_rgba(0,0,0,0.4)]">
+    <motion.article
+      whileHover={{
+        y: -4,
+        scale: 1.01,
+      }}
+      transition={{
+        duration: 0.4,
+        ease: "easeOut",
+      }}
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-explorerBorder bg-articleBg transition-all duration-300 hover:border-accentColor/40 hover:shadow-2xl"
+    >
       {/* image */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 z-10 bg-gradient-to-t from-articleBg/80 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-        <img
+        <motion.img
           src={img}
           alt={`${title} project screenshot`}
-          className="h-52 w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-110"
+          className="h-52 w-full object-cover object-top"
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3 }}
         />
         {/* line */}
         <div className="absolute left-0 top-0 h-[2px] w-full bg-gradient-to-r from-transparent via-accentColor to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -62,7 +75,7 @@ function ProjectCard({ img, title, desc, tags, srcCode, demo }) {
           </ProjectButton>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }
 
