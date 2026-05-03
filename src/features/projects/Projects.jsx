@@ -15,25 +15,25 @@ function Projects() {
         <div className="mx-auto max-w-6xl">
           <div className="mb-14 flex flex-col items-start gap-3">
             {/* Accent tag */}
-            <span className="inline-flex items-center gap-2 rounded-full border border-accentColor/30 bg-accentColor/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accentColor">
-              <span className="h-1.5 w-1.5 rounded-full bg-accentColor animate-pulse" />
+            <span className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest">
+              <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
               Featured Work
             </span>
 
             {/* Heading */}
-            <h1 className="text-4xl font-extrabold tracking-tight text-textColor sm:text-5xl">
+            <h1 className="text-textColor text-4xl font-extrabold tracking-tight sm:text-5xl">
               Projects
             </h1>
 
             {/* Subtitle */}
-            <p className="max-w-xl text-base leading-relaxed text-textColor/60">
-              A selection of projects I&apos;ve built — from AI-powered platforms
-              to full-stack applications. Each one crafted with attention to
-              detail, performance, and user experience.
+            <p className="text-textColor/60 max-w-xl text-base leading-relaxed">
+              A selection of projects I&apos;ve built — from AI-powered
+              platforms to full-stack applications. Each one crafted with
+              attention to detail, performance, and user experience.
             </p>
 
             {/* Decorative accent line */}
-            <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-accentColor to-accentColor/30" />
+            <div className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-gradient-to-r" />
           </div>
 
           {/* Project Cards Grid */}

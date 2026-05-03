@@ -14,17 +14,17 @@ function Articles() {
         <div className="mx-auto max-w-6xl">
           {/* Page Header */}
           <div className="mb-14 flex flex-col items-start gap-3">
-            <span className="inline-flex items-center gap-2 rounded-full border border-accentColor/30 bg-accentColor/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accentColor">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accentColor" />
+            <span className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest">
+              <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
               Latest Insights
             </span>
-            <h1 className="text-4xl font-extrabold tracking-tight text-textColor sm:text-5xl">
+            <h1 className="text-textColor text-4xl font-extrabold tracking-tight sm:text-5xl">
               Technical Blog
             </h1>
-            <p className="max-w-xl text-base leading-relaxed text-textColor/60">
+            <p className="text-textColor/60 max-w-xl text-base leading-relaxed">
               Recent posts from my{" "}
               <a
-                className="text-accentColor underline decoration-accentColor/30 underline-offset-4 transition-colors hover:decoration-accentColor"
+                className="text-accentColor decoration-accentColor/30 hover:decoration-accentColor underline underline-offset-4 transition-colors"
                 href="https://dev.to"
                 target="_blank"
                 rel="noreferrer"
@@ -33,7 +33,7 @@ function Articles() {
               </a>{" "}
               profile, covering React, JavaScript, and modern web architecture.
             </p>
-            <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-accentColor to-accentColor/30" />
+            <div className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-gradient-to-r" />
           </div>
 
           <div className="grid gap-x-5 gap-y-5 md:grid-cols-2 xl:grid-cols-4">

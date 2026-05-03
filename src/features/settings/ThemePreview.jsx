@@ -43,36 +43,36 @@ export default function ThemePreview({ themeClass }) {
       className={`${themeClass} aspect-[16/10] w-full overflow-hidden rounded-lg shadow-inner`}
     >
       {/* Entire mini-window uses the scoped theme */}
-      <div className="flex h-full w-full flex-col bg-mainBg">
+      <div className="bg-mainBg flex h-full w-full flex-col">
         {/* ─── Title Bar ─── */}
-        <div className="flex items-center gap-1.5 bg-titlebarBg px-2.5 py-[5px]">
+        <div className="bg-titlebarBg flex items-center gap-1.5 px-2.5 py-[5px]">
           <span className="h-[7px] w-[7px] rounded-full bg-[#ff5f56]" />
           <span className="h-[7px] w-[7px] rounded-full bg-[#ffbd2e]" />
           <span className="h-[7px] w-[7px] rounded-full bg-[#27c93f]" />
           <div className="ml-auto flex gap-1">
-            <div className="h-[5px] w-8 rounded-sm bg-textColor/10" />
-            <div className="h-[5px] w-6 rounded-sm bg-accentColor/30" />
+            <div className="bg-textColor/10 h-[5px] w-8 rounded-sm" />
+            <div className="bg-accentColor/30 h-[5px] w-6 rounded-sm" />
           </div>
         </div>
 
         {/* ─── Tabs Bar ─── */}
-        <div className="flex items-end gap-px bg-tabsBg px-1 pt-px">
-          <div className="flex items-center gap-1 rounded-t-[3px] bg-tabActiveBg px-2 py-[3px]">
-            <div className="h-[5px] w-[5px] rounded-sm bg-accentColor/60" />
-            <div className="h-[4px] w-10 rounded-sm bg-textColor/30" />
+        <div className="bg-tabsBg flex items-end gap-px px-1 pt-px">
+          <div className="bg-tabActiveBg flex items-center gap-1 rounded-t-[3px] px-2 py-[3px]">
+            <div className="bg-accentColor/60 h-[5px] w-[5px] rounded-sm" />
+            <div className="bg-textColor/30 h-[4px] w-10 rounded-sm" />
           </div>
           <div className="flex items-center gap-1 px-2 py-[3px] opacity-40">
-            <div className="h-[5px] w-[5px] rounded-sm bg-textColor/20" />
-            <div className="h-[4px] w-8 rounded-sm bg-textColor/15" />
+            <div className="bg-textColor/20 h-[5px] w-[5px] rounded-sm" />
+            <div className="bg-textColor/15 h-[4px] w-8 rounded-sm" />
           </div>
         </div>
 
         {/* ─── Body: Sidebar + Editor ─── */}
-        <div className="flex flex-1 overflow-hidden border-t border-explorerBorder/30">
+        <div className="border-explorerBorder/30 flex flex-1 overflow-hidden border-t">
           {/* Sidebar / Explorer */}
-          <div className="flex w-[28%] flex-col gap-[3px] border-r border-explorerBorder/30 bg-explorerBg p-2 pt-2.5">
+          <div className="border-explorerBorder/30 bg-explorerBg flex w-[28%] flex-col gap-[3px] border-r p-2 pt-2.5">
             {/* Section label */}
-            <div className="mb-1 h-[4px] w-10 rounded-sm bg-textColor/15" />
+            <div className="bg-textColor/15 mb-1 h-[4px] w-10 rounded-sm" />
             {/* File list */}
             {SIDEBAR_ITEMS.map((item, i) => (
               <div
@@ -96,7 +96,7 @@ export default function ThemePreview({ themeClass }) {
           </div>
 
           {/* Editor Area */}
-          <div className="flex flex-1 flex-col gap-[4px] bg-mainBg p-2.5 pl-3">
+          <div className="bg-mainBg flex flex-1 flex-col gap-[4px] p-2.5 pl-3">
             {CODE_LINES.map((line, i) => (
               <div
                 key={i}
@@ -104,7 +104,7 @@ export default function ThemePreview({ themeClass }) {
                 style={{ paddingLeft: `${line.indent * 10}px` }}
               >
                 {/* Line number */}
-                <span className="mr-1 h-[4px] w-3 rounded-sm bg-textColor/10" />
+                <span className="bg-textColor/10 mr-1 h-[4px] w-3 rounded-sm" />
                 {/* Code tokens */}
                 {line.widths.map((w, j) => (
                   <div
@@ -113,8 +113,8 @@ export default function ThemePreview({ themeClass }) {
                       line.keyword && j === 0
                         ? "bg-accentColor/50"
                         : j === 1
-                          ? "bg-textColor/25"
-                          : "bg-textColor/15"
+                        ? "bg-textColor/25"
+                        : "bg-textColor/15"
                     }`}
                   />
                 ))}
@@ -124,14 +124,14 @@ export default function ThemePreview({ themeClass }) {
         </div>
 
         {/* ─── Status Bar ─── */}
-        <div className="flex items-center justify-between bg-bottombarBg px-2 py-[3px] border-t border-bottombarBorder/30">
+        <div className="bg-bottombarBg border-bottombarBorder/30 flex items-center justify-between border-t px-2 py-[3px]">
           <div className="flex items-center gap-2">
-            <div className="h-[4px] w-8 rounded-sm bg-accentColor/40" />
-            <div className="h-[4px] w-6 rounded-sm bg-textColor/15" />
+            <div className="bg-accentColor/40 h-[4px] w-8 rounded-sm" />
+            <div className="bg-textColor/15 h-[4px] w-6 rounded-sm" />
           </div>
           <div className="flex items-center gap-2">
-            <div className="h-[4px] w-10 rounded-sm bg-textColor/10" />
-            <div className="h-[4px] w-6 rounded-sm bg-textColor/10" />
+            <div className="bg-textColor/10 h-[4px] w-10 rounded-sm" />
+            <div className="bg-textColor/10 h-[4px] w-6 rounded-sm" />
           </div>
         </div>
       </div>

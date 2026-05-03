@@ -96,29 +96,29 @@ function Settings() {
             variants={itemVariants}
             className="mb-14 flex flex-col items-start gap-3"
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-accentColor/30 bg-accentColor/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accentColor">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accentColor" />
+            <span className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest">
+              <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
               Customize Experience
             </span>
-            <h1 className="text-4xl font-extrabold tracking-tight text-textColor sm:text-5xl">
+            <h1 className="text-textColor text-4xl font-extrabold tracking-tight sm:text-5xl">
               Appearance
             </h1>
-            <p className="max-w-xl text-base leading-relaxed text-textColor/60">
+            <p className="text-textColor/60 max-w-xl text-base leading-relaxed">
               Personalize your workspace with a variety of themes inspired by
               popular code editors. Choose a style that matches your workflow.
             </p>
-            <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-accentColor to-accentColor/30" />
+            <div className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-gradient-to-r" />
           </motion.div>
 
           {/* Currently Active Theme Banner */}
           {activeTheme && (
             <motion.div
               variants={itemVariants}
-              className="mb-10 overflow-hidden rounded-2xl border border-accentColor/20 bg-gradient-to-r from-accentColor/5 via-articleBg/60 to-accentColor/5 p-6"
+              className="border-accentColor/20 from-accentColor/5 via-articleBg/60 to-accentColor/5 mb-10 overflow-hidden rounded-2xl border bg-gradient-to-r p-6"
             >
               <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accentColor/15 text-accentColor">
+                  <div className="bg-accentColor/15 text-accentColor flex h-12 w-12 items-center justify-center rounded-xl">
                     <svg
                       width="24"
                       height="24"
@@ -138,10 +138,10 @@ function Settings() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-xs font-medium uppercase tracking-widest text-textColor/40">
+                    <p className="text-textColor/40 text-xs font-medium uppercase tracking-widest">
                       Currently Active
                     </p>
-                    <p className="text-xl font-bold text-textColor">
+                    <p className="text-textColor text-xl font-bold">
                       {activeTheme.name}
                     </p>
                   </div>
@@ -165,7 +165,7 @@ function Settings() {
             variants={itemVariants}
             className="mb-6 flex items-center gap-3"
           >
-            <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-textColor/40">
+            <div className="text-textColor/40 flex items-center gap-2 text-sm font-semibold uppercase tracking-widest">
               <svg
                 width="16"
                 height="16"
@@ -184,8 +184,8 @@ function Settings() {
               </svg>
               Available Themes
             </div>
-            <div className="h-px flex-1 bg-explorerBorder" />
-            <span className="text-xs font-medium text-textColor/30">
+            <div className="bg-explorerBorder h-px flex-1" />
+            <span className="text-textColor/30 text-xs font-medium">
               {themeInfo.length} themes
             </span>
           </motion.div>
