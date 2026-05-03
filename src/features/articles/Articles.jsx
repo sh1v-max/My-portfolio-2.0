@@ -12,17 +12,30 @@ function Articles() {
       </Helmet>
       <section className="min-h-[85vh] px-6 py-16 sm:px-10 md:px-16 lg:px-20">
         <div className="mx-auto max-w-6xl">
-          <h1 className="pb-8 text-3xl font-semibold text-textColor">
-            Recent posts from{" "}
-            <a
-              className=" underline decoration-accentColor"
-              href="https://dev.to"
-              target="_blank"
-              rel="noreferrer"
-            >
-              dev.to
-            </a>
-          </h1>
+          {/* Page Header */}
+          <div className="mb-14 flex flex-col items-start gap-3">
+            <span className="inline-flex items-center gap-2 rounded-full border border-accentColor/30 bg-accentColor/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accentColor">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accentColor" />
+              Latest Insights
+            </span>
+            <h1 className="text-4xl font-extrabold tracking-tight text-textColor sm:text-5xl">
+              Technical Blog
+            </h1>
+            <p className="max-w-xl text-base leading-relaxed text-textColor/60">
+              Recent posts from my{" "}
+              <a
+                className="text-accentColor underline decoration-accentColor/30 underline-offset-4 transition-colors hover:decoration-accentColor"
+                href="https://dev.to"
+                target="_blank"
+                rel="noreferrer"
+              >
+                dev.to
+              </a>{" "}
+              profile, covering React, JavaScript, and modern web architecture.
+            </p>
+            <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-accentColor to-accentColor/30" />
+          </div>
+
           <div className="grid gap-x-5 gap-y-5 md:grid-cols-2 xl:grid-cols-4">
             {articles &&
               articles.map((article) => {

@@ -54,12 +54,27 @@ function Contact() {
       </Helmet>
       <section className="min-h-[85vh] px-6 py-16 sm:px-10 md:px-16 lg:px-20">
         <div className="mx-auto max-w-6xl">
+          {/* Page Header */}
+          <div className="mb-14 flex flex-col items-start gap-3">
+            <span className="inline-flex items-center gap-2 rounded-full border border-accentColor/30 bg-accentColor/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accentColor">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accentColor" />
+              Open for opportunities
+            </span>
+            <h1 className="text-4xl font-extrabold tracking-tight text-textColor sm:text-5xl">
+              Get in Touch
+            </h1>
+            <p className="max-w-xl text-base leading-relaxed text-textColor/60">
+              Have a question or want to work together? Feel free to reach out
+              via the form below or through my social links.
+            </p>
+            <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-accentColor to-accentColor/30" />
+          </div>
+
           <div className="xl:divide-accentColor flex w-full flex-col gap-x-8 gap-y-8 xl:flex-row xl:divide-x-2">
             <div className="xl:w-1/2 ">
               <ContactSocials />
             </div>
             <div className="flex flex-col xl:w-1/2  xl:pl-10">
-              <p className="text-textColor text-3xl">Let&apos;s Connect</p>
               <form
                 ref={formData}
                 className="text-textColor space-y-4 pt-5"

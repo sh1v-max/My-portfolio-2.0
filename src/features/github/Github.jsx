@@ -94,6 +94,22 @@ export default function Github() {
 
       <section className="min-h-[85vh] px-6 py-16 sm:px-10 md:px-16 lg:px-20">
         <div className="mx-auto max-w-6xl space-y-12 overflow-hidden">
+          {/* Page Header */}
+          <div className="mb-14 flex flex-col items-start gap-3">
+            <span className="inline-flex items-center gap-2 rounded-full border border-accentColor/30 bg-accentColor/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accentColor">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accentColor" />
+              {user.public_repos}+ Repositories
+            </span>
+            <h1 className="text-4xl font-extrabold tracking-tight text-textColor sm:text-5xl">
+              GitHub Dashboard
+            </h1>
+            <p className="max-w-xl text-base leading-relaxed text-textColor/60">
+              An overview of my open-source contributions, coding activity, and
+              featured projects directly from the GitHub API.
+            </p>
+            <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-accentColor to-accentColor/30" />
+          </div>
+
           <HeroProfile user={user} />
           <StatsGrid
             user={user}
