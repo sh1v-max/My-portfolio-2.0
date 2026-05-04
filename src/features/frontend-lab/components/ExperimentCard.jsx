@@ -25,7 +25,7 @@ export default function ExperimentCard({ project, index = 0 }) {
       viewport={{ once: true, amount: 0.1 }}
       transition={{
         duration: 1, // 1 second duration
-        delay: (index % 3) * 0.15, // Row-stagger to avoid massive delays on bottom items
+        delay: (index < 3 ? 0.6 : 0) + (index % 3) * 0.15, // Top row waits for dashboard, others stagger instantly on scroll
         ease: [0.25, 0.1, 0.25, 1],
       }}
       className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-explorerBorder bg-articleBg/60 backdrop-blur-sm transition-colors transition-shadow duration-500 hover:border-accentColor/50 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]"

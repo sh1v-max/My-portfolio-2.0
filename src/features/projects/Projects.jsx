@@ -86,7 +86,7 @@ function Projects() {
                 viewport={{ once: true, amount: 0.1 }} // Triggers when 10% is visible
                 transition={{
                   duration: 1, // 1 second duration
-                  delay: (i % 3) * 0.15, // Row-stagger matching Frontend Lab
+                  delay: (i < 3 ? 0.6 : 0) + (i % 3) * 0.15, // Top row waits for header, others stagger instantly on scroll
                   ease: [0.25, 0.1, 0.25, 1],
                 }}
               >
