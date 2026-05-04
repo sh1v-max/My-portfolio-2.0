@@ -25,8 +25,7 @@ export default function HeroSection() {
     <motion.div 
       variants={headerContainer}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true }}
+      animate="show"
       className="mb-12 flex flex-col items-start gap-4"
     >
       {/* Badge */}

@@ -28,6 +28,13 @@ const headerItem = {
 function Projects() {
   const [cols, setCols] = useState(3);
 
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 1200);
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     const updateCols = () => {
       if (window.innerWidth < 640) setCols(1);
@@ -51,8 +58,7 @@ function Projects() {
           <motion.div
             variants={headerContainer}
             initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-50px" }}
+            animate="show"
             className="mb-14 flex flex-col items-start gap-3"
           >
             {/* Accent tag */}
@@ -100,7 +106,7 @@ function Projects() {
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{
                   duration: 1,
-                  delay: cols === 1 ? 0.3 : (i < cols ? 0.45 : 0.15) + (i % cols) * 0.15,
+                  delay: cols === 1 ? 0.3 : (!isLoaded && i < cols ? 0.45 : 0.15) + (i % cols) * 0.15,
                   ease: [0.25, 0.1, 0.25, 1],
                 }}
               >

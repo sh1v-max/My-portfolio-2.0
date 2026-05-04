@@ -7,6 +7,14 @@ import { useState, useEffect } from "react";
 export default function ExperimentsGrid({ projects }) {
   const [cols, setCols] = useState(3);
 
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    // Small timeout to ensure headers finish before grid base delay disappears
+    const timer = setTimeout(() => setIsLoaded(true), 1200);
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     const updateCols = () => {
       if (window.innerWidth < 640) setCols(1); // mobile
@@ -28,7 +36,7 @@ export default function ExperimentsGrid({ projects }) {
           viewport={{ once: true, amount: 0.1 }}
           transition={{
             duration: 1,
-            delay: cols === 1 ? 0.3 : (index < cols ? 0.75 : 0.15) + (index % cols) * 0.15,
+            delay: cols === 1 ? 0.3 : (!isLoaded && index < cols ? 0.75 : 0.15) + (index % cols) * 0.15,
             ease: [0.25, 0.1, 0.25, 1],
           }}
         >
