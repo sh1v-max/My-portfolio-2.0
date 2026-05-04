@@ -100,7 +100,7 @@ function Projects() {
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{
                   duration: 1,
-                  delay: cols === 1 ? 0.3 : (i < cols ? 0.6 : 0.3) + (i % cols) * 0.15,
+                  delay: cols === 1 ? 0.3 : (i < cols ? 0.45 : 0.15) + (i % cols) * 0.15,
                   ease: [0.25, 0.1, 0.25, 1],
                 }}
               >

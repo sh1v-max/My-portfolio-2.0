@@ -1,26 +1,62 @@
 import { FaGithub } from "react-icons/fa";
+import { motion } from "framer-motion";
+
+const headerContainer = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const headerItem = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
 
 export default function HeroSection() {
   return (
-    <div className="mb-12 flex flex-col items-start gap-4">
+    <motion.div 
+      variants={headerContainer}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true }}
+      className="mb-12 flex flex-col items-start gap-4"
+    >
       {/* Badge */}
-      <span className="inline-flex items-center gap-2 rounded-full border border-accentColor/30 bg-accentColor/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accentColor shadow-[0_0_15px_rgba(136,192,208,0.2)]">
+      <motion.span 
+        variants={headerItem}
+        className="inline-flex items-center gap-2 rounded-full border border-accentColor/30 bg-accentColor/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accentColor shadow-[0_0_15px_rgba(136,192,208,0.2)]"
+      >
         <span className="h-1.5 w-1.5 rounded-full bg-accentColor animate-pulse" />
         33+ Builds
-      </span>
+      </motion.span>
 
       {/* Title */}
-      <h1 className="text-4xl font-extrabold tracking-tight text-textColor sm:text-5xl">
+      <motion.h1 
+        variants={headerItem}
+        className="text-4xl font-extrabold tracking-tight text-textColor sm:text-5xl"
+      >
         Frontend Lab
-      </h1>
+      </motion.h1>
 
       {/* Subtitle */}
-      <p className="max-w-2xl text-base leading-relaxed text-textColor/70">
+      <motion.p 
+        variants={headerItem}
+        className="max-w-2xl text-base leading-relaxed text-textColor/70"
+      >
         A collection of UI systems, machine coding challenges, and frontend experiments built to sharpen real-world development skills.
-      </p>
+      </motion.p>
 
       {/* Repository Link */}
-      <a
+      <motion.a
+        variants={headerItem}
         href="https://github.com/sh1v-max/Practice-UI-design-React-and-JS"
         target="_blank"
         rel="noreferrer"
@@ -28,10 +64,13 @@ export default function HeroSection() {
       >
         <FaGithub className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
         View Full Repository
-      </a>
+      </motion.a>
 
       {/* Decorative gradient line */}
-      <div className="mt-4 h-1 w-20 rounded-full bg-gradient-to-r from-accentColor to-transparent opacity-80" />
-    </div>
+      <motion.div 
+        variants={headerItem}
+        className="mt-4 h-1 w-20 rounded-full bg-gradient-to-r from-accentColor to-transparent opacity-80" 
+      />
+    </motion.div>
   );
 }

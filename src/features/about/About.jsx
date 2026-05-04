@@ -17,7 +17,7 @@ const containerVariants = {
     opacity: 1,
     transition: {
       staggerChildren: 0.3,
-      delayChildren: 0.2,
+      delayChildren: 0,
     },
   },
 };
@@ -83,7 +83,10 @@ function About() {
           viewport={{ once: true, margin: "-50px" }}
         >
           {/* ─── Hero Section ─── */}
-          <div className="mb-16 flex flex-col items-center gap-12 lg:flex-row lg:items-start">
+          <motion.div 
+            className="mb-16 flex flex-col items-center gap-12 lg:flex-row lg:items-start"
+            variants={containerVariants}
+          >
             <motion.div className="group relative" variants={slowBottomUp}>
               <div className="box border-accentColor overflow-hidden border-4">
                 <img
@@ -97,7 +100,7 @@ function About() {
 
             <motion.div
               className="flex-1 text-center lg:text-left"
-              variants={slowBottomUp}
+              variants={containerVariants}
             >
               <motion.span
                 className="border-accentColor/30 bg-accentColor/10 text-accentColor mb-4 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest shadow-[0_0_15px_rgba(136,192,208,0.1)]"
@@ -123,7 +126,7 @@ function About() {
                 India. 📍
               </motion.p>
             </motion.div>
-          </div>
+          </motion.div>
 
           {/* ─── Content Grid ─── */}
           <motion.div

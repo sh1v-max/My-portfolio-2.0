@@ -9,6 +9,25 @@ import FeaturedRepos from "./components/FeaturedRepos";
 import ContributionGraph from "./components/ContributionGraph";
 import QuickLinks from "./components/QuickLinks";
 
+const headerContainer = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const headerItem = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
+
 export default function Github() {
   const { user, repos } = useLoaderData();
 
@@ -96,25 +115,37 @@ export default function Github() {
       <section className="min-h-[85vh] px-6 py-16 sm:px-10 md:px-16 lg:px-20">
         <div className="mx-auto max-w-6xl space-y-12 overflow-hidden">
           {/* Page Header */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 1, delay: 0, ease: [0.25, 0.1, 0.25, 1] }}
+          <motion.div
+            variants={headerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
             className="mb-14 flex flex-col items-start gap-3"
           >
-            <span className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest">
+            <motion.span 
+              variants={headerItem}
+              className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
+            >
               <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
               {user.public_repos}+ Repositories
-            </span>
-            <h1 className="text-textColor text-4xl font-extrabold tracking-tight sm:text-5xl">
+            </motion.span>
+            <motion.h1 
+              variants={headerItem}
+              className="text-textColor text-4xl font-extrabold tracking-tight sm:text-5xl"
+            >
               GitHub Dashboard
-            </h1>
-            <p className="text-textColor/60 max-w-xl text-base leading-relaxed">
+            </motion.h1>
+            <motion.p 
+              variants={headerItem}
+              className="text-textColor/60 max-w-xl text-base leading-relaxed"
+            >
               An overview of my open-source contributions, coding activity, and
               featured projects directly from the GitHub API.
-            </p>
-            <div className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-gradient-to-r" />
+            </motion.p>
+            <motion.div 
+              variants={headerItem}
+              className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-gradient-to-r" 
+            />
           </motion.div>
 
           <motion.div
@@ -130,7 +161,7 @@ export default function Github() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 1, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <StatsGrid
               user={user}
@@ -143,7 +174,7 @@ export default function Github() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 1, delay: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <SkillsAndLearning skills={skills} learningItems={learningItems} />
           </motion.div>
@@ -152,7 +183,7 @@ export default function Github() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 1, delay: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <FeaturedRepos featuredRepos={featuredRepos} />
           </motion.div>
@@ -161,7 +192,7 @@ export default function Github() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 1, delay: 1.5, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <ContributionGraph theme={theme} />
           </motion.div>
@@ -170,7 +201,7 @@ export default function Github() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 1, delay: 1.8, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <QuickLinks user={user} />
           </motion.div>

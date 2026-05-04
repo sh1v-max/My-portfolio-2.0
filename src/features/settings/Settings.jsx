@@ -112,7 +112,7 @@ function Settings() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 1, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
               className="border-accentColor/20 from-accentColor/5 via-articleBg/60 to-accentColor/5 mb-10 overflow-hidden rounded-2xl border bg-gradient-to-r p-6"
             >
               <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
@@ -164,7 +164,7 @@ function Settings() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 1, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
             className="mb-6 flex items-center gap-3"
           >
             <div className="text-textColor/40 flex items-center gap-2 text-sm font-semibold uppercase tracking-widest">
@@ -202,7 +202,7 @@ function Settings() {
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ 
                   duration: 1, 
-                  delay: cols === 1 ? 0.3 : (index < cols ? 0.6 : 0.3) + (index % cols) * 0.15,
+                  delay: cols === 1 ? 0.3 : (index < cols ? 0.75 : 0.15) + (index % cols) * 0.15,
                   ease: [0.25, 0.1, 0.25, 1] 
                 }}
               >

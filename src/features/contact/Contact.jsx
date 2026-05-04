@@ -6,6 +6,25 @@ import { useRef } from "react";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 
+const headerContainer = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const headerItem = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
+
 function Contact() {
   const form = useForm({
     defaultValues: {
@@ -56,25 +75,37 @@ function Contact() {
       <section className="min-h-[85vh] px-6 py-16 sm:px-10 md:px-16 lg:px-20">
         <div className="mx-auto max-w-6xl">
           {/* Page Header */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 1, delay: 0, ease: [0.25, 0.1, 0.25, 1] }}
+          <motion.div
+            variants={headerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
             className="mb-14 flex flex-col items-start gap-3"
           >
-            <span className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest">
+            <motion.span 
+              variants={headerItem}
+              className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
+            >
               <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
               Open for opportunities
-            </span>
-            <h1 className="text-textColor text-4xl font-extrabold tracking-tight sm:text-5xl">
+            </motion.span>
+            <motion.h1 
+              variants={headerItem}
+              className="text-textColor text-4xl font-extrabold tracking-tight sm:text-5xl"
+            >
               Get in Touch
-            </h1>
-            <p className="text-textColor/60 max-w-xl text-base leading-relaxed">
+            </motion.h1>
+            <motion.p 
+              variants={headerItem}
+              className="text-textColor/60 max-w-xl text-base leading-relaxed"
+            >
               Have a question or want to work together? Feel free to reach out
               via the form below or through my social links.
-            </p>
-            <div className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-gradient-to-r" />
+            </motion.p>
+            <motion.div 
+              variants={headerItem}
+              className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-gradient-to-r" 
+            />
           </motion.div>
 
           <div className="xl:divide-accentColor flex w-full flex-col gap-x-8 gap-y-8 xl:flex-row xl:divide-x-2">
@@ -91,7 +122,7 @@ function Contact() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: 1, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
               className="flex flex-col xl:w-1/2  xl:pl-10"
             >
               <form
