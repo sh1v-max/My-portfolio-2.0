@@ -73,8 +73,8 @@ function MiniProjectsCarousel() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 1, delay: 0, ease: [0.25, 0.1, 0.25, 1] }}
             className="mb-10 flex flex-col items-start gap-3"
           >
             <span className="inline-flex items-center gap-2 rounded-full border border-accentColor/30 bg-accentColor/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accentColor">
@@ -98,7 +98,13 @@ function MiniProjectsCarousel() {
           </motion.div>
 
           {/* swiper carousel */}
-          <div className="mt-8">
+          <motion.div 
+            className="mt-8"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          >
             <Swiper
               className="mini-swiper pb-8 pt-4 -mt-4 px-2 -mx-2"
               modules={[Navigation, Pagination, A11y, Autoplay]}
@@ -126,14 +132,14 @@ function MiniProjectsCarousel() {
                 </SwiperSlide>
               ))}
             </Swiper>
-          </div>
+          </motion.div>
 
           {/* explore all mini projects */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10px" }}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 1, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
             className="mt-12 flex flex-col items-center gap-3"
           >
             <Link

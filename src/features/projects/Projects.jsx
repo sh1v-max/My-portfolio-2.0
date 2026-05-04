@@ -83,10 +83,10 @@ function Projects() {
                 key={p.title}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
+                viewport={{ once: true, amount: 0.1 }} // Triggers when 10% is visible
                 transition={{
-                  duration: 0.8,
-                  delay: (i % 3) * 0.2, // Stagger rows: 0s, 0.2s, 0.4s
+                  duration: 1, // 1 second duration
+                  delay: (i % 3) * 0.15, // Row-stagger matching Frontend Lab
                   ease: [0.25, 0.1, 0.25, 1],
                 }}
               >

@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { motion } from "framer-motion";
 
 import HeroSection from "./components/HeroSection";
 import StatsCards from "./components/StatsCards";
@@ -41,12 +42,32 @@ export default function UIExperiments() {
 
       <section className="min-h-screen px-6 py-16 sm:px-10 md:px-16 lg:px-20">
         <div className="mx-auto max-w-6xl">
-          <HeroSection />
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 1, delay: 0, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            <HeroSection />
+          </motion.div>
 
-          <StatsCards />
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            <StatsCards />
+          </motion.div>
 
           {/* Dashboard Controls Area */}
-          <div className="border-explorerBorder bg-articleBg/30 mb-8 rounded-2xl border p-6 shadow-lg backdrop-blur-md">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 1, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+            className="border-explorerBorder bg-articleBg/30 mb-8 rounded-2xl border p-6 shadow-lg backdrop-blur-md"
+          >
             <SearchBar
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
@@ -61,7 +82,7 @@ export default function UIExperiments() {
               setSelectedCategory={setSelectedCategory}
               onReset={handleReset}
             />
-          </div>
+          </motion.div>
 
           {/* Results Area */}
           {filteredProjects.length > 0 ? (
