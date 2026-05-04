@@ -13,7 +13,7 @@ function ThemeCard({
   description,
   palette,
   downloads,
-  index = 0,
+  // index = 0,
 }) {
   const { changeTheme, theme: currentTheme } = useTheme();
   const isActive = currentTheme === theme;
@@ -32,17 +32,6 @@ function ThemeCard({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ 
-        opacity: 1, 
-        y: 0,
-        transition: {
-          duration: 1, 
-          delay: (index < 3 ? 0.45 : 0) + (index % 3) * 0.15,
-          ease: [0.25, 0.1, 0.25, 1] 
-        }
-      }}
-      viewport={{ once: true, amount: 0.1 }}
       whileHover={{ y: -6, scale: 1.015 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       onClick={handleApply}

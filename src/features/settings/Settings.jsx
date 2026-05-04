@@ -2,11 +2,24 @@ import { motion } from "framer-motion";
 import ThemeCard from "./ThemeCard";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useTheme } from "../../context/ThemeContext";
+import { useState, useEffect } from "react";
 
 // Removed previous container/item variants in favor of standard whileInView
 
 function Settings() {
   const { theme: currentTheme } = useTheme();
+  const [cols, setCols] = useState(3);
+
+  useEffect(() => {
+    const updateCols = () => {
+      if (window.innerWidth < 640) setCols(1);
+      else if (window.innerWidth < 1024) setCols(2);
+      else setCols(3);
+    };
+    updateCols();
+    window.addEventListener("resize", updateCols);
+    return () => window.removeEventListener("resize", updateCols);
+  }, []);
 
   const themeInfo = [
     {
@@ -182,7 +195,19 @@ function Settings() {
           {/* Theme Cards Grid */}
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {themeInfo.map((th, index) => (
-              <ThemeCard key={th.name} {...th} index={index} />
+              <motion.div
+                key={th.name}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ 
+                  duration: 1, 
+                  delay: cols === 1 ? 0.15 : (index < cols ? 0.45 : 0.15) + (index % cols) * 0.15,
+                  ease: [0.25, 0.1, 0.25, 1] 
+                }}
+              >
+                <ThemeCard {...th} />
+              </motion.div>
             ))}
           </div>
         </div>

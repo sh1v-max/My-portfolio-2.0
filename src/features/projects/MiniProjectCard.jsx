@@ -12,18 +12,11 @@ function MiniProjectCard({
   tags,
   sourceCode,
   demo,
-  index = 0,
 }) {
   return (
     <motion.article 
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ 
-        duration: 1, 
-        delay: (index % 4) * 0.15, // Staggers up to 4 visible cards
-        ease: [0.25, 0.1, 0.25, 1] 
-      }}
+      whileHover={{ y: -6, scale: 1.015 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
       className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-explorerBorder bg-articleBg/80 backdrop-blur-sm transition-colors transition-shadow duration-500 hover:border-accentColor/50 hover:shadow-[0_8px_40px_rgba(0,0,0,0.45)]"
     >
       {/* top glow line */}

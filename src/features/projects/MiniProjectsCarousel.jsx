@@ -67,7 +67,7 @@ function MiniProjectsCarousel() {
         }
       `}</style>
 
-      <section className="mt-24 px-6 sm:px-10 md:px-16 lg:px-20 overflow-hidden">
+      <section className="mt-24 overflow-hidden px-6 sm:px-10 md:px-16 lg:px-20">
         <div className="mx-auto max-w-6xl">
           {/* section header, UI experiments */}
           <motion.div
@@ -77,28 +77,28 @@ function MiniProjectsCarousel() {
             transition={{ duration: 1, delay: 0, ease: [0.25, 0.1, 0.25, 1] }}
             className="mb-10 flex flex-col items-start gap-3"
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-accentColor/30 bg-accentColor/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accentColor">
-              <span className="h-1.5 w-1.5 rounded-full bg-accentColor animate-pulse" />
+            <span className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest">
+              <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
               UI Experiments
             </span>
 
             {/* heading */}
-            <h2 className="text-3xl font-extrabold tracking-tight text-textColor sm:text-4xl">
+            <h2 className="text-textColor text-3xl font-extrabold tracking-tight sm:text-4xl">
               Mini Projects &amp; Creative Builds
             </h2>
 
             {/* subtitle */}
-            <p className="max-w-xl text-sm leading-relaxed text-textColor/60">
+            <p className="text-textColor/60 max-w-xl text-sm leading-relaxed">
               A collection of focused UI experiments, interactive components,
               and creative builds — each one sharpening a specific skill.
             </p>
 
             {/* line */}
-            <div className="mt-1 h-1 w-16 rounded-full bg-gradient-to-r from-accentColor to-accentColor/30" />
+            <div className="from-accentColor to-accentColor/30 mt-1 h-1 w-16 rounded-full bg-gradient-to-r" />
           </motion.div>
 
           {/* swiper carousel */}
-          <motion.div 
+          <motion.div
             className="mt-8"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -106,7 +106,7 @@ function MiniProjectsCarousel() {
             transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <Swiper
-              className="mini-swiper pb-8 pt-4 -mt-4 px-2 -mx-2"
+              className="mini-swiper -mx-2 -mt-4 px-2 pb-8 pt-4"
               modules={[Navigation, Pagination, A11y, Autoplay]}
               spaceBetween={30}
               slidesPerView={1.2}
@@ -116,7 +116,11 @@ function MiniProjectsCarousel() {
               pagination={{ clickable: true, dynamicBullets: true }}
               grabCursor={true}
               a11y={{ enabled: true }}
-              autoplay={{ delay: 3500, disableOnInteraction: true, pauseOnMouseEnter: true }}
+              autoplay={{
+                delay: 3500,
+                disableOnInteraction: true,
+                pauseOnMouseEnter: true,
+              }}
               breakpoints={{
                 540: { slidesPerView: 1.5, spaceBetween: 20 },
                 768: { slidesPerView: 2.5, spaceBetween: 30 },
@@ -128,7 +132,19 @@ function MiniProjectsCarousel() {
                 <SwiperSlide key={project.title} className="!h-auto">
                   {/* ignoring swiper default height */}
                   {/* important modifier for height, set as auto */}
-                  <MiniProjectCard index={index} {...project} />
+                  <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{
+                      duration: 1,
+                      delay: (index % 4) * 0.15, // Staggers up to 4 visible cards
+                      ease: [0.25, 0.1, 0.25, 1],
+                    }}
+                    className="h-full"
+                  >
+                    <MiniProjectCard {...project} />
+                  </motion.div>
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -139,12 +155,16 @@ function MiniProjectsCarousel() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 1, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
-            className="mt-12 flex flex-col items-center gap-3"
+            transition={{
+              duration: 1,
+              delay: 0.15,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+            className="mt-10 mb-5 flex flex-col items-center gap-3"
           >
             <Link
               to="/frontend-lab"
-              className="group inline-flex items-center gap-3 rounded-xl border border-accentColor/30 bg-accentColor/5 px-7 py-3.5 text-sm font-semibold text-accentColor backdrop-blur-sm transition-all duration-300 hover:border-accentColor/60 hover:bg-accentColor/15 hover:shadow-[0_0_24px_rgba(136,192,208,0.15)] active:scale-[0.97]"
+              className="border-accentColor/30 bg-accentColor/5 text-accentColor hover:border-accentColor/60 hover:bg-accentColor/15 group inline-flex items-center gap-3 rounded-xl border px-7 py-3.5 text-sm font-semibold backdrop-blur-sm transition-all duration-300 hover:shadow-[0_0_24px_rgba(136,192,208,0.15)] active:scale-[0.97]"
             >
               Explore All Mini Projects
               {/* arrow svg */}
@@ -163,8 +183,9 @@ function MiniProjectsCarousel() {
             </Link>
 
             {/* more details */}
-            <p className="text-xs text-textColor/40 tracking-wide mb-12">
-              33+ projects &nbsp;·&nbsp; Beginner &nbsp;·&nbsp; Intermediate &nbsp;·&nbsp; Advanced
+            <p className="text-textColor/40 mb-12 text-xs tracking-wide">
+              33+ projects &nbsp;·&nbsp; Beginner &nbsp;·&nbsp; Intermediate
+              &nbsp;·&nbsp; Advanced
             </p>
           </motion.div>
         </div>

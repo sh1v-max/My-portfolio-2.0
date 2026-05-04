@@ -3,6 +3,7 @@ import MiniProjectsCarousel from "./MiniProjectsCarousel";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { projects } from "./project";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 // ─── Header Animation ────────────────────────────────────
 const headerContainer = {
@@ -25,6 +26,19 @@ const headerItem = {
 };
 
 function Projects() {
+  const [cols, setCols] = useState(3);
+
+  useEffect(() => {
+    const updateCols = () => {
+      if (window.innerWidth < 640) setCols(1);
+      else if (window.innerWidth < 1024) setCols(2);
+      else setCols(3);
+    };
+    updateCols();
+    window.addEventListener("resize", updateCols);
+    return () => window.removeEventListener("resize", updateCols);
+  }, []);
+
   return (
     <HelmetProvider>
       <Helmet>
@@ -86,7 +100,7 @@ function Projects() {
                 viewport={{ once: true, amount: 0.1 }} // Triggers when 10% is visible
                 transition={{
                   duration: 1, // 1 second duration
-                  delay: (i < 3 ? 0.6 : 0) + (i % 3) * 0.15, // Top row waits for header, others stagger instantly on scroll
+                  delay: cols === 1 ? 0.15 : (i < cols ? 0.45 : 0.15) + (i % cols) * 0.15,
                   ease: [0.25, 0.1, 0.25, 1],
                 }}
               >

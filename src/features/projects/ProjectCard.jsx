@@ -8,15 +8,9 @@ import { motion } from "framer-motion";
 function ProjectCard({ img, title, desc, tags, srcCode, demo }) {
   return (
     <motion.article
-      whileHover={{
-        y: -4,
-        scale: 1.01,
-      }}
-      transition={{
-        duration: 0.4,
-        ease: "easeOut",
-      }}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-explorerBorder bg-articleBg transition-all duration-300 hover:border-accentColor/40 hover:shadow-2xl"
+      whileHover={{ y: -6, scale: 1.015 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-explorerBorder bg-articleBg transition-colors transition-shadow duration-300 hover:border-accentColor/40 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]"
     >
       {/* image */}
       <div className="relative overflow-hidden">

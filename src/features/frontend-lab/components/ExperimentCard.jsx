@@ -4,7 +4,7 @@ import { FaGithub } from "react-icons/fa";
 import ProjectButton from "../../../components/ProjectButton";
 import { motion } from "framer-motion";
 
-export default function ExperimentCard({ project, index = 0 }) {
+export default function ExperimentCard({ project }) {
   const getLevelColor = (level) => {
     switch (level) {
       case "Beginner":
@@ -20,14 +20,8 @@ export default function ExperimentCard({ project, index = 0 }) {
 
   return (
     <motion.article 
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{
-        duration: 1, // 1 second duration
-        delay: (index < 3 ? 0.6 : 0) + (index % 3) * 0.15, // Top row waits for dashboard, others stagger instantly on scroll
-        ease: [0.25, 0.1, 0.25, 1],
-      }}
+      whileHover={{ y: -6, scale: 1.015 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
       className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-explorerBorder bg-articleBg/60 backdrop-blur-sm transition-colors transition-shadow duration-500 hover:border-accentColor/50 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]"
     >
       {/* Top subtle glow line */}
@@ -39,7 +33,7 @@ export default function ExperimentCard({ project, index = 0 }) {
         <img
           src={project.image}
           alt={project.title}
-          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          className="h-full w-full object-cover"
         />
         {/* Level Badge overlaid on image */}
         <div className="absolute right-3 top-3 z-20">
