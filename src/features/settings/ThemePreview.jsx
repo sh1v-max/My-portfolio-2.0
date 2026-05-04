@@ -27,19 +27,9 @@ const SIDEBAR_ITEMS = [
   { w: "w-8", active: false },
 ];
 
-const floatingAnimation = {
-  y: [0, -4, 0],
-  transition: {
-    duration: 4,
-    repeat: Infinity,
-    ease: "easeInOut",
-  },
-};
-
 export default function ThemePreview({ themeClass }) {
   return (
     <motion.div
-      animate={floatingAnimation}
       className={`${themeClass} aspect-[16/10] w-full overflow-hidden rounded-lg shadow-inner`}
     >
       {/* Entire mini-window uses the scoped theme */}

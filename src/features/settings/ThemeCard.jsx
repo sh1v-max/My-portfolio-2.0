@@ -4,14 +4,7 @@ import { motion } from "framer-motion";
 import { useTheme } from "../../context/ThemeContext";
 import ThemePreview from "./ThemePreview";
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" },
-  },
-};
+// Using standard whileInView inline transitions
 
 function ThemeCard({
   name,
@@ -20,6 +13,7 @@ function ThemeCard({
   description,
   palette,
   downloads,
+  index = 0,
 }) {
   const { changeTheme, theme: currentTheme } = useTheme();
   const isActive = currentTheme === theme;
@@ -38,11 +32,21 @@ function ThemeCard({
 
   return (
     <motion.div
-      variants={cardVariants}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ 
+        opacity: 1, 
+        y: 0,
+        transition: {
+          duration: 1, 
+          delay: (index < 3 ? 0.45 : 0) + (index % 3) * 0.15,
+          ease: [0.25, 0.1, 0.25, 1] 
+        }
+      }}
+      viewport={{ once: true, amount: 0.1 }}
       whileHover={{ y: -6, scale: 1.015 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       onClick={handleApply}
-      className={`group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl border backdrop-blur-sm transition-all duration-300 ${
+      className={`group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl border backdrop-blur-sm transition-colors transition-shadow duration-300 ${
         isActive
           ? "border-accentColor/50 bg-accentColor/[0.03] shadow-[0_0_40px_rgba(136,192,208,0.1)]"
           : "border-explorerBorder/60 bg-articleBg/20 hover:border-accentColor/30 hover:shadow-[0_12px_40px_rgba(0,0,0,0.35)]"

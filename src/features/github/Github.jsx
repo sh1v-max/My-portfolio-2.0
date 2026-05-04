@@ -1,5 +1,6 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useLoaderData } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import HeroProfile from "./components/HeroProfile";
 import StatsGrid from "./components/StatsGrid";
@@ -95,7 +96,13 @@ export default function Github() {
       <section className="min-h-[85vh] px-6 py-16 sm:px-10 md:px-16 lg:px-20">
         <div className="mx-auto max-w-6xl space-y-12 overflow-hidden">
           {/* Page Header */}
-          <div className="mb-14 flex flex-col items-start gap-3">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 1, delay: 0, ease: [0.25, 0.1, 0.25, 1] }}
+            className="mb-14 flex flex-col items-start gap-3"
+          >
             <span className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest">
               <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
               {user.public_repos}+ Repositories
@@ -108,18 +115,65 @@ export default function Github() {
               featured projects directly from the GitHub API.
             </p>
             <div className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-gradient-to-r" />
-          </div>
+          </motion.div>
 
-          <HeroProfile user={user} />
-          <StatsGrid
-            user={user}
-            totalStars={totalStars}
-            totalForks={totalForks}
-          />
-          <SkillsAndLearning skills={skills} learningItems={learningItems} />
-          <FeaturedRepos featuredRepos={featuredRepos} />
-          <ContributionGraph theme={theme} />
-          <QuickLinks user={user} />
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 1, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            <HeroProfile user={user} />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            <StatsGrid
+              user={user}
+              totalStars={totalStars}
+              totalForks={totalForks}
+            />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 1, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            <SkillsAndLearning skills={skills} learningItems={learningItems} />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 1, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            <FeaturedRepos featuredRepos={featuredRepos} />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 1, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            <ContributionGraph theme={theme} />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 1, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            <QuickLinks user={user} />
+          </motion.div>
         </div>
       </section>
     </HelmetProvider>

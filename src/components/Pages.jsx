@@ -23,7 +23,22 @@ function Pages() {
       <div className="absolute inset-0 z-10 flex flex-col overflow-y-auto overflow-x-hidden custom-scrollbar">
         {isLoading && (
           <div className="absolute inset-0 z-50 flex items-center justify-center bg-mainBg/80 backdrop-blur-sm">
-            <div className="h-10 w-10 animate-spin rounded-full border-4 border-accentColor border-t-transparent"></div>
+            <div className="flex flex-col items-center gap-4">
+              <div className="flex items-center gap-3 text-sm font-mono text-accentColor">
+                <span className="h-4 w-2 bg-accentColor animate-pulse" />
+                <span className="animate-pulse">Resolving workspace data...</span>
+              </div>
+              <div className="h-[2px] w-48 overflow-hidden rounded-full bg-explorerBorder">
+                <div className="h-full w-1/3 animate-[translateX_1.5s_ease-in-out_infinite] rounded-full bg-accentColor relative -left-1/3" />
+              </div>
+            </div>
+            <style>{`
+              @keyframes translateX {
+                0% { transform: translateX(0); }
+                50% { transform: translateX(400%); }
+                100% { transform: translateX(0); }
+              }
+            `}</style>
           </div>
         )}
 
