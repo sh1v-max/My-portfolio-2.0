@@ -1,6 +1,5 @@
-import { useRef } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import react_icon from "../../assets/icons/react_icon.svg";
 import html_icon from "../../assets/icons/html_icon.svg";
 import css_icon from "../../assets/icons/css_icon.svg";
@@ -8,65 +7,45 @@ import js_icon from "../../assets/icons/js_icon.svg";
 import tailwind_icon from "../../assets/icons/tw-icon.svg";
 import profile_pic from "../../assets/images/peakpx.jpg";
 
-// ─── Orchestration ───────────────────────────────────────
+// ─── Animation Design System ──────────────────────────────
+// containerVariants: Controls the timing of everything inside it
+// - staggerChildren (0.3s): Each child element waits for the one before it to start
+// - delayChildren (0.2s): Adds a tiny pause at the very start for a premium feel
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1,
+      staggerChildren: 0.3, // Sequenced reveal
+      delayChildren: 0.2,
     },
   },
 };
 
-// ─── Motion Hierarchy ────────────────────────────────────
-// Hero: strongest entrance — used for above-the-fold hero content
-const heroItem = {
-  hidden: { opacity: 0, y: 30 },
+// slowBottomUp: The "Cinematic" entrance logic
+// - Starts 40px below (y: 40) and invisible (opacity: 0)
+// - Slides to its final spot over 1.5 seconds
+// - Uses a "Cubic Bezier" curve [0.25, 0.1, 0.25, 1] for that slow, expensive look
+const slowBottomUp = {
+  hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: {
+      duration: 1, // Cinematic slow duration
+      ease: [0.25, 0.1, 0.25, 1],
+    },
   },
 };
 
-// Section: default weight — used for mid-page sections
-const sectionItem = {
+// cardItem: A slightly faster version for small details (badges/icons)
+// - Follows the same language but feels a bit more "snappy" (0.8s)
+const cardItem = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.4, ease: "easeOut" },
-  },
-};
-
-// Card: lightest — used for small interactive elements
-const cardItem = {
-  hidden: { opacity: 0, y: 10 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.35, ease: "easeOut" },
-  },
-};
-
-// ─── Directional Variants ────────────────────────────────
-const slideLeft = {
-  hidden: { opacity: 0, x: -20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
-};
-
-const slideRight = {
-  hidden: { opacity: 0, x: 20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.8, ease: "easeOut" },
   },
 };
 
@@ -79,15 +58,6 @@ function About() {
     { name: "Tailwind", icon: tailwind_icon },
   ];
 
-  // ─── Scroll-based reveal refs ──────────────────────────
-  const codeBlockRef = useRef(null);
-  const bioRef = useRef(null);
-  const techRef = useRef(null);
-
-  const codeInView = useInView(codeBlockRef, { once: true, margin: "-100px" });
-  const bioInView = useInView(bioRef, { once: true, margin: "-100px" });
-  const techInView = useInView(techRef, { once: true, margin: "-100px" });
-
   return (
     <HelmetProvider>
       <Helmet>
@@ -99,32 +69,29 @@ function About() {
           className="text-textColor mx-auto max-w-6xl"
           variants={containerVariants}
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
         >
-          {/* ─── Hero Section: Photo & Title ─── */}
+          {/* ─── Hero Section ─── */}
           <div className="mb-16 flex flex-col items-center gap-12 lg:flex-row lg:items-start">
-            {/* Profile image slides in from the left */}
-            <motion.div className="group relative" variants={slideLeft}>
+            <motion.div className="group relative" variants={slowBottomUp}>
               <div className="box border-accentColor overflow-hidden border-4">
                 <img
                   src={profile_pic}
                   alt="Shiv Shankar Singh"
-                  className="h-full w-full object-cover grayscale transition-all duration-500 group-hover:grayscale-0"
+                  className="h-full w-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
                 />
               </div>
-              {/* Subtle glow behind blob */}
               <div className="bg-accentColor/10 group-hover:bg-accentColor/20 absolute -inset-4 z-[-1] rounded-full blur-2xl transition-all duration-500" />
             </motion.div>
 
-            {/* Text content slides in from the right */}
             <motion.div
               className="flex-1 text-center lg:text-left"
-              variants={slideRight}
+              variants={slowBottomUp}
             >
-              {/* Social Proof Badge */}
               <motion.span
                 className="border-accentColor/30 bg-accentColor/10 text-accentColor mb-4 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest shadow-[0_0_15px_rgba(136,192,208,0.1)]"
-                variants={heroItem}
+                variants={cardItem}
               >
                 <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
                 33+ Projects Built
@@ -132,13 +99,13 @@ function About() {
 
               <motion.h1
                 className="mb-4 text-4xl font-extrabold text-white sm:text-6xl lg:text-7xl"
-                variants={heroItem}
+                variants={slowBottomUp}
               >
                 Front-End <span className="text-accentColor">Developer</span>
               </motion.h1>
               <motion.p
                 className="text-textColor/80 text-lg leading-relaxed md:text-xl lg:max-w-2xl"
-                variants={heroItem}
+                variants={slowBottomUp}
               >
                 Hi, I&apos;m{" "}
                 <span className="font-bold text-white">Shiv Shankar Singh</span>
@@ -148,14 +115,14 @@ function About() {
             </motion.div>
           </div>
 
-          {/* ─── Content Grid: Code Block + Bio ─── */}
-          <div className="grid gap-12 lg:grid-cols-2">
-            {/* Bio as Code Block — scroll-triggered with subtle scale */}
+          {/* ─── Content Grid ─── */}
+          <motion.div
+            className="grid gap-12 lg:grid-cols-2"
+            variants={containerVariants}
+          >
+            {/* Code Block */}
             <motion.div
-              ref={codeBlockRef}
-              variants={sectionItem}
-              initial="hidden"
-              animate={codeInView ? "visible" : "hidden"}
+              variants={slowBottomUp}
               whileHover={{ scale: 1.01 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="border-explorerBorder bg-articleBg/40 overflow-hidden rounded-xl border p-1 shadow-2xl backdrop-blur-sm"
@@ -207,13 +174,6 @@ function About() {
                     ,
                   </p>
                   <p>
-                    <span className="text-blue-300">currentlyBuilding:</span>{" "}
-                    <span className="text-green-300">
-                      &apos;Premium VSCode Portfolio&apos;
-                    </span>
-                    ,
-                  </p>
-                  <p>
                     <span className="text-blue-300">learning:</span>{" "}
                     <span className="text-yellow-200">[</span>
                     <span className="text-green-300">
@@ -231,12 +191,9 @@ function About() {
               </div>
             </motion.div>
 
-            {/* Narrative Bio — scroll-triggered */}
+            {/* Narrative Bio */}
             <motion.div
-              ref={bioRef}
-              variants={sectionItem}
-              initial="hidden"
-              animate={bioInView ? "visible" : "hidden"}
+              variants={slowBottomUp}
               className="flex flex-col justify-center gap-6"
             >
               <h2 className="text-accentColor text-2xl font-bold lg:text-3xl">
@@ -254,14 +211,11 @@ function About() {
               <p className="text-textColor/70 text-lg leading-relaxed">
                 I am a team player who thrives in collaborating with
                 cross-functional teams to produce outstanding web applications.
-                My goal is to translate complex problems into beautiful,
-                intuitive, and high-performance digital experiences.
               </p>
 
-              {/* Sub-badge or info */}
               <motion.div
                 variants={cardItem}
-                className="bg-accentColor/5 border-accentColor/10 mt-4 flex items-center gap-4 rounded-lg border p-4"
+                className="border-accentColor/10 bg-accentColor/5 mt-4 flex items-center gap-4 rounded-lg border p-4"
               >
                 <div className="bg-accentColor/20 text-accentColor flex h-10 w-10 items-center justify-center rounded-full">
                   💡
@@ -276,19 +230,19 @@ function About() {
                 </div>
               </motion.div>
             </motion.div>
-          </div>
+          </motion.div>
 
-          {/* ─── Tech Stack Section — scroll-triggered + staggered grid ─── */}
+          {/* Tech Stack Section - Isolated Scroll Trigger */}
           <motion.div
-            ref={techRef}
             className="mt-24 text-center"
             variants={containerVariants}
             initial="hidden"
-            animate={techInView ? "visible" : "hidden"}
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }} // Reveals only when 30% of the section is visible
           >
             <motion.h3
               className="mb-12 text-2xl font-bold text-white lg:text-4xl"
-              variants={sectionItem}
+              variants={slowBottomUp}
             >
               My <span className="text-accentColor">Tech Stack</span>
             </motion.h3>
@@ -298,25 +252,18 @@ function About() {
                   key={tech.name}
                   className="group flex flex-col items-center gap-3"
                   variants={cardItem}
-                  whileHover={{
-                    y: -8,
-                    scale: 1.05,
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 20,
-                  }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 15 }}
                 >
-                  <div className="bg-articleBg/80 border-explorerBorder group-hover:border-accentColor/50 relative flex h-16 w-16 items-center justify-center rounded-2xl border p-4 shadow-lg transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(136,192,208,0.2)] md:h-20 md:w-20">
+                  <div className="border-explorerBorder bg-articleBg/80 group-hover:border-accentColor/50 relative flex h-16 w-16 items-center justify-center rounded-2xl border p-4 shadow-lg transition-all duration-500 group-hover:shadow-[0_0_20px_rgba(136,192,208,0.25)] md:h-20 md:w-20">
                     <img
                       src={tech.icon}
                       alt={tech.name}
-                      className="h-full w-full object-contain grayscale transition-all duration-300 group-hover:grayscale-0"
+                      className="h-full w-full object-contain grayscale transition-all duration-500 group-hover:grayscale-0"
                     />
                   </div>
-                  <span className="text-textColor/40 group-hover:text-accentColor text-xs font-semibold uppercase tracking-wider transition-colors duration-300">
+                  <span className="text-textColor/40 group-hover:text-accentColor text-xs font-semibold uppercase tracking-wider transition-colors duration-500">
                     {tech.name}
                   </span>
                 </motion.div>
@@ -330,4 +277,3 @@ function About() {
 }
 
 export default About;
-

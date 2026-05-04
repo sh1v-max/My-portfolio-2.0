@@ -17,8 +17,6 @@ function Pages() {
             backgroundSize: "60px 60px",
           }}
         />
-        
-
       </div>
 
       {/* Scrolling Content Layer */}
