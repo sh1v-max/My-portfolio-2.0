@@ -16,8 +16,18 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.3, // Sequenced reveal
+      staggerChildren: 0.3,
       delayChildren: 0.2,
+    },
+  },
+};
+
+const stackVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1, // Faster reveal for tech stack icons
     },
   },
 };
@@ -235,7 +245,7 @@ function About() {
           {/* Tech Stack Section - Isolated Scroll Trigger */}
           <motion.div
             className="mt-24 text-center"
-            variants={containerVariants}
+            variants={stackVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }} // Reveals only when 30% of the section is visible

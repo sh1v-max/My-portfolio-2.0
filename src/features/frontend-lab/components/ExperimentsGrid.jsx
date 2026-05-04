@@ -28,7 +28,7 @@ export default function ExperimentsGrid({ projects }) {
           viewport={{ once: true, amount: 0.1 }}
           transition={{
             duration: 1,
-            delay: cols === 1 ? 0.15 : (index < cols ? 0.45 : 0.15) + (index % cols) * 0.15,
+            delay: cols === 1 ? 0.3 : (index < cols ? 0.6 : 0.3) + (index % cols) * 0.15,
             ease: [0.25, 0.1, 0.25, 1],
           }}
         >

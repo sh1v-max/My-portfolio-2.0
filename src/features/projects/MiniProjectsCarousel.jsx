@@ -157,7 +157,7 @@ function MiniProjectsCarousel() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{
               duration: 1,
-              delay: 0.15,
+              delay: 0.3,
               ease: [0.25, 0.1, 0.25, 1],
             }}
             className="mt-10 mb-5 flex flex-col items-center gap-3"

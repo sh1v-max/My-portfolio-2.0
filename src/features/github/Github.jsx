@@ -121,7 +121,7 @@ export default function Github() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 1, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <HeroProfile user={user} />
           </motion.div>
@@ -143,7 +143,7 @@ export default function Github() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 1, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <SkillsAndLearning skills={skills} learningItems={learningItems} />
           </motion.div>
@@ -152,7 +152,7 @@ export default function Github() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 1, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <FeaturedRepos featuredRepos={featuredRepos} />
           </motion.div>
@@ -161,7 +161,7 @@ export default function Github() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 1, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <ContributionGraph theme={theme} />
           </motion.div>
@@ -170,7 +170,7 @@ export default function Github() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 1, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <QuickLinks user={user} />
           </motion.div>
