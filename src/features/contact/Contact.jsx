@@ -5,6 +5,7 @@ import emailjs from "@emailjs/browser";
 import { useRef } from "react";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
+import PageNavigator from "../../components/PageNavigator";
 
 const headerContainer = {
   hidden: { opacity: 0 },
@@ -252,8 +253,14 @@ function Contact() {
               </form>
             </motion.div>
           </div>
+
         </div>
       </section>
+
+      {/* Page Navigation */}
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
+        <PageNavigator />
+      </div>
     </HelmetProvider>
   );
 }

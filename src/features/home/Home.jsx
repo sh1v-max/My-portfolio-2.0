@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Illustration from "./Illustration";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { motion } from "framer-motion";
+import PageNavigator from "../../components/PageNavigator";
 
 function Home() {
   // staggered text entry variants
@@ -53,8 +54,8 @@ function Home() {
         <title>Shiv | Home</title>
       </Helmet>
 
-      <div className="flex w-full flex-col overflow-hidden">
-        <section className="relative flex h-[calc(100vh-64px)] items-center justify-center overflow-hidden px-4 py-4 sm:px-6 md:px-8">
+      <div className="flex w-full flex-col">
+        <section className="relative flex min-h-[calc(100vh-140px)] items-center justify-center overflow-hidden px-4 py-8 sm:px-6 md:px-8 md:py-12">
           {/* Background Decorative Text */}
           <motion.div
             className="text-bgText absolute left-0 z-0 flex select-none flex-col gap-y-0 px-20 text-[10rem] font-extrabold leading-[0.85] tracking-tighter max-lg:hidden xl:text-[12rem] 2xl:text-[15rem]"
@@ -204,44 +205,12 @@ function Home() {
               </motion.div>
             </motion.div>
           </motion.div>
-
-          {/* Next Page Indicator */}
-          <motion.div
-            className="absolute bottom-6 left-1/2 -translate-x-1/2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 0.5 }}
-          >
-            <Link to="/about">
-              <motion.div
-                className="hover:text-accentColor flex cursor-pointer flex-col items-center gap-1 transition-colors duration-200"
-                animate={{ y: [0, 6, 0] }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <span className="text-textColor/40 text-[10px] font-medium uppercase tracking-widest">
-                  next page
-                </span>
-                <svg
-                  className="text-textColor/40 h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13 7l5 5-5 5M6 7l5 5-5 5"
-                  />
-                </svg>
-              </motion.div>
-            </Link>
-          </motion.div>
         </section>
+
+        {/* Page Navigation */}
+        <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 md:px-8">
+          <PageNavigator />
+        </div>
       </div>
     </HelmetProvider>
   );

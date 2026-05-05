@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+
 import Footer from "./Footer";
 import NavBar from "./NavBar";
 import Pages from "./Pages";
@@ -8,14 +8,10 @@ import { useTheme } from "../context/ThemeContext";
 
 function Main() {
   const { theme } = useTheme();
-  const location = useLocation();
-  const isHomePage = location.pathname === "/";
 
   return (
     <div
-      className={`theme-${theme} flex ${
-        isHomePage ? "h-screen overflow-hidden" : "min-h-screen"
-      } flex-col bg-mainBg text-textColor`}
+      className={`theme-${theme} flex min-h-screen flex-col bg-mainBg text-textColor`}
     >
       {/* Modern Top Navigation */}
       <NavBar />
@@ -25,8 +21,8 @@ function Main() {
         <Pages />
       </main>
 
-      {/* Modern Footer - Hidden on Home to prevent scrolling */}
-      {!isHomePage && <Footer />}
+      {/* Modern Footer */}
+      <Footer />
 
       {/* Mobile Bottom Navigation */}
       <BottomNav />

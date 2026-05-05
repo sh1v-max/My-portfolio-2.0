@@ -1,5 +1,6 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { motion } from "framer-motion";
+import PageNavigator from "../../components/PageNavigator";
 import react_icon from "../../assets/icons/react_icon.svg";
 import html_icon from "../../assets/icons/html_icon.svg";
 import css_icon from "../../assets/icons/css_icon.svg";
@@ -276,6 +277,11 @@ function About() {
           </motion.div>
         </motion.div>
       </section>
+
+      {/* Page Navigation */}
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
+        <PageNavigator />
+      </div>
     </HelmetProvider>
   );
 }

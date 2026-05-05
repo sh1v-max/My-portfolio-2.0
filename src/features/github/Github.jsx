@@ -1,6 +1,7 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useLoaderData } from "react-router-dom";
 import { motion } from "framer-motion";
+import PageNavigator from "../../components/PageNavigator";
 
 import HeroProfile from "./components/HeroProfile";
 import StatsGrid from "./components/StatsGrid";
@@ -205,8 +206,14 @@ export default function Github() {
           >
             <QuickLinks user={user} />
           </motion.div>
+
         </div>
       </section>
+
+      {/* Page Navigation */}
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
+        <PageNavigator />
+      </div>
     </HelmetProvider>
   );
 }

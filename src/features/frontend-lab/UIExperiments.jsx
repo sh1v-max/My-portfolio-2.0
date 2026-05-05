@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { motion } from "framer-motion";
+import PageNavigator from "../../components/PageNavigator";
 
 import HeroSection from "./components/HeroSection";
 import StatsCards from "./components/StatsCards";
@@ -97,8 +98,14 @@ export default function UIExperiments() {
               <EmptyState />
             </motion.div>
           )}
+
         </div>
       </section>
+
+      {/* Page Navigation */}
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
+        <PageNavigator />
+      </div>
     </HelmetProvider>
   );
 }

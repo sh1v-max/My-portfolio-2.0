@@ -4,6 +4,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { projects } from "./project";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import PageNavigator from "../../components/PageNavigator";
 
 // ─── Header Animation ────────────────────────────────────
 const headerContainer = {
@@ -125,6 +126,11 @@ function Projects() {
 
       {/* Mini Projects Carousel */}
       <MiniProjectsCarousel />
+
+      {/* Page Navigation */}
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
+        <PageNavigator />
+      </div>
     </HelmetProvider>
   );
 }
