@@ -61,31 +61,6 @@ function NavBar() {
 
         {/* ─── Right Section ─── */}
         <div className="flex items-center gap-3">
-          {/* Theme Switcher Link */}
-          <Link
-            to="/settings"
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-textColor/50 transition-all duration-200 hover:bg-explorerBorder/30 hover:text-accentColor"
-            title="Themes"
-          >
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <circle cx="13.5" cy="6.5" r="2.5" />
-              <circle cx="17.5" cy="10.5" r="2.5" />
-              <circle cx="8.5" cy="7.5" r="2.5" />
-              <circle cx="6.5" cy="12.5" r="2.5" />
-              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
-              <path d="M16.5 16.5l-5.2-1.8a1 1 0 0 1-.5-1.5l1.8-5.2" />
-            </svg>
-          </Link>
-
           {/* GitHub CTA */}
           <a
             href="https://github.com/sh1v-max/"
@@ -164,19 +139,6 @@ function NavBar() {
                   </Link>
                 );
               })}
-
-              {/* Settings in mobile */}
-              <Link
-                to="/settings"
-                onClick={() => setMobileOpen(false)}
-                className={`rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 ${
-                  location.pathname === "/settings"
-                    ? "bg-accentColor/10 text-accentColor"
-                    : "text-textColor/60 hover:bg-explorerBorder/20 hover:text-textColor"
-                }`}
-              >
-                Themes
-              </Link>
             </div>
           </motion.div>
         )}

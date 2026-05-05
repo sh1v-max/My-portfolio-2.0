@@ -53,8 +53,8 @@ function Home() {
         <title>Shiv | Home</title>
       </Helmet>
 
-      <div className="flex w-full flex-col">
-        <section className="relative flex min-h-[calc(100vh-140px)] items-center justify-center overflow-hidden px-4 py-8 sm:px-6 md:px-8 md:py-12">
+      <div className="flex w-full flex-col overflow-hidden">
+        <section className="relative flex h-[calc(100vh-64px)] items-center justify-center overflow-hidden px-4 py-4 sm:px-6 md:px-8">
           {/* Background Decorative Text */}
           <motion.div
             className="text-bgText absolute left-0 z-0 flex select-none flex-col gap-y-0 px-20 text-[10rem] font-extrabold leading-[0.85] tracking-tighter max-lg:hidden xl:text-[12rem] 2xl:text-[15rem]"
@@ -130,7 +130,7 @@ function Home() {
 
               {/* CTA Buttons */}
               <motion.div
-                className="flex flex-col py-8 items-center gap-4 sm:flex-row lg:justify-start"
+                className="flex flex-col py-4 items-center gap-4 sm:flex-row lg:justify-start"
                 variants={ctaVariants}
               >
                 <Link to="/projects">
@@ -160,7 +160,7 @@ function Home() {
 
               {/* Quick Stats */}
               <motion.div
-                className="border-textColor/10 mt-8 flex items-center gap-6 border-t pt-5 text-center sm:gap-8 lg:text-left"
+                className="border-textColor/10 mt-4 flex items-center gap-6 border-t pt-5 text-center sm:gap-8 lg:text-left"
                 variants={itemVariants}
               >
                 {[
