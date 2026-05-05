@@ -55,7 +55,7 @@ function Home() {
       </Helmet>
 
       <div className="flex w-full flex-col">
-        <section className="relative flex min-h-[calc(100vh-140px)] items-center justify-center overflow-hidden px-4 py-8 sm:px-6 md:px-8 md:py-12">
+        <section className="relative flex h-[calc(100vh-64px)] items-center justify-center overflow-hidden px-4 py-8 sm:px-6 md:px-8 md:py-12">
           {/* Background Decorative Text */}
           <motion.div
             className="text-bgText absolute left-0 z-0 flex select-none flex-col gap-y-0 px-20 text-[10rem] font-extrabold leading-[0.85] tracking-tighter max-lg:hidden xl:text-[12rem] 2xl:text-[15rem]"
@@ -77,53 +77,59 @@ function Home() {
           >
             {/* Left: Text Content */}
             <motion.div
-              className="flex flex-col items-center text-center lg:items-start lg:text-left"
+              className="relative flex flex-col items-center text-center lg:items-start lg:text-left"
               variants={containerVariants}
             >
+              {/* Mobile Decorative Glow (Visible only when illustration is hidden) */}
+              <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accentColor/10 blur-[100px] lg:hidden" />
+
               {/* Status Badge */}
               <motion.div variants={itemVariants}>
-                <span className="border-accentColor/20 bg-accentColor/5 text-accentColor mb-5 inline-flex items-center gap-2 rounded-full border px-3.5 py-1 text-[10px] font-semibold uppercase tracking-widest">
+                <span className="border-accentColor/20 bg-accentColor/5 text-accentColor mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[10px] font-semibold uppercase tracking-widest sm:text-xs">
                   <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
                   Available for work
                 </span>
               </motion.div>
 
-              {/* Main Heading */}
+              {/* Main Heading - Contrast Display Typography */}
               <motion.h1
-                className="text-textColor mt-1 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+                className="text-textColor mt-8 flex flex-col items-center lg:items-start"
                 variants={itemVariants}
               >
-                Hi, I&apos;m{" "}
+                <span className="text-accentColor mb-2 text-xl tracking-wide sm:text-2xl" style={{ fontFamily: "'Satisfy', cursive" }}>
+                  Hi, I&apos;m
+                </span>
                 <motion.span
-                  className="text-accentColor inline-block"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6, duration: 0.4, ease: "easeOut" }}
+                  className="bg-gradient-to-br from-textColor via-textColor to-textColor/50 bg-clip-text text-5xl font-black leading-[0.85] tracking-tighter text-transparent sm:text-6xl lg:text-[8rem] xl:text-[10rem]"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
                 >
-                  Shiv
+                  SHIV
                 </motion.span>
               </motion.h1>
 
-              {/* Subheading */}
+              {/* Subheading - Bold & Wide */}
               <motion.h2
-                className="text-accentColor/80 mb-3 mt-1.5 text-base font-semibold sm:text-lg md:text-xl lg:text-2xl"
+                className="text-accentColor/80 mb-8 mt-4 text-lg font-bold uppercase tracking-[0.2em] sm:text-xl lg:text-2xl"
                 variants={itemVariants}
               >
                 Frontend Developer
               </motion.h2>
 
-              {/* Description with highlighted keywords */}
+              {/* Description - Focused & Clean */}
               <motion.p
-                className="text-textColor/60 mb-8 max-w-md text-sm leading-relaxed md:text-base lg:text-lg"
+                className="text-textColor/70 mb-12 max-w-2xl text-xl leading-[1.6] md:text-2xl lg:text-3xl"
+                style={{ fontFamily: "'Satisfy', cursive" }}
                 variants={itemVariants}
               >
                 I build{" "}
-                <span className="text-accentColor/90 font-semibold">fast</span>,{" "}
-                <span className="text-accentColor/90 font-semibold">
+                <span className="text-textColor font-semibold">fast</span>,{" "}
+                <span className="text-textColor font-semibold">
                   scalable
                 </span>
                 , and{" "}
-                <span className="text-accentColor/90 font-semibold">
+                <span className="text-textColor font-semibold">
                   user-focused
                 </span>{" "}
                 web applications with modern tools and clean code.
@@ -131,12 +137,12 @@ function Home() {
 
               {/* CTA Buttons */}
               <motion.div
-                className="flex flex-col py-4 items-center gap-4 sm:flex-row lg:justify-start"
+                className="flex flex-row py-4 items-center gap-4 lg:justify-start"
                 variants={ctaVariants}
               >
                 <Link to="/projects">
                   <motion.button
-                    className="bg-accentColor text-mainBg rounded-xl px-6 py-3 text-sm font-bold shadow-lg transition-all duration-200 ease-out hover:shadow-[0_0_25px_rgba(136,192,208,0.25)]"
+                    className="bg-accentColor text-mainBg rounded-xl px-5 py-3 text-xs font-bold shadow-lg transition-all duration-200 ease-out hover:shadow-[0_0_25px_rgba(136,192,208,0.25)] sm:px-8 sm:py-4 sm:text-sm"
                     style={{
                       boxShadow:
                         "0 4px 20px color-mix(in srgb, var(--accentColor) 30%, transparent)",
@@ -148,20 +154,20 @@ function Home() {
                   </motion.button>
                 </Link>
 
-                <motion.a
-                  href="/assets/docs/resume.pdf"
-                  download
-                  className="border-accentColor/40 text-textColor hover:border-accentColor hover:bg-accentColor/10 rounded-xl border-2 px-6 py-3 text-sm font-bold transition-all duration-200 ease-out"
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  Download Resume
-                </motion.a>
+                <Link to="/contact">
+                  <motion.button
+                    className="border-accentColor/40 text-textColor hover:border-accentColor hover:bg-accentColor/10 rounded-xl border-2 px-5 py-3 text-xs font-bold transition-all duration-200 ease-out sm:px-8 sm:py-4 sm:text-sm"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    Contact Me
+                  </motion.button>
+                </Link>
               </motion.div>
 
               {/* Quick Stats */}
               <motion.div
-                className="border-textColor/10 mt-4 flex items-center gap-6 border-t pt-5 text-center sm:gap-8 lg:text-left"
+                className="border-textColor/10 mt-6 flex items-center gap-8 border-t pt-8 text-center sm:gap-12 lg:text-left"
                 variants={itemVariants}
               >
                 {[
@@ -169,10 +175,10 @@ function Home() {
                   { value: "6", label: "Themes" },
                 ].map((stat) => (
                   <div key={stat.label} className="flex flex-col">
-                    <span className="text-accentColor text-2xl font-bold sm:text-3xl">
+                    <span className="text-accentColor text-3xl font-bold sm:text-4xl">
                       {stat.value}
                     </span>
-                    <span className="text-textColor/50 mt-0.5 text-[10px] font-medium uppercase tracking-wider">
+                    <span className="text-textColor/50 mt-1 text-[11px] font-bold uppercase tracking-widest">
                       {stat.label}
                     </span>
                   </div>
@@ -180,20 +186,20 @@ function Home() {
               </motion.div>
             </motion.div>
 
-            {/* Right: Illustration */}
+            {/* Right: Illustration - Hidden on mobile for maximum focus */}
             <motion.div
-              className="relative flex items-center justify-center lg:justify-end"
+              className="relative hidden items-center justify-center lg:flex lg:justify-end"
               variants={illustrationVariants}
             >
               {/* Glow behind illustration */}
               <div
-                className="pointer-events-none absolute h-72 w-72 rounded-full opacity-[0.12] blur-[80px] md:h-96 md:w-96"
+                className="pointer-events-none absolute h-48 w-48 rounded-full opacity-[0.12] blur-[80px] sm:h-72 sm:w-72 md:h-96 md:w-96"
                 style={{ background: "var(--accentColor)" }}
               />
 
               {/* Floating illustration */}
               <motion.div
-                className="relative flex w-full max-w-sm lg:max-w-lg lg:justify-end xl:max-w-xl"
+                className="relative flex w-full max-w-[200px] sm:max-w-sm lg:max-w-lg lg:justify-end xl:max-w-xl"
                 animate={{ y: [0, -10, 0] }}
                 transition={{
                   duration: 4,
@@ -205,12 +211,15 @@ function Home() {
               </motion.div>
             </motion.div>
           </motion.div>
+
+          {/* Page Navigation - Positioned within the zero-scroll viewport */}
+          <div className="absolute bottom-20 left-0 right-0 z-20 px-4 md:bottom-8 md:px-8">
+            <div className="mx-auto max-w-7xl">
+              <PageNavigator />
+            </div>
+          </div>
         </section>
 
-        {/* Page Navigation */}
-        <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 md:px-8">
-          <PageNavigator />
-        </div>
       </div>
     </HelmetProvider>
   );

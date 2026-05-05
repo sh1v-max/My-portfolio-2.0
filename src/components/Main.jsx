@@ -1,28 +1,32 @@
-
 import Footer from "./Footer";
 import NavBar from "./NavBar";
 import Pages from "./Pages";
 import BottomNav from "./BottomNav";
 import FloatingThemeButton from "./FloatingThemeButton";
 import { useTheme } from "../context/ThemeContext";
+import { useLocation } from "react-router-dom";
 
 function Main() {
   const { theme } = useTheme();
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   return (
     <div
-      className={`theme-${theme} flex min-h-screen flex-col bg-mainBg text-textColor`}
+      className={`theme-${theme} flex ${
+        isHomePage ? "h-screen overflow-hidden" : "min-h-screen"
+      } flex-col bg-mainBg text-textColor`}
     >
       {/* Modern Top Navigation */}
       <NavBar />
 
       {/* Main Content Area */}
-      <main className="flex-1 pb-16 md:pb-0">
+      <main className={`flex-1 ${isHomePage ? "pb-0" : "pb-16"} md:pb-0`}>
         <Pages />
       </main>
 
       {/* Modern Footer */}
-      <Footer />
+      {!isHomePage && <Footer />}
 
       {/* Mobile Bottom Navigation */}
       <BottomNav />
