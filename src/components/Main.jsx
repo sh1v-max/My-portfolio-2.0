@@ -1,9 +1,6 @@
-import Explorer from "./Explorer";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
 import Pages from "./Pages";
-import SideBar from "./SideBar";
-import Tabs from "./Tabs";
 import { useTheme } from "../context/ThemeContext";
 
 function Main() {
@@ -11,31 +8,17 @@ function Main() {
 
   return (
     <div
-      className={`theme-${theme} bg-mainBg text-textColor flex h-screen w-full flex-col overflow-hidden`}
+      className={`theme-${theme} flex min-h-screen flex-col bg-mainBg text-textColor`}
     >
-      {/* Top Title Bar */}
+      {/* Modern Top Navigation */}
       <NavBar />
 
-      <div className="flex flex-1 overflow-hidden">
-        {/* Left Activity Bar (Sidebar) */}
-        <SideBar />
+      {/* Main Content Area */}
+      <main className="flex-1">
+        <Pages />
+      </main>
 
-        {/* Sidebar Explorer - Hidden on mobile */}
-        <div className="border-explorerBorder hidden border-r md:block">
-          <Explorer />
-        </div>
-
-        {/* Main Content Area */}
-        <main className="flex flex-1 flex-col overflow-hidden">
-          {/* Fixed Editor Tabs */}
-          <Tabs />
-
-          {/* Scrollable Editor Content */}
-          <Pages />
-        </main>
-      </div>
-
-      {/* Bottom Status Bar */}
+      {/* Modern Footer */}
       <Footer />
     </div>
   );

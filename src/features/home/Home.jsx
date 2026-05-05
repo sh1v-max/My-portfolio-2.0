@@ -1,10 +1,5 @@
 import { Link } from "react-router-dom";
 import Illustration from "./Illustration";
-import Illustration10X from "./Illustration10X";
-import Illustration20X from "./Illustration20X";
-import Illustration30X from "./Illustration30X";
-import Illustration40X from "./Illustration40X";
-import Illustration100X from "./Illustration100X";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { motion } from "framer-motion";
 
@@ -59,7 +54,7 @@ function Home() {
       </Helmet>
 
       <div className="flex w-full flex-col">
-        <section className="relative flex min-h-[calc(100vh-140px)] items-center justify-center overflow-hidden px-4 py-8 sm:px-8 md:px-16 md:py-12 lg:px-28 lg:py-12">
+        <section className="relative flex min-h-[calc(100vh-140px)] items-center justify-center overflow-hidden px-4 py-8 sm:px-6 md:px-8 md:py-12">
           {/* Background Decorative Text */}
           <motion.div
             className="text-bgText absolute left-0 z-0 flex select-none flex-col gap-y-0 px-20 text-[10rem] font-extrabold leading-[0.85] tracking-tighter max-lg:hidden xl:text-[12rem] 2xl:text-[15rem]"
@@ -140,7 +135,7 @@ function Home() {
               >
                 <Link to="/projects">
                   <motion.button
-                    className="bg-accentColor text-mainBg rounded-lg px-6 py-2.5 text-sm font-bold shadow-lg transition-all duration-200 ease-out hover:shadow-[0_0_25px_rgba(136,192,208,0.25)]"
+                    className="bg-accentColor text-mainBg rounded-xl px-6 py-3 text-sm font-bold shadow-lg transition-all duration-200 ease-out hover:shadow-[0_0_25px_rgba(136,192,208,0.25)]"
                     style={{
                       boxShadow:
                         "0 4px 20px color-mix(in srgb, var(--accentColor) 30%, transparent)",
@@ -155,7 +150,7 @@ function Home() {
                 <motion.a
                   href="/assets/docs/resume.pdf"
                   download
-                  className="border-accentColor/40 text-textColor hover:border-accentColor hover:bg-accentColor/10 rounded-lg border-2 px-6 py-2.5 text-sm font-bold transition-all duration-200 ease-out"
+                  className="border-accentColor/40 text-textColor hover:border-accentColor hover:bg-accentColor/10 rounded-xl border-2 px-6 py-3 text-sm font-bold transition-all duration-200 ease-out"
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.97 }}
                 >
@@ -246,38 +241,6 @@ function Home() {
               </motion.div>
             </Link>
           </motion.div>
-        </section>
-
-        {/* ── TEMPORARY SHOWCASE FOR USER REVIEW ── */}
-        <section className="border-explorerBorder bg-mainBg/50 relative z-20 flex w-full flex-col items-center justify-center gap-16 border-t px-4 py-24 backdrop-blur-md">
-          <div className="text-center">
-            <h2 className="mb-4 text-4xl font-extrabold text-white">
-              Illustration Showcase
-            </h2>
-            <p className="text-textColor/60 text-lg">
-              Scroll down to view all versions. Pick the one you like best!
-            </p>
-          </div>
-          <div className="grid w-full max-w-7xl grid-cols-1 place-items-center gap-16 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-            <div className="flex flex-col items-center gap-4">
-              <Illustration />
-            </div>
-            <div className="flex flex-col items-center gap-4">
-              <Illustration10X />
-            </div>
-            <div className="flex flex-col items-center gap-4">
-              <Illustration20X />
-            </div>
-            <div className="flex flex-col items-center gap-4">
-              <Illustration30X />
-            </div>
-            <div className="flex flex-col items-center gap-4">
-              <Illustration40X />
-            </div>
-            <div className="flex flex-col items-center gap-4">
-              <Illustration100X />
-            </div>
-          </div>
         </section>
       </div>
     </HelmetProvider>

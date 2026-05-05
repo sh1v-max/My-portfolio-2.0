@@ -4,8 +4,6 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useTheme } from "../../context/ThemeContext";
 import { useState, useEffect } from "react";
 
-// Removed previous container/item variants in favor of standard whileInView
-
 function Settings() {
   const { theme: currentTheme } = useTheme();
   const [cols, setCols] = useState(3);
@@ -80,23 +78,21 @@ function Settings() {
         <title>Shiv | Settings</title>
       </Helmet>
 
-      <section
-        className="min-h-[85vh] px-6 py-16 sm:px-10 md:px-16 lg:px-20"
-      >
-        <div className="mx-auto max-w-6xl">
+      <section className="py-16 md:py-20">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
           {/* Page Header */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 1, delay: 0, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.7, delay: 0, ease: [0.25, 0.1, 0.25, 1] }}
             className="mb-14 flex flex-col items-start gap-3"
           >
             <span className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest">
               <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
               Customize Experience
             </span>
-            <h1 className="text-textColor text-4xl font-extrabold tracking-tight sm:text-5xl">
+            <h1 className="text-textColor text-4xl font-bold tracking-tight md:text-5xl">
               Appearance
             </h1>
             <p className="text-textColor/60 max-w-xl text-base leading-relaxed">
@@ -109,10 +105,10 @@ function Settings() {
           {/* Currently Active Theme Banner */}
           {activeTheme && (
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
               className="border-accentColor/20 from-accentColor/5 via-articleBg/60 to-accentColor/5 mb-10 overflow-hidden rounded-2xl border bg-gradient-to-r p-6"
             >
               <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
@@ -161,10 +157,10 @@ function Settings() {
 
           {/* Theme Section Label */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 1, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.7, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
             className="mb-6 flex items-center gap-3"
           >
             <div className="text-textColor/40 flex items-center gap-2 text-sm font-semibold uppercase tracking-widest">
@@ -201,8 +197,8 @@ function Settings() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ 
-                  duration: 1, 
-                  delay: cols === 1 ? 0.3 : (index < cols ? 0.75 : 0.15) + (index % cols) * 0.15,
+                  duration: 0.7, 
+                  delay: cols === 1 ? 0.15 : (index < cols ? 0.4 : 0.1) + (index % cols) * 0.1,
                   ease: [0.25, 0.1, 0.25, 1] 
                 }}
               >

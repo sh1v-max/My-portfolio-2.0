@@ -11,17 +11,17 @@ const headerContainer = {
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2, // Slower stagger for header elements
+      staggerChildren: 0.15,
     },
   },
 };
 
 const headerItem = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 25 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 1, ease: [0.25, 0.1, 0.25, 1] },
+    transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] },
   },
 };
 
@@ -52,8 +52,8 @@ function Projects() {
         <title>Shiv | Projects</title>
       </Helmet>
 
-      <section className="min-h-[85vh] px-6 py-16 sm:px-10 md:px-16 lg:px-20">
-        <div className="mx-auto max-w-6xl">
+      <section className="py-16 md:py-20">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
           {/* ─── Animated Header ─── */}
           <motion.div
             variants={headerContainer}
@@ -73,7 +73,7 @@ function Projects() {
             {/* Heading */}
             <motion.h1
               variants={headerItem}
-              className="text-textColor text-4xl font-extrabold tracking-tight sm:text-5xl"
+              className="text-textColor text-4xl font-bold tracking-tight md:text-5xl"
             >
               Projects
             </motion.h1>
@@ -96,7 +96,6 @@ function Projects() {
           </motion.div>
 
           {/* ─── True Scroll-triggered Grid ─── */}
-          {/* We do NOT use parent stagger here. Each card tracks itself. */}
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {projects.map((p, i) => (
               <motion.div

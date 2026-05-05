@@ -40,32 +40,32 @@ export default function UIExperiments() {
         <title>Shiv | Frontend Lab</title>
       </Helmet>
 
-      <section className="min-h-screen px-6 py-16 sm:px-10 md:px-16 lg:px-20">
-        <div className="mx-auto max-w-6xl">
+      <section className="py-16 md:py-20">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 1, delay: 0, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.7, delay: 0, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <HeroSection />
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <StatsCards />
           </motion.div>
 
           {/* Dashboard Controls Area */}
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 1, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.7, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
             className="border-explorerBorder bg-articleBg/30 mb-8 rounded-2xl border p-6 shadow-lg backdrop-blur-md"
           >
             <SearchBar
@@ -89,10 +89,10 @@ export default function UIExperiments() {
             <ExperimentsGrid projects={filteredProjects} />
           ) : (
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <EmptyState />
             </motion.div>

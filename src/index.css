@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500;800&display=swap");
 @import "tailwindcss";
 
@@ -29,6 +30,8 @@
   --color-scrollbarTrackBg: var(--scrollbarTrackBg);
   --color-scrollbarThumbBg: var(--scrollbarThumbBg);
   --color-articleBg: var(--articleBg);
+  --color-secondaryBg: var(--secondaryBg);
+  --font-family-Inter: "Inter", sans-serif;
   --font-family-Inconsolata: "Inconsolata", monospace;
 }
 
@@ -61,6 +64,7 @@
   --scrollbarTrackBg: #24292e;
   --scrollbarThumbBg: #333536;
   --articleBg: #1f2428;
+  --secondaryBg: #1f2428;
 }
 
 /* --- Dracula --- */
@@ -87,6 +91,7 @@
   --scrollbarTrackBg: #282a36;
   --scrollbarThumbBg: #454647;
   --articleBg: #21222c;
+  --secondaryBg: #21222c;
 }
 
 /* --- Ayu Dark --- */
@@ -113,6 +118,7 @@
   --scrollbarTrackBg: #0a0e14;
   --scrollbarThumbBg: #454647;
   --articleBg: #10121a;
+  --secondaryBg: #10121a;
 }
 
 /* --- Ayu Mirage --- */
@@ -139,6 +145,7 @@
   --scrollbarTrackBg: #1f2430;
   --scrollbarThumbBg: #454647;
   --articleBg: #252e3d;
+  --secondaryBg: #252e3d;
 }
 
 /* --- Nord --- */
@@ -165,6 +172,7 @@
   --scrollbarTrackBg: #2e3440;
   --scrollbarThumbBg: #454647;
   --articleBg: #363f50;
+  --secondaryBg: #363f50;
 }
 
 /* --- Night Owl --- */
@@ -191,6 +199,7 @@
   --scrollbarTrackBg: #011627;
   --scrollbarThumbBg: #043254;
   --articleBg: #031d33;
+  --secondaryBg: #031d33;
 }
 
 /* =============================================
@@ -202,11 +211,11 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: "Inconsolata", monospace;
+  font-family: "Inter", sans-serif;
 }
 
 body {
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 img,
@@ -288,15 +297,18 @@ p {
   height: 3rem;
   width: 100%;
   background-color: var(--articleBg);
-  padding: 0.5rem;
-  font-size: 1.25rem;
-  border: 1px solid transparent;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.9375rem;
+  border: 1px solid var(--explorerBorder);
+  border-radius: 0.75rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: "Inter", sans-serif;
 }
 
 .input:focus {
   border-color: var(--accentColor);
   outline: none;
-  box-shadow: 0 0 0 1px var(--accentColor);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accentColor) 20%, transparent);
 }
 
 /* =============================================

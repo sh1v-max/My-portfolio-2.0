@@ -8,9 +8,6 @@ import tailwind_icon from "../../assets/icons/tw-icon.svg";
 import profile_pic from "../../assets/images/peakpx.jpg";
 
 // ─── Animation Design System ──────────────────────────────
-// containerVariants: Controls the timing of everything inside it
-// - staggerChildren (0.3s): Each child element waits for the one before it to start
-// - delayChildren (0.2s): Adds a tiny pause at the very start for a premium feel
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -27,29 +24,23 @@ const stackVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1, // Faster reveal for tech stack icons
+      staggerChildren: 0.1,
     },
   },
 };
 
-// slowBottomUp: The "Cinematic" entrance logic
-// - Starts 40px below (y: 40) and invisible (opacity: 0)
-// - Slides to its final spot over 1.5 seconds
-// - Uses a "Cubic Bezier" curve [0.25, 0.1, 0.25, 1] for that slow, expensive look
 const slowBottomUp = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.7, // Refined duration
+      duration: 0.7,
       ease: [0.25, 0.1, 0.25, 1],
     },
   },
 };
 
-// cardItem: A slightly faster version for small details (badges/icons)
-// - Follows the same language but feels a bit more "snappy" (0.8s)
 const cardItem = {
   hidden: { opacity: 0, y: 20 },
   visible: {
@@ -74,9 +65,9 @@ function About() {
         <title>Shiv | About</title>
       </Helmet>
 
-      <section className="min-h-[85vh] px-6 py-16 sm:px-10 md:px-16 lg:px-20">
+      <section className="py-16 md:py-20">
         <motion.div
-          className="text-textColor mx-auto max-w-6xl"
+          className="text-textColor mx-auto max-w-5xl space-y-16 px-4 sm:px-6 md:px-8"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -84,7 +75,7 @@ function About() {
         >
           {/* ─── Hero Section ─── */}
           <motion.div 
-            className="mb-16 flex flex-col items-center gap-12 lg:flex-row lg:items-start"
+            className="flex flex-col items-center gap-12 lg:flex-row lg:items-start"
             variants={containerVariants}
           >
             <motion.div className="group relative" variants={slowBottomUp}>
@@ -111,7 +102,7 @@ function About() {
               </motion.span>
 
               <motion.h1
-                className="mb-4 text-4xl font-extrabold text-white sm:text-6xl lg:text-7xl"
+                className="mb-4 text-4xl font-bold text-white tracking-tight md:text-5xl"
                 variants={slowBottomUp}
               >
                 Front-End <span className="text-accentColor">Developer</span>
@@ -130,7 +121,7 @@ function About() {
 
           {/* ─── Content Grid ─── */}
           <motion.div
-            className="grid gap-12 lg:grid-cols-2"
+            className="grid gap-10 lg:grid-cols-2"
             variants={containerVariants}
           >
             {/* Code Block */}
@@ -138,9 +129,9 @@ function About() {
               variants={slowBottomUp}
               whileHover={{ scale: 1.01 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="border-explorerBorder bg-articleBg/40 overflow-hidden rounded-xl border p-1 shadow-2xl backdrop-blur-sm"
+              className="border-explorerBorder bg-articleBg/40 overflow-hidden rounded-2xl border p-1 shadow-2xl backdrop-blur-sm"
             >
-              <div className="border-explorerBorder bg-titlebarBg/50 flex items-center gap-2 border-b px-4 py-2">
+              <div className="border-explorerBorder bg-articleBg/80 flex items-center gap-2 rounded-t-xl border-b px-4 py-2.5">
                 <div className="flex gap-1.5">
                   <div className="h-3 w-3 rounded-full bg-[#ff5f56]" />
                   <div className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
@@ -150,7 +141,7 @@ function About() {
                   aboutMe.json
                 </span>
               </div>
-              <div className="p-6 font-mono text-sm leading-relaxed sm:text-base">
+              <div className="p-6 font-Inconsolata text-sm leading-relaxed sm:text-base">
                 <div className="flex">
                   <span className="text-purple-400">const</span>&nbsp;
                   <span className="text-blue-400">developer</span>&nbsp;
@@ -200,7 +191,7 @@ function About() {
                     <span className="text-orange-300">true</span>
                   </p>
                 </div>
-                <div className="text-yellow-200">{"};"}</div>
+                <div className="text-yellow-200">{"};"};</div>
               </div>
             </motion.div>
 
@@ -212,7 +203,7 @@ function About() {
               <h2 className="text-accentColor text-2xl font-bold lg:text-3xl">
                 My Journey
               </h2>
-              <p className="text-textColor/70 text-lg leading-relaxed">
+              <p className="text-textColor/70 text-base leading-relaxed lg:text-lg">
                 As a Junior Front-End Developer, I possess an impressive arsenal
                 of skills in{" "}
                 <span className="font-medium text-white">
@@ -221,14 +212,14 @@ function About() {
                 . I excel in designing and maintaining responsive websites that
                 offer a smooth user experience.
               </p>
-              <p className="text-textColor/70 text-lg leading-relaxed">
+              <p className="text-textColor/70 text-base leading-relaxed lg:text-lg">
                 I am a team player who thrives in collaborating with
                 cross-functional teams to produce outstanding web applications.
               </p>
 
               <motion.div
                 variants={cardItem}
-                className="border-accentColor/10 bg-accentColor/5 mt-4 flex items-center gap-4 rounded-lg border p-4"
+                className="border-accentColor/10 bg-accentColor/5 flex items-center gap-4 rounded-xl border p-4"
               >
                 <div className="bg-accentColor/20 text-accentColor flex h-10 w-10 items-center justify-center rounded-full">
                   💡
@@ -247,11 +238,11 @@ function About() {
 
           {/* Tech Stack Section - Isolated Scroll Trigger */}
           <motion.div
-            className="mt-24 text-center"
+            className="text-center"
             variants={stackVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }} // Reveals only when 30% of the section is visible
+            viewport={{ once: true, amount: 0.3 }}
           >
             <motion.h3
               className="mb-12 text-2xl font-bold text-white lg:text-4xl"

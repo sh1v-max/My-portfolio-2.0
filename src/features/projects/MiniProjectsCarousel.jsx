@@ -67,8 +67,8 @@ function MiniProjectsCarousel() {
         }
       `}</style>
 
-      <section className="mt-24 overflow-hidden px-6 sm:px-10 md:px-16 lg:px-20">
-        <div className="mx-auto max-w-6xl">
+      <section className="mt-24 overflow-hidden px-4 sm:px-6 md:px-8">
+        <div className="mx-auto max-w-5xl">
           {/* section header, UI experiments */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}

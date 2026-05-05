@@ -11,7 +11,7 @@ const headerContainer = {
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.15,
     },
   },
 };
@@ -21,7 +21,7 @@ const headerItem = {
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
+    transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] },
   },
 };
 
@@ -72,96 +72,102 @@ function Contact() {
       <Helmet>
         <title>Shiv | Contact</title>
       </Helmet>
-      <section className="min-h-[85vh] px-6 py-16 sm:px-10 md:px-16 lg:px-20">
-        <div className="mx-auto max-w-6xl">
+
+      <section className="py-16 md:py-20">
+        <div className="mx-auto max-w-5xl space-y-10 px-4 sm:px-6 md:px-8">
           {/* Page Header */}
           <motion.div
             variants={headerContainer}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="mb-14 flex flex-col items-start gap-3"
+            className="space-y-3"
           >
-            <motion.span 
+            <motion.span
               variants={headerItem}
               className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
             >
               <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
               Open for opportunities
             </motion.span>
-            <motion.h1 
+            <motion.h1
               variants={headerItem}
-              className="text-textColor text-4xl font-extrabold tracking-tight sm:text-5xl"
+              className="text-textColor text-4xl font-bold tracking-tight md:text-5xl"
             >
               Get in Touch
             </motion.h1>
-            <motion.p 
+            <motion.p
               variants={headerItem}
               className="text-textColor/60 max-w-xl text-base leading-relaxed"
             >
               Have a question or want to work together? Feel free to reach out
               via the form below or through my social links.
             </motion.p>
-            <motion.div 
+            <motion.div
               variants={headerItem}
-              className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-gradient-to-r" 
+              className="from-accentColor to-accentColor/30 h-1 w-16 rounded-full bg-gradient-to-r"
             />
           </motion.div>
 
-          <div className="xl:divide-accentColor flex w-full flex-col gap-x-8 gap-y-8 xl:flex-row xl:divide-x-2">
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
+          {/* Content Grid */}
+          <div className="grid gap-10 lg:grid-cols-2">
+            {/* Socials */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-              className="xl:w-1/2 "
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <ContactSocials />
             </motion.div>
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
+
+            {/* Form */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 1, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-              className="flex flex-col xl:w-1/2  xl:pl-10"
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <form
                 ref={formData}
-                className="text-textColor space-y-4 pt-5"
+                className="space-y-5"
                 onSubmit={handleSubmit(sendEmail)}
               >
-                <div className="flex flex-col  ">
+                <div className="space-y-1.5">
                   <label
-                    className="text-base font-semibold  md:text-lg"
+                    className="text-sm font-semibold text-textColor/80"
                     htmlFor="name"
                   >
-                    NAME
+                    Name
                   </label>
                   <input
-                    className="input "
+                    className="input"
                     name="name"
                     type="text"
                     id="name"
+                    placeholder="Your name"
                     {...register("name", {
                       required: { value: true, message: "Name is required" },
                     })}
                   />
-                  <p className="error text-sm text-red-600">
-                    {errors.name?.message}{" "}
+                  <p className="text-xs text-red-400">
+                    {errors.name?.message}
                   </p>
                 </div>
-                <div className="flex flex-col">
+
+                <div className="space-y-1.5">
                   <label
-                    className="text-base font-semibold md:text-lg"
+                    className="text-sm font-semibold text-textColor/80"
                     htmlFor="email"
                   >
-                    EMAIL
+                    Email
                   </label>
                   <input
                     className="input"
                     type="email"
                     id="email"
                     name="email"
+                    placeholder="your@email.com"
                     {...register("email", {
                       pattern: {
                         value:
@@ -174,22 +180,24 @@ function Contact() {
                       },
                     })}
                   />
-                  <p className="error text-sm text-red-600">
-                    {errors.email?.message}{" "}
+                  <p className="text-xs text-red-400">
+                    {errors.email?.message}
                   </p>
                 </div>
-                <div className="flex flex-col">
+
+                <div className="space-y-1.5">
                   <label
-                    className="text-base font-semibold md:text-lg"
+                    className="text-sm font-semibold text-textColor/80"
                     htmlFor="subject"
                   >
-                    SUBJECT
+                    Subject
                   </label>
                   <input
                     className="input"
                     type="text"
                     name="subject"
                     id="subject"
+                    placeholder="What's this about?"
                     {...register("subject", {
                       required: {
                         value: true,
@@ -197,23 +205,24 @@ function Contact() {
                       },
                     })}
                   />
-                  <p className="error text-sm text-red-600">
-                    {errors.subject?.message}{" "}
+                  <p className="text-xs text-red-400">
+                    {errors.subject?.message}
                   </p>
                 </div>
-                <div className="flex flex-col">
+
+                <div className="space-y-1.5">
                   <label
-                    className="text-base font-semibold md:text-lg"
+                    className="text-sm font-semibold text-textColor/80"
                     htmlFor="message"
                   >
-                    MESSAGE
+                    Message
                   </label>
                   <textarea
-                    className="bg-articleBg  focus:border-accentColor focus:ring-accentColor  w-full p-2 text-xl focus:outline-none focus:ring-1"
+                    className="w-full rounded-xl border border-explorerBorder bg-articleBg p-3 text-sm text-textColor transition-all duration-200 focus:border-accentColor focus:outline-none focus:ring-2 focus:ring-accentColor/20"
                     id="message"
                     name="message"
-                    cols="30"
-                    rows="6"
+                    rows="5"
+                    placeholder="Tell me about your project..."
                     {...register("message", {
                       required: {
                         value: true,
@@ -229,15 +238,16 @@ function Contact() {
                       },
                     })}
                   ></textarea>
-                  <p className="error text-sm text-red-600">
-                    {errors.message?.message}{" "}
+                  <p className="text-xs text-red-400">
+                    {errors.message?.message}
                   </p>
                 </div>
+
                 <button
                   type="submit"
-                  className=" bg-accentColor px-6 py-1 text-lg font-medium text-black"
+                  className="w-full rounded-xl bg-accentColor px-6 py-3 text-sm font-bold text-mainBg transition-all duration-200 hover:brightness-110 hover:shadow-lg active:scale-[0.98] sm:w-auto"
                 >
-                  Submit
+                  Send Message
                 </button>
               </form>
             </motion.div>
