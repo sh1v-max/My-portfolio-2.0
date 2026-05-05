@@ -16,7 +16,7 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.3,
+      staggerChildren: 0.15,
       delayChildren: 0,
     },
   },
@@ -42,7 +42,7 @@ const slowBottomUp = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 1, // Cinematic slow duration
+      duration: 0.7, // Refined duration
       ease: [0.25, 0.1, 0.25, 1],
     },
   },
@@ -55,7 +55,7 @@ const cardItem = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: "easeOut" },
+    transition: { duration: 0.5, ease: "easeOut" },
   },
 };
 
