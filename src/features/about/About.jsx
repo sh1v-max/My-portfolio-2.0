@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import PageNavigator from "../../components/PageNavigator";
 import profile_pic from "../../assets/images/peakpx.jpg";
+import resumeFile from "../../assets/docs/resume.pdf";
 import BentoSkills from "./BentoSkills";
 import MarqueeSkills from "./MarqueeSkills";
 import { Icon } from "@iconify/react";
@@ -39,7 +40,7 @@ const services = [
   {
     icon: <Icon icon="lucide:monitor" width="22" height="22" />,
     title: "UI Development",
-    desc: "Pixel-perfect, responsive interfaces built with React and Tailwind CSS — designed to feel premium on every screen.",
+    desc: "Pixel-perfect, responsive interfaces built with React and Tailwind CSS for designs to feel premium on every screen.",
   },
   {
     icon: <Icon icon="lucide:code-2" width="22" height="22" />,
@@ -106,17 +107,16 @@ const timeline = [
   },
 ];
 
-
 // ─── Education Accordion Component ───────────────────────────
 /* eslint-disable react/prop-types */
 function EducationAccordion({ items = [] }) {
   const [openIndex, setOpenIndex] = useState(
-    items.map((_, i) => i) // all expanded by default
+    items.map((_, i) => i), // all expanded by default
   );
 
   const toggle = (i) => {
     setOpenIndex((prev) =>
-      prev.includes(i) ? prev.filter((idx) => idx !== i) : [...prev, i]
+      prev.includes(i) ? prev.filter((idx) => idx !== i) : [...prev, i],
     );
   };
 
@@ -130,19 +130,25 @@ function EducationAccordion({ items = [] }) {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7, delay: i * 0.12, ease: [0.25, 0.1, 0.25, 1] }}
-            className="border-explorerBorder bg-articleBg/40 rounded-2xl border overflow-hidden transition-colors duration-300"
+            transition={{
+              duration: 0.7,
+              delay: i * 0.12,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+            className="border-explorerBorder bg-articleBg/40 overflow-hidden rounded-2xl border transition-colors duration-300"
           >
             {/* Header Row */}
             <div className="flex items-start gap-4 p-5">
               {/* Graduation icon */}
-              <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accentColor/10 text-accentColor">
+              <div className="bg-accentColor/10 text-accentColor mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl">
                 <Icon icon="lucide:graduation-cap" width="18" height="18" />
               </div>
 
               {/* Title + Year */}
-              <div className="flex-1 min-w-0">
-                <h3 className="font-bold text-white leading-snug">{edu.degree}</h3>
+              <div className="min-w-0 flex-1">
+                <h3 className="font-bold leading-snug text-white">
+                  {edu.degree}
+                </h3>
                 <p className="text-accentColor mt-0.5 text-sm font-semibold">
                   {edu.institution}
                 </p>
@@ -154,7 +160,7 @@ function EducationAccordion({ items = [] }) {
               {/* Toggle button */}
               <button
                 onClick={() => toggle(i)}
-                className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-explorerBorder text-textColor/40 transition-all duration-200 hover:border-accentColor/40 hover:text-accentColor"
+                className="border-explorerBorder text-textColor/40 hover:border-accentColor/40 hover:text-accentColor mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border transition-all duration-200"
                 aria-label={isOpen ? "Collapse" : "Expand"}
               >
                 <Icon
@@ -172,15 +178,18 @@ function EducationAccordion({ items = [] }) {
               transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
               className="overflow-hidden"
             >
-              <div className="border-t border-explorerBorder/50 px-5 pb-5 pt-4">
+              <div className="border-explorerBorder/50 border-t px-5 pb-5 pt-4">
                 <p className="text-textColor/60 font-mono text-sm leading-relaxed">
                   {edu.note}
                 </p>
                 {edu.points && edu.points.length > 0 && (
                   <ul className="mt-3 space-y-2">
                     {edu.points.map((pt, j) => (
-                      <li key={j} className="flex items-start gap-2 text-sm text-textColor/55">
-                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accentColor/60" />
+                      <li
+                        key={j}
+                        className="text-textColor/55 flex items-start gap-2 text-sm"
+                      >
+                        <span className="bg-accentColor/60 mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" />
                         {pt}
                       </li>
                     ))}
@@ -231,9 +240,10 @@ function About() {
             </motion.h1>
             <motion.p
               variants={headerItem}
-              className="text-textColor/60 text-base leading-relaxed text-justify md:w-1/2"
+              className="text-textColor/60 text-justify text-base leading-relaxed md:w-1/2"
             >
-              Front-End Developer specializing in the React ecosystem, building fast, scalable, and motion-rich web applications.
+              Front-End Developer specializing in the React ecosystem, building
+              fast, scalable, and motion-rich web applications.
             </motion.p>
             <motion.div
               variants={headerItem}
@@ -272,10 +282,18 @@ function About() {
                   </span>
                 </p>
                 <p className="text-textColor/70 text-base leading-relaxed">
-                  I specialize in the React ecosystem, building responsive, performant web applications with clean architecture and thoughtful UX. My toolkit spans the modern JavaScript stack, from React and Redux on the front end to Node.js and MongoDB on the back end.
+                  I specialize in the React ecosystem, building responsive,
+                  performant web applications with clean architecture and
+                  thoughtful UX. My toolkit spans the modern JavaScript stack,
+                  from React and Redux on the front end to Node.js and MongoDB
+                  on the back end.
                 </p>
                 <p className="text-textColor/70 text-base leading-relaxed">
-                  What excites me most is the intersection of design and engineering, crafting interfaces that feel alive through motion, micro-interactions, and meticulous attention to detail. Every project in this portfolio was built from scratch with that philosophy.
+                  What excites me most is the intersection of design and
+                  engineering, crafting interfaces that feel alive through
+                  motion, micro-interactions, and meticulous attention to
+                  detail. Every project in this portfolio was built from scratch
+                  with that philosophy.
                 </p>
               </div>
 
@@ -298,16 +316,21 @@ function About() {
               {/* Resume CTA */}
               <div className="flex flex-wrap items-center gap-4">
                 <a
-                  href="https://drive.google.com/file/d/1R_YPrT1UbdBq3_5mNJc6c8FTRKIbfhYW/view?usp=sharing"
-                  target="_blank"
-                  rel="noreferrer"
+                  href={resumeFile}
+                  download="resume.pdf"
+                  className="group relative"
                 >
                   <motion.button
                     className="bg-accentColor text-mainBg flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold shadow-lg transition-all duration-200 hover:shadow-[0_0_25px_rgba(136,192,208,0.25)] hover:brightness-110"
                     whileHover={{ scale: 1.04, y: -2 }}
                     whileTap={{ scale: 0.97 }}
                   >
-                    <Icon icon="lucide:download" width="18" height="18" strokeWidth="2.5" />
+                    <Icon
+                      icon="lucide:download"
+                      width="18"
+                      height="18"
+                      strokeWidth="2.5"
+                    />
                     Download Resume
                   </motion.button>
                 </a>
@@ -419,18 +442,18 @@ function About() {
                     className="flex gap-5"
                   >
                     <div className="flex flex-col items-center pt-0.5">
-                      <span className="text-xs font-bold text-accentColor tracking-wider">
+                      <span className="text-accentColor text-xs font-bold tracking-wider">
                         {item.year}
                       </span>
                       {i < timeline.length - 1 && (
-                        <div className="mt-2 w-px flex-1 bg-explorerBorder/80" />
+                        <div className="bg-explorerBorder/80 mt-2 w-px flex-1" />
                       )}
                     </div>
                     <div className="pb-8">
                       <p className="text-sm font-bold text-white">
                         {item.title}
                       </p>
-                      <p className="mt-1.5 text-sm leading-relaxed text-textColor/60">
+                      <p className="text-textColor/60 mt-1.5 text-sm leading-relaxed">
                         {item.desc}
                       </p>
                     </div>
@@ -529,8 +552,6 @@ function About() {
             </motion.div>
             <EducationAccordion items={education} />
           </div>
-
-
 
           {/* ─── Bottom CTA ─── */}
           <motion.div

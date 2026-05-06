@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState, useRef, useLayoutEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Icon } from "@iconify/react";
+import resumeFile from "../assets/docs/resume.pdf";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -58,14 +59,19 @@ function NavBar() {
           </Link>
 
           {/* ─── Desktop Nav Links ─── */}
-          <div ref={navLinksRef} className="relative hidden items-center gap-1 md:flex">
+          <div
+            ref={navLinksRef}
+            className="relative hidden items-center gap-1 md:flex"
+          >
             {navLinks.map((link) => {
               const isActive = location.pathname === link.path;
               return (
                 <Link
                   key={link.path}
                   to={link.path}
-                  ref={(el) => { linkRefs.current[link.path] = el; }}
+                  ref={(el) => {
+                    linkRefs.current[link.path] = el;
+                  }}
                   className={`relative rounded-lg px-3.5 py-2 text-sm font-medium transition-colors duration-200 ${
                     isActive
                       ? "text-accentColor"
@@ -93,11 +99,15 @@ function NavBar() {
           <div className="flex items-center gap-2 sm:gap-3">
             {/* Download Resume CTA */}
             <a
-              href="/assets/docs/resume.pdf"
-              download
+              href={resumeFile}
+              download="resume.pdf"
               className="bg-accentColor/10 text-accentColor hover:bg-accentColor/20 flex items-center gap-2 rounded-lg px-3 py-2 text-[10px] font-bold transition-all duration-200 sm:px-4 sm:text-xs"
             >
-              <Icon icon="lucide:download" className="h-[14px] w-[14px] sm:h-4 sm:w-4" strokeWidth="3" />
+              <Icon
+                icon="lucide:download"
+                className="h-[14px] w-[14px] sm:h-4 sm:w-4"
+                strokeWidth="3"
+              />
               <span className="uppercase tracking-wider">Resume</span>
             </a>
 
@@ -162,7 +172,12 @@ function NavBar() {
                   onClick={() => setMobileOpen(false)}
                   className="bg-textColor/5 text-textColor/60 hover:bg-textColor/10 flex h-10 w-10 items-center justify-center rounded-xl transition-colors"
                 >
-                  <Icon icon="lucide:x" width="20" height="20" strokeWidth="2.5" />
+                  <Icon
+                    icon="lucide:x"
+                    width="20"
+                    height="20"
+                    strokeWidth="2.5"
+                  />
                 </button>
               </div>
 
