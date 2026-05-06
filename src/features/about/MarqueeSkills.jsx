@@ -12,7 +12,7 @@ const row1 = [
   { name: "Firebase", icon: "logos:firebase" },
   { name: "Git", icon: "logos:git-icon" },
   { name: "React Router", icon: "logos:react-router" },
-  { name: "Vercel", icon: "logos:vercel-icon" },
+  { name: "Vercel", icon: "simple-icons:vercel" },
   { name: "Postman", icon: "logos:postman-icon" },
   { name: "TypeScript", icon: "logos:typescript-icon" },
   { name: "Next.js", icon: "logos:nextjs-icon" },

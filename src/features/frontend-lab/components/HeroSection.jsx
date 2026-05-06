@@ -48,7 +48,7 @@ export default function HeroSection() {
       {/* Subtitle */}
       <motion.p 
         variants={headerItem}
-        className="max-w-2xl text-base leading-relaxed text-textColor/70"
+        className="text-base leading-relaxed text-textColor/70 text-justify md:w-1/2"
       >
         A collection of UI systems, machine coding challenges, and frontend experiments built to sharpen real-world development skills.
       </motion.p>

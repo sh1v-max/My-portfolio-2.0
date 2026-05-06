@@ -99,8 +99,8 @@ const skills = [
   {
     name: "Vercel",
     category: "HOSTING",
-    icon: "logos:vercel-icon",
-    watermark: "logos:vercel-icon",
+    icon: "simple-icons:vercel",
+    watermark: "simple-icons:vercel",
     col: "col-span-1",
     row: "row-span-1",
   },
@@ -182,7 +182,7 @@ export default function BentoSkills() {
   return (
     <div className="py-2">
       <motion.div
-        className="mx-auto grid max-w-4xl grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6"
+        className="grid w-full grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6"
         variants={gridContainer}
         initial="hidden"
         whileInView="visible"
@@ -192,9 +192,8 @@ export default function BentoSkills() {
           <motion.div
             key={skill.name}
             variants={cardVariant}
-            whileHover={{ scale: 0.97 }}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            className={`group relative flex flex-col justify-between overflow-hidden rounded-xl border border-white/[0.06] bg-[#141414] p-3 transition-colors duration-300 hover:border-white/[0.12] md:p-4 ${skill.col} ${skill.row}`}
+            className={`group relative flex flex-col gap-3 overflow-hidden rounded-xl border border-explorerBorder bg-articleBg/40 p-3 transition-colors duration-300 hover:border-accentColor/30 hover:bg-articleBg/70 md:p-4 ${skill.col} ${skill.row}`}
             style={{ minHeight: skill.row === "row-span-2" ? "140px" : "70px" }}
           >
             {/* Small Icon (Top Left) */}
@@ -203,14 +202,14 @@ export default function BentoSkills() {
                 icon={skill.icon}
                 width={skill.row === "row-span-2" ? 28 : 20}
                 height={skill.row === "row-span-2" ? 28 : 20}
-                className="opacity-80 brightness-200 grayscale transition-all duration-500 group-hover:brightness-100 group-hover:grayscale-0"
+                className="transition-transform duration-300 group-hover:scale-125"
               />
             </div>
 
             {/* Name + Category (Bottom Left) */}
             <div className="relative z-10 mt-auto">
               <h4
-                className={`font-bold leading-tight text-white/90 ${
+                className={`font-bold leading-tight text-textColor ${
                   skill.row === "row-span-2"
                     ? "text-base md:text-lg"
                     : "text-[11px] md:text-xs"
@@ -218,18 +217,18 @@ export default function BentoSkills() {
               >
                 {skill.name}
               </h4>
-              <p className="mt-0.5 text-[8px] font-semibold uppercase tracking-[0.2em] text-white/30 md:text-[9px]">
+              <p className="mt-0.5 text-[8px] font-semibold uppercase tracking-[0.2em] text-textColor/40 md:text-[9px]">
                 {skill.category}
               </p>
             </div>
 
             {/* Watermark Icon (Bottom Right, large and faded) */}
-            <div className="pointer-events-none absolute -bottom-3 -right-3 opacity-[0.04] transition-opacity duration-500 group-hover:opacity-[0.08]">
+            <div className="pointer-events-none absolute -bottom-3 -right-3 opacity-[0.04] transition-all duration-500 group-hover:scale-110 group-hover:opacity-[0.08]">
               <Icon
                 icon={skill.watermark}
                 width={skill.row === "row-span-2" ? 120 : 70}
                 height={skill.row === "row-span-2" ? 120 : 70}
-                className="brightness-200 grayscale"
+                className="grayscale"
               />
             </div>
           </motion.div>

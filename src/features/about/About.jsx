@@ -1,4 +1,5 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import PageNavigator from "../../components/PageNavigator";
@@ -59,33 +60,37 @@ const services = [
 
 const education = [
   {
-    degree: "B.Tech — Computer Science & Engineering",
-    institution: "Dr. A.P.J. Abdul Kalam Technical University",
-    year: "2021 – 2025",
-    note: "Core CS fundamentals, DSA, and software engineering principles.",
+    degree: "Lovely Professional University, Punjab",
+    institution: "LPU",
+    year: "2020 - 2024",
+    note: "Completed Bachelor of Computer Science and Engineering (CSE) at LPU, Punjab.",
+    points: [
+      "Focused on programming, data structures, and full-stack web development.",
+      "Participated in technical events and workshops.",
+      "Developed academic projects demonstrating React and Node.js skills.",
+    ],
   },
   {
-    degree: "Full-Stack Web Development",
-    institution: "Cohort 2.0 — Harkirat Singh",
-    year: "2024 – 2025",
-    note: "Intensive full-stack program covering Node.js, databases, DevOps basics, and system design.",
-  },
-  {
-    degree: "Namaste React — Deep Dive",
-    institution: "Akshay Saini",
-    year: "2024",
-    note: "In-depth React course covering internals, rendering, hooks, Redux, and production patterns.",
+    degree: "Tulsi Vidya Niketan, Varanasi",
+    institution: "CBSE Board",
+    year: "2018 - 2020",
+    note: "Completed Class 11th and 12th from an English medium school affiliated with the CBSE Board.",
+    points: [
+      "Completed higher secondary education (Science stream).",
+      "Strengthened logical, analytical, and communication skills.",
+      "Focused on mathematics and computer fundamentals.",
+    ],
   },
 ];
 
 const timeline = [
   {
-    year: "2022",
+    year: "2020",
     title: "First Line of Code",
     desc: "Started with HTML & CSS, discovered the web was buildable — not magic.",
   },
   {
-    year: "2023",
+    year: "2022",
     title: "JavaScript & React",
     desc: "Learned vanilla JS deeply, then fell into the React ecosystem and never looked back.",
   },
@@ -100,6 +105,95 @@ const timeline = [
     desc: "Shipped this portfolio, exploring Next.js, Three.js, and building increasingly complex UIs.",
   },
 ];
+
+
+// ─── Education Accordion Component ───────────────────────────
+/* eslint-disable react/prop-types */
+function EducationAccordion({ items = [] }) {
+  const [openIndex, setOpenIndex] = useState(
+    items.map((_, i) => i) // all expanded by default
+  );
+
+  const toggle = (i) => {
+    setOpenIndex((prev) =>
+      prev.includes(i) ? prev.filter((idx) => idx !== i) : [...prev, i]
+    );
+  };
+
+  return (
+    <div className="space-y-4">
+      {items.map((edu, i) => {
+        const isOpen = openIndex.includes(i);
+        return (
+          <motion.div
+            key={edu.degree}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, delay: i * 0.12, ease: [0.25, 0.1, 0.25, 1] }}
+            className="border-explorerBorder bg-articleBg/40 rounded-2xl border overflow-hidden transition-colors duration-300"
+          >
+            {/* Header Row */}
+            <div className="flex items-start gap-4 p-5">
+              {/* Graduation icon */}
+              <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accentColor/10 text-accentColor">
+                <Icon icon="lucide:graduation-cap" width="18" height="18" />
+              </div>
+
+              {/* Title + Year */}
+              <div className="flex-1 min-w-0">
+                <h3 className="font-bold text-white leading-snug">{edu.degree}</h3>
+                <p className="text-accentColor mt-0.5 text-sm font-semibold">
+                  {edu.institution}
+                </p>
+                <p className="text-textColor/40 mt-1 text-xs font-medium">
+                  {edu.year}
+                </p>
+              </div>
+
+              {/* Toggle button */}
+              <button
+                onClick={() => toggle(i)}
+                className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-explorerBorder text-textColor/40 transition-all duration-200 hover:border-accentColor/40 hover:text-accentColor"
+                aria-label={isOpen ? "Collapse" : "Expand"}
+              >
+                <Icon
+                  icon={isOpen ? "lucide:chevron-up" : "lucide:chevron-down"}
+                  width="14"
+                  height="14"
+                />
+              </button>
+            </div>
+
+            {/* Expandable Body */}
+            <motion.div
+              initial={false}
+              animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+              transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+              className="overflow-hidden"
+            >
+              <div className="border-t border-explorerBorder/50 px-5 pb-5 pt-4">
+                <p className="text-textColor/60 font-mono text-sm leading-relaxed">
+                  {edu.note}
+                </p>
+                {edu.points && edu.points.length > 0 && (
+                  <ul className="mt-3 space-y-2">
+                    {edu.points.map((pt, j) => (
+                      <li key={j} className="flex items-start gap-2 text-sm text-textColor/55">
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accentColor/60" />
+                        {pt}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+}
 
 // ─── Component ────────────────────────────────────────────────
 function About() {
@@ -137,10 +231,9 @@ function About() {
             </motion.h1>
             <motion.p
               variants={headerItem}
-              className="text-textColor/60 max-w-xl text-base leading-relaxed"
+              className="text-textColor/60 text-base leading-relaxed text-justify md:w-1/2"
             >
-              Front-End Developer specializing in the React ecosystem — building
-              fast, scalable, and motion-rich web applications.
+              Front-End Developer specializing in the React ecosystem, building fast, scalable, and motion-rich web applications.
             </motion.p>
             <motion.div
               variants={headerItem}
@@ -179,18 +272,10 @@ function About() {
                   </span>
                 </p>
                 <p className="text-textColor/70 text-base leading-relaxed">
-                  I specialize in the React ecosystem — building responsive,
-                  performant web applications with clean architecture and
-                  thoughtful UX. My toolkit spans the modern JavaScript stack,
-                  from React and Redux on the front end to Node.js and MongoDB
-                  on the back end.
+                  I specialize in the React ecosystem, building responsive, performant web applications with clean architecture and thoughtful UX. My toolkit spans the modern JavaScript stack, from React and Redux on the front end to Node.js and MongoDB on the back end.
                 </p>
                 <p className="text-textColor/70 text-base leading-relaxed">
-                  What excites me most is the intersection of design and
-                  engineering — crafting interfaces that feel alive through
-                  motion, micro-interactions, and meticulous attention to
-                  detail. Every project in this portfolio was built from scratch
-                  with that philosophy.
+                  What excites me most is the intersection of design and engineering, crafting interfaces that feel alive through motion, micro-interactions, and meticulous attention to detail. Every project in this portfolio was built from scratch with that philosophy.
                 </p>
               </div>
 
@@ -331,21 +416,21 @@ function About() {
                       delay: i * 0.1,
                       ease: [0.25, 0.1, 0.25, 1],
                     }}
-                    className="flex gap-4"
+                    className="flex gap-5"
                   >
-                    <div className="flex flex-col items-center">
-                      <div className="bg-accentColor/20 border-accentColor/40 text-accentColor flex h-9 w-9 shrink-0 items-center justify-center rounded-full border text-xs font-bold">
-                        {item.year.slice(2)}
-                      </div>
+                    <div className="flex flex-col items-center pt-0.5">
+                      <span className="text-xs font-bold text-accentColor tracking-wider">
+                        {item.year}
+                      </span>
                       {i < timeline.length - 1 && (
-                        <div className="bg-accentColor/20 mt-1 w-px flex-1" />
+                        <div className="mt-2 w-px flex-1 bg-explorerBorder/80" />
                       )}
                     </div>
-                    <div className="pb-4">
+                    <div className="pb-8">
                       <p className="text-sm font-bold text-white">
                         {item.title}
                       </p>
-                      <p className="text-textColor/60 mt-0.5 text-sm leading-relaxed">
+                      <p className="mt-1.5 text-sm leading-relaxed text-textColor/60">
                         {item.desc}
                       </p>
                     </div>
@@ -442,37 +527,7 @@ function About() {
               </h2>
               <div className="from-accentColor to-accentColor/30 h-1 w-16 rounded-full bg-gradient-to-r" />
             </motion.div>
-            <div className="space-y-4">
-              {education.map((edu, i) => (
-                <motion.div
-                  key={edu.degree}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{
-                    duration: 0.7,
-                    delay: i * 0.1,
-                    ease: [0.25, 0.1, 0.25, 1],
-                  }}
-                  className="border-explorerBorder bg-articleBg/40 hover:border-accentColor/30 group flex flex-col gap-2 rounded-2xl border p-6 transition-colors duration-300"
-                >
-                  <div className="flex flex-wrap items-start justify-between gap-2">
-                    <div>
-                      <h3 className="font-bold text-white">{edu.degree}</h3>
-                      <p className="text-accentColor mt-0.5 text-sm font-medium">
-                        {edu.institution}
-                      </p>
-                    </div>
-                    <span className="border-accentColor/20 bg-accentColor/10 text-accentColor shrink-0 rounded-full border px-3 py-1 text-xs font-semibold">
-                      {edu.year}
-                    </span>
-                  </div>
-                  <p className="text-textColor/60 text-sm leading-relaxed">
-                    {edu.note}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
+            <EducationAccordion items={education} />
           </div>
 
 

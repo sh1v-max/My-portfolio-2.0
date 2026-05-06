@@ -99,10 +99,10 @@ function Contact() {
             </motion.h1>
             <motion.p
               variants={headerItem}
-              className="text-textColor/60 max-w-xl text-base leading-relaxed"
+              className="text-textColor/60 w-full text-justify text-base leading-relaxed"
             >
-              Have a question or want to work together? Feel free to reach out
-              via the form below or through my social links.
+              If you’ve made it this far, we’d probably enjoy building something together. I’m open to frontend roles, freelance work, and creative web projects.
+
             </motion.p>
 
             {/* Availability Indicator - Moved to Header */}
@@ -111,10 +111,10 @@ function Contact() {
               className="flex items-center gap-3 pt-1"
             >
               <div className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accentColor opacity-75"></span>
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-accentColor"></span>
+                <span className="bg-accentColor absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span>
+                <span className="bg-accentColor relative inline-flex h-2 w-2 rounded-full"></span>
               </div>
-              <span className="text-xs font-semibold uppercase tracking-widest text-textColor/40">
+              <span className="text-textColor/40 text-xs font-semibold uppercase tracking-widest">
                 Currently accepting new projects
               </span>
             </motion.div>
@@ -126,7 +126,7 @@ function Contact() {
             />
           </motion.div>
 
-          <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
+          <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-24">
             {/* Left Column: Socials */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -154,15 +154,12 @@ function Contact() {
             >
               <form
                 ref={formData}
-                className="space-y-6"
+                className="space-y-5"
                 onSubmit={handleSubmit(sendEmail)}
               >
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-textColor/80" htmlFor="name">
-                    Name
-                  </label>
+                <div>
                   <input
-                    className="w-full rounded-xl border border-explorerBorder bg-articleBg p-4 text-sm text-textColor transition-all duration-300 focus:border-accentColor focus:outline-none focus:ring-4 focus:ring-accentColor/10"
+                    className="w-full rounded-2xl bg-white/[0.03] px-5 py-4 text-sm text-textColor transition-all duration-300 placeholder:text-textColor/40 hover:bg-white/[0.06] focus:bg-white/[0.08] focus:outline-none focus:ring-2 focus:ring-accentColor/50"
                     name="name"
                     type="text"
                     id="name"
@@ -171,19 +168,16 @@ function Contact() {
                       required: { value: true, message: "Name is required" },
                     })}
                   />
-                  {errors.name && <p className="text-xs text-red-400">{errors.name.message}</p>}
+                  {errors.name && <p className="mt-1.5 ml-2 text-xs text-red-400">{errors.name.message}</p>}
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-textColor/80" htmlFor="email">
-                    Email
-                  </label>
+                <div>
                   <input
-                    className="w-full rounded-xl border border-explorerBorder bg-articleBg p-4 text-sm text-textColor transition-all duration-300 focus:border-accentColor focus:outline-none focus:ring-4 focus:ring-accentColor/10"
+                    className="w-full rounded-2xl bg-white/[0.03] px-5 py-4 text-sm text-textColor transition-all duration-300 placeholder:text-textColor/40 hover:bg-white/[0.06] focus:bg-white/[0.08] focus:outline-none focus:ring-2 focus:ring-accentColor/50"
                     type="email"
                     id="email"
                     name="email"
-                    placeholder="your@email.com"
+                    placeholder="Email address"
                     {...register("email", {
                       pattern: {
                         value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
@@ -192,69 +186,49 @@ function Contact() {
                       required: { value: true, message: "Email is required" },
                     })}
                   />
-                  {errors.email && <p className="text-xs text-red-400">{errors.email.message}</p>}
+                  {errors.email && <p className="mt-1.5 ml-2 text-xs text-red-400">{errors.email.message}</p>}
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-textColor/80" htmlFor="subject">
-                    Subject
-                  </label>
+                <div>
                   <input
-                    className="w-full rounded-xl border border-explorerBorder bg-articleBg p-4 text-sm text-textColor transition-all duration-300 focus:border-accentColor focus:outline-none focus:ring-4 focus:ring-accentColor/10"
+                    className="w-full rounded-2xl bg-white/[0.03] px-5 py-4 text-sm text-textColor transition-all duration-300 placeholder:text-textColor/40 hover:bg-white/[0.06] focus:bg-white/[0.08] focus:outline-none focus:ring-2 focus:ring-accentColor/50"
                     type="text"
                     name="subject"
                     id="subject"
-                    placeholder="What's this about?"
+                    placeholder="Subject"
                     {...register("subject", {
                       required: { value: true, message: "Subject is required" },
                     })}
                   />
-                  {errors.subject && <p className="text-xs text-red-400">{errors.subject.message}</p>}
+                  {errors.subject && <p className="mt-1.5 ml-2 text-xs text-red-400">{errors.subject.message}</p>}
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-textColor/80" htmlFor="message">
-                    Message
-                  </label>
+                <div>
                   <textarea
-                    className="w-full min-h-[160px] rounded-xl border border-explorerBorder bg-articleBg p-4 text-sm text-textColor transition-all duration-200 focus:border-accentColor focus:outline-none focus:ring-4 focus:ring-accentColor/10 resize-none"
+                    className="w-full resize-none rounded-2xl bg-white/[0.03] px-5 py-4 text-sm text-textColor transition-all duration-300 placeholder:text-textColor/40 hover:bg-white/[0.06] focus:bg-white/[0.08] focus:outline-none focus:ring-2 focus:ring-accentColor/50"
                     id="message"
                     name="message"
-                    rows="5"
+                    rows="4"
                     placeholder="Tell me about your project..."
                     {...register("message", {
                       required: { value: true, message: "Message is required" },
                       minLength: { value: 5, message: "Minimum 5 characters" }
                     })}
                   ></textarea>
-                  {errors.message && <p className="text-xs text-red-400">{errors.message.message}</p>}
+                  {errors.message && <p className="mt-1.5 ml-2 text-xs text-red-400">{errors.message.message}</p>}
                 </div>
 
-                <button
-                  type="submit"
-                  className="w-full rounded-xl bg-accentColor px-8 py-4 text-sm font-bold text-mainBg transition-all duration-300 hover:brightness-110 hover:shadow-[0_0_20px_rgba(136,192,208,0.2)] active:scale-[0.98] sm:w-auto"
-                >
-                  Send Message
-                </button>
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    className="w-full rounded-2xl bg-accentColor px-8 py-4 text-sm font-bold text-mainBg shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(136,192,208,0.3)] active:scale-[0.98]"
+                  >
+                    Send Message
+                  </button>
+                </div>
               </form>
             </motion.div>
           </div>
-
-          {/* Bottom Context - Moved from left column */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="pt-10 border-t border-textColor/5"
-          >
-            <div className="max-w-2xl space-y-4">
-              <h3 className="text-2xl font-bold text-textColor">Let&apos;s build something together</h3>
-              <p className="text-base leading-relaxed text-textColor/60">
-                Whether you have a specific project in mind or just want to explore potential collaborations, I&apos;m always excited to hear from fellow developers and creators.
-              </p>
-            </div>
-          </motion.div>
         </div>
       </section>
 

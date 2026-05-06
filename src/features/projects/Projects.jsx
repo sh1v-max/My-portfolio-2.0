@@ -82,9 +82,9 @@ function Projects() {
             {/* Subtitle */}
             <motion.p
               variants={headerItem}
-              className="text-textColor/60 max-w-xl text-base leading-relaxed"
+              className="text-textColor/60 text-base leading-relaxed text-justify md:w-1/2"
             >
-              A selection of projects I&apos;ve built — from AI-powered
+              A selection of projects I&apos;ve built, from AI-powered
               platforms to full-stack applications. Each one crafted with
               attention to detail, performance, and user experience.
             </motion.p>

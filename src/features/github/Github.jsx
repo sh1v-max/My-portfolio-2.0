@@ -130,7 +130,7 @@ export default function Github() {
             </motion.h1>
             <motion.p 
               variants={headerItem}
-              className="text-textColor/60 max-w-xl text-base leading-relaxed"
+              className="text-textColor/60 text-base leading-relaxed text-justify md:w-1/2"
             >
               An overview of my open-source contributions, coding activity, and
               featured projects directly from the GitHub API.
