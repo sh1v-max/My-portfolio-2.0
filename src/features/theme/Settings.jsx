@@ -3,6 +3,7 @@ import ThemeCard from "./ThemeCard";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useTheme } from "../../context/ThemeContext";
 import { useState, useEffect } from "react";
+import { Icon } from "@iconify/react";
 
 function Settings() {
   const { theme: currentTheme } = useTheme();
@@ -114,23 +115,7 @@ function Settings() {
               <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-4">
                   <div className="bg-accentColor/15 text-accentColor flex h-12 w-12 items-center justify-center rounded-xl">
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <circle cx="13.5" cy="6.5" r="2.5" />
-                      <circle cx="17.5" cy="10.5" r="2.5" />
-                      <circle cx="8.5" cy="7.5" r="2.5" />
-                      <circle cx="6.5" cy="12.5" r="2.5" />
-                      <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
-                      <path d="M16.5 16.5l-5.2-1.8a1 1 0 0 1-.5-1.5l1.8-5.2" />
-                    </svg>
+                    <Icon icon="lucide:palette" width="24" height="24" />
                   </div>
                   <div>
                     <p className="text-textColor/40 text-xs font-medium uppercase tracking-widest">
@@ -164,22 +149,7 @@ function Settings() {
             className="mb-6 flex items-center gap-3"
           >
             <div className="text-textColor/40 flex items-center gap-2 text-sm font-semibold uppercase tracking-widest">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="text-accentColor"
-              >
-                <rect x="3" y="3" width="7" height="7" />
-                <rect x="14" y="3" width="7" height="7" />
-                <rect x="3" y="14" width="7" height="7" />
-                <rect x="14" y="14" width="7" height="7" />
-              </svg>
+              <Icon icon="lucide:layout-grid" className="text-accentColor" width="16" height="16" />
               Available Themes
             </div>
             <div className="bg-explorerBorder h-px flex-1" />

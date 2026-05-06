@@ -1,43 +1,37 @@
 import { useState } from "react";
-import ChevronRight from "./icons/ChevronRight";
-import react_icon from "../assets/icons/react_icon.svg";
-import html_icon from "../assets/icons/html_icon.svg";
-import css_icon from "../assets/icons/css_icon.svg";
-import js_icon from "../assets/icons/js_icon.svg";
-// import json_icon from "../assets/icons/json_icon.svg";
-import markdown_icon from "../assets/icons/markdown_icon.svg";
+import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 
 const explorerItems = [
   {
     name: "home.jsx",
     path: "/",
-    icon: `${react_icon}`,
+    icon: "vscode-icons:file-type-reactjs",
   },
   {
     name: "about.html",
     path: "/about",
-    icon: `${html_icon}`,
+    icon: "vscode-icons:file-type-html",
   },
   {
     name: "projects.js",
     path: "/projects",
-    icon: `${js_icon}`,
+    icon: "vscode-icons:file-type-js-official",
   },
   {
     name: "frontend-lab.jsx",
     path: "/frontend-lab",
-    icon: `${react_icon}`,
+    icon: "vscode-icons:file-type-reactjs",
   },
   {
     name: "github.md",
     path: "/github",
-    icon: `${markdown_icon}`,
+    icon: "vscode-icons:file-type-markdown",
   },
   {
     name: "contact.css",
     path: "/contact",
-    icon: `${css_icon}`,
+    icon: "vscode-icons:file-type-css",
   },
 ];
 
@@ -55,7 +49,8 @@ function Explorer() {
           className="flex cursor-pointer items-center px-2 py-1 hover:bg-explorerHoverBg transition-colors duration-200"
           onClick={() => setShow(!show)}
         >
-          <ChevronRight 
+          <Icon 
+            icon="lucide:chevron-right"
             className="w-4 h-4 transition-transform duration-200" 
             style={show ? { transform: "rotate(90deg)" } : {}} 
           />
@@ -72,7 +67,7 @@ function Explorer() {
                 key={item.name}
                 className="flex items-center gap-x-2 px-6 py-1 text-sm hover:bg-explorerHoverBg transition-colors duration-200"
               >
-                <img src={item.icon} alt="" className="w-4 h-4" />
+                <Icon icon={item.icon} className="w-4 h-4" />
                 <span className="font-medium">{item.name}</span>
               </Link>
             ))}

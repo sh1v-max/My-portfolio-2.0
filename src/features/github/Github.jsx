@@ -1,6 +1,7 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useLoaderData } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Icon } from "@iconify/react";
 import PageNavigator from "../../components/PageNavigator";
 
 import HeroProfile from "./components/HeroProfile";
@@ -39,21 +40,12 @@ export default function Github() {
           <title>Shiv | Github Dashboard</title>
         </Helmet>
         <div className="text-textColor flex h-[80vh] w-full flex-col items-center justify-center p-8">
-          <svg
+          <Icon
+            icon="lucide:alert-circle"
             width="64"
             height="64"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1"
-            strokeLinecap="round"
-            strokeLinejoin="round"
             className="mb-4 opacity-50"
-          >
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="8" x2="12" y2="12"></line>
-            <line x1="12" y1="16" x2="12.01" y2="16"></line>
-          </svg>
+          />
           <h2 className="mb-2 text-2xl font-bold">Data Unavailable</h2>
           <p className="text-lg opacity-80">
             Failed to load GitHub data. Please try again later.

@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
-import { ExternalLink } from "lucide-react";
-import { FaGithub } from "react-icons/fa";
+import { Icon } from "@iconify/react";
 import ProjectButton from "../../../components/ProjectButton";
 import { motion } from "framer-motion";
 
@@ -75,7 +74,7 @@ export default function ExperimentCard({ project }) {
         <div className="mt-auto flex gap-3">
           <ProjectButton
             href={project.demo}
-            icon={ExternalLink}
+            icon={() => <Icon icon="lucide:external-link" />}
             variant="primary"
             className="flex-1"
           >
@@ -83,7 +82,7 @@ export default function ExperimentCard({ project }) {
           </ProjectButton>
           <ProjectButton
             href={project.sourceCode}
-            icon={FaGithub}
+            icon={() => <Icon icon="lucide:github" />}
             variant="outline"
             className="flex-1"
           >

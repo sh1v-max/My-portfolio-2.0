@@ -9,6 +9,7 @@ import {
 import "swiper/css/bundle";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Icon } from "@iconify/react";
 
 import MiniProjectCard from "./MiniProjectCard";
 import { miniProjects } from "./miniProjects";
@@ -167,19 +168,10 @@ function MiniProjectsCarousel() {
               className="border-accentColor/30 bg-accentColor/5 text-accentColor hover:border-accentColor/60 hover:bg-accentColor/15 group inline-flex items-center gap-3 rounded-xl border px-7 py-3.5 text-sm font-semibold backdrop-blur-sm transition-all duration-300 hover:shadow-[0_0_24px_rgba(136,192,208,0.15)] active:scale-[0.97]"
             >
               Explore All Mini Projects
-              {/* arrow svg */}
-              <svg
-                className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
+              <Icon 
+                icon="lucide:arrow-right" 
+                className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" 
+              />
             </Link>
 
             {/* more details */}

@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import Tag from "./Tag";
-import { ExternalLink } from "lucide-react";
-import { FaGithub } from "react-icons/fa";
+import { Icon } from "@iconify/react";
 import ProjectButton from "../../components/ProjectButton";
 import { motion } from "framer-motion";
 
@@ -52,7 +51,7 @@ function ProjectCard({ img, title, desc, tags, srcCode, demo }) {
         <div className="flex items-center gap-3">
           <ProjectButton
             href={demo}
-            icon={ExternalLink}
+            icon={() => <Icon icon="lucide:external-link" />}
             variant="primary"
             className="flex-1 !px-4 !py-2.5 !text-sm"
           >
@@ -61,7 +60,7 @@ function ProjectCard({ img, title, desc, tags, srcCode, demo }) {
 
           <ProjectButton
             href={srcCode}
-            icon={FaGithub}
+            icon={() => <Icon icon="lucide:github" />}
             variant="outline"
             className="flex-1 !px-4 !py-2.5 !text-sm"
           >

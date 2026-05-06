@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Icon } from "@iconify/react";
 import { useTheme } from "../../context/ThemeContext";
 import ThemePreview from "./ThemePreview";
 
@@ -72,20 +73,7 @@ function ThemeCard({
             {name}
           </h3>
           <p className="text-textColor/40 flex items-center gap-1.5 text-xs">
-            <svg
-              width="11"
-              height="11"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="opacity-50"
-            >
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-              <circle cx="12" cy="7" r="4" />
-            </svg>
+            <Icon icon="lucide:user" className="opacity-50" width="11" height="11" />
             {publisher}
           </p>
         </div>
@@ -115,20 +103,7 @@ function ThemeCard({
           {/* Downloads */}
           {downloads && (
             <span className="text-textColor/25 flex items-center gap-1 text-[10px] font-medium">
-              <svg
-                width="11"
-                height="11"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="7,10 12,15 17,10" />
-                <line x1="12" y1="15" x2="12" y2="3" />
-              </svg>
+              <Icon icon="lucide:download" width="11" height="11" />
               {downloads}
             </span>
           )}

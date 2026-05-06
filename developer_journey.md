@@ -51,6 +51,14 @@ This document chronicles the evolution of the "My-portfolio-vsc" project—a hig
     *   **Solution:** We manually mapped all 22+ color variables for all 6 themes into standard CSS classes (`.theme-github`, etc.). We then used the Tailwind `@theme` directive to bridge these variables back into Tailwind utility classes like `bg-mainBg`.
     *   **What was learned:** Native CSS variables are more powerful and predictable than JS-in-CSS plugins. It taught the importance of "knowing your variables" rather than relying on black-box plugins.
 
+### Phase 6: Optimization & Architectural Refinement (The "Polish" Era)
+*   **The Vision:** Transition from "working" to "architecturally sound" by cleaning up visual debt and centralizing core systems.
+*   **Milestones:** 
+    *   **Iconify Integration:** Replaced hundreds of lines of raw inline SVG code in `NavBar` and `BottomNav` with the `@iconify/react` library, significantly reducing component length and improving DX.
+    *   **Theme Centralization:** Restructured the project by moving all theme-related visual assets (illustrations, previews, cards) into a dedicated `src/features/theme/` directory.
+    *   **Folder Renaming:** Migrated the generic `settings` feature to a more descriptive `theme` feature, updating all imports and routes project-wide.
+*   **Key Challenge:** Executing a large-scale file reorganization and renaming while ensuring zero broken paths or functional regressions in the build.
+
 ---
 
 ## 🛠️ Technical Stack Evolution
@@ -95,6 +103,16 @@ This document chronicles the evolution of the "My-portfolio-vsc" project—a hig
     1.  Fixed the scroll issue by changing `useEffect` + `setTimeout` to a synchronous `useLayoutEffect` in `ScrollToTop`, forcing the scroll to reset *before* browser paint.
     2.  Fixed the NavBar indicator by completely ditching Framer Motion's `layoutId`. `layoutId` internally uses `getBoundingClientRect() + window.scrollY` for position capture, meaning it always captured an inflated Y-position if the user had scrolled. Replaced it with a single, always-mounted indicator whose X-position is calculated purely via container-relative coordinates (`linkRect.left - containerRect.left`), making it 100% immune to `window.scrollY`.
 *   **Lesson Learned:** Framer Motion's `layoutId` is powerful but dangerous when mixed with scroll positioning and sticky elements. For navigation indicators, manual layout calculation using container-relative math is far more robust and completely eliminates scroll-based layout capture bugs.
+
+### 7. The SVG Bloat (The "Maintainability Trap")
+*   **Problem:** Components like `NavBar.jsx` and `BottomNav.jsx` were bloated with hundreds of lines of raw SVG paths, making them hard to read and modify.
+*   **Solution:** Migrated to **Iconify**. By using the `<Icon />` component, we reduced component length by ~70% while gaining access to thousands of standardized, lightweight icons.
+*   **Lesson Learned:** Don't ship raw SVGs for standard UI elements. Use a unified icon framework to keep your components clean, lightweight, and easily swappable.
+
+### 8. Architectural Debt & Feature Clarity
+*   **Problem:** Theme-related components were scattered between `components/` and `features/settings/`, causing confusion about where the "Source of Truth" for themes lived.
+*   **Solution:** Created a centralized `features/theme/` directory. Moved all appearance-related components (illustrations, cards, previews) into this domain-specific slice.
+*   **Lesson Learned:** Folder structure is documentation. A well-organized structure like "Feature Slicing" tells the story of your project at a glance. Renaming "Settings" to "Theme" immediately clarified the intent of that module to anyone reading the code.
 
 ---
 

@@ -1,4 +1,4 @@
-import { FaGithub } from "react-icons/fa";
+import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 
 const headerContainer = {
@@ -61,7 +61,7 @@ export default function HeroSection() {
         rel="noreferrer"
         className="mt-2 group inline-flex items-center gap-2 rounded-lg border border-explorerBorder bg-articleBg/50 px-4 py-2.5 text-sm font-semibold text-textColor transition-all duration-300 hover:border-accentColor/50 hover:bg-accentColor/10 hover:text-accentColor active:scale-[0.97]"
       >
-        <FaGithub className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
+        <Icon icon="lucide:github" className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
         View Full Repository
       </motion.a>
 

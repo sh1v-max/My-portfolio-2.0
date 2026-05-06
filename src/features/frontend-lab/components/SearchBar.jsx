@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
-import { Search } from "lucide-react";
+import { Icon } from "@iconify/react";
 
 export default function SearchBar({ searchQuery, setSearchQuery }) {
   return (
     <div className="mb-8 relative w-full max-w-md">
       <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-        <Search className="h-4 w-4 text-textColor/50" />
+        <Icon icon="lucide:search" className="h-4 w-4 text-textColor/50" />
       </div>
       <input
         type="text"

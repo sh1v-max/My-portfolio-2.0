@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Icon } from "@iconify/react";
 
 const pageOrder = [
   { path: "/", label: "Home" },
@@ -41,19 +42,7 @@ export default function PageNavigator() {
               Previous
             </span>
             <span className="flex items-center gap-2 text-sm font-medium text-textColor/60 transition-colors duration-200 group-hover:text-accentColor">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M19 12H5" />
-                <path d="m12 19-7-7 7-7" />
-              </svg>
+              <Icon icon="lucide:arrow-left" width="16" height="16" />
               {prevPage.label}
             </span>
           </motion.div>
@@ -89,19 +78,7 @@ export default function PageNavigator() {
             </span>
             <span className="flex items-center gap-2 text-sm font-medium text-textColor/60 transition-colors duration-200 group-hover:text-accentColor">
               {nextPage.label}
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
+              <Icon icon="lucide:arrow-right" width="16" height="16" />
             </span>
           </motion.div>
         </Link>
