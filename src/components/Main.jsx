@@ -5,6 +5,7 @@ import BottomNav from "./BottomNav";
 import FloatingThemeButton from "./FloatingThemeButton";
 import { useTheme } from "../context/ThemeContext";
 import { useLocation } from "react-router-dom";
+import ScrollToTop from "./ScrollToTop";
 
 function Main() {
   const { theme } = useTheme();
@@ -12,13 +13,15 @@ function Main() {
   const isHomePage = location.pathname === "/";
 
   return (
-    <div
-      className={`theme-${theme} flex ${
-        isHomePage ? "h-screen overflow-hidden" : "min-h-screen"
-      } flex-col bg-mainBg text-textColor`}
-    >
-      {/* Modern Top Navigation */}
-      <NavBar />
+    <>
+      <ScrollToTop />
+      <div
+        className={`theme-${theme} flex ${
+          isHomePage ? "h-screen overflow-hidden" : "min-h-screen"
+        } flex-col bg-mainBg text-textColor`}
+      >
+        {/* Modern Top Navigation */}
+        <NavBar />
 
       {/* Main Content Area */}
       <main className={`flex-1 ${isHomePage ? "pb-0" : "pb-16"} md:pb-0`}>
@@ -34,6 +37,7 @@ function Main() {
       {/* Floating Theme Selector */}
       <FloatingThemeButton />
     </div>
+    </>
   );
 }
 

@@ -6,7 +6,16 @@ const bottomNavItems = [
     name: "Home",
     path: "/",
     icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
         <polyline points="9 22 9 12 15 12 15 22" />
       </svg>
@@ -16,7 +25,16 @@ const bottomNavItems = [
     name: "Projects",
     path: "/projects",
     icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <polyline points="16 18 22 12 16 6" />
         <polyline points="8 6 2 12 8 18" />
       </svg>
@@ -26,7 +44,16 @@ const bottomNavItems = [
     name: "Lab",
     path: "/frontend-lab",
     icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <path d="M9 3h6v4H9z" />
         <path d="M7 7h10l2 13H5z" />
         <path d="M10 11h4" />
@@ -47,7 +74,16 @@ const bottomNavItems = [
     name: "Contact",
     path: "/contact",
     icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <rect width="20" height="16" x="2" y="4" rx="2" />
         <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
       </svg>
@@ -59,7 +95,7 @@ function BottomNav() {
   const location = useLocation();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-explorerBorder/40 bg-mainBg/90 backdrop-blur-xl md:hidden">
+    <nav className="border-explorerBorder/40 bg-mainBg/90 fixed bottom-0 left-0 right-0 z-40 border-t backdrop-blur-xl md:hidden">
       <div className="mx-auto flex h-16 max-w-lg items-center justify-around px-2">
         {bottomNavItems.map((item) => {
           const isActive = location.pathname === item.path;
@@ -89,7 +125,7 @@ function BottomNav() {
               {isActive && (
                 <motion.div
                   layoutId="bottomnav-indicator"
-                  className="absolute -top-[1px] h-[2px] w-6 rounded-full bg-accentColor"
+                  className="bg-accentColor absolute -top-[1px] h-[2px] w-6 rounded-full"
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
               )}
