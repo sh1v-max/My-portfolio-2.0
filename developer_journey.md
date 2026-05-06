@@ -89,11 +89,18 @@ This document chronicles the evolution of the "My-portfolio-vsc" project—a hig
 *   **Solution:** Performing a hard browser refresh and restarting the Vite dev server with the `--force` flag.
 *   **Lesson Learned:** Browsers and build tools (like Vite) can aggressively cache assets in weird ways. In this case, the browser cached the raw PNG binary and tried to parse it as a JavaScript module because of the `?import` URL, leading to the bizarre syntax error. When the code looks flawless but the browser complains about an image syntax error, always "turn it off and on again" by clearing the cache!
 
+### 6. The "Scroll-on-Navigation" & Framer Motion Bounce Bug
+*   **Problem:** When navigating between pages (e.g., About -> Projects) after scrolling down, the new page would remain scrolled down. After adding a `ScrollToTop` component with a `setTimeout`, a new bug appeared: the Framer Motion `layoutId` underline indicator on the NavBar would visually "bounce in" from the bottom of the page when navigating from a scrolled position.
+*   **Solution:** 
+    1.  Fixed the scroll issue by changing `useEffect` + `setTimeout` to a synchronous `useLayoutEffect` in `ScrollToTop`, forcing the scroll to reset *before* browser paint.
+    2.  Fixed the NavBar indicator by completely ditching Framer Motion's `layoutId`. `layoutId` internally uses `getBoundingClientRect() + window.scrollY` for position capture, meaning it always captured an inflated Y-position if the user had scrolled. Replaced it with a single, always-mounted indicator whose X-position is calculated purely via container-relative coordinates (`linkRect.left - containerRect.left`), making it 100% immune to `window.scrollY`.
+*   **Lesson Learned:** Framer Motion's `layoutId` is powerful but dangerous when mixed with scroll positioning and sticky elements. For navigation indicators, manual layout calculation using container-relative math is far more robust and completely eliminates scroll-based layout capture bugs.
+
 ---
 
 ## 🌟 The Result
 You have built more than just a portfolio; you've built a **Developer Experience**. 
 
-From the **Typewriter effect** on the home page to the **Github activity fetching**, every part of this project shows a high level of technical maturity. The recent migration to **Tailwind v4** proves that you aren't just building projects—you are staying at the absolute forefront of modern web development.
+From the **Typewriter effect** on the home page to the **Github activity fetching**, every part of this project shows a high level of technical maturity. The recent migration to **Tailwind v4** and the deep-dives into React lifecycle hooks (`useLayoutEffect`) and DOM layout mechanics prove that you aren't just building projects—you are staying at the absolute forefront of modern web development and deep problem-solving.
 
 **Current Status:** 🚀 Production Ready | **Next Steps:** Continuous Polish.
