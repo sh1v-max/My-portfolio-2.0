@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef, useLayoutEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
@@ -11,9 +11,35 @@ const navLinks = [
   { name: "Contact", path: "/contact" },
 ];
 
+// Width of the indicator in px (matches w-5 = 20px)
+const INDICATOR_W = 20;
+
 function NavBar() {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  // ─── Scroll-immune indicator ───────────────────────────────────────────────
+  // We calculate the indicator's x position relative to the nav container rect,
+  // NOT relative to the page. This means window.scrollY has zero effect on the
+  // animation, completely eliminating the "bounce from bottom" layoutId bug.
+  const navLinksRef = useRef(null);
+  const linkRefs = useRef({});
+  const [indicatorX, setIndicatorX] = useState(0);
+  const [indicatorVisible, setIndicatorVisible] = useState(false);
+
+  useLayoutEffect(() => {
+    const activeEl = linkRefs.current[location.pathname];
+    const container = navLinksRef.current;
+    if (!activeEl || !container) return;
+
+    const cRect = container.getBoundingClientRect();
+    const lRect = activeEl.getBoundingClientRect();
+    // Center of link minus half of indicator width → left edge of indicator
+    const x = lRect.left - cRect.left + lRect.width / 2 - INDICATOR_W / 2;
+    setIndicatorX(x);
+    setIndicatorVisible(true);
+  }, [location.pathname]);
+  // ──────────────────────────────────────────────────────────────────────────
 
   return (
     <>
@@ -31,13 +57,14 @@ function NavBar() {
           </Link>
 
           {/* ─── Desktop Nav Links ─── */}
-          <div className="hidden items-center gap-1 md:flex">
+          <div ref={navLinksRef} className="relative hidden items-center gap-1 md:flex">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.path;
               return (
                 <Link
                   key={link.path}
                   to={link.path}
+                  ref={(el) => { linkRefs.current[link.path] = el; }}
                   className={`relative rounded-lg px-3.5 py-2 text-sm font-medium transition-colors duration-200 ${
                     isActive
                       ? "text-accentColor"
@@ -45,20 +72,20 @@ function NavBar() {
                   }`}
                 >
                   {link.name}
-                  {isActive && (
-                    <motion.div
-                      layoutId="navbar-indicator"
-                      className="bg-accentColor absolute bottom-0 left-1/2 h-[2px] w-5 -translate-x-1/2 rounded-full"
-                      transition={{
-                        type: "spring",
-                        stiffness: 400,
-                        damping: 30,
-                      }}
-                    />
-                  )}
                 </Link>
               );
             })}
+
+            {/* Single always-mounted indicator — position is container-relative,
+                so it is completely unaffected by window.scrollY */}
+            {indicatorVisible && (
+              <motion.div
+                initial={false}
+                animate={{ x: indicatorX }}
+                transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                className="bg-accentColor pointer-events-none absolute bottom-0 left-0 h-[2px] w-5 rounded-full"
+              />
+            )}
           </div>
 
           {/* ─── Right Section ─── */}
