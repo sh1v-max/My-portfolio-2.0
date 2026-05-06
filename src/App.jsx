@@ -9,7 +9,7 @@ import Projects from "./features/projects/Projects";
 // import Github, { loader as GithubLoader } from "./features/github/Github";
 import Github from "./features/github/Github";
 import { githubLoader } from "./features/github/githubLoader";
-import Settings from "./features/settings/Settings";
+import Settings from "./features/theme/Settings";
 import UIExperiments from "./features/frontend-lab/UIExperiments";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";

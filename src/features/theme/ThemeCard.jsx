@@ -4,8 +4,6 @@ import { motion } from "framer-motion";
 import { useTheme } from "../../context/ThemeContext";
 import ThemePreview from "./ThemePreview";
 
-// Using standard whileInView inline transitions
-
 function ThemeCard({
   name,
   publisher,
@@ -13,7 +11,6 @@ function ThemeCard({
   description,
   palette,
   downloads,
-  // index = 0,
 }) {
   const { changeTheme, theme: currentTheme } = useTheme();
   const isActive = currentTheme === theme;
@@ -23,7 +20,6 @@ function ThemeCard({
     e.stopPropagation();
     if (isActive || applying) return;
     setApplying(true);
-    // Brief delay for visual feedback
     setTimeout(() => {
       changeTheme(theme);
       setApplying(false);

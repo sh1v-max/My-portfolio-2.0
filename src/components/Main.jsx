@@ -2,7 +2,7 @@ import Footer from "./Footer";
 import NavBar from "./NavBar";
 import Pages from "./Pages";
 import BottomNav from "./BottomNav";
-import FloatingThemeButton from "./FloatingThemeButton";
+import FloatingThemeButton from "../features/theme/FloatingThemeButton";
 import { useTheme } from "../context/ThemeContext";
 import { useLocation } from "react-router-dom";
 import ScrollToTop from "./ScrollToTop";
