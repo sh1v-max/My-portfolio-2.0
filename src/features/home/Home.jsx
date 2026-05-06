@@ -1,5 +1,11 @@
 import { Link } from "react-router-dom";
 import Illustration from "./Illustration";
+// import Illustration10X from "./Illustration10X";
+// import Illustration20X from "./Illustration20X";
+// import Illustration30X from "./Illustration30X";
+// import Illustration40X from "./Illustration40X";
+// import Illustration100X from "./Illustration100X";
+
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { motion } from "framer-motion";
 import PageNavigator from "../../components/PageNavigator";
@@ -81,7 +87,7 @@ function Home() {
               variants={containerVariants}
             >
               {/* Mobile Decorative Glow (Visible only when illustration is hidden) */}
-              <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accentColor/10 blur-[100px] lg:hidden" />
+              <div className="bg-accentColor/10 pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[100px] lg:hidden" />
 
               {/* Status Badge */}
               <motion.div variants={itemVariants}>
@@ -96,11 +102,14 @@ function Home() {
                 className="text-textColor mt-8 flex flex-col items-center lg:items-start"
                 variants={itemVariants}
               >
-                <span className="text-accentColor mb-2 text-xl tracking-wide sm:text-2xl" style={{ fontFamily: "'Satisfy', cursive" }}>
+                <span
+                  className="text-accentColor mb-2 text-xl tracking-wide sm:text-2xl"
+                  style={{ fontFamily: "'Satisfy', cursive" }}
+                >
                   Hi, I&apos;m
                 </span>
                 <motion.span
-                  className="bg-gradient-to-br from-textColor via-textColor to-textColor/50 bg-clip-text text-5xl font-black leading-[0.85] tracking-tighter text-transparent sm:text-6xl lg:text-[8rem] xl:text-[10rem]"
+                  className="from-textColor via-textColor to-textColor/50 bg-gradient-to-br bg-clip-text pr-4 pb-2 text-5xl font-black leading-[0.85] tracking-tighter text-transparent sm:text-6xl lg:text-[8rem] xl:text-[10rem]"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
@@ -125,10 +134,8 @@ function Home() {
               >
                 I build{" "}
                 <span className="text-textColor font-semibold">fast</span>,{" "}
-                <span className="text-textColor font-semibold">
-                  scalable
-                </span>
-                , and{" "}
+                <span className="text-textColor font-semibold">scalable</span>,
+                and{" "}
                 <span className="text-textColor font-semibold">
                   user-focused
                 </span>{" "}
@@ -137,7 +144,7 @@ function Home() {
 
               {/* CTA Buttons */}
               <motion.div
-                className="flex flex-row py-4 items-center gap-4 lg:justify-start"
+                className="flex flex-row items-center gap-4 py-4 lg:justify-start"
                 variants={ctaVariants}
               >
                 <Link to="/projects">
@@ -219,7 +226,6 @@ function Home() {
             </div>
           </div>
         </section>
-
       </div>
     </HelmetProvider>
   );
