@@ -41,29 +41,42 @@ function MiniProjectsCarousel() {
       <style>{`
         .mini-swiper .swiper-button-next,
         .mini-swiper .swiper-button-prev {
-          color: white;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 12px;
-          width: 44px;
-          height: 44px;
-          backdrop-filter: blur(10px);
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          position: absolute;
           top: 50%;
           transform: translateY(-50%);
+          width: 60px;
+          height: 60px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          z-index: 20;
+          color: var(--tw-colors-accentColor, #88c0d0);
+          background: transparent;
+          border: none;
         }
+
+        .mini-swiper .swiper-button-next {
+          right: 0;
+        }
+
+        .mini-swiper .swiper-button-prev {
+          left: 0;
+        }
+
         .mini-swiper .swiper-button-next:hover,
         .mini-swiper .swiper-button-prev:hover {
-          background: var(--tw-colors-accentColor, #88c0d0);
-          border-color: var(--tw-colors-accentColor, #88c0d0);
-          box-shadow: 0 0 20px rgba(136, 192, 208, 0.3);
-          transform: translateY(-50%) scale(1.05);
+          color: var(--tw-colors-accentColor, #88c0d0);
+          filter: drop-shadow(0 0 8px rgba(136, 192, 208, 0.4));
+          transform: translateY(-50%) scale(1.1);
         }
-        .mini-swiper .swiper-button-next::after,
-        .mini-swiper .swiper-button-prev::after {
-          font-size: 14px;
-          font-weight: 900;
+
+        .mini-swiper .swiper-button-next:active,
+        .mini-swiper .swiper-button-prev:active {
+          transform: translateY(-50%) scale(0.9);
         }
+
         .mini-swiper .swiper-button-disabled {
           opacity: 0;
           pointer-events: none;
@@ -76,7 +89,7 @@ function MiniProjectsCarousel() {
           gap: 10px;
         }
         .mini-swiper .swiper-pagination-bullet {
-          width: 24px;
+          width: 14px;
           height: 4px;
           border-radius: 4px;
           background: rgba(255, 255, 255, 0.1);
@@ -116,13 +129,14 @@ function MiniProjectsCarousel() {
         }
       `}</style>
 
-      <section className="py-16 md:py-20">
+      <section className="py-6 md:py-10">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
           {/* section header, UI experiments */}
           <motion.div
             variants={headerContainer}
             initial="hidden"
-            animate="show"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
             className="mb-14 flex flex-col items-start gap-3"
           >
             <motion.span
@@ -165,15 +179,33 @@ function MiniProjectsCarousel() {
             viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <div className="relative -mx-4 -my-16 overflow-hidden px-4 py-16">
+            <div className="relative -my-16 overflow-hidden py-16">
+              <button className="swiper-button-prev flex items-center">
+                <Icon icon="lucide:chevron-left" className="h-10 w-10" />
+                <Icon
+                  icon="lucide:chevron-left"
+                  className="-ml-6 h-5 w-5 opacity-40"
+                />
+              </button>
+              <button className="swiper-button-next flex items-center">
+                <Icon
+                  icon="lucide:chevron-right"
+                  className="-mr-6 h-5 w-5 opacity-40"
+                />
+                <Icon icon="lucide:chevron-right" className="h-10 w-10" />
+              </button>
+
               <Swiper
                 className="mini-swiper mt-4 pb-8 pt-8"
                 modules={[Navigation, Pagination, A11y, Autoplay]}
-                spaceBetween={20}
-                slidesPerView={1.2}
+                spaceBetween={10}
+                slidesPerView={1.1}
                 centeredSlides={true}
                 loop={true}
-                navigation
+                navigation={{
+                  prevEl: ".swiper-button-prev",
+                  nextEl: ".swiper-button-next",
+                }}
                 pagination={{ clickable: true }}
                 grabCursor={true}
                 a11y={{ enabled: true }}
@@ -183,27 +215,17 @@ function MiniProjectsCarousel() {
                   pauseOnMouseEnter: true,
                 }}
                 breakpoints={{
-                  540: { slidesPerView: 1.8, spaceBetween: 15 },
-                  768: { slidesPerView: 2.8, spaceBetween: 20 },
-                  1024: { slidesPerView: 3.8, spaceBetween: 24 },
-                  1280: { slidesPerView: 4.2, spaceBetween: 24 },
+                  540: { slidesPerView: 1.5, spaceBetween: 15 },
+                  768: { slidesPerView: 2.2, spaceBetween: 20 },
+                  1024: { slidesPerView: 3.2, spaceBetween: 24 },
+                  1280: { slidesPerView: 3.5, spaceBetween: 24 },
                 }}
               >
-                {miniProjects.map((project, index) => (
+                {miniProjects.map((project) => (
                   <SwiperSlide key={project.title} className="!h-auto">
-                    <motion.div
-                      initial={{ opacity: 0, y: 40 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, amount: 0.2 }}
-                      transition={{
-                        duration: 1,
-                        delay: (index % 4) * 0.15,
-                        ease: [0.25, 0.1, 0.25, 1],
-                      }}
-                      className="h-full"
-                    >
+                    <div className="h-full">
                       <MiniProjectCard {...project} />
-                    </motion.div>
+                    </div>
                   </SwiperSlide>
                 ))}
               </Swiper>
@@ -220,7 +242,7 @@ function MiniProjectsCarousel() {
               delay: 0.3,
               ease: [0.25, 0.1, 0.25, 1],
             }}
-            className="mb-5 mt-10 flex flex-col items-center gap-3"
+            className="mt-10 flex flex-col items-center gap-3"
           >
             <Link
               to="/frontend-lab"
