@@ -21,7 +21,7 @@ function MiniProjectCard({
         rotateY: -2,
       }}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
-      className="hover:border-accentColor/30 group relative flex h-[460px] flex-col overflow-hidden rounded-[24px] border border-white/5 bg-[#161b22]/40 backdrop-blur-xl transition-shadow transition-colors duration-300 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_20px_rgba(136,192,208,0.1)]"
+      className="hover:border-accentColor/30 group relative flex h-[460px] flex-col overflow-hidden rounded-[24px] border border-white/5 bg-[#161b22]/40 backdrop-blur-xl transition-colors transition-shadow duration-300 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_20px_rgba(136,192,208,0.1)]"
     >
       {/* glass shine effect */}
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />

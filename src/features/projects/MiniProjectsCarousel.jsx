@@ -14,6 +14,26 @@ import { Icon } from "@iconify/react";
 import MiniProjectCard from "./MiniProjectCard";
 import { miniProjects } from "./miniProjects";
 
+// ─── Header Animation ────────────────────────────────────
+const headerContainer = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const headerItem = {
+  hidden: { opacity: 0, y: 25 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
+
 function MiniProjectsCarousel() {
   return (
     <>
@@ -96,38 +116,45 @@ function MiniProjectsCarousel() {
         }
       `}</style>
 
-      <section className="mt-2 overflow-hidden px-4 sm:mt-12 sm:px-6 md:px-8">
-        <div className="mx-auto max-w-5xl px-4">
+      <section className="py-16 md:py-20">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
           {/* section header, UI experiments */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 1, delay: 0, ease: [0.25, 0.1, 0.25, 1] }}
-            className="mb-10 flex flex-col items-start gap-3"
+            variants={headerContainer}
+            initial="hidden"
+            animate="show"
+            className="mb-14 flex flex-col items-start gap-3"
           >
-            <span className="text-accentColor/80 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] backdrop-blur-md">
-              <span className="bg-accentColor h-1 w-1 rounded-full shadow-[0_0_8px_rgba(136,192,208,0.8)]" />
+            <motion.span
+              variants={headerItem}
+              className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
+            >
+              <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
               UI Experiments
-            </span>
+            </motion.span>
 
             {/* heading */}
-            <h2 className="text-4xl font-black tracking-tighter text-white sm:text-5xl lg:text-6xl">
-              Mini Projects <span className="text-white/20">&amp;</span>{" "}
-              <span className="from-accentColor to-accentColor/40 bg-gradient-to-r bg-clip-text text-transparent">
-                Creative Builds
-              </span>
-            </h2>
+            <motion.h2
+              variants={headerItem}
+              className="text-textColor text-4xl font-bold tracking-tight md:text-5xl"
+            >
+              Mini Projects &amp; Creative Builds
+            </motion.h2>
 
             {/* subtitle */}
-            <p className="max-w-2xl text-base font-medium leading-relaxed text-white/40 sm:text-lg">
-              A curated collection of focused UI experiments and interactive
-              components, crafted to push the boundaries of modern web
-              development.
-            </p>
+            <motion.p
+              variants={headerItem}
+              className="text-textColor/60 max-w-xl text-sm leading-relaxed"
+            >
+              A collection of focused UI experiments, interactive components,
+              and creative builds — each one sharpening a specific skill.
+            </motion.p>
 
             {/* line */}
-            <div className="from-accentColor h-1 w-20 rounded-full bg-gradient-to-r to-transparent opacity-50" />
+            <motion.div
+              variants={headerItem}
+              className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-gradient-to-r"
+            />
           </motion.div>
 
           {/* swiper carousel */}
