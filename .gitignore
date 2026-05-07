@@ -12,11 +12,9 @@ dist
 dist-ssr
 *.local
 .env
-# portfolio_analysis_before_update.md
-# portfolio_file_reference_before_update.md
-# mini_projects_walkthrough_using_swiperjs.md
-# refinement_plan_home_about_contact.md
-# framer_motion_strategy.md
+
+# Archive
+readme_archive/
 
 # Editor directories and files
 .vscode/*
@@ -28,4 +26,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
 
