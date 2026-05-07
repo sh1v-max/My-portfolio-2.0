@@ -55,7 +55,7 @@ function ProjectCard({ img, title, desc, tags, srcCode, demo }) {
             variant="primary"
             className="flex-1 !px-4 !py-2.5 !text-sm"
           >
-            Live Demo
+            Demo
           </ProjectButton>
 
           <ProjectButton
