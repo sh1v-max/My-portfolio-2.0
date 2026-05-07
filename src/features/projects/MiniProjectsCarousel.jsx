@@ -96,8 +96,8 @@ function MiniProjectsCarousel() {
         }
       `}</style>
 
-      <section className="mt-2 sm:mt-12 overflow-hidden px-4 sm:px-6 md:px-8">
-        <div className="mx-auto max-w-5xl">
+      <section className="mt-2 overflow-hidden px-4 sm:mt-12 sm:px-6 md:px-8">
+        <div className="mx-auto max-w-5xl px-4">
           {/* section header, UI experiments */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -106,24 +106,28 @@ function MiniProjectsCarousel() {
             transition={{ duration: 1, delay: 0, ease: [0.25, 0.1, 0.25, 1] }}
             className="mb-10 flex flex-col items-start gap-3"
           >
-            <span className="border-white/10 bg-white/5 text-accentColor/80 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] backdrop-blur-md">
+            <span className="text-accentColor/80 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] backdrop-blur-md">
               <span className="bg-accentColor h-1 w-1 rounded-full shadow-[0_0_8px_rgba(136,192,208,0.8)]" />
               UI Experiments
             </span>
 
             {/* heading */}
-            <h2 className="text-white text-4xl font-black tracking-tighter sm:text-5xl lg:text-6xl">
-              Mini Projects <span className="text-white/20">&amp;</span> <span className="bg-gradient-to-r from-accentColor to-accentColor/40 bg-clip-text text-transparent">Creative Builds</span>
+            <h2 className="text-4xl font-black tracking-tighter text-white sm:text-5xl lg:text-6xl">
+              Mini Projects <span className="text-white/20">&amp;</span>{" "}
+              <span className="from-accentColor to-accentColor/40 bg-gradient-to-r bg-clip-text text-transparent">
+                Creative Builds
+              </span>
             </h2>
 
             {/* subtitle */}
-            <p className="text-white/40 max-w-2xl text-base font-medium leading-relaxed sm:text-lg">
-              A curated collection of focused UI experiments and interactive components,
-              crafted to push the boundaries of modern web development.
+            <p className="max-w-2xl text-base font-medium leading-relaxed text-white/40 sm:text-lg">
+              A curated collection of focused UI experiments and interactive
+              components, crafted to push the boundaries of modern web
+              development.
             </p>
 
             {/* line */}
-            <div className="h-1 w-20 rounded-full bg-gradient-to-r from-accentColor to-transparent opacity-50" />
+            <div className="from-accentColor h-1 w-20 rounded-full bg-gradient-to-r to-transparent opacity-50" />
           </motion.div>
 
           {/* swiper carousel */}
@@ -134,7 +138,7 @@ function MiniProjectsCarousel() {
             viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <div className="relative overflow-hidden px-4 py-16 -mx-4 -my-16">
+            <div className="relative -mx-4 -my-16 overflow-hidden px-4 py-16">
               <Swiper
                 className="mini-swiper mt-4 pb-8 pt-8"
                 modules={[Navigation, Pagination, A11y, Autoplay]}
@@ -189,16 +193,16 @@ function MiniProjectsCarousel() {
               delay: 0.3,
               ease: [0.25, 0.1, 0.25, 1],
             }}
-            className="mt-10 mb-5 flex flex-col items-center gap-3"
+            className="mb-5 mt-10 flex flex-col items-center gap-3"
           >
             <Link
               to="/frontend-lab"
               className="border-accentColor/30 bg-accentColor/5 text-accentColor hover:border-accentColor/60 hover:bg-accentColor/15 group inline-flex items-center gap-3 rounded-xl border px-7 py-3.5 text-sm font-semibold backdrop-blur-sm transition-all duration-300 hover:shadow-[0_0_24px_rgba(136,192,208,0.15)] active:scale-[0.97]"
             >
               Explore All Mini Projects
-              <Icon 
-                icon="lucide:arrow-right" 
-                className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" 
+              <Icon
+                icon="lucide:arrow-right"
+                className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
               />
             </Link>
 
