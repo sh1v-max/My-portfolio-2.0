@@ -556,38 +556,26 @@ function About() {
           {/* ─── Bottom CTA ─── */}
           <motion.div
             {...sectionReveal(0.1)}
-            className="border-textColor/5 border-t pt-10"
+            className="mt-12 flex flex-wrap items-center gap-4"
           >
-            <div className="border-explorerBorder bg-articleBg/40 rounded-2xl border p-8 text-center">
-              <h3 className="mb-3 text-2xl font-bold text-white md:text-3xl">
-                Let&apos;s build something{" "}
-                <span className="text-accentColor">together</span>
-              </h3>
-              <p className="text-textColor/60 mx-auto mb-6 max-w-md text-base leading-relaxed">
-                Whether you have a project in mind or just want to connect —
-                I&apos;m always open to new opportunities and conversations.
-              </p>
-              <div className="flex flex-wrap items-center justify-center gap-4">
-                <Link to="/contact">
-                  <motion.button
-                    className="bg-accentColor text-mainBg rounded-xl px-8 py-3 text-sm font-bold shadow-lg transition-all duration-200 hover:shadow-[0_0_25px_rgba(136,192,208,0.25)] hover:brightness-110"
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.97 }}
-                  >
-                    Get In Touch
-                  </motion.button>
-                </Link>
-                <Link to="/projects">
-                  <motion.button
-                    className="border-accentColor/40 text-textColor hover:border-accentColor hover:bg-accentColor/10 rounded-xl border-2 px-8 py-3 text-sm font-bold transition-all duration-200"
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.97 }}
-                  >
-                    View My Work
-                  </motion.button>
-                </Link>
-              </div>
-            </div>
+            <Link to="/contact">
+              <motion.button
+                className="bg-accentColor text-mainBg rounded-xl px-8 py-3 text-sm font-bold shadow-lg transition-all duration-200 hover:shadow-[0_0_25px_rgba(136,192,208,0.25)] hover:brightness-110"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                Get In Touch
+              </motion.button>
+            </Link>
+            <Link to="/projects">
+              <motion.button
+                className="border-accentColor/40 text-textColor hover:border-accentColor hover:bg-accentColor/10 rounded-xl border-2 px-8 py-3 text-sm font-bold transition-all duration-200"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                View My Work
+              </motion.button>
+            </Link>
           </motion.div>
         </div>
       </section>

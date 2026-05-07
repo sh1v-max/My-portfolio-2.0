@@ -29,9 +29,9 @@ function ContactSocials() {
       icon: <Icon icon="lucide:instagram" width="24" height="24" />,
     },
     {
-      social: "Twitter",
+      social: "X",
       href: "https://twitter.com/",
-      icon: <Icon icon="lucide:twitter" width="24" height="24" />,
+      icon: <Icon icon="simple-icons:x" width="24" height="24" />,
     },
     {
       social: "LeetCode",
