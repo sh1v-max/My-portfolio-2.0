@@ -3,6 +3,7 @@ import { useState, useRef, useLayoutEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Icon } from "@iconify/react";
 import resumeFile from "../assets/docs/resume.pdf";
+import LiveClock from "./LiveClock";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -46,6 +47,11 @@ function NavBar() {
   return (
     <>
       <header className="border-explorerBorder/50 bg-mainBg/80 sticky top-0 z-50 border-b backdrop-blur-xl">
+        {/* Very Top Left Corner Clock (Desktop only) */}
+        <div className="absolute left-6 top-1/2 -translate-y-1/2 hidden xl:block">
+          <LiveClock />
+        </div>
+
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 md:px-8">
           {/* ─── Brand ─── */}
           <Link
