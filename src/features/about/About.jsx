@@ -297,41 +297,46 @@ function About() {
                 </p>
               </div>
 
-              {/* Focus Timeline */}
-              <div className="relative space-y-6">
-                {/* Ruby & Rails - Top */}
-                <div className="flex gap-4">
-                  <div className="flex flex-col items-center">
-                    <div className="bg-accentColor/20 text-accentColor flex h-10 w-10 items-center justify-center rounded-full text-lg">
-                      💎
-                    </div>
-                    <div className="h-12 w-0.5 bg-gradient-to-b from-accentColor/40 to-accentColor/20"></div>
-                  </div>
-                  <div className="border-accentColor/10 bg-accentColor/5 flex-1 rounded-xl border p-4 pt-2">
-                    <p className="text-accentColor text-sm font-bold">
-                      Learning & Exploring
-                    </p>
-                    <p className="text-textColor/60 text-sm">
-                      Diving into Ruby and Rails to expand backend expertise and build scalable applications.
-                    </p>
-                  </div>
-                </div>
+              {/* Currently Learning Block */}
+              <div className="space-y-4">
+                <h3 className="text-accentColor text-lg font-bold">Currently Learning</h3>
 
-                {/* Current Focus - Bottom */}
-                <div className="flex gap-4">
-                  <div className="flex flex-col items-center">
-                    <div className="bg-accentColor/20 text-accentColor flex h-10 w-10 items-center justify-center rounded-full text-lg">
-                      💡
+                {/* Timeline */}
+                <div className="relative space-y-6">
+                  {/* Ruby & Rails - Top */}
+                  <div className="flex gap-4">
+                    <div className="flex flex-col items-center">
+                      <div className="bg-accentColor/20 text-accentColor flex h-10 w-10 items-center justify-center rounded-full text-lg">
+                        💎
+                      </div>
+                      <div className="h-12 w-0.5 bg-gradient-to-b from-accentColor/40 to-accentColor/20"></div>
+                    </div>
+                    <div className="border-accentColor/10 bg-accentColor/5 flex-1 rounded-xl border p-4 pt-2">
+                      <p className="text-accentColor text-sm font-bold">
+                        Ruby & Rails
+                      </p>
+                      <p className="text-textColor/60 text-sm">
+                        Diving into Ruby and Rails to expand backend expertise and build scalable applications.
+                      </p>
                     </div>
                   </div>
-                  <div className="border-accentColor/10 bg-accentColor/5 flex-1 rounded-xl border p-4 pt-2">
-                    <p className="text-accentColor text-sm font-bold">
-                      Current Focus
-                    </p>
-                    <p className="text-textColor/60 text-sm">
-                      Building full-stack apps with Next.js & exploring 3D web
-                      experiences with Three.js.
-                    </p>
+
+                  {/* Current Focus - Bottom */}
+                  <div className="flex gap-4">
+                    <div className="flex flex-col items-center">
+                      <div className="bg-accentColor/20 text-accentColor flex h-10 w-10 items-center justify-center rounded-full text-lg">
+                        💡
+                      </div>
+                    </div>
+                    <div className="border-accentColor/10 bg-accentColor/5 flex-1 rounded-xl border p-4 pt-2">
+                      <p className="text-accentColor text-sm font-bold">
+                        Frontend & 3D Web
+                      </p>
+                      <p className="text-textColor/60 text-sm">
+                        Building full-stack apps with Next.js & exploring 3D web
+                        experiences with Three.js.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
