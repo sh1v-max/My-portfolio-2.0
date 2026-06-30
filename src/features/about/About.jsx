@@ -86,9 +86,19 @@ const education = [
 
 const timeline = [
   {
-    year: "2020",
-    title: "First Line of Code",
-    desc: "Started with HTML & CSS, discovered the web was buildable — not magic.",
+    year: "2026",
+    title: "Going Full-Stack",
+    desc: "Deep-diving into Node.js, Express, and MongoDB to build complete backend systems. Exploring Ruby on Rails, SQL, and shipping full-stack apps end-to-end.",
+  },
+  {
+    year: "2025",
+    title: "Portfolio & Beyond",
+    desc: "Shipped this portfolio, exploring Next.js, Three.js, and building increasingly complex UIs.",
+  },
+  {
+    year: "2024",
+    title: "Cohort 2.0 & Deployment",
+    desc: "Built Node.js backends, integrated MongoDB, deployed apps to Vercel & Firebase. Joined Cohort 2.0.",
   },
   {
     year: "2022",
@@ -96,14 +106,9 @@ const timeline = [
     desc: "Learned vanilla JS deeply, then fell into the React ecosystem and never looked back.",
   },
   {
-    year: "2024",
-    title: "Full-Stack & Production",
-    desc: "Built Node.js backends, integrated MongoDB, deployed apps to Vercel & Firebase. Joined Cohort 2.0.",
-  },
-  {
-    year: "2025",
-    title: "Portfolio & Beyond",
-    desc: "Shipped this portfolio, exploring Next.js, Three.js, and building increasingly complex UIs.",
+    year: "2020",
+    title: "First Line of Code",
+    desc: "Started with HTML & CSS, discovered the web was buildable — not magic.",
   },
 ];
 
