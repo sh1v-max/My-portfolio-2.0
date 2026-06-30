@@ -303,7 +303,43 @@ function About() {
 
                 {/* Timeline */}
                 <div className="relative space-y-6">
-                  {/* Ruby & Rails - Top */}
+                  {/* MongoDB */}
+                  <div className="flex gap-4">
+                    <div className="flex flex-col items-center">
+                      <div className="bg-accentColor/20 text-accentColor flex h-10 w-10 items-center justify-center rounded-full text-lg">
+                        🍃
+                      </div>
+                      <div className="h-12 w-0.5 bg-gradient-to-b from-accentColor/40 to-accentColor/20"></div>
+                    </div>
+                    <div className="border-accentColor/10 bg-accentColor/5 flex-1 rounded-xl border p-4 pt-2">
+                      <p className="text-accentColor text-sm font-bold">
+                        MongoDB
+                      </p>
+                      <p className="text-textColor/60 text-sm">
+                        Learning NoSQL database design, schema modeling with Mongoose, and efficient querying patterns.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Node / Express */}
+                  <div className="flex gap-4">
+                    <div className="flex flex-col items-center">
+                      <div className="bg-accentColor/20 text-accentColor flex h-10 w-10 items-center justify-center rounded-full text-lg">
+                        ⚙️
+                      </div>
+                      <div className="h-12 w-0.5 bg-gradient-to-b from-accentColor/40 to-accentColor/20"></div>
+                    </div>
+                    <div className="border-accentColor/10 bg-accentColor/5 flex-1 rounded-xl border p-4 pt-2">
+                      <p className="text-accentColor text-sm font-bold">
+                        Node.js & Express
+                      </p>
+                      <p className="text-textColor/60 text-sm">
+                        Building REST APIs, handling authentication with JWT, and structuring scalable backend services.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Ruby & Rails */}
                   <div className="flex gap-4">
                     <div className="flex flex-col items-center">
                       <div className="bg-accentColor/20 text-accentColor flex h-10 w-10 items-center justify-center rounded-full text-lg">
@@ -321,7 +357,7 @@ function About() {
                     </div>
                   </div>
 
-                  {/* Current Focus - Bottom */}
+                  {/* Frontend & 3D Web - Bottom */}
                   <div className="flex gap-4">
                     <div className="flex flex-col items-center">
                       <div className="bg-accentColor/20 text-accentColor flex h-10 w-10 items-center justify-center rounded-full text-lg">
