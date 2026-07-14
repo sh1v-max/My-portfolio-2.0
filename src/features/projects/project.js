@@ -1,3 +1,4 @@
+import taskforge from "../../assets/images/taskforge.png";
 import netflix from "../../assets/images/netflix.png";
 import biteswift from "../../assets/images/biteswift.png";
 import bookverse from "../../assets/images/bookverse.png";
@@ -8,7 +9,7 @@ export const projects = [
     title: "TaskForge",
     description:
       "Full-stack task management app with JWT auth, CRUD operations, filtering, sorting, pagination, and a production-ready Express/MongoDB REST API backed by a 12-test suite.",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=TaskForge",
+    image: taskforge,
     tags: ["node.js", "express", "mongodb", "mongoose", "jwt", "zod", "rest-api", "swagger", "react", "tailwind"],
     sourceCode: "https://github.com/sh1v-max/TaskforgeAPI",
     demo: "https://github.com/sh1v-max/TaskforgeAPI",
