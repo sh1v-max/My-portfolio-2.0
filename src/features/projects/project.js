@@ -5,6 +5,15 @@ import portfolio from "../../assets/images/portfolio.png";
 
 export const projects = [
   {
+    title: "TaskForge",
+    description:
+      "Full-stack task management app with JWT auth, CRUD operations, filtering, sorting, pagination, and a production-ready Express/MongoDB REST API backed by a 12-test suite.",
+    image: "https://placehold.co/600x400/1f2428/88c0d0?text=TaskForge",
+    tags: ["node.js", "express", "mongodb", "mongoose", "jwt", "zod", "rest-api", "swagger", "react", "tailwind"],
+    sourceCode: "https://github.com/sh1v-max/TaskforgeAPI",
+    demo: "https://github.com/sh1v-max/TaskforgeAPI",
+  },
+  {
     title: "Netflix-GPT",
     description:
       "AI-powered streaming platform with Firebase auth, dynamic movie carousels, and GPT-driven semantic search.",
@@ -39,15 +48,6 @@ export const projects = [
     tags: ["react", "tailwind", "vite", "react-router", "context-api", "tw-colors", "react-helmet-async"],
     sourceCode: "https://github.com/sh1v-max/My-portfolio-2.0",
     demo: "https://singhshiv.netlify.app/",
-  },
-  {
-    title: "TaskForge",
-    description:
-      "Full-stack task management app with JWT auth, CRUD operations, filtering, sorting, pagination, and a production-ready Express/MongoDB REST API backed by a 12-test suite.",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=TaskForge",
-    tags: ["node.js", "express", "mongodb", "mongoose", "jwt", "zod", "rest-api", "swagger", "react", "tailwind"],
-    sourceCode: "https://github.com/sh1v-max/TaskforgeAPI",
-    demo: "https://github.com/sh1v-max/TaskforgeAPI",
   },
   {
     title: "Coming Soon...",
