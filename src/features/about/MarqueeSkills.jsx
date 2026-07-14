@@ -51,7 +51,7 @@ const row2 = [
 export default function MarqueeSkills() {
   return (
     <div className="mt-8">
-      <div className="relative mx-auto flex max-w-5xl flex-col gap-1 overflow-hidden py-4 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+      <div className="relative mx-auto flex max-w-5xl flex-col gap-1 overflow-hidden py-4 mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
         {/* Row 1 (Scrolling Left) - Faded */}
         <div className="animate-marquee-left flex w-max min-w-full shrink-0 gap-0 opacity-60 transition-opacity duration-500">
           {[...row1, ...row1, ...row1].map((skill, index) => (
