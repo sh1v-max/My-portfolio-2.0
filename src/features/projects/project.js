@@ -41,6 +41,15 @@ export const projects = [
     demo: "https://singhshiv.netlify.app/",
   },
   {
+    title: "TaskForge",
+    description:
+      "Full-stack task management app with JWT auth, CRUD operations, filtering, sorting, pagination, and a production-ready Express/MongoDB REST API backed by a 12-test suite.",
+    image: "https://placehold.co/600x400/1f2428/88c0d0?text=TaskForge",
+    tags: ["node.js", "express", "mongodb", "mongoose", "jwt", "zod", "rest-api", "swagger", "react", "tailwind"],
+    sourceCode: "https://github.com/sh1v-max/TaskforgeAPI",
+    demo: "https://github.com/sh1v-max/TaskforgeAPI",
+  },
+  {
     title: "Coming Soon...",
     description:
       "I'm currently brewing up something exciting! Stay tuned for my next big project.",
