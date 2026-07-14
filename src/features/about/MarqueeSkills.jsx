@@ -21,6 +21,7 @@ const row1 = [
   { name: "Sass", icon: "logos:sass" },
   { name: "Vite", icon: "logos:vitejs" },
   { name: "Axios", icon: "logos:axios" },
+  { name: "MySQL", icon: "logos:mysql" },
 ];
 
 const row2 = [
