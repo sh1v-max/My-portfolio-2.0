@@ -2,21 +2,10 @@
 
 ## 🪪 Identity & Voice
 
-**1. 🔴 Title still says "Frontend Developer"**
-You're shipping production backends. This undersells you.
-- Fix: Change to "Full-Stack Developer" in `Home.jsx`, `About.jsx` Helmet meta, and `Contact.jsx`
-
-**2. 🔴 Background text: "I BUILD PRETTY WEBSITES"**
-"Pretty" reads as cosmetic-only. Doesn't hint at backends.
-- Fix: Change to `I BUILD FOR THE WEB` in `Home.jsx:72`
-
-**3. 🟡 Contact copy: "open to frontend roles"**
-Limits you to frontend-only opportunities.
-- Fix: Update `Contact.jsx:104` to include backend/full-stack roles
-
-**4. 🟢 "Available for work" is phrased differently on Home vs Contact**
-Home says "Available for work", Contact says "Currently accepting new projects". Same thing, different words.
-- Fix: Pick one phrase, use it both places
+- [x] ~~1. 🔴 Title still says "Frontend Developer" — changed to "Full-Stack Developer" across Home, About, Contact, GitHub page~~
+- [x] ~~2. 🔴 Background text "I BUILD PRETTY WEBSITES" — changed to "I BUILD FOR THE WEB"~~
+- [x] ~~3. 🟡 Contact copy "open to frontend roles" — updated to include full-stack & backend roles~~
+- [x] ~~4. 🟢 Availability phrase mismatch — unified to "Available for work" on both Home and Contact~~
 
 ---
 
