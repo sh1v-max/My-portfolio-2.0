@@ -476,10 +476,9 @@ function About() {
                   <p>
                     <span className="text-blue-300">learning:</span>{" "}
                     <span className="text-yellow-200">[</span>
-                    <span className="text-green-300">
-                      &apos;Next.js&apos;
-                    </span>,{" "}
-                    <span className="text-green-300">&apos;Three.js&apos;</span>
+                    <span className="text-green-300">&apos;MongoDB&apos;</span>,{" "}
+                    <span className="text-green-300">&apos;Node.js&apos;</span>,{" "}
+                    <span className="text-green-300">&apos;Rails&apos;</span>
                     <span className="text-yellow-200">]</span>,
                   </p>
                   <p>
