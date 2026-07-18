@@ -101,7 +101,7 @@ function Contact() {
               variants={headerItem}
               className="text-textColor/60 w-full text-justify text-base leading-relaxed"
             >
-              If you’ve made it this far, we’d probably enjoy building something together. I’m open to frontend roles, freelance work, and creative web projects.
+              If you’ve made it this far, we’d probably enjoy building something together. I’m open to full-stack and frontend roles, freelance work, and creative web projects.
 
             </motion.p>
 
@@ -115,7 +115,7 @@ function Contact() {
                 <span className="bg-accentColor relative inline-flex h-2 w-2 rounded-full"></span>
               </div>
               <span className="text-textColor/40 text-xs font-semibold uppercase tracking-widest">
-                Currently accepting new projects
+                Available for work
               </span>
             </motion.div>
 

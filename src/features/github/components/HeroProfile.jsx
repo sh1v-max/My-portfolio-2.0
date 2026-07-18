@@ -41,7 +41,7 @@ export default function HeroProfile({ user }) {
 
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-textColor opacity-90">
             {user.bio ||
-              "Front-end developer passionate about building beautiful, interactive web experiences."}
+              "Full-Stack Developer passionate about building beautiful, interactive web experiences."}
           </p>
 
           <div className="mt-6 flex flex-wrap items-center justify-center gap-6 text-sm text-textColor opacity-80 md:justify-start">

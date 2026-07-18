@@ -217,7 +217,7 @@ function About() {
         <title>Shiv | About</title>
         <meta
           name="description"
-          content="Shiv Shankar Singh — Front-End Developer specializing in React, responsive UI, and motion-rich web applications. Based in Varanasi, India."
+          content="Shiv Shankar Singh — Full-Stack Developer specializing in React, Node.js, and MongoDB. Building fast, scalable web applications. Based in Varanasi, India."
         />
       </Helmet>
 
@@ -247,7 +247,7 @@ function About() {
               variants={headerItem}
               className="text-textColor/60 text-justify text-base leading-relaxed md:w-1/2"
             >
-              Front-End Developer specializing in the React ecosystem, building
+              Full-Stack Developer specializing in the React ecosystem and Node.js backends, building
               fast, scalable, and motion-rich web applications.
             </motion.p>
             <motion.div
@@ -281,7 +281,7 @@ function About() {
                   <span className="font-bold text-white">
                     Shiv Shankar Singh
                   </span>
-                  , a Front-End Developer based in{" "}
+                  , a Full-Stack Developer based in{" "}
                   <span className="text-accentColor font-medium">
                     Varanasi, India.
                   </span>
@@ -455,7 +455,7 @@ function About() {
                   <p>
                     <span className="text-blue-300">role:</span>{" "}
                     <span className="text-green-300">
-                      &apos;Frontend Developer&apos;
+                      &apos;Full-Stack Developer&apos;
                     </span>
                     ,
                   </p>

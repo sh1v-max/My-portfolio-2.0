@@ -70,8 +70,8 @@ function Home() {
             transition={{ duration: 1, ease: "easeOut" }}
           >
             <span>I BUILD</span>
-            <span>PRETTY</span>
-            <span>WEBSITES</span>
+            <span>FOR THE</span>
+            <span>WEB</span>
           </motion.div>
 
           {/* ── Main Content Grid ── */}
@@ -93,7 +93,7 @@ function Home() {
               <motion.div variants={itemVariants}>
                 <span className="border-accentColor/20 bg-accentColor/5 text-accentColor mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[10px] font-semibold uppercase tracking-widest sm:text-xs">
                   <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
-                  Available for work
+                  Available for work — frontend, full-stack & backend
                 </span>
               </motion.div>
 
@@ -123,7 +123,7 @@ function Home() {
                 className="text-accentColor/80 mb-8 mt-4 text-lg font-bold uppercase tracking-[0.2em] sm:text-xl lg:text-2xl"
                 variants={itemVariants}
               >
-                Frontend Developer
+                Full-Stack Developer
               </motion.h2>
 
               {/* Description - Focused & Clean */}
