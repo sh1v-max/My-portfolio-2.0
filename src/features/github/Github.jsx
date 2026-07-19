@@ -3,6 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
 import PageNavigator from "../../components/PageNavigator";
+import { pinnedRepos, githubSkills, currentlyLearning } from "../../data/config";
 
 import HeroProfile from "./components/HeroProfile";
 import StatsGrid from "./components/StatsGrid";
@@ -62,42 +63,13 @@ export default function Github() {
   );
   const totalForks = repos.reduce((acc, repo) => acc + repo.forks_count, 0);
 
-  // pinned repositories
-  const pinnedRepoNames = [
-    "Netflix-GPT",
-    "BiteSwift",
-    "BookVerse",
-    "Backend-Projects",
-    "Practice-UI-design-React-and-JS",
-    "JavaScript-DSA",
-  ];
-
   const featuredRepos = repos
-    .filter((repo) => pinnedRepoNames.includes(repo.name))
+    .filter((repo) => pinnedRepos.includes(repo.name))
     .sort((a, b) => b.stargazers_count - a.stargazers_count);
 
   const theme = {
     dark: ["#161B22", "#0e4429", "#006d32", "#26a641", "#39d353"],
   };
-
-  const skills = [
-    "HTML5",
-    "CSS3",
-    "JavaScript (ES6+)",
-    "React.js",
-    "TailwindCSS",
-    "Redux Toolkit",
-    "Git & GitHub",
-    "REST APIs",
-    "Node.js",
-  ];
-
-  const learningItems = [
-    "Backend APIs with Node.js & Express",
-    "MongoDB & Database Design",
-    "Advanced React Patterns",
-    "Full-Stack Next.js Applications",
-  ];
 
   return (
     <HelmetProvider>
@@ -169,7 +141,7 @@ export default function Github() {
             viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <SkillsAndLearning skills={skills} learningItems={learningItems} />
+            <SkillsAndLearning skills={githubSkills} learningItems={currentlyLearning} />
           </motion.div>
 
           <motion.div

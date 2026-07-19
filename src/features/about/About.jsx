@@ -8,6 +8,7 @@ import resumeFile from "../../assets/docs/resume.pdf";
 import BentoSkills from "./BentoSkills";
 import MarqueeSkills from "./MarqueeSkills";
 import { Icon } from "@iconify/react";
+import { personal, stats } from "../../data/config";
 
 // ─── Animation System (matches Projects / GitHub / Contact) ───
 const headerContainer = {
@@ -56,6 +57,11 @@ const services = [
     icon: <Icon icon="lucide:layers" width="22" height="22" />,
     title: "Motion & Interaction",
     desc: "Bringing interfaces to life with Framer Motion — scroll-triggered animations, micro-interactions, and cinematic transitions.",
+  },
+  {
+    icon: <Icon icon="lucide:server" width="22" height="22" />,
+    title: "Backend Development",
+    desc: "Building production-grade REST APIs with Node.js & Express — JWT auth, rate limiting, input validation (Zod), Swagger docs, and automated test suites.",
   },
 ];
 
@@ -235,7 +241,7 @@ function About() {
               className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
             >
               <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
-              33+ Projects Built
+              {stats.projects} Projects Built
             </motion.span>
             <motion.h1
               variants={headerItem}
@@ -279,11 +285,11 @@ function About() {
                 <p className="text-textColor/80 text-lg leading-relaxed">
                   Hi, I&apos;m{" "}
                   <span className="font-bold text-white">
-                    Shiv Shankar Singh
+                    {personal.name}
                   </span>
                   , a Full-Stack Developer based in{" "}
                   <span className="text-accentColor font-medium">
-                    Varanasi, India.
+                    {personal.location}.
                   </span>
                 </p>
                 <p className="text-textColor/70 text-base leading-relaxed">

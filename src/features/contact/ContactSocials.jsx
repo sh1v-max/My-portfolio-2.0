@@ -1,23 +1,24 @@
 import { Icon } from "@iconify/react";
+import { personal } from "../../data/config";
 
 function ContactSocials() {
   const mainLinks = [
     {
       social: "Email",
-      un: "singhshiv0427@gmail.com",
-      href: "mailto:singhshiv0427@gmail.com",
+      un: personal.email,
+      href: `mailto:${personal.email}`,
       icon: <Icon icon="lucide:mail" width="24" height="24" />,
     },
     {
       social: "LinkedIn",
-      un: "shiv-shankar-singh-",
-      href: "https://www.linkedin.com/in/shiv-shankar-singh-/",
+      un: personal.linkedinUsername,
+      href: personal.linkedin,
       icon: <Icon icon="lucide:linkedin" width="24" height="24" />,
     },
     {
       social: "GitHub",
-      un: "sh1v-max",
-      href: "https://www.github.com/sh1v-max/",
+      un: personal.githubUsername,
+      href: personal.github,
       icon: <Icon icon="lucide:github" width="24" height="24" />,
     },
   ];
@@ -25,22 +26,22 @@ function ContactSocials() {
   const followMeLinks = [
     {
       social: "Instagram",
-      href: "https://www.instagram.com/wiwiwiwi.exe/",
+      href: personal.instagram,
       icon: <Icon icon="lucide:instagram" width="24" height="24" />,
     },
     {
       social: "X",
-      href: "https://twitter.com/",
+      href: personal.twitter,
       icon: <Icon icon="simple-icons:x" width="24" height="24" />,
     },
     {
       social: "LeetCode",
-      href: "https://leetcode.com/u/shiv0427/",
+      href: personal.leetcode,
       icon: <Icon icon="simple-icons:leetcode" width="24" height="24" />,
     },
     {
       social: "MonkeyType",
-      href: "https://monkeytype.com/profile/wazir",
+      href: personal.monkeytype,
       icon: <Icon icon="mdi:keyboard-outline" width="24" height="24" />,
     },
   ];

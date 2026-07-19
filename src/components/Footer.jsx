@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
+import { personal } from "../data/config";
 
 function Footer() {
   const currentYear = new Date().getFullYear();
@@ -7,17 +8,17 @@ function Footer() {
   const socialLinks = [
     {
       name: "GitHub",
-      href: "https://github.com/sh1v-max/",
+      href: personal.github,
       icon: <Icon icon="mdi:github" width="18" height="18" />,
     },
     {
       name: "LinkedIn",
-      href: "https://www.linkedin.com/in/shiv-shankar-singh-/",
+      href: personal.linkedin,
       icon: <Icon icon="mdi:linkedin" width="18" height="18" />,
     },
     {
       name: "Email",
-      href: "mailto:singhshiv0427@gmail.com",
+      href: `mailto:${personal.email}`,
       icon: <Icon icon="lucide:mail" width="18" height="18" />,
     },
   ];
@@ -31,7 +32,7 @@ function Footer() {
             Shiv<span className="text-accentColor">.</span>
           </Link>
           <p className="text-xs text-textColor/40">
-            © {currentYear} Shiv Shankar Singh. All rights reserved.
+            © {currentYear} {personal.name}. All rights reserved.
           </p>
         </div>
 

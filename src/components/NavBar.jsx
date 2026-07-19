@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Icon } from "@iconify/react";
 import resumeFile from "../assets/docs/resume.pdf";
 import LiveClock from "./LiveClock";
+import { personal } from "../data/config";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -241,17 +242,17 @@ function NavBar() {
                     {
                       id: "github",
                       icon: <Icon icon="mdi:github" width="22" height="22" />,
-                      url: "https://www.github.com/sh1v-max/",
+                      url: personal.github,
                     },
                     {
                       id: "linkedin",
                       icon: <Icon icon="mdi:linkedin" width="22" height="22" />,
-                      url: "https://www.linkedin.com/in/shiv-shankar-singh-/",
+                      url: personal.linkedin,
                     },
                     {
                       id: "email",
                       icon: <Icon icon="lucide:mail" width="22" height="22" />,
-                      url: "mailto:singhshiv0427@gmail.com",
+                      url: `mailto:${personal.email}`,
                     },
                   ].map((social) => (
                     <a

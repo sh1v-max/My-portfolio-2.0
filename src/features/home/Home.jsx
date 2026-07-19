@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Illustration from "./Illustration";
+import { personal, stats } from "../../data/config";
 // import Illustration10X from "./Illustration10X";
 // import Illustration20X from "./Illustration20X";
 // import Illustration30X from "./Illustration30X";
@@ -123,7 +124,7 @@ function Home() {
                 className="text-accentColor/80 mb-8 mt-4 text-lg font-bold uppercase tracking-[0.2em] sm:text-xl lg:text-2xl"
                 variants={itemVariants}
               >
-                Full-Stack Developer
+                {personal.role}
               </motion.h2>
 
               {/* Description - Focused & Clean */}
@@ -178,8 +179,8 @@ function Home() {
                 variants={itemVariants}
               >
                 {[
-                  { value: "30+", label: "Projects" },
-                  { value: "6", label: "Themes" },
+                  { value: stats.projects, label: "Projects" },
+                  { value: stats.themes, label: "Themes" },
                 ].map((stat) => (
                   <div key={stat.label} className="flex flex-col">
                     <span className="text-accentColor text-3xl font-bold sm:text-4xl">
