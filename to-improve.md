@@ -11,9 +11,7 @@
 
 ## 📄 Content & Copy
 
-**5. 🟡 `aboutMe.json` code block is stale**
-Shows `learning: ['Next.js', 'Three.js']` but you've added MongoDB, Node.js, Rails to Currently Learning. They don't match.
-- Fix: Update `About.jsx:438` to reflect current learning array
+- [x] ~~5. 🟡 `aboutMe.json` code block was stale — updated `learning` to `['MongoDB', 'Node.js', 'Rails']`, removed Three.js~~
 
 **6. 🟡 Services section has no Backend card**
 4 cards (UI Dev, React Apps, API Integration, Motion) — nothing about building REST APIs, despite shipping a production-grade one with auth, rate limiting, test suite, and Swagger.
