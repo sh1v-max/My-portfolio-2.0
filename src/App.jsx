@@ -69,9 +69,16 @@ function App() {
         position="bottom-right"
         toastOptions={{
           style: {
-            background: "var(--articleBg)",
-            color: "var(--accentColor)",
-            border: "1px solid var(--explorerBorder)",
+            background: "#1e2228",
+            color: "#e2e8f0",
+            border: "1px solid #88c0d0",
+            fontSize: "14px",
+          },
+          success: {
+            iconTheme: { primary: "#88c0d0", secondary: "#1e2228" },
+          },
+          error: {
+            iconTheme: { primary: "#bf616a", secondary: "#1e2228" },
           },
         }}
       />
