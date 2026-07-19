@@ -1,8 +1,6 @@
 import { useForm } from "react-hook-form";
 import ContactSocials from "./ContactSocials";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import emailjs from "@emailjs/browser";
-import { useRef } from "react";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import PageNavigator from "../../components/PageNavigator";
@@ -36,7 +34,6 @@ function Contact() {
     },
   });
 
-  const formData = useRef();
   const {
     register,
     handleSubmit,
@@ -44,13 +41,18 @@ function Contact() {
     reset,
   } = form;
 
-  const sendEmail = () => {
-    const sendPromise = emailjs.sendForm(
-      `${import.meta.env.VITE_SERVICE_ID}`,
-      `${import.meta.env.VITE_TEMPLATE_ID}`,
-      formData.current,
-      `${import.meta.env.VITE_EMAILJS_KEY}`,
-    );
+  const sendEmail = async (data) => {
+    const sendPromise = fetch("/.netlify/functions/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }).then(async (res) => {
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || "Failed to send");
+      }
+      return res.json();
+    });
 
     toast.promise(sendPromise, {
       loading: "Sending message...",
@@ -58,14 +60,12 @@ function Contact() {
       error: "Failed to send message. ❌",
     });
 
-    sendPromise.then(
-      () => {
-        reset();
-      },
-      (error) => {
-        console.log(error.text);
-      },
-    );
+    try {
+      await sendPromise;
+      reset();
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -153,7 +153,6 @@ function Contact() {
               }}
             >
               <form
-                ref={formData}
                 className="space-y-5"
                 onSubmit={handleSubmit(sendEmail)}
               >
