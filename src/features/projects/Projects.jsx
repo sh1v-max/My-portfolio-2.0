@@ -117,6 +117,7 @@ function Projects() {
                   srcCode={p.sourceCode}
                   demo={p.demo}
                   tags={p.tags}
+                  caseStudy={p.caseStudy}
                 />
               </motion.div>
             ))}

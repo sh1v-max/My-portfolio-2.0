@@ -13,6 +13,7 @@ export const projects = [
     tags: ["node.js", "express", "mongodb", "mongoose", "jwt", "zod", "rest-api", "swagger", "react", "tailwind"],
     sourceCode: "https://github.com/sh1v-max/Taskforge",
     demo: "https://taskforge-eight-xi.vercel.app",
+    caseStudy: "/projects/taskforge",
   },
   {
     title: "Netflix-GPT",

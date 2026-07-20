@@ -3,6 +3,7 @@ import Home from "./features/home/Home";
 import About from "./features/about/About";
 import Contact from "./features/contact/Contact";
 import Projects from "./features/projects/Projects";
+import TaskForgeDetail from "./features/projects/TaskForgeDetail";
 // import Articles, {
 //   loader as ArticlesLoader,
 // } from "./features/articles/Articles";
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/projects",
         element: <Projects />,
+      },
+      {
+        path: "/projects/taskforge",
+        element: <TaskForgeDetail />,
       },
       // {
       //   path: "/articles",
