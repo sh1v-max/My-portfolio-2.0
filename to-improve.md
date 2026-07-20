@@ -13,20 +13,20 @@
 
 - [x] ~~5. 🟡 `aboutMe.json` code block was stale — updated `learning` to `['MongoDB', 'Node.js', 'Rails']`, removed Three.js~~
 
-**6. 🟡 Services section has no Backend card**
-4 cards (UI Dev, React Apps, API Integration, Motion) — nothing about building REST APIs, despite shipping a production-grade one with auth, rate limiting, test suite, and Swagger.
-- Fix: Add a 5th "Backend Development" card to the services array in `About.jsx`
+- [x] ~~**6. 🟡 Services section has no Backend card**~~
+~~4 cards (UI Dev, React Apps, API Integration, Motion) — nothing about building REST APIs, despite shipping a production-grade one with auth, rate limiting, test suite, and Swagger.~~
+~~- Fix: Add a 5th "Backend Development" card to the services array in `About.jsx`~~
 
-**7. 🟢 Stats say "30+" on Home but "33+" on About**
-- Fix: Align `Home.jsx:181` and `About.jsx:233` to the same number
+- [x] ~~**7. 🟢 Stats say "30+" on Home but "33+" on About**~~
+~~- Fix: Align `Home.jsx:181` and `About.jsx:233` to the same number~~
 
-**8. 🟢 MongoDB and Node.js appear in both "Currently Learning" AND the tech stack grid**
-Mixed signal — are they skills or are you still learning them?
-- Fix: Remove them from Currently Learning; they're established skills now
+- [x] ~~**8. 🟢 MongoDB and Node.js appear in both "Currently Learning" AND the tech stack grid**~~
+~~Mixed signal — are they skills or are you still learning them?~~
+~~- Fix: Remove them from Currently Learning; they're established skills now~~
 
-**9. 🟡 No social links on the hero**
-GitHub/LinkedIn buried in Contact page. Most visitors won't navigate that far.
-- Fix: Add a small GitHub + LinkedIn icon row below CTA buttons in `Home.jsx`
+- [x] ~~**9. 🟡 No social links on the hero**~~
+~~GitHub/LinkedIn buried in Contact page. Most visitors won't navigate that far.~~
+~~- Fix: Add a small GitHub + LinkedIn icon row below CTA buttons in `Home.jsx`~~
 
 ---
 

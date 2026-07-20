@@ -9,6 +9,7 @@ import { personal, stats } from "../../data/config";
 
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { motion } from "framer-motion";
+import { Icon } from "@iconify/react";
 import PageNavigator from "../../components/PageNavigator";
 
 function Home() {
@@ -171,6 +172,55 @@ function Home() {
                     Contact Me
                   </motion.button>
                 </Link>
+              </motion.div>
+
+              {/* Social Links */}
+              <motion.div
+                className="flex items-center gap-3"
+                variants={ctaVariants}
+              >
+                <a
+                  href={personal.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                >
+                  <motion.div
+                    className="border-textColor/20 text-textColor/60 hover:border-accentColor hover:text-accentColor flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-200"
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Icon icon="mdi:github" width="20" height="20" />
+                  </motion.div>
+                </a>
+                <a
+                  href={personal.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                >
+                  <motion.div
+                    className="border-textColor/20 text-textColor/60 hover:border-accentColor hover:text-accentColor flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-200"
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Icon icon="mdi:linkedin" width="20" height="20" />
+                  </motion.div>
+                </a>
+                <a
+                  href={personal.leetcode}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LeetCode"
+                >
+                  <motion.div
+                    className="border-textColor/20 text-textColor/60 hover:border-accentColor hover:text-accentColor flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-200"
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Icon icon="simple-icons:leetcode" width="18" height="18" />
+                  </motion.div>
+                </a>
               </motion.div>
 
               {/* Quick Stats */}

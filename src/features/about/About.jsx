@@ -368,23 +368,6 @@ function About() {
                     </div>
                   </div>
 
-                  {/* Frontend & 3D Web - Bottom */}
-                  <div className="flex gap-4">
-                    <div className="flex flex-col items-center">
-                      <div className="bg-accentColor/20 text-accentColor flex h-10 w-10 items-center justify-center rounded-full text-lg">
-                        💡
-                      </div>
-                    </div>
-                    <div className="border-accentColor/10 bg-accentColor/5 flex-1 rounded-xl border p-4 pt-2">
-                      <p className="text-accentColor text-sm font-bold">
-                        Frontend & 3D Web
-                      </p>
-                      <p className="text-textColor/60 text-sm">
-                        Building full-stack apps with Next.js & exploring 3D web
-                        experiences with Three.js.
-                      </p>
-                    </div>
-                  </div>
                 </div>
               </div>
 
