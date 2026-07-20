@@ -23,6 +23,7 @@ export const projects = [
     tags: ["react", "redux-toolkit", "firebase", "openai", "tailwind", "react-router", "tmdb-api", "vite"],
     sourceCode: "https://github.com/sh1v-max/Netflix-GPT",
     demo: "https://netflixgpt-e671d.firebaseapp.com/",
+    caseStudy: "/projects/netflix-gpt",
   },
   {
     title: "BiteSwift",
@@ -32,6 +33,7 @@ export const projects = [
     tags: ["react", "redux-toolkit", "tailwind", "vite", "react-router", "swiggy-api", "custom-hooks"],
     sourceCode: "https://github.com/sh1v-max/BiteSwift",
     demo: "https://yourbiteswift.netlify.app/",
+    caseStudy: "/projects/biteswift",
   },
   {
     title: "BookVerse",
@@ -41,6 +43,7 @@ export const projects = [
     tags: ["react", "tailwind", "react-router", "open-library-api", "vite", "custom-hooks"],
     sourceCode: "https://github.com/sh1v-max/BookVerse",
     demo: "https://bookversedot.netlify.app/",
+    caseStudy: "/projects/bookverse",
   },
   {
     title: "Portfolio",
@@ -50,6 +53,7 @@ export const projects = [
     tags: ["react", "tailwind", "vite", "react-router", "context-api", "tw-colors", "react-helmet-async"],
     sourceCode: "https://github.com/sh1v-max/My-portfolio-2.0",
     demo: "https://singhshiv.netlify.app/",
+    caseStudy: "/projects/portfolio",
   },
   {
     title: "Coming Soon...",

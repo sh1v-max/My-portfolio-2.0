@@ -4,6 +4,10 @@ import About from "./features/about/About";
 import Contact from "./features/contact/Contact";
 import Projects from "./features/projects/Projects";
 import TaskForgeDetail from "./features/projects/TaskForgeDetail";
+import NetflixGPTDetail from "./features/projects/NetflixGPTDetail";
+import BiteSwiftDetail from "./features/projects/BiteSwiftDetail";
+import BookVerseDetail from "./features/projects/BookVerseDetail";
+import PortfolioDetail from "./features/projects/PortfolioDetail";
 // import Articles, {
 //   loader as ArticlesLoader,
 // } from "./features/articles/Articles";
@@ -41,6 +45,22 @@ const router = createBrowserRouter([
       {
         path: "/projects/taskforge",
         element: <TaskForgeDetail />,
+      },
+      {
+        path: "/projects/netflix-gpt",
+        element: <NetflixGPTDetail />,
+      },
+      {
+        path: "/projects/biteswift",
+        element: <BiteSwiftDetail />,
+      },
+      {
+        path: "/projects/bookverse",
+        element: <BookVerseDetail />,
+      },
+      {
+        path: "/projects/portfolio",
+        element: <PortfolioDetail />,
       },
       // {
       //   path: "/articles",
