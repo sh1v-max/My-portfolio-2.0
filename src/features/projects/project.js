@@ -11,8 +11,8 @@ export const projects = [
       "Full-stack task management app with JWT auth, CRUD operations, filtering, sorting, pagination, and a production-ready Express/MongoDB REST API backed by a 12-test suite.",
     image: taskforge,
     tags: ["node.js", "express", "mongodb", "mongoose", "jwt", "zod", "rest-api", "swagger", "react", "tailwind"],
-    sourceCode: "https://github.com/sh1v-max/TaskforgeAPI",
-    demo: "https://github.com/sh1v-max/TaskforgeAPI",
+    sourceCode: "https://github.com/sh1v-max/Taskforge",
+    demo: "https://taskforge-eight-xi.vercel.app",
   },
   {
     title: "Netflix-GPT",

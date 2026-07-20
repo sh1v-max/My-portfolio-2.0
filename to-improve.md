@@ -32,9 +32,9 @@
 
 ## 🎯 UX & Features
 
-**10. 🔴 TaskForge demo link = source code link**
-Both buttons point to the same GitHub URL. Looks like a bug to visitors.
-- Fix: Either hide the demo button when there's no live URL, or add a "Backend Only — No Live Demo" badge
+- [x] ~~**10. 🔴 TaskForge demo link = source code link**~~
+~~Both buttons point to the same GitHub URL. Looks like a bug to visitors.~~
+~~- Fix: Either hide the demo button when there's no live URL, or add a "Backend Only — No Live Demo" badge~~
 
 **11. 🟡 No project tag filtering**
 Flat grid works now but won't scale as you add more projects.
