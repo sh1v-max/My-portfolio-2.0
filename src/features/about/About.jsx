@@ -8,8 +8,7 @@ import resumeFile from "../../assets/docs/resume.pdf";
 import BentoSkills from "./BentoSkills";
 import MarqueeSkills from "./MarqueeSkills";
 import { Icon } from "@iconify/react";
-import { personal } from "../../data/config";
-import { useGithub } from "../../context/GithubContext";
+import { personal, stats } from "../../data/config";
 
 // ─── Animation System (matches Projects / GitHub / Contact) ───
 const headerContainer = {
@@ -218,8 +217,6 @@ function EducationAccordion({ items = [] }) {
 
 // ─── Component ────────────────────────────────────────────────
 function About() {
-  const { repoCount } = useGithub();
-
   return (
     <HelmetProvider>
       <Helmet>
@@ -244,7 +241,7 @@ function About() {
               className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
             >
               <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
-              {repoCount} Projects Built
+              {stats.projects} Projects Built
             </motion.span>
             <motion.h1
               variants={headerItem}
