@@ -8,11 +8,11 @@ import Projects from "./features/projects/Projects";
 // } from "./features/articles/Articles";
 // import Github, { loader as GithubLoader } from "./features/github/Github";
 import Github from "./features/github/Github";
-import { githubLoader } from "./features/github/githubLoader";
 import Settings from "./features/theme/Settings";
 import UIExperiments from "./features/frontend-lab/UIExperiments";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
+import { GithubProvider } from "./context/GithubContext";
 import ErrorPage from "./features/error/ErrorPage";
 import GithubError from "./features/error/GithubError";
 
@@ -46,7 +46,6 @@ const router = createBrowserRouter([
         path: "/github",
         element: <Github />,
         errorElement: <GithubError />,
-        loader: githubLoader,
       },
       {
         path: "/frontend-lab",
@@ -64,6 +63,7 @@ import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
+    <GithubProvider>
     <ThemeProvider>
       <Toaster
         position="bottom-right"
@@ -84,6 +84,7 @@ function App() {
       />
       <RouterProvider router={router} />
     </ThemeProvider>
+    </GithubProvider>
   );
 }
 

@@ -1,7 +1,8 @@
 import axios from "axios";
-const API_USER_URL = "https://api.github.com/users/sh1v-max";
-const API_REPOS_URL =
-  "https://api.github.com/users/sh1v-max/repos?per_page=100";
+import { personal } from "../data/config";
+
+const API_USER_URL = `https://api.github.com/users/${personal.githubUsername}`;
+const API_REPOS_URL = `https://api.github.com/users/${personal.githubUsername}/repos?per_page=100`;
 
 export async function getUser() {
   try {

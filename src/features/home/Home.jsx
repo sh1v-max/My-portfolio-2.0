@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Illustration from "./Illustration";
 import { personal, stats } from "../../data/config";
+import { useGithub } from "../../context/GithubContext";
 // import Illustration10X from "./Illustration10X";
 // import Illustration20X from "./Illustration20X";
 // import Illustration30X from "./Illustration30X";
@@ -12,6 +13,7 @@ import { motion } from "framer-motion";
 import PageNavigator from "../../components/PageNavigator";
 
 function Home() {
+  const { repoCount } = useGithub();
   // staggered text entry variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -179,7 +181,7 @@ function Home() {
                 variants={itemVariants}
               >
                 {[
-                  { value: stats.projects, label: "Projects" },
+                  { value: repoCount, label: "Projects" },
                   { value: stats.themes, label: "Themes" },
                 ].map((stat) => (
                   <div key={stat.label} className="flex flex-col">

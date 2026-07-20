@@ -1,9 +1,9 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { useLoaderData } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
 import PageNavigator from "../../components/PageNavigator";
 import { pinnedRepos, githubSkills, currentlyLearning } from "../../data/config";
+import { useGithub } from "../../context/GithubContext";
 
 import HeroProfile from "./components/HeroProfile";
 import StatsGrid from "./components/StatsGrid";
@@ -32,25 +32,28 @@ const headerItem = {
 };
 
 export default function Github() {
-  const { user, repos } = useLoaderData();
+  const { user, repos, loading, error } = useGithub();
 
-  if (!user || !repos) {
+  if (loading) {
     return (
       <HelmetProvider>
-        <Helmet>
-          <title>Shiv | Github Dashboard</title>
-        </Helmet>
+        <Helmet><title>Shiv | Github Dashboard</title></Helmet>
+        <div className="text-textColor flex h-[80vh] w-full flex-col items-center justify-center gap-4">
+          <Icon icon="lucide:loader-2" width="48" height="48" className="animate-spin opacity-50" />
+          <p className="text-lg opacity-60">Loading GitHub data...</p>
+        </div>
+      </HelmetProvider>
+    );
+  }
+
+  if (error || !user || !repos) {
+    return (
+      <HelmetProvider>
+        <Helmet><title>Shiv | Github Dashboard</title></Helmet>
         <div className="text-textColor flex h-[80vh] w-full flex-col items-center justify-center p-8">
-          <Icon
-            icon="lucide:alert-circle"
-            width="64"
-            height="64"
-            className="mb-4 opacity-50"
-          />
+          <Icon icon="lucide:alert-circle" width="64" height="64" className="mb-4 opacity-50" />
           <h2 className="mb-2 text-2xl font-bold">Data Unavailable</h2>
-          <p className="text-lg opacity-80">
-            Failed to load GitHub data. Please try again later.
-          </p>
+          <p className="text-lg opacity-80">Failed to load GitHub data. Please try again later.</p>
         </div>
       </HelmetProvider>
     );
