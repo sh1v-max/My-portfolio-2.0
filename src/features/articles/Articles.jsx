@@ -33,7 +33,7 @@ function Articles() {
               </a>{" "}
               profile, covering React, JavaScript, and modern web architecture.
             </p>
-            <div className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-gradient-to-r" />
+            <div className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-linear-to-r" />
           </div>
 
           <div className="grid gap-x-5 gap-y-5 md:grid-cols-2 xl:grid-cols-4">

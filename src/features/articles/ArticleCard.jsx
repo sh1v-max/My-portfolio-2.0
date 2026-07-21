@@ -9,7 +9,7 @@ function ArticleCard({ url, image, title, desc }) {
     >
       <img
         src={image}
-        className=" h-[160px] rounded-b-xl rounded-t-lg "
+        className=" h-40 rounded-b-xl rounded-t-lg "
         alt=""
       />
 
