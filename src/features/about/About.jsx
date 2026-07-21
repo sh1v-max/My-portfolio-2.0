@@ -258,7 +258,7 @@ function About() {
             </motion.p>
             <motion.div
               variants={headerItem}
-              className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-gradient-to-r"
+              className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-linear-to-r"
             />
           </motion.div>
 
@@ -320,7 +320,7 @@ function About() {
                       <div className="bg-accentColor/20 text-accentColor flex h-10 w-10 items-center justify-center rounded-full text-lg">
                         🍃
                       </div>
-                      <div className="h-12 w-0.5 bg-gradient-to-b from-accentColor/40 to-accentColor/20"></div>
+                      <div className="h-12 w-0.5 bg-linear-to-b from-accentColor/40 to-accentColor/20"></div>
                     </div>
                     <div className="border-accentColor/10 bg-accentColor/5 flex-1 rounded-xl border p-4 pt-2">
                       <p className="text-accentColor text-sm font-bold">
@@ -338,7 +338,7 @@ function About() {
                       <div className="bg-accentColor/20 text-accentColor flex h-10 w-10 items-center justify-center rounded-full text-lg">
                         ⚙️
                       </div>
-                      <div className="h-12 w-0.5 bg-gradient-to-b from-accentColor/40 to-accentColor/20"></div>
+                      <div className="h-12 w-0.5 bg-linear-to-b from-accentColor/40 to-accentColor/20"></div>
                     </div>
                     <div className="border-accentColor/10 bg-accentColor/5 flex-1 rounded-xl border p-4 pt-2">
                       <p className="text-accentColor text-sm font-bold">
@@ -356,7 +356,7 @@ function About() {
                       <div className="bg-accentColor/20 text-accentColor flex h-10 w-10 items-center justify-center rounded-full text-lg">
                         💎
                       </div>
-                      <div className="h-12 w-0.5 bg-gradient-to-b from-accentColor/40 to-accentColor/20"></div>
+                      <div className="h-12 w-0.5 bg-linear-to-b from-accentColor/40 to-accentColor/20"></div>
                     </div>
                     <div className="border-accentColor/10 bg-accentColor/5 flex-1 rounded-xl border p-4 pt-2">
                       <p className="text-accentColor text-sm font-bold">
@@ -536,7 +536,7 @@ function About() {
               <h2 className="text-textColor text-2xl font-bold md:text-3xl">
                 What I Do
               </h2>
-              <div className="from-accentColor to-accentColor/30 h-1 w-16 rounded-full bg-gradient-to-r" />
+              <div className="from-accentColor to-accentColor/30 h-1 w-16 rounded-full bg-linear-to-r" />
             </motion.div>
             <div className="grid gap-4 sm:grid-cols-2">
               {services.map((s, i) => (
@@ -583,7 +583,7 @@ function About() {
               <h2 className="text-textColor text-2xl font-bold md:text-3xl">
                 My <span className="text-accentColor">Tech Stack</span>
               </h2>
-              <div className="from-accentColor to-accentColor/30 h-1 w-16 rounded-full bg-gradient-to-r" />
+              <div className="from-accentColor to-accentColor/30 h-1 w-16 rounded-full bg-linear-to-r" />
             </motion.div>
             <BentoSkills />
             <MarqueeSkills />
@@ -605,7 +605,7 @@ function About() {
               <h2 className="text-textColor text-2xl font-bold md:text-3xl">
                 Education
               </h2>
-              <div className="from-accentColor to-accentColor/30 h-1 w-16 rounded-full bg-gradient-to-r" />
+              <div className="from-accentColor to-accentColor/30 h-1 w-16 rounded-full bg-linear-to-r" />
             </motion.div>
             <EducationAccordion items={education} />
           </div>
