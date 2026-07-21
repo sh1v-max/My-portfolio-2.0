@@ -93,7 +93,7 @@ function FloatingThemeButton() {
                   aria-label={`Apply ${t.name} theme`}
                 >
                   {/* Color swatch */}
-                  <div className="relative flex h-7 w-7 flex-shrink-0 items-center justify-center">
+                  <div className="relative flex h-7 w-7 shrink-0 items-center justify-center">
                     <div
                       className={`h-7 w-7 overflow-hidden rounded-full border-2 transition-all duration-200 ${
                         isActive
@@ -132,7 +132,7 @@ function FloatingThemeButton() {
 
                   {/* Active dot */}
                   {isActive && (
-                    <div className="bg-accentColor ml-auto h-1.5 w-1.5 flex-shrink-0 rounded-full" />
+                    <div className="bg-accentColor ml-auto h-1.5 w-1.5 shrink-0 rounded-full" />
                   )}
                 </motion.button>
               );

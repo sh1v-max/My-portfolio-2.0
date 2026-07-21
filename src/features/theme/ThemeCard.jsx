@@ -32,15 +32,15 @@ function ThemeCard({
       whileHover={{ y: -6, scale: 1.015 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       onClick={handleApply}
-      className={`group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl border backdrop-blur-sm transition-colors transition-shadow duration-300 ${
+      className={`group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl border backdrop-blur-sm transition duration-300 ${
         isActive
-          ? "border-accentColor/50 bg-accentColor/[0.03] shadow-[0_0_40px_rgba(136,192,208,0.1)]"
+          ? "border-accentColor/50 bg-accentColor/3 shadow-[0_0_40px_rgba(136,192,208,0.1)]"
           : "border-explorerBorder/60 bg-articleBg/20 hover:border-accentColor/30 hover:shadow-[0_12px_40px_rgba(0,0,0,0.35)]"
       }`}
     >
       {/* Active glow bar at top */}
       {isActive && (
-        <div className="via-accentColor absolute left-0 right-0 top-0 z-10 h-[2px] bg-gradient-to-r from-transparent to-transparent" />
+        <div className="via-accentColor absolute left-0 right-0 top-0 z-10 h-0.5 bg-linear-to-r from-transparent to-transparent" />
       )}
 
       {/* ─── Dynamic Theme Preview ─── */}
@@ -90,7 +90,7 @@ function ThemeCard({
             {palette?.map((color, i) => (
               <div
                 key={i}
-                className="border-mainBg relative -ml-1 h-[18px] w-[18px] rounded-full border-2 shadow-sm transition-all duration-200 first:ml-0 hover:z-10 hover:-translate-y-0.5 hover:scale-125"
+                className="border-mainBg relative -ml-1 h-4.5 w-4.5 rounded-full border-2 shadow-sm transition-all duration-200 first:ml-0 hover:z-10 hover:-translate-y-0.5 hover:scale-125"
                 style={{
                   backgroundColor: color,
                   zIndex: palette.length - i,

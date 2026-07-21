@@ -100,7 +100,7 @@ function Settings() {
               Personalize your workspace with a variety of themes inspired by
               popular code editors. Choose a style that matches your workflow.
             </p>
-            <div className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-gradient-to-r" />
+            <div className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-linear-to-r" />
           </motion.div>
 
           {/* Currently Active Theme Banner */}
@@ -110,7 +110,7 @@ function Settings() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
-              className="border-accentColor/20 from-accentColor/5 via-articleBg/60 to-accentColor/5 mb-10 overflow-hidden rounded-2xl border bg-gradient-to-r p-6"
+              className="border-accentColor/20 from-accentColor/5 via-articleBg/60 to-accentColor/5 mb-10 overflow-hidden rounded-2xl border bg-linear-to-r p-6"
             >
               <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-4">
