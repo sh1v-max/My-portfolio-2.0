@@ -112,7 +112,7 @@ export default function Github() {
             </motion.p>
             <motion.div 
               variants={headerItem}
-              className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-gradient-to-r" 
+              className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-linear-to-r" 
             />
           </motion.div>
 

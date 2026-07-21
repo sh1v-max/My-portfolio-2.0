@@ -14,7 +14,7 @@ const RepoCardItem = ({ repo }) => (
         >
           {repo.name}
         </a>
-        <div className="flex shrink-0 gap-2 text-textColor opacity-70">
+        <div className="flex shrink-0 gap-2 text-textColor/70">
           {repo.homepage && (
             <a
               href={repo.homepage}
@@ -37,12 +37,12 @@ const RepoCardItem = ({ repo }) => (
           </a>
         </div>
       </div>
-      <p className="mt-3 line-clamp-3 text-sm text-textColor opacity-80 break-words">
+      <p className="mt-3 line-clamp-3 text-sm text-textColor/80 wrap-break-word">
         {repo.description || "No description provided."}
       </p>
     </div>
 
-    <div className="mt-5 flex flex-wrap items-center justify-between gap-y-3 text-sm text-textColor opacity-80">
+    <div className="mt-5 flex flex-wrap items-center justify-between gap-y-3 text-sm text-textColor/80">
       <div className="flex flex-wrap items-center gap-3">
         {repo.language && (
           <span className="flex items-center gap-1.5 font-medium shrink-0">

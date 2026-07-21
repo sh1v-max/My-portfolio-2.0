@@ -32,7 +32,7 @@ export default function HeroProfile({ user }) {
               href={user.html_url}
               target="_blank"
               rel="noreferrer"
-              className="mt-4 inline-flex items-center gap-2 rounded-lg bg-accentColor px-6 py-2.5 font-semibold text-mainBg transition-all hover:bg-opacity-90 hover:shadow-lg md:mt-0"
+              className="mt-4 inline-flex items-center gap-2 rounded-lg bg-accentColor px-6 py-2.5 font-semibold text-mainBg transition-all hover:bg-accentColor/90 hover:shadow-lg md:mt-0"
             >
               <Icon icon="lucide:github" className="h-5 w-5" />
               Follow

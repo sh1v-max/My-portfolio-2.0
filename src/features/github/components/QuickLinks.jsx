@@ -16,7 +16,7 @@ export default function QuickLinks({ user }) {
       </a>
       <Link
         to="/contact"
-        className="flex items-center gap-2 rounded-lg bg-accentColor px-6 py-3 font-semibold text-mainBg shadow-sm transition-all hover:bg-opacity-90 hover:shadow-md"
+        className="flex items-center gap-2 rounded-lg bg-accentColor px-6 py-3 font-semibold text-mainBg shadow-sm transition-all hover:bg-accentColor/90 hover:shadow-md"
       >
         <Icon icon="lucide:mail" width="20" height="20" />
         Contact Me
