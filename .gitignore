@@ -16,6 +16,9 @@ dist-ssr
 # Archive
 readme_archive/
 
+# Local History (VS Code extension)
+.history
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
