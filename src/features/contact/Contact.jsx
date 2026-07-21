@@ -122,7 +122,7 @@ function Contact() {
             {/* line break  */}
             <motion.div
               variants={headerItem}
-              className="from-accentColor to-accentColor/30 mt-3 h-1 w-16 rounded-full bg-gradient-to-r"
+              className="from-accentColor to-accentColor/30 mt-3 h-1 w-16 rounded-full bg-linear-to-r"
             />
           </motion.div>
 
@@ -158,7 +158,7 @@ function Contact() {
               >
                 <div>
                   <input
-                    className="w-full rounded-2xl bg-white/[0.03] px-5 py-4 text-sm text-textColor transition-all duration-300 placeholder:text-textColor/40 hover:bg-white/[0.06] focus:bg-white/[0.08] focus:outline-none focus:ring-2 focus:ring-accentColor/50"
+                    className="w-full rounded-2xl bg-white/3 px-5 py-4 text-sm text-textColor transition-all duration-300 placeholder:text-textColor/40 hover:bg-white/6 focus:bg-white/8 focus:outline-none focus:ring-2 focus:ring-accentColor/50"
                     name="name"
                     type="text"
                     id="name"
@@ -172,7 +172,7 @@ function Contact() {
 
                 <div>
                   <input
-                    className="w-full rounded-2xl bg-white/[0.03] px-5 py-4 text-sm text-textColor transition-all duration-300 placeholder:text-textColor/40 hover:bg-white/[0.06] focus:bg-white/[0.08] focus:outline-none focus:ring-2 focus:ring-accentColor/50"
+                    className="w-full rounded-2xl bg-white/3 px-5 py-4 text-sm text-textColor transition-all duration-300 placeholder:text-textColor/40 hover:bg-white/6 focus:bg-white/8 focus:outline-none focus:ring-2 focus:ring-accentColor/50"
                     type="email"
                     id="email"
                     name="email"
@@ -190,7 +190,7 @@ function Contact() {
 
                 <div>
                   <input
-                    className="w-full rounded-2xl bg-white/[0.03] px-5 py-4 text-sm text-textColor transition-all duration-300 placeholder:text-textColor/40 hover:bg-white/[0.06] focus:bg-white/[0.08] focus:outline-none focus:ring-2 focus:ring-accentColor/50"
+                    className="w-full rounded-2xl bg-white/3 px-5 py-4 text-sm text-textColor transition-all duration-300 placeholder:text-textColor/40 hover:bg-white/6 focus:bg-white/8 focus:outline-none focus:ring-2 focus:ring-accentColor/50"
                     type="text"
                     name="subject"
                     id="subject"
@@ -204,7 +204,7 @@ function Contact() {
 
                 <div>
                   <textarea
-                    className="w-full resize-none rounded-2xl bg-white/[0.03] px-5 py-4 text-sm text-textColor transition-all duration-300 placeholder:text-textColor/40 hover:bg-white/[0.06] focus:bg-white/[0.08] focus:outline-none focus:ring-2 focus:ring-accentColor/50"
+                    className="w-full resize-none rounded-2xl bg-white/3 px-5 py-4 text-sm text-textColor transition-all duration-300 placeholder:text-textColor/40 hover:bg-white/6 focus:bg-white/8 focus:outline-none focus:ring-2 focus:ring-accentColor/50"
                     id="message"
                     name="message"
                     rows="4"
