@@ -64,7 +64,7 @@ function BottomNav() {
               {isActive && (
                 <motion.div
                   layoutId="bottomnav-indicator"
-                  className="bg-accentColor absolute -top-[1px] h-[2px] w-6 rounded-full"
+                  className="bg-accentColor absolute -top-px h-0.5 w-6 rounded-full"
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
               )}

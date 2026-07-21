@@ -97,7 +97,7 @@ function NavBar() {
                 initial={false}
                 animate={{ x: indicatorX }}
                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                className="bg-accentColor pointer-events-none absolute bottom-0 left-0 h-[2px] w-5 rounded-full"
+                className="bg-accentColor pointer-events-none absolute bottom-0 left-0 h-0.5 w-5 rounded-full"
               />
             )}
           </div>
@@ -112,7 +112,7 @@ function NavBar() {
             >
               <Icon
                 icon="lucide:download"
-                className="h-[14px] w-[14px] sm:h-4 sm:w-4"
+                className="h-3.5 w-3.5 sm:h-4 sm:w-4"
                 strokeWidth="3"
               />
               <span className="uppercase tracking-wider">Resume</span>
@@ -162,7 +162,7 @@ function NavBar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileOpen(false)}
-              className="bg-mainBg/70 fixed inset-0 z-[60] md:hidden"
+              className="bg-mainBg/70 fixed inset-0 z-60 md:hidden"
             />
 
             {/* Drawer Container */}
@@ -171,7 +171,7 @@ function NavBar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              className="border-textColor/10 bg-mainBg fixed inset-y-0 right-0 z-[70] flex w-[300px] flex-col border-l shadow-2xl md:hidden"
+              className="border-textColor/10 bg-mainBg fixed inset-y-0 right-0 z-70 flex w-75 flex-col border-l shadow-2xl md:hidden"
             >
               {/* Drawer Close Header */}
               <div className="flex items-center justify-end p-6">

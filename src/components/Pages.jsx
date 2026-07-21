@@ -25,7 +25,7 @@ function Pages() {
             animate={{ scaleX: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
-            className="fixed top-16 left-0 right-0 z-50 h-[2px] origin-left bg-accentColor"
+            className="fixed top-16 left-0 right-0 z-50 h-0.5 origin-left bg-accentColor"
           />
         )}
       </AnimatePresence>
