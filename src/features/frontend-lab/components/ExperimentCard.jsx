@@ -21,14 +21,14 @@ export default function ExperimentCard({ project }) {
     <motion.article 
       whileHover={{ y: -6, scale: 1.015 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-explorerBorder bg-articleBg/60 backdrop-blur-sm transition-colors transition-shadow duration-500 hover:border-accentColor/50 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]"
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-explorerBorder bg-articleBg/60 backdrop-blur-sm transition duration-500 hover:border-accentColor/50 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]"
     >
       {/* Top subtle glow line */}
-      <div className="absolute left-0 top-0 z-10 h-[2px] w-full bg-gradient-to-r from-transparent via-accentColor to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      <div className="absolute left-0 top-0 z-10 h-0.5 w-full bg-linear-to-r from-transparent via-accentColor to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
       {/* Image Container */}
       <div className="relative h-48 overflow-hidden">
-        <div className="absolute inset-0 z-10 bg-gradient-to-t from-articleBg via-transparent to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-70" />
+        <div className="absolute inset-0 z-10 bg-linear-to-t from-articleBg via-transparent to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-70" />
         <img
           src={project.image}
           alt={project.title}

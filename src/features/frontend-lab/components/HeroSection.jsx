@@ -68,7 +68,7 @@ export default function HeroSection() {
       {/* Decorative gradient line */}
       <motion.div 
         variants={headerItem}
-        className="mt-4 h-1 w-20 rounded-full bg-gradient-to-r from-accentColor to-transparent opacity-80" 
+        className="mt-4 h-1 w-20 rounded-full bg-linear-to-r from-accentColor to-transparent opacity-80" 
       />
     </motion.div>
   );
