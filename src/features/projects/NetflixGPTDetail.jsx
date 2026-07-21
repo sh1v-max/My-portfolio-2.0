@@ -351,7 +351,7 @@ function Section({ title, children }) {
     <motion.section variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.05 }} className="mb-14">
       <motion.div variants={fadeUp} className="mb-6 flex items-center gap-4">
         <h2 className="text-textColor text-xl font-bold tracking-tight md:text-2xl">{title}</h2>
-        <div className="from-accentColor to-accentColor/0 h-px flex-1 bg-gradient-to-r" />
+        <div className="from-accentColor to-accentColor/0 h-px flex-1 bg-linear-to-r" />
       </motion.div>
       <motion.div variants={fadeUp}>{children}</motion.div>
     </motion.section>

@@ -167,7 +167,7 @@ function MiniProjectsCarousel() {
             {/* line */}
             <motion.div
               variants={headerItem}
-              className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-gradient-to-r"
+              className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-linear-to-r"
             />
           </motion.div>
 
@@ -222,7 +222,7 @@ function MiniProjectsCarousel() {
                 }}
               >
                 {miniProjects.map((project) => (
-                  <SwiperSlide key={project.title} className="!h-auto">
+                  <SwiperSlide key={project.title} className="h-auto!">
                     <div className="h-full">
                       <MiniProjectCard {...project} />
                     </div>

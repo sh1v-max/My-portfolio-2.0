@@ -10,11 +10,11 @@ function ProjectCard({ img, title, desc, tags, srcCode, demo, caseStudy }) {
     <motion.article
       whileHover={{ y: -6, scale: 1.015 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-explorerBorder bg-articleBg transition-colors transition-shadow duration-300 hover:border-accentColor/40 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]"
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-explorerBorder bg-articleBg transition duration-300 hover:border-accentColor/40 hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]"
     >
       {/* image */}
       <div className="relative overflow-hidden">
-        <div className="absolute inset-0 z-10 bg-gradient-to-t from-articleBg/80 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+        <div className="absolute inset-0 z-10 bg-linear-to-t from-articleBg/80 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
         <motion.img
           src={img}
           alt={`${title} project screenshot`}
@@ -23,7 +23,7 @@ function ProjectCard({ img, title, desc, tags, srcCode, demo, caseStudy }) {
           transition={{ duration: 0.3 }}
         />
         {/* line */}
-        <div className="absolute left-0 top-0 h-[2px] w-full bg-gradient-to-r from-transparent via-accentColor to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+        <div className="absolute left-0 top-0 h-0.5 w-full bg-linear-to-r from-transparent via-accentColor to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       </div>
 
       {/* content */}
@@ -46,7 +46,7 @@ function ProjectCard({ img, title, desc, tags, srcCode, demo, caseStudy }) {
         </div>
 
         {/* divider */}
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-explorerBorder to-transparent" />
+        <div className="h-px w-full bg-linear-to-r from-transparent via-explorerBorder to-transparent" />
 
         {/* buttons */}
         <div className="flex flex-col gap-2">
@@ -67,7 +67,7 @@ function ProjectCard({ img, title, desc, tags, srcCode, demo, caseStudy }) {
               href={demo}
               icon={() => <Icon icon="lucide:external-link" />}
               variant="primary"
-              className="flex-1 !px-4 !py-2.5 !text-sm"
+              className="flex-1 px-4! py-2.5! text-sm!"
             >
               Demo
             </ProjectButton>
@@ -76,7 +76,7 @@ function ProjectCard({ img, title, desc, tags, srcCode, demo, caseStudy }) {
               href={srcCode}
               icon={() => <Icon icon="lucide:github" />}
               variant="outline"
-              className="flex-1 !px-4 !py-2.5 !text-sm"
+              className="flex-1 px-4! py-2.5! text-sm!"
             >
               GitHub
             </ProjectButton>
