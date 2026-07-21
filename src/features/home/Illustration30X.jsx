@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 export default function Illustration30X() {
   return (
-    <div className="relative flex h-[400px] w-full max-w-[450px] items-center justify-center">
+    <div className="relative flex h-100 w-full max-w-112.5 items-center justify-center">
       <div className="absolute text-textColor/50 top-0 text-sm font-bold">30X - Holographic Matrix</div>
 
       <motion.div

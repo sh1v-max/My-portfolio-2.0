@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 export default function Illustration20X() {
   return (
-    <div className="relative flex h-[400px] w-full max-w-[450px] items-center justify-center">
+    <div className="relative flex h-100 w-full max-w-112.5 items-center justify-center">
       <div className="absolute text-textColor/50 top-0 text-sm font-bold">20X - Isometric Layers</div>
 
       <motion.div

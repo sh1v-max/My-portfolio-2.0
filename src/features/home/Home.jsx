@@ -89,7 +89,7 @@ function Home() {
               variants={containerVariants}
             >
               {/* Mobile Decorative Glow (Visible only when illustration is hidden) */}
-              <div className="bg-accentColor/10 pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[100px] lg:hidden" />
+              <div className="bg-accentColor/10 pointer-events-none absolute left-1/2 top-1/2 -z-10 h-75 w-75 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[100px] lg:hidden" />
 
               {/* Status Badge */}
               <motion.div variants={itemVariants}>
@@ -111,7 +111,7 @@ function Home() {
                   Hi, I&apos;m
                 </span>
                 <motion.span
-                  className="from-textColor via-textColor to-textColor/50 bg-gradient-to-br bg-clip-text pr-4 pb-2 text-5xl font-black leading-[0.85] tracking-tighter text-transparent sm:text-6xl lg:text-[8rem] xl:text-[10rem]"
+                  className="from-textColor via-textColor to-textColor/50 bg-linear-to-br bg-clip-text pr-4 pb-2 text-5xl font-black leading-[0.85] tracking-tighter text-transparent sm:text-6xl lg:text-[8rem] xl:text-[10rem]"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
@@ -251,13 +251,13 @@ function Home() {
             >
               {/* Glow behind illustration */}
               <div
-                className="pointer-events-none absolute h-48 w-48 rounded-full opacity-[0.12] blur-[80px] sm:h-72 sm:w-72 md:h-96 md:w-96"
+                className="pointer-events-none absolute h-48 w-48 rounded-full opacity-12 blur-[80px] sm:h-72 sm:w-72 md:h-96 md:w-96"
                 style={{ background: "var(--accentColor)" }}
               />
 
               {/* Floating illustration */}
               <motion.div
-                className="relative flex w-full max-w-[200px] sm:max-w-sm lg:max-w-lg lg:justify-end xl:max-w-xl"
+                className="relative flex w-full max-w-50 sm:max-w-sm lg:max-w-lg lg:justify-end xl:max-w-xl"
                 animate={{ y: [0, -10, 0] }}
                 transition={{
                   duration: 4,

@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 
 export default function Illustration10X() {
   return (
-    <div className="relative flex h-[400px] w-full max-w-[450px] items-center justify-center">
+    <div className="relative flex h-100 w-full max-w-112.5 items-center justify-center">
       <div className="absolute text-textColor/50 top-0 text-sm font-bold">10X - Orbital System</div>
       
       {/* Central Glow */}
       <motion.div
-        className="absolute h-32 w-32 rounded-full opacity-80 blur-[40px]"
+        className="absolute h-32 w-32 rounded-full opacity-80 blur-2xl"
         style={{ background: "var(--accentColor)" }}
         animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}

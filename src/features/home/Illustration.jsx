@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 function Illustration() {
   return (
-    <div className="relative flex h-[400px] w-full max-w-[450px] items-center justify-center max-sm:h-[300px]">
+    <div className="relative flex h-100 w-full max-w-112.5 items-center justify-center max-sm:h-75">
       {/* Core Glowing Sphere */}
       <motion.div
         className="absolute h-48 w-48 sm:h-64 sm:w-64 rounded-full opacity-60 blur-[70px]"
@@ -112,7 +112,7 @@ function Illustration() {
           ease: "easeInOut",
         }}
       >
-        <div className="bg-accentColor/10 text-accentColor flex h-8 w-8 sm:h-10 sm:w-10 flex-shrink-0 items-center justify-center rounded-xl">
+        <div className="bg-accentColor/10 text-accentColor flex h-8 w-8 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl">
           <svg
             className="h-5 w-5 sm:h-6 sm:w-6"
             viewBox="0 0 24 24"

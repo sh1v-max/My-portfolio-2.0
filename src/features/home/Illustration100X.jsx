@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 export default function Illustration100X() {
   return (
-    <div className="relative flex h-[400px] w-full max-w-[450px] items-center justify-center overflow-visible">
+    <div className="relative flex h-100 w-full max-w-112.5 items-center justify-center overflow-visible">
       <div className="absolute text-textColor/50 -top-6 text-sm font-bold z-50">100X - GOD TIER SCI-FI HUD</div>
 
       {/* Deep Background Glow */}
@@ -36,7 +36,7 @@ export default function Illustration100X() {
 
         {/* HUD Data Rings */}
         <motion.div
-          className="absolute h-64 w-64 rounded-full border-[10px] border-dashed border-accentColor/30"
+          className="absolute h-64 w-64 rounded-full border-10 border-dashed border-accentColor/30"
           animate={{ rotate: 360 }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
         />
@@ -75,8 +75,8 @@ export default function Illustration100X() {
       
       {/* Target Crosshairs */}
       <div className="absolute inset-0 flex items-center justify-center opacity-20">
-        <div className="h-full w-[1px] bg-textColor" />
-        <div className="absolute h-[1px] w-full bg-textColor" />
+        <div className="h-full w-px bg-textColor" />
+        <div className="absolute h-px w-full bg-textColor" />
       </div>
     </div>
   );
