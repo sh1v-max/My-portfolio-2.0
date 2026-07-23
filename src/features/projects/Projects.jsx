@@ -1,5 +1,6 @@
 import ProjectCard from "./ProjectCard";
 import MiniProjectsCarousel from "./MiniProjectsCarousel";
+import ProjectTimeline from "./ProjectTimeline";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { projects } from "./project";
 import { motion } from "framer-motion";
@@ -124,6 +125,9 @@ function Projects() {
           </div>
         </div>
       </section>
+
+      {/* Cross-project Timeline */}
+      <ProjectTimeline />
 
       {/* Mini Projects Carousel */}
       <MiniProjectsCarousel />
