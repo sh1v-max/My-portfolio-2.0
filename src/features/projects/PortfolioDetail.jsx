@@ -1,10 +1,21 @@
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Icon } from "@iconify/react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import portfolioImg from "../../assets/images/portfolio.png";
-import portfolioProjectsImg from "../../assets/images/portfolio-projects.png";
-import portfolioContactImg from "../../assets/images/portfolio-contact.png";
+
+import heroImg      from "../../assets/images/portfolio/portfolio.png";
+import aboutImg     from "../../assets/images/portfolio/about.png";
+import projectsImg  from "../../assets/images/portfolio/projects.png";
+import labImg       from "../../assets/images/portfolio/lab.png";
+import githubImg    from "../../assets/images/portfolio/github.png";
+import contactImg   from "../../assets/images/portfolio/contact.png";
+import phoneHomeImg    from "../../assets/images/portfolio/phone_home.png";
+import phoneAboutImg   from "../../assets/images/portfolio/phone_about.png";
+import phoneProjectsImg from "../../assets/images/portfolio/phone_projects.png";
+import phoneLabImg     from "../../assets/images/portfolio/phone_lab.png";
+import phoneGithubImg  from "../../assets/images/portfolio/phone_github.png";
+import phoneContactImg from "../../assets/images/portfolio/phone_contact.png";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -17,16 +28,16 @@ const stagger = {
 };
 
 const techStack = [
-  { name: "React 18", icon: "logos:react", note: "Component-based UI library" },
-  { name: "Vite", icon: "logos:vitejs", note: "Build tool with instant HMR" },
-  { name: "Tailwind CSS 4", icon: "logos:tailwindcss-icon", note: "Utility-first styling with CSS variables" },
-  { name: "Framer Motion", icon: "logos:framer", note: "Cinematic animations & transitions" },
-  { name: "React Router v6", icon: "logos:react-router", note: "Client-side page routing" },
-  { name: "Context API", icon: "logos:react", note: "ThemeContext + GithubContext" },
-  { name: "GitHub API", icon: "mdi:github", note: "Live repos, stats & contribution graph" },
-  { name: "Netlify Functions", icon: "logos:netlify", note: "Serverless contact form backend" },
-  { name: "Resend", icon: "lucide:mail", note: "Transactional email API" },
-  { name: "react-helmet-async", icon: "lucide:globe", note: "Per-page SEO head management" },
+  { name: "React 18",            icon: "logos:react",           note: "Component-based UI library" },
+  { name: "Vite",                icon: "logos:vitejs",          note: "Build tool with instant HMR" },
+  { name: "Tailwind CSS 4",      icon: "logos:tailwindcss-icon",note: "Utility-first styling with CSS variables" },
+  { name: "Framer Motion",       icon: "logos:framer",          note: "Cinematic animations & transitions" },
+  { name: "React Router v6",     icon: "logos:react-router",    note: "Client-side page routing" },
+  { name: "Context API",         icon: "logos:react",           note: "ThemeContext + GithubContext" },
+  { name: "GitHub API",          icon: "mdi:github",            note: "Live repos, stats & contribution graph" },
+  { name: "Netlify Functions",   icon: "logos:netlify",         note: "Serverless contact form backend" },
+  { name: "Resend",              icon: "lucide:mail",           note: "Transactional email API" },
+  { name: "react-helmet-async",  icon: "lucide:globe",          note: "Per-page SEO head management" },
 ];
 
 const features = [
@@ -93,7 +104,43 @@ const challenges = [
   },
 ];
 
+const desktopScreenshots = [
+  { src: aboutImg,    alt: "Portfolio about page",         label: "About" },
+  { src: projectsImg, alt: "Portfolio projects page",      label: "Projects" },
+  { src: labImg,      alt: "Portfolio frontend lab page",  label: "Frontend Lab" },
+  { src: githubImg,   alt: "Portfolio GitHub dashboard",   label: "GitHub" },
+  { src: contactImg,  alt: "Portfolio contact page",       label: "Contact" },
+];
+
+const phoneScreenshots = [
+  { src: phoneHomeImg,    alt: "Portfolio mobile — home",          label: "Home" },
+  { src: phoneAboutImg,   alt: "Portfolio mobile — about",         label: "About" },
+  { src: phoneProjectsImg,alt: "Portfolio mobile — projects",      label: "Projects" },
+  { src: phoneLabImg,     alt: "Portfolio mobile — frontend lab",  label: "Frontend Lab" },
+  { src: phoneGithubImg,  alt: "Portfolio mobile — github",        label: "GitHub" },
+  { src: phoneContactImg, alt: "Portfolio mobile — contact",       label: "Contact" },
+];
+
+const allScreenshots = [...desktopScreenshots, ...phoneScreenshots];
+
 export default function PortfolioDetail() {
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+
+  const closeLightbox = useCallback(() => setLightboxIndex(null), []);
+  const prev = useCallback(() => setLightboxIndex((i) => (i - 1 + allScreenshots.length) % allScreenshots.length), []);
+  const next = useCallback(() => setLightboxIndex((i) => (i + 1) % allScreenshots.length), []);
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const onKey = (e) => {
+      if (e.key === "Escape")     closeLightbox();
+      if (e.key === "ArrowLeft")  prev();
+      if (e.key === "ArrowRight") next();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightboxIndex, closeLightbox, prev, next]);
+
   return (
     <HelmetProvider>
       <Helmet>
@@ -151,7 +198,7 @@ export default function PortfolioDetail() {
           </motion.div>
 
           <motion.div variants={fadeUp} className="border-explorerBorder overflow-hidden rounded-2xl border shadow-2xl">
-            <img src={portfolioImg} alt="Portfolio home page" className="w-full object-cover object-top" />
+            <img src={heroImg} alt="Portfolio home page" className="w-full object-cover object-top" />
           </motion.div>
         </motion.div>
 
@@ -168,20 +215,6 @@ export default function PortfolioDetail() {
             I keep coming back to as skills improve — and the one that shows how I think about
             architecture, not just UI.
           </p>
-        </Section>
-
-        {/* ── Screenshots ── */}
-        <Section title="Screenshots">
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="border-explorerBorder overflow-hidden rounded-xl border">
-              <img src={portfolioProjectsImg} alt="Projects page" className="w-full object-cover" />
-              <p className="text-textColor/40 p-3 text-center text-xs">Projects Page</p>
-            </div>
-            <div className="border-explorerBorder overflow-hidden rounded-xl border">
-              <img src={portfolioContactImg} alt="Contact page" className="w-full object-cover" />
-              <p className="text-textColor/40 p-3 text-center text-xs">Contact Page</p>
-            </div>
-          </div>
         </Section>
 
         {/* ── Problem & Goal ── */}
@@ -269,6 +302,52 @@ export default function PortfolioDetail() {
           </div>
         </Section>
 
+        {/* ── Desktop Screenshots ── */}
+        <Section title="Desktop Screenshots">
+          <div className="grid gap-4 sm:grid-cols-2">
+            {desktopScreenshots.map((s, i) => (
+              <motion.div
+                key={s.label}
+                variants={fadeUp} whileInView="show" initial="hidden" viewport={{ once: true, amount: 0.1 }}
+                className="border-explorerBorder group cursor-zoom-in overflow-hidden rounded-xl border"
+                onClick={() => setLightboxIndex(i)}
+              >
+                <div className="relative overflow-hidden">
+                  <img src={s.src} alt={s.alt} className="w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover:bg-black/20">
+                    <Icon icon="lucide:zoom-in" width="28" className="text-white opacity-0 drop-shadow-lg transition-opacity duration-200 group-hover:opacity-100" />
+                  </div>
+                </div>
+                <p className="text-textColor/40 bg-articleBg border-explorerBorder border-t px-3 py-2 text-center text-xs font-medium">{s.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </Section>
+
+        {/* ── Mobile Screenshots ── */}
+        <Section title="Mobile Views">
+          <div className="overflow-x-auto pb-3">
+            <div className="flex gap-4" style={{ minWidth: "max-content" }}>
+              {phoneScreenshots.map((s, i) => (
+                <motion.div
+                  key={s.label}
+                  variants={fadeUp} whileInView="show" initial="hidden" viewport={{ once: true, amount: 0.1 }}
+                  className="border-explorerBorder group w-44 shrink-0 cursor-zoom-in overflow-hidden rounded-2xl border shadow-lg sm:w-52"
+                  onClick={() => setLightboxIndex(desktopScreenshots.length + i)}
+                >
+                  <div className="relative overflow-hidden">
+                    <img src={s.src} alt={s.alt} className="w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]" />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover:bg-black/20">
+                      <Icon icon="lucide:zoom-in" width="24" className="text-white opacity-0 drop-shadow-lg transition-opacity duration-200 group-hover:opacity-100" />
+                    </div>
+                  </div>
+                  <p className="text-textColor/40 bg-articleBg border-explorerBorder border-t px-3 py-2 text-center text-xs font-medium">{s.label}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </Section>
+
         {/* ── Challenges ── */}
         <Section title="Challenges & How I Solved Them">
           <div className="flex flex-col gap-5">
@@ -299,11 +378,11 @@ export default function PortfolioDetail() {
         <Section title="What I Learned">
           <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
             {[
-              { icon: "lucide:palette", text: "CSS custom property theming — how to bridge runtime variables to a utility-class system like Tailwind" },
-              { icon: "lucide:database", text: "The config-as-source-of-truth pattern — one change propagates everywhere, eliminating stale data" },
-              { icon: "lucide:share-2", text: "React Context as a fetch cache — fetching once and sharing the result is always better than fetching per page" },
-              { icon: "lucide:server", text: "Serverless functions for frontend backends — never expose API keys client-side, even for 'simple' contact forms" },
-              { icon: "lucide:zap", text: "Framer Motion's stagger and viewport patterns for cinematic scroll reveals without layout jank" },
+              { icon: "lucide:palette",     text: "CSS custom property theming — how to bridge runtime variables to a utility-class system like Tailwind" },
+              { icon: "lucide:database",    text: "The config-as-source-of-truth pattern — one change propagates everywhere, eliminating stale data" },
+              { icon: "lucide:share-2",     text: "React Context as a fetch cache — fetching once and sharing the result is always better than fetching per page" },
+              { icon: "lucide:server",      text: "Serverless functions for frontend backends — never expose API keys client-side, even for 'simple' contact forms" },
+              { icon: "lucide:zap",         text: "Framer Motion's stagger and viewport patterns for cinematic scroll reveals without layout jank" },
               { icon: "lucide:layout-grid", text: "Bento grid design — planning col-span and row-span layouts that stay non-broken across breakpoints" },
             ].map((item) => (
               <div key={item.text} className="border-explorerBorder bg-articleBg flex items-start gap-3 rounded-xl border p-4">
@@ -340,7 +419,82 @@ export default function PortfolioDetail() {
         </motion.div>
 
       </article>
+
+      <Lightbox
+        screenshots={allScreenshots}
+        index={lightboxIndex}
+        onClose={closeLightbox}
+        onPrev={prev}
+        onNext={next}
+      />
     </HelmetProvider>
+  );
+}
+
+function Lightbox({ screenshots, index, onClose, onPrev, onNext }) {
+  const isOpen = index !== null;
+  const current = isOpen ? screenshots[index] : null;
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          key="lightbox-backdrop"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
+          onClick={onClose}
+        >
+          {/* Prev */}
+          <button
+            onClick={(e) => { e.stopPropagation(); onPrev(); }}
+            className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-2.5 text-white backdrop-blur-sm transition-colors hover:bg-white/25 sm:left-6"
+            aria-label="Previous image"
+          >
+            <Icon icon="lucide:chevron-left" width="22" />
+          </button>
+
+          {/* Image */}
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, scale: 0.93 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.93 }}
+            transition={{ duration: 0.2 }}
+            className="relative flex max-h-[90vh] max-w-5xl flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={current.src}
+              alt={current.alt}
+              className="max-h-[82vh] max-w-full rounded-xl object-contain shadow-2xl"
+            />
+            <p className="mt-3 text-sm font-medium text-white/60">{current.label}</p>
+            <p className="text-xs text-white/30">{index + 1} / {screenshots.length}</p>
+          </motion.div>
+
+          {/* Next */}
+          <button
+            onClick={(e) => { e.stopPropagation(); onNext(); }}
+            className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-2.5 text-white backdrop-blur-sm transition-colors hover:bg-white/25 sm:right-6"
+            aria-label="Next image"
+          >
+            <Icon icon="lucide:chevron-right" width="22" />
+          </button>
+
+          {/* Close */}
+          <button
+            onClick={onClose}
+            className="absolute right-3 top-3 rounded-full bg-white/10 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/25 sm:right-6 sm:top-6"
+            aria-label="Close lightbox"
+          >
+            <Icon icon="lucide:x" width="20" />
+          </button>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 

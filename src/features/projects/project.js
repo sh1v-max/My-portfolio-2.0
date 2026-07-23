@@ -2,7 +2,7 @@ import taskforge from "../../assets/images/taskforge.png";
 import netflix from "../../assets/images/netflix.png";
 import biteswift from "../../assets/images/BiteSwift/biteswift.png";
 import bookverse from "../../assets/images/bookverse.png";
-import portfolio from "../../assets/images/portfolio.png";
+import portfolio from "../../assets/images/portfolio/portfolio.png";
 
 export const projects = [
   {
