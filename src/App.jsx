@@ -47,7 +47,7 @@ const router = createBrowserRouter([
         element: <TaskForgeDetail />,
       },
       {
-        path: "/projects/netflix-gpt",
+        path: "/projects/cinegraph",
         element: <NetflixGPTDetail />,
       },
       {
