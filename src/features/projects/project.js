@@ -1,5 +1,5 @@
 import taskforge from "../../assets/images/taskforge.png";
-import netflix from "../../assets/images/netflix.png";
+import cinegraph from "../../assets/images/netflix.png";
 import biteswift from "../../assets/images/BiteSwift/biteswift.png";
 import bookverse from "../../assets/images/bookverse.png";
 import portfolio from "../../assets/images/portfolio/portfolio.png";
@@ -16,14 +16,14 @@ export const projects = [
     caseStudy: "/projects/taskforge",
   },
   {
-    title: "Netflix-GPT",
+    title: "Cinegraph",
     description:
-      "AI-powered streaming platform with Firebase auth, dynamic movie carousels, and GPT-driven semantic search.",
-    image: netflix,
-    tags: ["react", "redux-toolkit", "firebase", "openai", "tailwind", "react-router", "tmdb-api", "vite"],
+      "AI movie, TV & anime recommendation engine built on your own taste graph — rate titles, get a computed taste profile, and let Gemini suggest what to watch next with multi-turn conversation, personalized 'For You' rows, and a full filterable TMDB-backed catalog.",
+    image: cinegraph,
+    tags: ["react-19", "redux-toolkit", "firebase", "gemini-ai", "tailwind-v4", "react-router-7", "tmdb-api", "vite-6", "cloudflare-worker", "framer-motion", "shadcn-ui", "cloudinary"],
     sourceCode: "https://github.com/sh1v-max/Netflix-GPT",
-    demo: "https://netflixgpt-e671d.firebaseapp.com/",
-    caseStudy: "/projects/netflix-gpt",
+    demo: "https://cinewatchgraph-ai.web.app",
+    caseStudy: "/projects/cinegraph",
   },
   {
     title: "BiteSwift",
