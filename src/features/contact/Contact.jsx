@@ -157,6 +157,7 @@ function Contact() {
                 onSubmit={handleSubmit(sendEmail)}
               >
                 <div>
+                  <label htmlFor="name" className="sr-only">Your name</label>
                   <input
                     className="w-full rounded-2xl bg-white/3 px-5 py-4 text-sm text-textColor transition-all duration-300 placeholder:text-textColor/40 hover:bg-white/6 focus:bg-white/8 focus:outline-none focus:ring-2 focus:ring-accentColor/50"
                     name="name"
@@ -167,10 +168,11 @@ function Contact() {
                       required: { value: true, message: "Name is required" },
                     })}
                   />
-                  {errors.name && <p className="mt-1.5 ml-2 text-xs text-red-400">{errors.name.message}</p>}
+                  {errors.name && <p className="mt-1.5 ml-2 text-xs text-red-400" role="alert">{errors.name.message}</p>}
                 </div>
 
                 <div>
+                  <label htmlFor="email" className="sr-only">Email address</label>
                   <input
                     className="w-full rounded-2xl bg-white/3 px-5 py-4 text-sm text-textColor transition-all duration-300 placeholder:text-textColor/40 hover:bg-white/6 focus:bg-white/8 focus:outline-none focus:ring-2 focus:ring-accentColor/50"
                     type="email"
@@ -185,10 +187,11 @@ function Contact() {
                       required: { value: true, message: "Email is required" },
                     })}
                   />
-                  {errors.email && <p className="mt-1.5 ml-2 text-xs text-red-400">{errors.email.message}</p>}
+                  {errors.email && <p className="mt-1.5 ml-2 text-xs text-red-400" role="alert">{errors.email.message}</p>}
                 </div>
 
                 <div>
+                  <label htmlFor="subject" className="sr-only">Subject</label>
                   <input
                     className="w-full rounded-2xl bg-white/3 px-5 py-4 text-sm text-textColor transition-all duration-300 placeholder:text-textColor/40 hover:bg-white/6 focus:bg-white/8 focus:outline-none focus:ring-2 focus:ring-accentColor/50"
                     type="text"
@@ -199,10 +202,11 @@ function Contact() {
                       required: { value: true, message: "Subject is required" },
                     })}
                   />
-                  {errors.subject && <p className="mt-1.5 ml-2 text-xs text-red-400">{errors.subject.message}</p>}
+                  {errors.subject && <p className="mt-1.5 ml-2 text-xs text-red-400" role="alert">{errors.subject.message}</p>}
                 </div>
 
                 <div>
+                  <label htmlFor="message" className="sr-only">Message</label>
                   <textarea
                     className="w-full resize-none rounded-2xl bg-white/3 px-5 py-4 text-sm text-textColor transition-all duration-300 placeholder:text-textColor/40 hover:bg-white/6 focus:bg-white/8 focus:outline-none focus:ring-2 focus:ring-accentColor/50"
                     id="message"
@@ -214,7 +218,7 @@ function Contact() {
                       minLength: { value: 5, message: "Minimum 5 characters" }
                     })}
                   ></textarea>
-                  {errors.message && <p className="mt-1.5 ml-2 text-xs text-red-400">{errors.message.message}</p>}
+                  {errors.message && <p className="mt-1.5 ml-2 text-xs text-red-400" role="alert">{errors.message.message}</p>}
                 </div>
 
                 <div className="pt-2">

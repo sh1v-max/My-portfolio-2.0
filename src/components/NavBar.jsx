@@ -121,7 +121,7 @@ function NavBar() {
             {/* ─── Modern Animated Hamburger (Minimalist) ─── */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="group relative flex h-10 w-10 items-center justify-center transition-all duration-300 active:scale-90 md:hidden"
+              className="group relative flex h-12 w-12 items-center justify-center transition-all duration-300 active:scale-90 md:hidden"
               aria-label="Toggle menu"
             >
               <div className="flex flex-col items-end gap-1.5">
@@ -260,7 +260,8 @@ function NavBar() {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-textColor/40 hover:text-accentColor transition-colors"
+                      aria-label={social.id.charAt(0).toUpperCase() + social.id.slice(1)}
+                      className="flex h-11 w-11 items-center justify-center rounded-lg text-textColor/40 hover:text-accentColor transition-colors"
                     >
                       {social.icon}
                     </a>

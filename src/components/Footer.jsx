@@ -44,8 +44,8 @@ function Footer() {
               href={social.href}
               target="_blank"
               rel="noreferrer"
-              className="flex h-9 w-9 items-center justify-center rounded-lg text-textColor/40 transition-all duration-200 hover:bg-explorerBorder/30 hover:text-accentColor"
-              title={social.name}
+              aria-label={social.name}
+              className="flex h-11 w-11 items-center justify-center rounded-lg text-textColor/40 transition-all duration-200 hover:bg-explorerBorder/30 hover:text-accentColor"
             >
               {social.icon}
             </a>

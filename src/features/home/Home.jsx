@@ -8,11 +8,13 @@ import { personal, stats } from "../../data/config";
 // import Illustration100X from "./Illustration100X";
 
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Icon } from "@iconify/react";
 import PageNavigator from "../../components/PageNavigator";
 
 function Home() {
+  const shouldReduceMotion = useReducedMotion();
+
   // staggered text entry variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -151,7 +153,7 @@ function Home() {
               >
                 <Link to="/projects">
                   <motion.button
-                    className="bg-accentColor text-mainBg rounded-xl px-5 py-3 text-xs font-bold shadow-lg transition-all duration-200 ease-out hover:shadow-[0_0_25px_rgba(136,192,208,0.25)] sm:px-8 sm:py-4 sm:text-sm"
+                    className="bg-accentColor text-mainBg rounded-xl px-5 py-3 text-xs font-bold shadow-lg transition-all duration-200 ease-out hover:shadow-[0_0_25px_rgba(136,192,208,0.25)] min-h-11 sm:px-8 sm:py-4 sm:text-sm"
                     style={{
                       boxShadow:
                         "0 4px 20px color-mix(in srgb, var(--accentColor) 30%, transparent)",
@@ -165,7 +167,7 @@ function Home() {
 
                 <Link to="/contact">
                   <motion.button
-                    className="border-accentColor/40 text-textColor hover:border-accentColor hover:bg-accentColor/10 rounded-xl border-2 px-5 py-3 text-xs font-bold transition-all duration-200 ease-out sm:px-8 sm:py-4 sm:text-sm"
+                    className="border-accentColor/40 text-textColor hover:border-accentColor hover:bg-accentColor/10 rounded-xl border-2 px-5 py-3 text-xs font-bold transition-all duration-200 ease-out min-h-11 sm:px-8 sm:py-4 sm:text-sm"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.97 }}
                   >
@@ -258,10 +260,10 @@ function Home() {
               {/* Floating illustration */}
               <motion.div
                 className="relative flex w-full max-w-50 sm:max-w-sm lg:max-w-lg lg:justify-end xl:max-w-xl"
-                animate={{ y: [0, -10, 0] }}
+                animate={shouldReduceMotion ? {} : { y: [0, -10, 0] }}
                 transition={{
                   duration: 4,
-                  repeat: Infinity,
+                  repeat: shouldReduceMotion ? 0 : Infinity,
                   ease: "easeInOut",
                 }}
               >

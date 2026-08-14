@@ -19,6 +19,7 @@ function ProjectCard({ img, title, desc, tags, srcCode, demo, caseStudy }) {
           src={img}
           alt={`${title} project screenshot`}
           className="h-52 w-full object-cover object-top"
+          loading="lazy"
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.3 }}
         />
