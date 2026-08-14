@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import cinegraphImg from "../../assets/images/netflix.png";
+import cinegraphImg from "../../assets/images/cinegraph.png";
 import cinegraphLoginImg from "../../assets/images/netflix-login.png";
 import cinegraphMoviesImg from "../../assets/images/netflix-featured-movies.png";
 

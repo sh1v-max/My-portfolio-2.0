@@ -2,7 +2,6 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import PageNavigator from "../../components/PageNavigator";
 import profile_pic from "../../assets/images/peakpx.jpg";
 import resumeFile from "../../assets/docs/resume.pdf";
 import BentoSkills from "./BentoSkills";
@@ -216,16 +215,18 @@ function EducationAccordion({ items = [] }) {
 }
 
 // ─── Component ────────────────────────────────────────────────
-function About() {
+function About({ asSection = false }) {
   return (
     <HelmetProvider>
-      <Helmet>
-        <title>Shiv | About</title>
-        <meta
-          name="description"
-          content="Shiv Shankar Singh — Full-Stack Developer specializing in React, Node.js, and MongoDB. Building fast, scalable web applications. Based in Varanasi, India."
-        />
-      </Helmet>
+      {!asSection && (
+        <Helmet>
+          <title>Shiv | About</title>
+          <meta
+            name="description"
+            content="Shiv Shankar Singh — Full-Stack Developer specializing in React, Node.js, and MongoDB. Building fast, scalable web applications. Based in Varanasi, India."
+          />
+        </Helmet>
+      )}
 
       <section className="py-16 md:py-20">
         <div className="mx-auto max-w-5xl space-y-20 px-4 sm:px-6 md:px-8">
@@ -637,10 +638,6 @@ function About() {
         </div>
       </section>
 
-      {/* Page Navigation */}
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
-        <PageNavigator />
-      </div>
     </HelmetProvider>
   );
 }

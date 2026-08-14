@@ -5,7 +5,6 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { projects } from "./project";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import PageNavigator from "../../components/PageNavigator";
 
 // ─── Header Animation ────────────────────────────────────
 const headerContainer = {
@@ -27,7 +26,7 @@ const headerItem = {
   },
 };
 
-function Projects() {
+function Projects({ asSection = false }) {
   const [cols, setCols] = useState(3);
 
   const [isLoaded, setIsLoaded] = useState(false);
@@ -50,9 +49,7 @@ function Projects() {
 
   return (
     <HelmetProvider>
-      <Helmet>
-        <title>Shiv | Projects</title>
-      </Helmet>
+      {!asSection && <Helmet><title>Shiv | Projects</title></Helmet>}
 
       <section className="py-16 md:py-20">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
@@ -132,10 +129,6 @@ function Projects() {
       {/* Mini Projects Carousel */}
       <MiniProjectsCarousel />
 
-      {/* Page Navigation */}
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
-        <PageNavigator />
-      </div>
     </HelmetProvider>
   );
 }

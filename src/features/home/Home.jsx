@@ -10,9 +10,8 @@ import { personal, stats } from "../../data/config";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { motion, useReducedMotion } from "framer-motion";
 import { Icon } from "@iconify/react";
-import PageNavigator from "../../components/PageNavigator";
 
-function Home() {
+function Home({ asSection = false }) {
   const shouldReduceMotion = useReducedMotion();
 
   // staggered text entry variants
@@ -60,9 +59,7 @@ function Home() {
 
   return (
     <HelmetProvider>
-      <Helmet>
-        <title>Shiv | Home</title>
-      </Helmet>
+      {!asSection && <Helmet><title>Shiv | Home</title></Helmet>}
 
       <div className="flex w-full flex-col">
         <section className="relative flex h-[calc(100dvh-64px)] items-center justify-center overflow-hidden px-4 py-8 sm:px-6 md:px-8 md:py-12">
@@ -281,12 +278,6 @@ function Home() {
             </motion.div>
           </motion.div>
 
-          {/* Page Navigation - Positioned within the zero-scroll viewport */}
-          <div className="absolute bottom-20 left-0 right-0 z-20 px-4 md:bottom-8 md:px-8">
-            <div className="mx-auto max-w-7xl">
-              <PageNavigator />
-            </div>
-          </div>
         </section>
       </div>
     </HelmetProvider>

@@ -1,5 +1,5 @@
 import Main from "./components/Main";
-import Home from "./features/home/Home";
+import MainScrollPage from "./features/home/MainScrollPage";
 import About from "./features/about/About";
 import Contact from "./features/contact/Contact";
 import Projects from "./features/projects/Projects";
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <MainScrollPage />,
       },
       {
         path: "/about",

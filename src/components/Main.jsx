@@ -19,8 +19,6 @@ const themeTokens = {
 
 function Main() {
   const { theme } = useTheme();
-  const location = useLocation();
-  const isHomePage = location.pathname === "/";
   const tokens = themeTokens[theme] ?? themeTokens.github;
 
   return (
@@ -43,28 +41,15 @@ function Main() {
           },
         }}
       />
-      <div
-        className={`theme-${theme} flex ${
-          isHomePage ? "h-screen overflow-hidden" : "min-h-screen"
-        } flex-col bg-mainBg text-textColor`}
-      >
-        {/* Modern Top Navigation */}
+      <div className={`theme-${theme} flex min-h-screen flex-col bg-mainBg text-textColor`}>
         <NavBar />
-
-      {/* Main Content Area */}
-      <main className={`flex-1 ${isHomePage ? "pb-0" : "pb-16"} md:pb-0`}>
-        <Pages />
-      </main>
-
-      {/* Modern Footer */}
-      {!isHomePage && <Footer />}
-
-      {/* Mobile Bottom Navigation */}
-      <BottomNav />
-
-      {/* Floating Theme Selector */}
-      <FloatingThemeButton />
-    </div>
+        <main className="flex-1 pb-16 md:pb-0">
+          <Pages />
+        </main>
+        <Footer />
+        <BottomNav />
+        <FloatingThemeButton />
+      </div>
     </>
   );
 }

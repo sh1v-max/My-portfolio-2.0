@@ -3,7 +3,6 @@ import ContactSocials from "./ContactSocials";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
-import PageNavigator from "../../components/PageNavigator";
 
 const headerContainer = {
   hidden: { opacity: 0 },
@@ -24,7 +23,7 @@ const headerItem = {
   },
 };
 
-function Contact() {
+function Contact({ asSection = false }) {
   const form = useForm({
     defaultValues: {
       name: "",
@@ -70,9 +69,7 @@ function Contact() {
 
   return (
     <HelmetProvider>
-      <Helmet>
-        <title>Shiv | Contact</title>
-      </Helmet>
+      {!asSection && <Helmet><title>Shiv | Contact</title></Helmet>}
 
       <section className="py-16 md:py-20">
         <div className="mx-auto max-w-5xl space-y-10 px-4 sm:px-6 md:px-8">
@@ -235,10 +232,6 @@ function Contact() {
         </div>
       </section>
 
-      {/* Page Navigation */}
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
-        <PageNavigator />
-      </div>
     </HelmetProvider>
   );
 }
