@@ -62,25 +62,31 @@ function ProjectCard({ img, title, desc, tags, srcCode, demo, caseStudy }) {
               </motion.div>
             </Link>
           )}
-          <div className="flex items-center gap-3">
-            <ProjectButton
-              href={demo}
-              icon={() => <Icon icon="lucide:external-link" />}
-              variant="primary"
-              className="flex-1 px-4! py-2.5! text-sm!"
-            >
-              Demo
-            </ProjectButton>
+          {(demo || srcCode) && (
+            <div className="flex items-center gap-3">
+              {demo && (
+                <ProjectButton
+                  href={demo}
+                  icon={() => <Icon icon="lucide:external-link" />}
+                  variant="primary"
+                  className="flex-1 px-4! py-2.5! text-sm!"
+                >
+                  Demo
+                </ProjectButton>
+              )}
 
-            <ProjectButton
-              href={srcCode}
-              icon={() => <Icon icon="lucide:github" />}
-              variant="outline"
-              className="flex-1 px-4! py-2.5! text-sm!"
-            >
-              GitHub
-            </ProjectButton>
-          </div>
+              {srcCode && (
+                <ProjectButton
+                  href={srcCode}
+                  icon={() => <Icon icon="lucide:github" />}
+                  variant="outline"
+                  className="flex-1 px-4! py-2.5! text-sm!"
+                >
+                  GitHub
+                </ProjectButton>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </motion.article>

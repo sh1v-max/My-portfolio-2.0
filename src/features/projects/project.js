@@ -61,7 +61,7 @@ export const projects = [
       "I'm currently brewing up something exciting! Stay tuned for my next big project.",
     image: "https://placehold.co/600x400/1f2428/88c0d0?text=Coming+Soon",
     tags: ["top-secret", "cooking", "stay-tuned"],
-    sourceCode: "#",
-    demo: "#",
+    sourceCode: null,
+    demo: null,
   },
 ];
