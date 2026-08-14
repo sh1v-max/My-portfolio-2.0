@@ -222,34 +222,6 @@ function Home({ asSection = false }) {
                 </a>
               </motion.div>
 
-              {/* Quick Stats */}
-              <motion.div
-                className="border-textColor/10 mt-6 flex items-center gap-8 border-t pt-8 text-center sm:gap-12 lg:text-left"
-                variants={itemVariants}
-              >
-                {[
-                  { value: stats.projects, label: "GitHub Repos", to: "/github" },
-                  { value: stats.themes, label: "Themes", to: null },
-                ].map((stat) => (
-                  <div key={stat.label} className="flex flex-col">
-                    <span className="text-accentColor text-3xl font-bold sm:text-4xl">
-                      {stat.value}
-                    </span>
-                    {stat.to ? (
-                      <Link
-                        to={stat.to}
-                        className="text-textColor/50 hover:text-accentColor mt-1 text-[11px] font-bold uppercase tracking-widest transition-colors duration-200"
-                      >
-                        {stat.label}
-                      </Link>
-                    ) : (
-                      <span className="text-textColor/50 mt-1 text-[11px] font-bold uppercase tracking-widest">
-                        {stat.label}
-                      </span>
-                    )}
-                  </div>
-                ))}
-              </motion.div>
             </motion.div>
 
             {/* Right: Illustration - Hidden on mobile for maximum focus */}

@@ -242,7 +242,7 @@ function About({ asSection = false }) {
               className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
             >
               <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
-              {stats.projects} Projects Built
+              About Me
             </motion.span>
             <motion.h1
               variants={headerItem}
