@@ -79,7 +79,7 @@ function NavBar() {
                   ref={(el) => {
                     linkRefs.current[link.path] = el;
                   }}
-                  className={`relative rounded-lg px-3.5 py-2 text-sm font-medium transition-colors duration-200 ${
+                  className={`relative rounded-lg px-3.5 py-2 text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accentColor ${
                     isActive
                       ? "text-accentColor"
                       : "text-textColor/60 hover:text-textColor hover:bg-explorerBorder/20"

@@ -231,16 +231,25 @@ function Home() {
                 variants={itemVariants}
               >
                 {[
-                  { value: stats.projects, label: "Projects" },
-                  { value: stats.themes, label: "Themes" },
+                  { value: stats.projects, label: "GitHub Repos", to: "/github" },
+                  { value: stats.themes, label: "Themes", to: null },
                 ].map((stat) => (
                   <div key={stat.label} className="flex flex-col">
                     <span className="text-accentColor text-3xl font-bold sm:text-4xl">
                       {stat.value}
                     </span>
-                    <span className="text-textColor/50 mt-1 text-[11px] font-bold uppercase tracking-widest">
-                      {stat.label}
-                    </span>
+                    {stat.to ? (
+                      <Link
+                        to={stat.to}
+                        className="text-textColor/50 hover:text-accentColor mt-1 text-[11px] font-bold uppercase tracking-widest transition-colors duration-200"
+                      >
+                        {stat.label}
+                      </Link>
+                    ) : (
+                      <span className="text-textColor/50 mt-1 text-[11px] font-bold uppercase tracking-widest">
+                        {stat.label}
+                      </span>
+                    )}
                   </div>
                 ))}
               </motion.div>

@@ -18,6 +18,8 @@ function ProjectCard({ img, title, desc, tags, srcCode, demo, caseStudy }) {
         <motion.img
           src={img}
           alt={`${title} project screenshot`}
+          width={600}
+          height={400}
           className="h-52 w-full object-cover object-top"
           loading="lazy"
           whileHover={{ scale: 1.05 }}
