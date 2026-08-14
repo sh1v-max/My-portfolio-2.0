@@ -1,5 +1,5 @@
 import taskforge from "../../assets/images/taskforge.png";
-import cinegraph from "../../assets/images/netflix.png";
+import cinegraph from "../../assets/images/cinegraph.png";
 import biteswift from "../../assets/images/BiteSwift/biteswift.png";
 import bookverse from "../../assets/images/bookverse.png";
 import portfolio from "../../assets/images/portfolio/portfolio.png";

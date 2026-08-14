@@ -119,9 +119,9 @@ function TimelineEntry({ item, index, isLast }) {
   const isLeft = index % 2 === 0;
   const isCompleted = item.status === "completed";
 
-  const dotBorder = isCompleted ? "border-green-500/50" : "border-accentColor/50";
-  const dotBg    = isCompleted ? "bg-green-500/10"    : "bg-accentColor/10";
-  const iconColor = isCompleted ? "text-green-400"    : "text-accentColor";
+  const dotBorder = isCompleted ? "border-successBorder" : "border-accentColor/50";
+  const dotBg    = isCompleted ? "bg-successBg"         : "bg-accentColor/10";
+  const iconColor = isCompleted ? "text-successText"    : "text-accentColor";
 
   return (
     <motion.div
@@ -191,7 +191,7 @@ function EntryCard({ item, align, isCompleted }) {
           {item.period}{item.periodEnd ? ` — ${item.periodEnd}` : " — Present"}
         </span>
         <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold ${
-          isCompleted ? "bg-green-500/10 text-green-400" : "bg-accentColor/10 text-accentColor"
+          isCompleted ? "bg-successBg text-successText" : "bg-accentColor/10 text-accentColor"
         }`}>
           {isCompleted
             ? <><Icon icon="lucide:check" width="11" />Completed</>
