@@ -3,6 +3,7 @@ import NavBar from "./NavBar";
 import Pages from "./Pages";
 import BottomNav from "./BottomNav";
 import FloatingThemeButton from "../features/theme/FloatingThemeButton";
+import SocialSidebar from "./SocialSidebar";
 import { useTheme } from "../context/ThemeContext";
 import { useLocation } from "react-router-dom";
 import ScrollToTop from "./ScrollToTop";
@@ -49,6 +50,7 @@ function Main() {
         <Footer />
         <BottomNav />
         <FloatingThemeButton />
+        <SocialSidebar />
       </div>
     </>
   );
