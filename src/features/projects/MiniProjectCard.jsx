@@ -14,14 +14,9 @@ function MiniProjectCard({
 }) {
   return (
     <motion.article
-      whileHover={{
-        y: -10,
-        scale: 1.02,
-        rotateX: 2,
-        rotateY: -2,
-      }}
-      transition={{ type: "spring", stiffness: 400, damping: 25 }}
-      className="hover:border-accentColor/30 group relative flex h-115 flex-col overflow-hidden rounded-3xl border border-white/5 bg-[#161b22]/40 backdrop-blur-xl transition duration-300 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_20px_rgba(136,192,208,0.1)]"
+      whileHover={{ y: -8, scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 140, damping: 22, mass: 1 }}
+      className="hover:border-accentColor/30 group relative flex h-115 flex-col overflow-hidden rounded-3xl border border-white/5 bg-[#161b22]/40 backdrop-blur-xl transition-[border-color,box-shadow] duration-500 ease-out hover:shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_20px_rgba(136,192,208,0.1)]"
     >
       {/* glass shine effect */}
       <div className="absolute inset-0 z-0 bg-linear-to-br from-white/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />

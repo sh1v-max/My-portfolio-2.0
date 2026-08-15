@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 
+const cardSpring = { type: "spring", stiffness: 140, damping: 22, mass: 1 };
+
 // ── Update these dates to match your actual start / end dates ──
 const timelineData = [
   {
@@ -10,7 +12,7 @@ const timelineData = [
     periodEnd: null,
     status: "ongoing",
     icon: "lucide:layout-dashboard",
-    desc: "A cinematic developer portfolio with 6 dynamic themes, live GitHub dashboard, serverless contact form via Netlify Functions + Resend, and per-project case studies. The one you're browsing right now.",
+    desc: "A motion-rich developer portfolio with themeable design tokens, live GitHub dashboard, serverless contact form via Netlify Functions + Resend, and per-project case studies. The one you're browsing right now.",
     tags: ["React", "Tailwind CSS 4", "Framer Motion", "GitHub API"],
     caseStudy: "/projects/portfolio",
     demo: "https://singhshiv.netlify.app/",
@@ -137,7 +139,7 @@ function TimelineEntry({ item, index, isLast }) {
 
         {/* Left slot */}
         <div className="flex justify-end">
-          {isLeft && <EntryCard item={item} align="right" isCompleted={isCompleted} />}
+          {isLeft && <EntryCard item={item} isCompleted={isCompleted} />}
         </div>
 
         {/* Center dot */}
@@ -147,7 +149,7 @@ function TimelineEntry({ item, index, isLast }) {
 
         {/* Right slot */}
         <div className="flex justify-start">
-          {!isLeft && <EntryCard item={item} align="left" isCompleted={isCompleted} />}
+          {!isLeft && <EntryCard item={item} isCompleted={isCompleted} />}
         </div>
       </div>
 
@@ -157,7 +159,7 @@ function TimelineEntry({ item, index, isLast }) {
           <Dot dotBorder={dotBorder} dotBg={dotBg} iconColor={iconColor} item={item} isCompleted={isCompleted} size="sm" />
         </div>
         <div className="min-w-0 flex-1 pt-1">
-          <EntryCard item={item} align="left" isCompleted={isCompleted} />
+          <EntryCard item={item} isCompleted={isCompleted} />
         </div>
       </div>
 
@@ -179,14 +181,16 @@ function Dot({ dotBorder, dotBg, iconColor, item, isCompleted, size }) {
   );
 }
 
-function EntryCard({ item, align, isCompleted }) {
-  const right = align === "right";
-
+function EntryCard({ item, isCompleted }) {
   return (
-    <div className={`group w-full max-w-md rounded-2xl border border-explorerBorder bg-articleBg p-5 transition-all duration-300 hover:border-accentColor/30 hover:shadow-lg ${right ? "text-right" : "text-left"}`}>
+    <motion.div
+      whileHover={{ y: -5 }}
+      transition={cardSpring}
+      className="group w-full max-w-lg rounded-2xl border border-explorerBorder bg-articleBg p-5 transition-[border-color,box-shadow] duration-500 ease-out hover:border-accentColor/30 hover:shadow-[0_12px_36px_rgba(0,0,0,0.35)] text-left"
+    >
 
       {/* Period + Status */}
-      <div className={`mb-3 flex flex-wrap items-center gap-2 ${right ? "justify-end" : "justify-start"}`}>
+      <div className="mb-3 flex flex-wrap items-center gap-2 justify-start">
         <span className="text-textColor/40 font-mono text-xs">
           {item.period}{item.periodEnd ? ` — ${item.periodEnd}` : " — Present"}
         </span>
@@ -207,7 +211,7 @@ function EntryCard({ item, align, isCompleted }) {
       <p className="text-textColor/60 mb-4 text-sm leading-relaxed">{item.desc}</p>
 
       {/* Tags */}
-      <div className={`mb-4 flex flex-wrap gap-1.5 ${right ? "justify-end" : "justify-start"}`}>
+      <div className="mb-4 flex flex-wrap gap-1.5 justify-start">
         {item.tags.map((tag) => (
           <span key={tag} className="border-accentColor/15 bg-accentColor/5 text-accentColor/70 rounded-md border px-2 py-0.5 text-xs font-medium">
             {tag}
@@ -215,25 +219,30 @@ function EntryCard({ item, align, isCompleted }) {
         ))}
       </div>
 
-      {/* Links */}
-      <div className={`flex flex-wrap gap-4 ${right ? "justify-end" : "justify-start"}`}>
+      {/* Links — min-h-11 ensures 44px touch targets */}
+      <div className="flex flex-wrap gap-3 justify-start">
         {item.caseStudy && (
           <Link
             to={item.caseStudy}
-            className="text-accentColor hover:text-accentColor/70 inline-flex items-center gap-1 text-xs font-bold transition-colors"
+            className="text-accentColor hover:text-accentColor/70 inline-flex min-h-11 items-center gap-1.5 rounded-lg px-3 text-xs font-bold transition-colors hover:bg-accentColor/5"
           >
-            Case Study <Icon icon="lucide:arrow-right" width="12" />
+            <Icon icon="lucide:file-text" width="13" />
+            Case Study
           </Link>
         )}
-        <a
-          href={item.demo}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-textColor/40 hover:text-accentColor inline-flex items-center gap-1 text-xs font-medium transition-colors"
-        >
-          Live Demo <Icon icon="lucide:external-link" width="11" />
-        </a>
+        {item.demo && (
+          <a
+            href={item.demo}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${item.title} live demo (opens in new tab)`}
+            className="text-textColor/40 hover:text-accentColor inline-flex min-h-11 items-center gap-1.5 rounded-lg px-3 text-xs font-medium transition-colors hover:bg-accentColor/5"
+          >
+            <Icon icon="lucide:external-link" width="13" />
+            Live Demo
+          </a>
+        )}
       </div>
-    </div>
+    </motion.div>
   );
 }

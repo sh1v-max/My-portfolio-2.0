@@ -3,13 +3,13 @@ import {
   Navigation,
   Pagination,
   A11y,
-  // FreeMode,
   Autoplay,
 } from "swiper/modules";
 import "swiper/css/bundle";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
+import { useReducedMotion } from "framer-motion";
 
 import MiniProjectCard from "./MiniProjectCard";
 import { miniProjects } from "./miniProjects";
@@ -35,6 +35,8 @@ const headerItem = {
 };
 
 function MiniProjectsCarousel() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <>
       {/* swiper theme css override */}
@@ -95,10 +97,11 @@ function MiniProjectsCarousel() {
           background: rgba(255, 255, 255, 0.1);
           opacity: 1;
           margin: 0 !important;
-          transition: all 0.4s ease;
+          transition: transform 0.4s ease, background 0.4s ease;
+          transform-origin: left center;
         }
         .mini-swiper .swiper-pagination-bullet-active {
-          width: 48px;
+          transform: scaleX(3.4);
           background: var(--tw-colors-accentColor, #88c0d0);
           box-shadow: 0 0 15px rgba(136, 192, 208, 0.3);
         }
@@ -108,24 +111,21 @@ function MiniProjectsCarousel() {
         }
         .mini-swiper .swiper-slide {
           height: auto;
-          transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-          opacity: 0.2;
-          transform: scale(0.9) translateY(20px);
-          filter: blur(4px);
+          transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+          opacity: 0.25;
+          transform: scale(0.92) translateY(12px);
           pointer-events: none;
         }
         .mini-swiper .swiper-slide-active {
           opacity: 1;
-          transform: scale(1.1) translateY(0);
-          filter: blur(0);
+          transform: scale(1.03) translateY(0);
           pointer-events: auto;
           z-index: 10;
         }
         .mini-swiper .swiper-slide-next,
         .mini-swiper .swiper-slide-prev {
-          opacity: 0.5;
-          transform: scale(0.95) translateY(10px);
-          filter: blur(2px);
+          opacity: 0.55;
+          transform: scale(0.97) translateY(5px);
         }
       `}</style>
 
@@ -180,19 +180,11 @@ function MiniProjectsCarousel() {
             transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <div className="relative -my-16 overflow-hidden py-16">
-              <button className="swiper-button-prev flex items-center">
-                <Icon icon="lucide:chevron-left" className="h-10 w-10" />
-                <Icon
-                  icon="lucide:chevron-left"
-                  className="-ml-6 h-5 w-5 opacity-40"
-                />
+              <button className="swiper-button-prev" aria-label="Previous slide">
+                <Icon icon="lucide:arrow-left" className="h-6 w-6" />
               </button>
-              <button className="swiper-button-next flex items-center">
-                <Icon
-                  icon="lucide:chevron-right"
-                  className="-mr-6 h-5 w-5 opacity-40"
-                />
-                <Icon icon="lucide:chevron-right" className="h-10 w-10" />
+              <button className="swiper-button-next" aria-label="Next slide">
+                <Icon icon="lucide:arrow-right" className="h-6 w-6" />
               </button>
 
               <Swiper
@@ -209,7 +201,7 @@ function MiniProjectsCarousel() {
                 pagination={{ clickable: true }}
                 grabCursor={true}
                 a11y={{ enabled: true }}
-                autoplay={{
+                autoplay={shouldReduceMotion ? false : {
                   delay: 4000,
                   disableOnInteraction: true,
                   pauseOnMouseEnter: true,
@@ -257,8 +249,7 @@ function MiniProjectsCarousel() {
 
             {/* more details */}
             <p className="text-textColor/40 mb-12 text-xs tracking-wide">
-              33+ projects &nbsp;·&nbsp; Beginner &nbsp;·&nbsp; Intermediate
-              &nbsp;·&nbsp; Advanced
+              Beginner &nbsp;·&nbsp; Intermediate &nbsp;·&nbsp; Advanced
             </p>
           </motion.div>
         </div>

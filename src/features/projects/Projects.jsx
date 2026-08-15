@@ -57,7 +57,8 @@ function Projects({ asSection = false }) {
           <motion.div
             variants={headerContainer}
             initial="hidden"
-            animate="show"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
             className="mb-14 flex flex-col items-start gap-3"
           >
             {/* Accent tag */}
@@ -69,13 +70,13 @@ function Projects({ asSection = false }) {
               Featured Work
             </motion.span>
 
-            {/* Heading */}
-            <motion.h1
+            {/* Heading — h2 when rendered as scroll section to preserve single h1 */}
+            <motion.h2
               variants={headerItem}
               className="text-textColor text-4xl font-bold tracking-tight md:text-5xl"
             >
               Projects
-            </motion.h1>
+            </motion.h2>
 
             {/* Subtitle */}
             <motion.p
