@@ -1,136 +1,318 @@
-import ProjectCard from "./ProjectCard";
-import MiniProjectsCarousel from "./MiniProjectsCarousel";
-import ProjectTimeline from "./ProjectTimeline";
+/*
+ * THESIS: Each featured project owns one full viewport — ambient blur of its
+ *   screenshot grounds the scene, large type commands attention, and content
+ *   rises from darkness on scroll. Refuses the card grid entirely.
+ *
+ * OWN-WORLD: mainBg field + 22% opacity project image at blur(52px) brightness(1.8)
+ *   saturate(1.3) + stacked linear-gradient vignettes. accentColor for chapter counter and pill borders.
+ *   textColor at 100% / 55% for heading / description. No surface cards, no
+ *   borders as structure — depth from opacity and blur layers alone. Fixed-right
+ *   chapter dots: accentColor pill (h-8) active, muted circle (h-2) inactive.
+ *
+ * STORY: Visitor scrolls five project scenes in sequence — ambient image sets
+ *   the mood, huge title names the work, description and CTAs follow. Chapter
+ *   dots on the right track position. Timeline and mini-projects close the page.
+ *
+ * FIRST VIEWPORT: 100vh section, TaskForge (01/05). Chapter counter top-left
+ *   (mono 11px accentColor/50). Title centered at 5–8rem bold. 5 tag pills
+ *   above. Description (textColor/55) below. Case Study + Live Demo pills.
+ *   Project screenshot peek emerges from bottom edge, fading into mainBg.
+ *
+ * FORM: Cinematic full-viewport sections, #1 from ranked list, seed d79aba54.
+ * FINISH: unreviewed and undocumented is unfinished; this build ends with the
+ *   finish review, the verdict, and DESIGN.md.
+ */
+
+import { useRef, useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Icon } from "@iconify/react";
+import { Link } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { projects } from "./project";
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import MiniProjectsCarousel from "./MiniProjectsCarousel";
+import ProjectTimeline from "./ProjectTimeline";
 
-// ─── Header Animation ────────────────────────────────────
+// Real projects only — Coming Soon lives elsewhere
+const cinemaProjects = projects.filter((p) => p.title !== "Coming Soon...");
+
+// Page header animation — identical to Contact / GitHub / Frontend Lab
 const headerContainer = {
   hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
+  show: { opacity: 1, transition: { staggerChildren: 0.15 } },
 };
-
 const headerItem = {
-  hidden: { opacity: 0, y: 25 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] },
-  },
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] } },
 };
 
 function Projects({ asSection = false }) {
-  const [cols, setCols] = useState(3);
+  const [activeScene, setActiveScene] = useState(0);
+  const [dotsVisible, setDotsVisible] = useState(false);
+  const sceneRefs = useRef([]);
+  const cinematicRef = useRef(null);
 
-  const [isLoaded, setIsLoaded] = useState(false);
-
+  // Track which scene is 50%+ in view → drives the active dot
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoaded(true), 1200);
-    return () => clearTimeout(timer);
+    const observers = cinemaProjects.map((_, i) => {
+      const el = sceneRefs.current[i];
+      if (!el) return null;
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveScene(i);
+        },
+        { threshold: 0.5 }
+      );
+      obs.observe(el);
+      return obs;
+    });
+    return () => observers.forEach((obs) => obs?.disconnect());
   }, []);
 
+  // Show dots while any cinematic scene is on screen
   useEffect(() => {
-    const updateCols = () => {
-      if (window.innerWidth < 640) setCols(1);
-      else if (window.innerWidth < 1024) setCols(2);
-      else setCols(3);
-    };
-    updateCols();
-    window.addEventListener("resize", updateCols);
-    return () => window.removeEventListener("resize", updateCols);
+    const el = cinematicRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => setDotsVisible(entry.isIntersecting),
+      { threshold: 0.05 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  const scrollToScene = useCallback((i) => {
+    sceneRefs.current[i]?.scrollIntoView({ behavior: "smooth", block: "center" });
   }, []);
 
   return (
     <HelmetProvider>
       {!asSection && <Helmet><title>Shiv | Projects</title></Helmet>}
 
-      <section className="py-16 md:py-20">
+      {/* ── Chapter progress dots — fixed right rail, hidden on small screens ── */}
+      <AnimatePresence>
+        {dotsVisible && (
+          <motion.nav
+            initial={{ opacity: 0, x: 16 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 16 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            aria-label="Project chapters"
+            className="fixed right-5 top-1/2 z-50 hidden -translate-y-1/2 flex-col items-center gap-3 md:flex"
+          >
+            {cinemaProjects.map((p, i) => (
+              <button
+                key={p.title}
+                onClick={() => scrollToScene(i)}
+                aria-label={`${p.title}, chapter ${i + 1}`}
+                className="group relative flex items-center justify-center"
+              >
+                {/* Hover tooltip — appears to the left */}
+                <span className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded-md border border-explorerBorder bg-articleBg px-2.5 py-1 text-xs text-textColor opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100">
+                  {p.title}
+                </span>
+                <span
+                  className={`block w-2 rounded-full transition-all duration-500 ease-out ${
+                    i === activeScene
+                      ? "h-8 bg-accentColor"
+                      : "h-2 bg-textColor/20 group-hover:bg-textColor/40"
+                  }`}
+                />
+              </button>
+            ))}
+          </motion.nav>
+        )}
+      </AnimatePresence>
+
+      {/* ── Page header — matches site-wide structural pattern ── */}
+      <section className="pt-16 pb-4 md:pt-20">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
-          {/* ─── Animated Header ─── */}
           <motion.div
             variants={headerContainer}
             initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-            className="mb-14 flex flex-col items-start gap-3"
+            animate="show"
+            className="flex flex-col items-start gap-3"
           >
-            {/* Accent tag */}
             <motion.span
               variants={headerItem}
               className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
             >
               <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
-              Featured Work
+              Featured Projects
             </motion.span>
-
-            {/* Heading — h2 when rendered as scroll section to preserve single h1 */}
-            <motion.h2
+            <motion.h1
               variants={headerItem}
               className="text-textColor text-4xl font-bold tracking-tight md:text-5xl"
             >
-              Projects
-            </motion.h2>
-
-            {/* Subtitle */}
+              My Projects
+            </motion.h1>
             <motion.p
               variants={headerItem}
-              className="text-textColor/60 text-base leading-relaxed text-justify md:w-1/2"
+              className="text-textColor/60 max-w-xl text-base leading-relaxed"
             >
-              A selection of projects I&apos;ve built, from AI-powered
-              platforms to full-stack applications. Each one crafted with
-              attention to detail, performance, and user experience.
+              Five production-grade applications built to go beyond tutorials —
+              real APIs, AI integrations, and polished interfaces.
             </motion.p>
-
-            {/* Decorative accent line */}
             <motion.div
               variants={headerItem}
               className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-linear-to-r"
             />
           </motion.div>
-
-          {/* ─── True Scroll-triggered Grid ─── */}
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {projects.map((p, i) => (
-              <motion.div
-                key={p.title}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{
-                  duration: 1,
-                  delay: cols === 1 ? 0.3 : (!isLoaded && i < cols ? 0.45 : 0.15) + (i % cols) * 0.15,
-                  ease: [0.25, 0.1, 0.25, 1],
-                }}
-              >
-                <ProjectCard
-                  title={p.title}
-                  desc={p.description}
-                  img={p.image}
-                  srcCode={p.sourceCode}
-                  demo={p.demo}
-                  tags={p.tags}
-                  caseStudy={p.caseStudy}
-                />
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* Cross-project Timeline */}
+      {/* ── Cinematic featured project scenes ── */}
+      <div ref={cinematicRef}>
+        {cinemaProjects.map((project, i) => (
+          <div
+            key={project.title}
+            ref={(el) => (sceneRefs.current[i] = el)}
+          >
+            <CinematicScene
+              project={project}
+              index={i}
+              total={cinemaProjects.length}
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* ── Timeline ── */}
       <ProjectTimeline />
 
-      {/* Mini Projects Carousel */}
+      {/* ── Mini Projects Carousel ── */}
       <MiniProjectsCarousel />
-
     </HelmetProvider>
+  );
+}
+
+// ─── CinematicScene ──────────────────────────────────────────────────────────
+function CinematicScene({ project, index, total }) {
+  return (
+    <section
+      aria-label={`${project.title} — project ${index + 1} of ${total}`}
+      className="relative flex min-h-screen items-center justify-center overflow-hidden"
+    >
+      {/* ── Ambient background: blurred project screenshot ── */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <img
+          src={project.image}
+          alt=""
+          className="h-full w-full scale-110 object-cover object-top opacity-[0.22]"
+          style={{ filter: "blur(52px) brightness(1.8) saturate(1.3)", willChange: "transform" }}
+        />
+        {/* Four-directional vignette via layered gradients — uses theme token */}
+        <div className="absolute inset-x-0 top-0 h-1/2 bg-linear-to-b from-mainBg/55 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-t from-mainBg via-mainBg/60 to-transparent" />
+        <div className="absolute inset-y-0 left-0 w-1/3 bg-linear-to-r from-mainBg/55 to-transparent" />
+        <div className="absolute inset-y-0 right-0 w-1/3 bg-linear-to-l from-mainBg/55 to-transparent" />
+      </div>
+
+      {/* ── Chapter counter — top-left ── */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.1 }}
+        className="absolute left-6 top-10 select-none font-mono text-[11px] tracking-[0.2em] text-accentColor/50 md:left-10"
+        aria-hidden="true"
+      >
+        {String(index + 1).padStart(2, "0")}&thinsp;/&thinsp;{String(total).padStart(2, "0")}
+      </motion.div>
+
+      {/* ── Main content ── */}
+      <motion.div
+        initial={{ opacity: 0, y: 52 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.95, ease: [0.25, 0.1, 0.25, 1] }}
+        className="relative z-10 mx-auto max-w-3xl px-6 py-16 text-center"
+      >
+        {/* Tech stack tags */}
+        <div className="mb-8 flex flex-wrap items-center justify-center gap-2">
+          {project.tags.slice(0, 5).map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full border border-accentColor/15 px-2.5 py-0.5 font-mono text-[10px] tracking-wide text-accentColor/55"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {/* Project title — the thesis of each scene */}
+        <h2 className="mb-5 text-5xl font-bold leading-none tracking-tight text-textColor sm:text-6xl md:text-7xl lg:text-8xl">
+          {project.title}
+        </h2>
+
+        {/* Description — clamped to 3 lines + min-height so title sits at the same
+            Y position across all scenes regardless of description length */}
+        <p className="mx-auto mb-10 line-clamp-3 min-h-20 max-w-xl text-base leading-relaxed text-textColor/55 md:min-h-22 md:text-lg">
+          {project.description}
+        </p>
+
+        {/* Action CTAs */}
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          {project.caseStudy && (
+            <Link
+              to={project.caseStudy}
+              className="group inline-flex min-h-11 items-center gap-2 rounded-full border border-accentColor/40 bg-accentColor/10 px-6 py-3 text-sm font-semibold text-accentColor transition-all duration-300 hover:bg-accentColor hover:text-mainBg focus-visible:outline-2 focus-visible:outline-accentColor"
+            >
+              Case Study
+              <Icon
+                icon="lucide:arrow-right"
+                className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5"
+              />
+            </Link>
+          )}
+          {project.demo && (
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${project.title} live demo, opens in new tab`}
+              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-textColor/15 px-6 py-3 text-sm font-medium text-textColor/55 transition-all duration-300 hover:border-accentColor/30 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor"
+            >
+              Live Demo
+              <Icon icon="lucide:external-link" className="h-3.5 w-3.5" />
+            </a>
+          )}
+          {project.sourceCode && (
+            <a
+              href={project.sourceCode}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${project.title} source code on GitHub`}
+              className="inline-flex min-h-11 items-center gap-2 rounded-full px-4 py-3 text-sm font-medium text-textColor/30 transition-colors duration-300 hover:text-textColor/65"
+            >
+              <Icon icon="lucide:github" className="h-4 w-4" />
+            </a>
+          )}
+        </div>
+      </motion.div>
+
+      {/* ── Project screenshot peek — emerges from bottom edge ── */}
+      <motion.div
+        initial={{ opacity: 0, y: 28 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.45 }}
+        transition={{ duration: 1.1, delay: 0.42, ease: [0.25, 0.1, 0.25, 1] }}
+        className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center"
+      >
+        <div className="relative w-[76vw] max-w-3xl overflow-hidden rounded-t-2xl border-t border-l border-r border-textColor/5 shadow-[0_-24px_80px_rgba(0,0,0,0.4)]">
+          {/* Fade the screenshot into the background from the bottom */}
+          <div className="absolute inset-x-0 bottom-0 z-10 h-3/4 bg-linear-to-t from-mainBg via-mainBg/70 to-transparent" />
+          {/* Subtle top fade */}
+          <div className="absolute inset-x-0 top-0 z-10 h-1/4 bg-linear-to-b from-mainBg/60 to-transparent" />
+          <img
+            src={project.image}
+            alt=""
+            aria-hidden="true"
+            className="w-full object-cover object-top opacity-30"
+            style={{ maxHeight: "220px" }}
+          />
+        </div>
+      </motion.div>
+    </section>
   );
 }
 

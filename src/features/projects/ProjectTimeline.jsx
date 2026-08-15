@@ -81,13 +81,6 @@ export default function ProjectTimeline() {
           viewport={{ once: true, amount: 0.3 }}
           className="mb-14 flex flex-col items-start gap-3"
         >
-          <motion.span
-            variants={fadeUp}
-            className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
-          >
-            <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
-            The Journey
-          </motion.span>
           <motion.h2 variants={fadeUp} className="text-textColor text-4xl font-bold tracking-tight md:text-5xl">
             Timeline
           </motion.h2>

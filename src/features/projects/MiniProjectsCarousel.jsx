@@ -41,8 +41,8 @@ function MiniProjectsCarousel() {
     <>
       {/* swiper theme css override */}
       <style>{`
-        .mini-swiper .swiper-button-next,
-        .mini-swiper .swiper-button-prev {
+        .swiper-wrapper-outer .swiper-button-next,
+        .swiper-wrapper-outer .swiper-button-prev {
           position: absolute;
           top: 50%;
           transform: translateY(-50%);
@@ -59,27 +59,27 @@ function MiniProjectsCarousel() {
           border: none;
         }
 
-        .mini-swiper .swiper-button-next {
+        .swiper-wrapper-outer .swiper-button-next {
           right: 0;
         }
 
-        .mini-swiper .swiper-button-prev {
+        .swiper-wrapper-outer .swiper-button-prev {
           left: 0;
         }
 
-        .mini-swiper .swiper-button-next:hover,
-        .mini-swiper .swiper-button-prev:hover {
+        .swiper-wrapper-outer .swiper-button-next:hover,
+        .swiper-wrapper-outer .swiper-button-prev:hover {
           color: var(--tw-colors-accentColor, #88c0d0);
-          filter: drop-shadow(0 0 8px rgba(136, 192, 208, 0.4));
+          filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-accentColor) 40%, transparent));
           transform: translateY(-50%) scale(1.1);
         }
 
-        .mini-swiper .swiper-button-next:active,
-        .mini-swiper .swiper-button-prev:active {
+        .swiper-wrapper-outer .swiper-button-next:active,
+        .swiper-wrapper-outer .swiper-button-prev:active {
           transform: translateY(-50%) scale(0.9);
         }
 
-        .mini-swiper .swiper-button-disabled {
+        .swiper-wrapper-outer .swiper-button-disabled {
           opacity: 0;
           pointer-events: none;
         }
@@ -103,7 +103,7 @@ function MiniProjectsCarousel() {
         .mini-swiper .swiper-pagination-bullet-active {
           transform: scaleX(3.4);
           background: var(--tw-colors-accentColor, #88c0d0);
-          box-shadow: 0 0 15px rgba(136, 192, 208, 0.3);
+          box-shadow: 0 0 15px color-mix(in srgb, var(--color-accentColor) 30%, transparent);
         }
 
         .mini-swiper {
@@ -139,14 +139,6 @@ function MiniProjectsCarousel() {
             viewport={{ once: true, amount: 0.3 }}
             className="mb-14 flex flex-col items-start gap-3"
           >
-            <motion.span
-              variants={headerItem}
-              className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
-            >
-              <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
-              UI Experiments
-            </motion.span>
-
             {/* heading */}
             <motion.h2
               variants={headerItem}
@@ -179,7 +171,7 @@ function MiniProjectsCarousel() {
             viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <div className="relative -my-16 overflow-hidden py-16">
+            <div className="swiper-wrapper-outer relative -my-16 overflow-hidden py-16">
               <button className="swiper-button-prev" aria-label="Previous slide">
                 <Icon icon="lucide:arrow-left" className="h-6 w-6" />
               </button>
@@ -238,7 +230,7 @@ function MiniProjectsCarousel() {
           >
             <Link
               to="/frontend-lab"
-              className="border-accentColor/30 bg-accentColor/5 text-accentColor hover:border-accentColor/60 hover:bg-accentColor/15 group inline-flex items-center gap-3 rounded-xl border px-7 py-3.5 text-sm font-semibold backdrop-blur-sm transition-all duration-300 hover:shadow-[0_0_24px_rgba(136,192,208,0.15)] active:scale-[0.97]"
+              className="border-accentColor/30 bg-accentColor/5 text-accentColor hover:border-accentColor/60 hover:bg-accentColor/15 group inline-flex items-center gap-3 rounded-xl border px-7 py-3.5 text-sm font-semibold backdrop-blur-sm transition-all duration-300 [&:hover]:shadow-[0_0_24px_color-mix(in_srgb,var(--color-accentColor)_15%,transparent)] active:scale-[0.97]"
             >
               Explore All Mini Projects
               <Icon

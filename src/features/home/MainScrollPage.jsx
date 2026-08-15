@@ -2,9 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import Home from "./Home";
-import About from "../about/About";
-import Projects from "../projects/Projects";
-import Contact from "../contact/Contact";
+import AboutTeaser from "./AboutTeaser";
 
 export default function MainScrollPage() {
   const location = useLocation();
@@ -37,15 +35,7 @@ export default function MainScrollPage() {
       </section>
 
       <section id="about">
-        <About asSection />
-      </section>
-
-      <section id="projects">
-        <Projects asSection />
-      </section>
-
-      <section id="contact">
-        <Contact asSection />
+        <AboutTeaser />
       </section>
     </HelmetProvider>
   );
