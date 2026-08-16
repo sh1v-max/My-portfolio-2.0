@@ -3,6 +3,10 @@ import { useLocation } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import Home from "./Home";
 import AboutTeaser from "./AboutTeaser";
+import WorkTeaser from "./WorkTeaser";
+import LabTeaser from "./LabTeaser";
+import GithubTeaser from "./GithubTeaser";
+import ContactTeaser from "./ContactTeaser";
 
 export default function MainScrollPage() {
   const location = useLocation();
@@ -36,6 +40,22 @@ export default function MainScrollPage() {
 
       <section id="about">
         <AboutTeaser />
+      </section>
+
+      <section id="projects">
+        <WorkTeaser />
+      </section>
+
+      <section id="lab">
+        <LabTeaser />
+      </section>
+
+      <section id="github">
+        <GithubTeaser />
+      </section>
+
+      <section id="contact">
+        <ContactTeaser />
       </section>
     </HelmetProvider>
   );

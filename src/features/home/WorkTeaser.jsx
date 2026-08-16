@@ -1,154 +1,256 @@
-/*
- * THESIS: A cinematic threshold between About and Contact — five project
- *   screenshots fanned like cards on a table, ambient blur from all of them
- *   at once, a single line that names the body of work, and one door to
- *   the full experience. Refuses a card grid, a list, or any kind of timeline.
- *
- * OWN-WORLD: Inherits the Projects page's cinematic language exactly —
- *   mainBg field, multi-source ambient blur at low opacity + brightness/
- *   saturate filter, four-directional vignette via theme tokens. The spread
- *   uses rotation + translateY + graduated opacity to create physical depth.
- *   accentColor on the CTA pill and nothing else. textColor at 100% / 55%.
- *
- * STORY: Visitor reaches this section after reading About. They see a fan of
- *   real project UIs, register that real work exists, feel the pull of the
- *   cinematic atmosphere, and click through to the full project experience.
- *
- * FIRST VIEWPORT: min-h-screen centered column. Large heading. Subtitle.
- *   Five screenshots fanned at ±10°/±5°/0°, graduated opacity 1→0.76→0.52,
- *   outer two hidden on mobile. Single "Explore My Projects →" CTA pill.
- */
-
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { projects } from "../projects/project";
 
-const featured = projects.filter((p) => p.title !== "Coming Soon...");
+const hc = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.15 } },
+};
+const hi = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] } },
+};
 
-// Fan spread: x-offset (px from center), rotation, vertical drop, opacity
-// Outer two cards are decorative — hidden on small screens
-const spread = [
-  { x: -195, rotate: -10, y: 16, opacity: 0.50, mobileHide: true  },
-  { x: -98,  rotate:  -5, y:  6, opacity: 0.76, mobileHide: false },
-  { x:   0,  rotate:   0, y:  0, opacity: 1.00, mobileHide: false },
-  { x:  98,  rotate:   5, y:  6, opacity: 0.76, mobileHide: false },
-  { x: 195,  rotate:  10, y: 16, opacity: 0.50, mobileHide: true  },
-];
+const featured = projects.filter((p) => p.title !== "Coming Soon...").slice(0, 3);
 
 export default function WorkTeaser() {
   return (
-    <section
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden py-20"
-      aria-label="Work preview"
-    >
-      {/* ── Ambient background: all five project images blended across viewport ── */}
-      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        {featured.map((p, i) => (
-          <img
-            key={p.title}
-            src={p.image}
-            alt=""
-            className="absolute inset-0 h-full w-full object-cover"
-            style={{
-              opacity: 0.10,
-              filter: "blur(64px) brightness(1.8) saturate(1.3)",
-              transform: `scale(1.2) translateX(${(i - 2) * 28}%)`,
-              willChange: "transform",
-            }}
-          />
-        ))}
-        {/* Four-directional vignette — same token pattern as CinematicScene */}
-        <div className="absolute inset-x-0 top-0 h-2/3 bg-linear-to-b from-mainBg via-mainBg/55 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-t from-mainBg via-mainBg/55 to-transparent" />
-        <div className="absolute inset-y-0 left-0 w-1/4 bg-linear-to-r from-mainBg/70 to-transparent" />
-        <div className="absolute inset-y-0 right-0 w-1/4 bg-linear-to-l from-mainBg/70 to-transparent" />
-      </div>
+    <section className="relative overflow-hidden py-16 md:py-24">
+      {/* Ambient glow — left-center, different position from AboutTeaser */}
+      <div
+        className="pointer-events-none absolute -left-32 top-1/3 h-96 w-96 rounded-full bg-accentColor/5 blur-[96px]"
+        aria-hidden="true"
+      />
 
-      {/* ── Content column ── */}
-      <div className="relative z-10 flex w-full flex-col items-center gap-14 text-center">
-        {/* Heading + subtitle */}
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
+
+        {/* Section header */}
         <motion.div
-          initial={{ opacity: 0, y: 48 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={hc}
+          initial="hidden"
+          whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
-          className="flex flex-col items-center gap-4 px-6"
+          className="mb-14 flex flex-col items-start gap-3"
         >
-          {/* Section identity badge — matches the portfolio-wide pattern */}
-          <span className="inline-flex items-center gap-2 rounded-full border border-accentColor/30 bg-accentColor/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accentColor">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accentColor" />
+          <motion.span
+            variants={hi}
+            className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
+          >
+            <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
             My Work
-          </span>
-
-          <h2 className="text-5xl font-bold leading-none tracking-tight text-textColor sm:text-6xl md:text-7xl">
-            Things I've Built
-          </h2>
-          <p className="max-w-lg text-base leading-relaxed text-textColor/55 md:text-lg">
-            Five production-grade projects — real APIs, AI integrations, and polished interfaces.
-            Each one built to go further than tutorials.
-          </p>
-
-          {/* Accent rule — matches Timeline / MiniProjects section header pattern */}
-          <div className="mt-1 h-1 w-16 rounded-full bg-linear-to-r from-accentColor to-accentColor/30" />
+          </motion.span>
+          <motion.h2
+            variants={hi}
+            className="text-textColor text-4xl font-bold tracking-tight md:text-5xl"
+          >
+            Featured Projects
+          </motion.h2>
+          <motion.p
+            variants={hi}
+            className="text-textColor/60 max-w-xl text-base leading-relaxed"
+          >
+            Production-grade applications built with real APIs, AI integrations,
+            and polished interfaces — each one going further than tutorials.
+          </motion.p>
+          <motion.div
+            variants={hi}
+            className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-linear-to-r"
+          />
         </motion.div>
 
-        {/* ── Fanned project screenshot spread ── */}
+        {/* Featured card — full width, hero treatment */}
         <motion.div
-          initial={{ opacity: 0, y: 36 }}
+          initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 1.1, delay: 0.22, ease: [0.25, 0.1, 0.25, 1] }}
-          className="relative h-50 w-full"
-          aria-hidden="true"
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+          className="mb-6"
         >
-          {featured.map((project, i) => {
-            const { x, rotate, y, opacity, mobileHide } = spread[i];
-            return (
-              <div
-                key={project.title}
-                className={`absolute left-1/2 top-0 w-36 overflow-hidden rounded-xl border border-textColor/10 shadow-[0_14px_52px_rgba(0,0,0,0.52)] sm:w-40 md:w-44 ${
-                  mobileHide ? "hidden sm:block" : ""
-                }`}
-                style={{
-                  transform: `translate(calc(-50% + ${x}px), ${y}px) rotate(${rotate}deg)`,
-                  opacity,
-                  zIndex: featured.length - Math.abs(i - 2),
-                }}
-              >
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full object-cover object-top"
-                  style={{ maxHeight: "170px" }}
-                  loading="lazy"
-                />
-                {/* Bottom fade dissolves the screenshot into the scene */}
-                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-mainBg/75 to-transparent" />
-              </div>
-            );
-          })}
+          <FeaturedCard project={featured[0]} />
         </motion.div>
 
-        {/* ── CTA ── */}
+        {/* Supporting cards — 2-column */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+          {featured.slice(1).map((project, i) => (
+            <motion.div
+              key={project.title}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+            >
+              <ProjectCard project={project} />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Footer CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.8, delay: 0.38, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+          className="mt-10 flex justify-start"
         >
           <Link
             to="/projects"
-            className="group inline-flex min-h-12 items-center gap-3 rounded-full border border-accentColor/40 bg-accentColor/10 px-8 py-3.5 text-sm font-semibold text-accentColor transition-all duration-300 hover:bg-accentColor hover:text-mainBg focus-visible:outline-2 focus-visible:outline-accentColor"
+            className="group inline-flex min-h-11 items-center gap-2.5 rounded-full border border-accentColor/40 bg-accentColor/10 px-6 py-3 text-sm font-semibold text-accentColor transition-all duration-300 hover:bg-accentColor hover:text-mainBg focus-visible:outline-2 focus-visible:outline-accentColor"
           >
-            Explore My Projects
+            View all projects
             <Icon
               icon="lucide:arrow-right"
               className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
             />
           </Link>
         </motion.div>
+
       </div>
     </section>
+  );
+}
+
+function FeaturedCard({ project }) {
+  return (
+    <motion.div
+      whileHover={{ y: -3 }}
+      transition={{ type: "spring", stiffness: 300, damping: 24 }}
+      className="group overflow-hidden rounded-2xl border border-accentColor/25 bg-articleBg shadow-[0_0_0_1px_color-mix(in_srgb,var(--color-accentColor)_12%,transparent)] transition-[box-shadow] duration-300 hover:shadow-[0_16px_48px_rgba(0,0,0,0.35),0_0_0_1px_color-mix(in_srgb,var(--color-accentColor)_25%,transparent)]"
+    >
+      <div className="flex flex-col lg:flex-row">
+        {/* Screenshot — full height on desktop, 16:9 on mobile */}
+        <div className="relative overflow-hidden lg:h-auto lg:w-[44%] lg:shrink-0">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="h-56 w-full object-cover object-top transition-transform duration-700 group-hover:scale-105 lg:h-full"
+            loading="lazy"
+          />
+          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-articleBg to-transparent" />
+          {/* Featured badge */}
+          <div className="absolute left-3 top-3">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-accentColor/40 bg-accentColor/15 px-3 py-1 text-xs font-semibold text-accentColor backdrop-blur-sm">
+              <Icon icon="lucide:star" className="h-3 w-3" />
+              Featured
+            </span>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="flex flex-1 flex-col justify-between gap-4 p-6 lg:p-8">
+          <div className="flex flex-col gap-4">
+            <h3 className="text-textColor text-2xl font-bold tracking-tight">
+              {project.title}
+            </h3>
+            <p className="text-textColor/60 line-clamp-3 text-sm leading-relaxed lg:text-base">
+              {project.description}
+            </p>
+          </div>
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2">
+            {project.tags.slice(0, 4).map((tag) => (
+              <span
+                key={tag}
+                className="border-accentColor/15 bg-accentColor/5 text-accentColor/70 rounded-md border px-2.5 py-1 text-xs font-medium"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* Links */}
+          <div className="flex items-center gap-3">
+            {project.caseStudy && (
+              <Link
+                to={project.caseStudy}
+                className="group/link inline-flex min-h-9 items-center gap-2 rounded-full border border-accentColor/40 bg-accentColor/10 px-4 py-2 text-xs font-bold text-accentColor transition-all duration-300 hover:bg-accentColor hover:text-mainBg"
+              >
+                <Icon icon="lucide:file-text" className="h-3.5 w-3.5" />
+                Case Study
+              </Link>
+            )}
+            {project.demo && (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-textColor/40 hover:text-accentColor inline-flex min-h-9 items-center gap-1.5 rounded-lg px-3 text-xs font-medium transition-colors hover:bg-accentColor/5"
+              >
+                <Icon icon="lucide:external-link" className="h-3.5 w-3.5" />
+                Live Demo
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function ProjectCard({ project }) {
+  return (
+    <motion.div
+      whileHover={{ y: -4 }}
+      transition={{ type: "spring", stiffness: 300, damping: 24 }}
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-explorerBorder bg-articleBg transition-[border-color,box-shadow] duration-300 hover:border-accentColor/30 hover:shadow-[0_12px_40px_rgba(0,0,0,0.3)]"
+    >
+      {/* Screenshot */}
+      <div className="relative overflow-hidden">
+        <img
+          src={project.image}
+          alt={project.title}
+          className="h-48 w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          loading="lazy"
+        />
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-articleBg to-transparent" />
+      </div>
+
+      {/* Content */}
+      <div className="flex flex-1 flex-col gap-3 p-5">
+        <h3 className="text-textColor text-lg font-bold tracking-tight">
+          {project.title}
+        </h3>
+        <p className="text-textColor/55 line-clamp-2 text-sm leading-relaxed">
+          {project.description}
+        </p>
+
+        {/* Tags */}
+        <div className="mt-auto flex flex-wrap gap-1.5 pt-2">
+          {project.tags.slice(0, 3).map((tag) => (
+            <span
+              key={tag}
+              className="border-accentColor/15 bg-accentColor/5 text-accentColor/70 rounded-md border px-2 py-0.5 text-xs font-medium"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {/* Links */}
+        <div className="flex items-center gap-3 pt-1">
+          {project.caseStudy && (
+            <Link
+              to={project.caseStudy}
+              className="text-accentColor hover:text-accentColor/70 inline-flex min-h-9 items-center gap-1.5 rounded-lg px-3 text-xs font-bold transition-colors hover:bg-accentColor/5"
+            >
+              <Icon icon="lucide:file-text" className="h-3.5 w-3.5" />
+              Case Study
+            </Link>
+          )}
+          {project.demo && (
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-textColor/40 hover:text-accentColor inline-flex min-h-9 items-center gap-1.5 rounded-lg px-3 text-xs font-medium transition-colors hover:bg-accentColor/5"
+            >
+              <Icon icon="lucide:external-link" className="h-3.5 w-3.5" />
+              Live Demo
+            </a>
+          )}
+        </div>
+      </div>
+    </motion.div>
   );
 }

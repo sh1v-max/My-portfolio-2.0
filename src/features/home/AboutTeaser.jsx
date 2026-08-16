@@ -15,12 +15,24 @@ const hi = {
 
 const SKILLS = ["React 19", "Node.js", "MongoDB", "Framer Motion", "Tailwind CSS v4"];
 
+const QUICK_STATS = [
+  { icon: "lucide:layers", value: "5", label: "Production apps" },
+  { icon: "lucide:flask-conical", value: "33+", label: "Mini builds" },
+  { icon: "lucide:map-pin", value: "Varanasi", label: "India" },
+];
+
 export default function AboutTeaser() {
   return (
-    <section className="py-16 md:py-20">
+    <section className="relative overflow-hidden py-16 md:py-24">
+      {/* Ambient glow — accentColor atmosphere, upper-right */}
+      <div
+        className="pointer-events-none absolute -right-24 -top-12 h-96 w-96 rounded-full bg-accentColor/5 blur-[96px]"
+        aria-hidden="true"
+      />
+
       <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
 
-        {/* Section header — identical pattern to every other page */}
+        {/* Section header */}
         <motion.div
           variants={hc}
           initial="hidden"
@@ -54,41 +66,62 @@ export default function AboutTeaser() {
           />
         </motion.div>
 
-        {/* Bio card */}
+        {/* Bio layout */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.85, ease: [0.25, 0.1, 0.25, 1] }}
-          className="flex flex-col items-center gap-10 lg:flex-row lg:items-start"
+          className="flex flex-col items-center gap-12 lg:flex-row lg:items-start"
         >
-          {/* Profile photo */}
-          <div className="group relative shrink-0">
-            <div className="border-accentColor/25 overflow-hidden rounded-2xl border-2">
+          {/* Profile photo — circular with glow ring */}
+          <div className="group relative shrink-0 self-start">
+            <div className="relative h-52 w-52 overflow-hidden rounded-full border-2 border-accentColor/30 shadow-[0_0_40px_color-mix(in_srgb,var(--color-accentColor)_20%,transparent)]">
               <img
                 src={profile_pic}
                 alt={personal.name}
-                className="h-56 w-48 object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                className="h-full w-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
               />
             </div>
-            {/* Ambient glow behind the photo */}
-            <div className="bg-accentColor/10 group-hover:bg-accentColor/20 pointer-events-none absolute -inset-6 -z-10 rounded-full blur-2xl transition-all duration-500" />
+            {/* Outer glow ring */}
+            <div className="border-accentColor/15 absolute -inset-3 rounded-full border" />
+            {/* Ambient behind photo */}
+            <div className="bg-accentColor/10 pointer-events-none absolute -inset-8 -z-10 rounded-full blur-2xl" />
           </div>
 
           {/* Text content */}
-          <div className="flex flex-1 flex-col gap-5 text-center lg:text-left">
-            <p className="text-textColor/80 text-lg leading-relaxed">
-              Hi, I&apos;m{" "}
-              <span className="text-textColor font-bold">{personal.name}</span>, a
-              Full-Stack Developer based in{" "}
-              <span className="text-accentColor font-medium">{personal.location}</span>.
-            </p>
-            <p className="text-textColor/65 max-w-2xl text-base leading-relaxed">
+          <div className="flex flex-1 flex-col gap-6 text-center lg:text-left">
+            {/* Intro — the name gets full weight */}
+            <div className="space-y-2">
+              <p className="text-textColor/80 text-xl leading-relaxed">
+                Hi, I&apos;m{" "}
+                <span className="text-textColor text-2xl font-black tracking-tight">
+                  {personal.name}
+                </span>
+              </p>
+              <p className="text-textColor/60 text-base leading-relaxed">
+                a Full-Stack Developer based in{" "}
+                <span className="text-accentColor font-semibold">{personal.location}</span>.
+              </p>
+            </div>
+
+            <p className="text-textColor/65 max-w-xl text-base leading-relaxed">
               I specialize in the React ecosystem, building responsive, performant web
               applications with clean architecture and thoughtful UX. My toolkit spans
               the modern JavaScript stack — React and Redux on the front end to Node.js
               and MongoDB on the back end.
             </p>
+
+            {/* Quick stats strip */}
+            <div className="flex flex-wrap justify-center gap-4 lg:justify-start">
+              {QUICK_STATS.map(({ icon, value, label }) => (
+                <div key={label} className="border-explorerBorder bg-articleBg flex items-center gap-2.5 rounded-xl border px-4 py-2.5">
+                  <Icon icon={icon} className="text-accentColor h-4 w-4 shrink-0" />
+                  <span className="text-textColor text-sm font-bold">{value}</span>
+                  <span className="text-textColor/40 text-xs">{label}</span>
+                </div>
+              ))}
+            </div>
 
             {/* Skill pills */}
             <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
