@@ -6,6 +6,7 @@ import resumeFile from "../assets/docs/resume.pdf";
 import LiveClock from "./LiveClock";
 import { personal } from "../data/config";
 import { useActiveSection } from "../hooks/useActiveSection";
+import ThemeToggle from "../features/theme/FloatingThemeButton";
 
 // sectionId: null = standalone route, string = scroll section on "/"
 const navLinks = [
@@ -123,7 +124,7 @@ function NavBar() {
             )}
           </div>
 
-          {/* Right: Resume + Hamburger */}
+          {/* Right: Resume + ThemeToggle + Hamburger */}
           <div className="flex items-center gap-2 sm:gap-3">
             <a
               href={resumeFile}
@@ -133,6 +134,8 @@ function NavBar() {
               <Icon icon="lucide:download" className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth="3" />
               <span className="uppercase tracking-wider">Resume</span>
             </a>
+
+            <ThemeToggle />
 
             <button
               onClick={() => setMobileOpen(!mobileOpen)}

@@ -2,7 +2,6 @@ import Footer from "./Footer";
 import NavBar from "./NavBar";
 import Pages from "./Pages";
 import BottomNav from "./BottomNav";
-import FloatingThemeButton from "../features/theme/FloatingThemeButton";
 import SocialSidebar from "./SocialSidebar";
 import { useTheme } from "../context/ThemeContext";
 import { useLocation } from "react-router-dom";
@@ -49,7 +48,6 @@ function Main() {
         </main>
         <Footer />
         <BottomNav />
-        <FloatingThemeButton />
         <SocialSidebar />
       </div>
     </>
