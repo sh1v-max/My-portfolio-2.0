@@ -112,7 +112,7 @@ function NavBar() {
       <div ref={cardRef} className="relative mx-auto max-w-7xl">
 
         {/* ── Floating card — relative z-50 keeps it above the mega-menu panel ── */}
-        <div className="relative z-50 rounded-2xl bg-articleBg shadow-[0_8px_40px_rgba(0,0,0,0.4)]">
+        <div className={`relative z-50 bg-articleBg transition-[border-radius,box-shadow] duration-300 ${open ? "rounded-t-2xl shadow-none" : "rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.4)]"}`}>
           <div className="grid h-17 grid-cols-3 items-center px-5 sm:px-7">
 
             {/* Left — hamburger */}
@@ -194,7 +194,7 @@ function NavBar() {
               {/* Separator */}
               <div className="mx-5 border-t border-explorerBorder/20 sm:mx-7" />
 
-              {/* Three-column grid — plain div, no motion overhead */}
+              {/* Three-column grid */}
               <div className="grid grid-cols-1 gap-8 px-5 py-7 sm:grid-cols-[5fr_3fr_3fr] sm:gap-0 sm:px-7 sm:py-10">
 
                 {/* ── Col 1: Navigate ── */}
@@ -213,27 +213,40 @@ function NavBar() {
                         key={link.sectionId}
                         custom={li + 1} variants={itemVar} initial="hidden" animate="show"
                       >
-                        <button
+                        {/* motion.button propagates "hover"/"tap" to children via variants */}
+                        <motion.button
                           onClick={() => handleClick(link)}
-                          className="group flex w-full items-center justify-between border-b border-explorerBorder/15 py-3 text-left transition-transform duration-300 ease-out hover:translate-x-2 sm:py-3.5"
+                          whileHover="hover"
+                          whileTap="tap"
+                          className="group flex w-full items-center justify-between border-b border-explorerBorder/15 py-3 text-left sm:py-3.5"
                         >
-                          <span className={`text-3xl font-black uppercase leading-none tracking-tight transition-colors duration-200 sm:text-4xl lg:text-5xl ${
-                            active ? "text-accentColor" : "text-textColor/65 group-hover:text-textColor"
-                          }`}>
+                          <motion.span
+                            variants={{
+                              hover: { x: 9, transition: { type: "spring", stiffness: 320, damping: 26 } },
+                              tap:   { x: 4,  transition: { duration: 0.1 } },
+                            }}
+                            className={`text-3xl font-black uppercase leading-none tracking-tight transition-colors duration-200 sm:text-4xl lg:text-5xl ${
+                              active ? "text-accentColor" : "text-textColor/65 group-hover:text-textColor"
+                            }`}
+                          >
                             {link.name}
-                          </span>
-                          <div className="flex shrink-0 items-center gap-2 pl-4">
-                            {active && (
-                              <span className="h-1.5 w-1.5 rounded-full bg-accentColor" />
-                            )}
+                          </motion.span>
+                          {/* Arrow: slides diagonally up-right on hover; base opacity follows active state */}
+                          <motion.div
+                            animate={{ opacity: active ? 1 : 0, x: 0, y: 0 }}
+                            variants={{
+                              hover: { x: 5, y: -5, opacity: 1, transition: { duration: 0.2, ease: EASE_EXPO } },
+                              tap:   { x: 2, y: -2, opacity: 1 },
+                            }}
+                            className="flex shrink-0 items-center gap-2 pl-4"
+                          >
+                            {active && <span className="h-1.5 w-1.5 rounded-full bg-accentColor" />}
                             <Icon
                               icon="lucide:arrow-up-right"
-                              className={`h-5 w-5 transition-all duration-200 ${
-                                active ? "text-accentColor opacity-100" : "text-textColor opacity-0 group-hover:opacity-35"
-                              }`}
+                              className={`h-5 w-5 ${active ? "text-accentColor" : "text-textColor"}`}
                             />
-                          </div>
-                        </button>
+                          </motion.div>
+                        </motion.button>
                       </motion.div>
                     );
                   })}
@@ -255,27 +268,38 @@ function NavBar() {
                         key={link.path}
                         custom={li + 6} variants={itemVar} initial="hidden" animate="show"
                       >
-                        <button
+                        <motion.button
                           onClick={() => handleClick(link)}
-                          className="group flex w-full items-center justify-between border-b border-explorerBorder/15 py-3 text-left transition-transform duration-300 ease-out hover:translate-x-2 sm:py-3.5"
+                          whileHover="hover"
+                          whileTap="tap"
+                          className="group flex w-full items-center justify-between border-b border-explorerBorder/15 py-3 text-left sm:py-3.5"
                         >
-                          <span className={`text-3xl font-black uppercase leading-none tracking-tight transition-colors duration-200 sm:text-4xl ${
-                            active ? "text-accentColor" : "text-textColor/65 group-hover:text-textColor"
-                          }`}>
+                          <motion.span
+                            variants={{
+                              hover: { x: 9, transition: { type: "spring", stiffness: 320, damping: 26 } },
+                              tap:   { x: 4,  transition: { duration: 0.1 } },
+                            }}
+                            className={`text-3xl font-black uppercase leading-none tracking-tight transition-colors duration-200 sm:text-4xl ${
+                              active ? "text-accentColor" : "text-textColor/65 group-hover:text-textColor"
+                            }`}
+                          >
                             {link.name}
-                          </span>
-                          <div className="flex shrink-0 items-center gap-2 pl-4">
-                            {active && (
-                              <span className="h-1.5 w-1.5 rounded-full bg-accentColor" />
-                            )}
+                          </motion.span>
+                          <motion.div
+                            animate={{ opacity: active ? 1 : 0, x: 0, y: 0 }}
+                            variants={{
+                              hover: { x: 5, y: -5, opacity: 1, transition: { duration: 0.2, ease: EASE_EXPO } },
+                              tap:   { x: 2, y: -2, opacity: 1 },
+                            }}
+                            className="flex shrink-0 items-center gap-2 pl-4"
+                          >
+                            {active && <span className="h-1.5 w-1.5 rounded-full bg-accentColor" />}
                             <Icon
                               icon="lucide:arrow-up-right"
-                              className={`h-5 w-5 transition-all duration-200 ${
-                                active ? "text-accentColor opacity-100" : "text-textColor opacity-0 group-hover:opacity-35"
-                              }`}
+                              className={`h-5 w-5 ${active ? "text-accentColor" : "text-textColor"}`}
                             />
-                          </div>
-                        </button>
+                          </motion.div>
+                        </motion.button>
                       </motion.div>
                     );
                   })}
@@ -297,10 +321,12 @@ function NavBar() {
                     Connect
                   </motion.p>
 
-                  {/* Open-to-work badge — pulse gated until clip finishes */}
+                  {/* Open-to-work badge — scale on hover, pulse gated until clip finishes */}
                   <motion.div
                     custom={10} variants={itemVar} initial="hidden" animate="show"
-                    className="mb-6 flex w-fit items-center gap-2 rounded-full border border-accentColor/22 bg-accentColor/8 px-3.5 py-1.5"
+                    whileHover={{ scale: 1.05, transition: { duration: 0.2, ease: EASE_EXPO } }}
+                    whileTap={{ scale: 0.96 }}
+                    className="mb-6 flex w-fit cursor-default items-center gap-2 rounded-full border border-accentColor/22 bg-accentColor/8 px-3.5 py-1.5"
                   >
                     <motion.span
                       className="h-1.5 w-1.5 shrink-0 rounded-full bg-accentColor"
@@ -312,7 +338,7 @@ function NavBar() {
                     </span>
                   </motion.div>
 
-                  {/* Social links */}
+                  {/* Social links — icon spring-rotates, label slides right */}
                   <div className="flex flex-col gap-3">
                     {[
                       { icon: "mdi:github",   label: "sh1v-max",    href: personal.github },
@@ -322,15 +348,31 @@ function NavBar() {
                       <motion.a
                         key={s.icon}
                         custom={11 + si} variants={itemVar} initial="hidden" animate="show"
+                        whileHover="hover"
+                        whileTap="tap"
                         href={s.href}
                         target={s.href.startsWith("mailto") ? undefined : "_blank"}
                         rel="noopener noreferrer"
                         className="group flex items-center gap-3 text-textColor/40 transition-colors duration-200 hover:text-accentColor"
                       >
-                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-explorerBorder/25 bg-textColor/5 transition-all duration-200 group-hover:border-accentColor/30 group-hover:bg-accentColor/10">
+                        <motion.div
+                          variants={{
+                            hover: { scale: 1.15, rotate: -10, transition: { type: "spring", stiffness: 380, damping: 14 } },
+                            tap:   { scale: 0.88, rotate: 0,  transition: { duration: 0.1 } },
+                          }}
+                          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-explorerBorder/25 bg-textColor/5 transition-all duration-200 group-hover:border-accentColor/30 group-hover:bg-accentColor/10"
+                        >
                           <Icon icon={s.icon} width="15" height="15" />
-                        </div>
-                        <span className="text-xs font-medium tracking-wide">{s.label}</span>
+                        </motion.div>
+                        <motion.span
+                          variants={{
+                            hover: { x: 5, transition: { duration: 0.22, ease: EASE_EXPO } },
+                            tap:   { x: 2 },
+                          }}
+                          className="text-xs font-medium tracking-wide"
+                        >
+                          {s.label}
+                        </motion.span>
                       </motion.a>
                     ))}
                   </div>
