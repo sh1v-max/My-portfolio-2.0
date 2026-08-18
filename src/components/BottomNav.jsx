@@ -57,6 +57,8 @@ function BottomNav() {
     }
   };
 
+  const SCROLL_SECTION_PATH = { lab: "/frontend-lab", github: "/github" };
+
   const isActive = (item) => {
     if (item.sectionId) {
       if (isMainPage) {
@@ -66,6 +68,7 @@ function BottomNav() {
       }
       return false;
     }
+    if (isMainPage && SCROLL_SECTION_PATH[activeSection] === item.path) return true;
     return location.pathname === item.path;
   };
 

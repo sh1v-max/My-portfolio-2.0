@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-const SCROLL_SECTIONS = ["home", "about", "projects", "contact"];
+const SCROLL_SECTIONS = ["home", "about", "projects", "lab", "github", "contact"];
 
 export function useActiveSection() {
   const location = useLocation();

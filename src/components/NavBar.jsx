@@ -50,9 +50,15 @@ function NavBar() {
     }
   };
 
+  // Section IDs that live on "/" but whose nav links point to standalone routes
+  const SCROLL_SECTION_PATH = { lab: "/frontend-lab", github: "/github" };
+
   // Which key is currently "active" for indicator positioning
   const isActive = (link) => {
-    if (isMainPage && link.sectionId) return link.sectionId === activeSection;
+    if (isMainPage) {
+      if (link.sectionId) return link.sectionId === activeSection;
+      return SCROLL_SECTION_PATH[activeSection] === link.path;
+    }
     return !isMainPage && location.pathname === link.path;
   };
 
