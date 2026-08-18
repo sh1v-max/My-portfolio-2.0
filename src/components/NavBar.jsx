@@ -1,14 +1,12 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState, useRef, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Icon } from "@iconify/react";
 import resumeFile from "../assets/docs/resume.pdf";
-import LiveClock from "./LiveClock";
 import { personal } from "../data/config";
 import { useActiveSection } from "../hooks/useActiveSection";
 import ThemeToggle from "../features/theme/FloatingThemeButton";
 
-// sectionId: null = standalone route, string = scroll section on "/"
 const navLinks = [
   { name: "Home",     path: "/",            sectionId: "home" },
   { name: "About",    path: "/about",        sectionId: "about" },
@@ -18,42 +16,48 @@ const navLinks = [
   { name: "Contact",  path: "/contact",      sectionId: "contact" },
 ];
 
-const INDICATOR_W = 20;
+const TICKER_TEXT = [
+  "FULL STACK DEVELOPER",
+  "REACT & NODE.JS",
+  "EXPLORE MY WORK",
+  "OPEN TO OPPORTUNITIES",
+  "FRAMER MOTION",
+  "BUILDING FOR THE WEB",
+];
+
+const tickerItems = [
+  ...TICKER_TEXT,
+  ...TICKER_TEXT,
+  ...TICKER_TEXT,
+  ...TICKER_TEXT,
+];
+
+const SCROLL_SECTION_PATH = { lab: "/frontend-lab", github: "/github" };
 
 function NavBar() {
-  const location  = useLocation();
-  const navigate  = useNavigate();
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [tickerVisible, setTickerVisible] = useState(true);
   const { activeSection, isMainPage } = useActiveSection();
+  useEffect(() => {
+    const onScroll = () => setTickerVisible(window.scrollY <= 4);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-  const navLinksRef = useRef(null);
-  const linkRefs    = useRef({});
-  const [indicatorX, setIndicatorX]         = useState(0);
-  const [indicatorVisible, setIndicatorVisible] = useState(false);
-
-  // Scroll to a section on the current page
-  const scrollTo = (id) => {
+  const scrollTo = (id) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
 
-  // Unified click handler
   const handleClick = (link) => {
-    setMobileOpen(false);
+    setOpen(false);
     if (link.sectionId) {
-      if (isMainPage) {
-        scrollTo(link.sectionId);
-      } else {
-        navigate(`/#${link.sectionId}`);
-      }
+      isMainPage ? scrollTo(link.sectionId) : navigate(`/#${link.sectionId}`);
     } else {
       navigate(link.path);
     }
   };
 
-  // Section IDs that live on "/" but whose nav links point to standalone routes
-  const SCROLL_SECTION_PATH = { lab: "/frontend-lab", github: "/github" };
-
-  // Which key is currently "active" for indicator positioning
   const isActive = (link) => {
     if (isMainPage) {
       if (link.sectionId) return link.sectionId === activeSection;
@@ -62,204 +66,206 @@ function NavBar() {
     return !isMainPage && location.pathname === link.path;
   };
 
-  // Ref key: sectionId takes priority so indicator tracks scroll position on "/"
   const refKey = (link) => link.sectionId ?? link.path;
-
-  // Recalculate indicator position whenever active item changes
-  useLayoutEffect(() => {
-    const activeLink = navLinks.find(isActive);
-    if (!activeLink) { setIndicatorVisible(false); return; }
-    const key      = refKey(activeLink);
-    const activeEl = linkRefs.current[key];
-    const container = navLinksRef.current;
-    if (!activeEl || !container) return;
-    const cRect = container.getBoundingClientRect();
-    const lRect = activeEl.getBoundingClientRect();
-    setIndicatorX(lRect.left - cRect.left + lRect.width / 2 - INDICATOR_W / 2);
-    setIndicatorVisible(true);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeSection, location.pathname]);
 
   return (
     <>
-      <header className="border-explorerBorder/50 bg-mainBg/80 sticky top-0 z-50 border-b backdrop-blur-xl">
-        {/* Desktop-only clock */}
-        <div className="absolute left-6 top-1/2 -translate-y-1/2 hidden xl:block">
-          <LiveClock />
-        </div>
+      {/* ── Sticky navbar ── */}
+      <div className="sticky top-0 z-50 px-4 pt-3 sm:px-6 md:px-8">
 
-        <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 md:px-8">
-          {/* Brand */}
-          <button
-            onClick={() => handleClick(navLinks[0])}
-            className="group flex items-center"
-          >
-            <span className="text-textColor hover:text-accentColor text-xl font-black uppercase tracking-[0.2em] transition-colors duration-300">
-              SHIV<span className="text-accentColor">.</span>
-            </span>
-          </button>
+        {/* ── Floating card — articleBg = lighter theme surface ── */}
+        <div className="mx-auto max-w-7xl rounded-2xl bg-articleBg shadow-[0_8px_40px_rgba(0,0,0,0.4)]">
 
-          {/* Desktop links */}
-          <div ref={navLinksRef} className="relative hidden items-center gap-1 md:flex">
-            {navLinks.map((link) => {
-              const key    = refKey(link);
-              const active = isActive(link);
-              return (
-                <button
-                  key={key}
-                  ref={(el) => { linkRefs.current[key] = el; }}
-                  onClick={() => handleClick(link)}
-                  className={`relative rounded-lg px-3.5 py-2 text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accentColor ${
-                    active
-                      ? "text-accentColor"
-                      : "text-textColor/60 hover:text-textColor hover:bg-explorerBorder/20"
-                  }`}
-                >
-                  {link.name}
-                </button>
-              );
-            })}
+          {/* ── Bar ── */}
+          <div className="grid h-17 grid-cols-3 items-center px-5 sm:px-7">
 
-            {indicatorVisible && (
-              <motion.div
-                initial={false}
-                animate={{ x: indicatorX }}
-                transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                className="bg-accentColor pointer-events-none absolute bottom-0 left-0 h-0.5 w-5 rounded-full"
-              />
-            )}
-          </div>
-
-          {/* Right: Resume + ThemeToggle + Hamburger */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            <a
-              href={resumeFile}
-              download="resume.pdf"
-              className="bg-accentColor/10 text-accentColor hover:bg-accentColor/20 flex items-center gap-2 rounded-lg px-3 py-2 text-[10px] font-bold transition-all duration-200 sm:px-4 sm:text-xs"
-            >
-              <Icon icon="lucide:download" className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth="3" />
-              <span className="uppercase tracking-wider">Resume</span>
-            </a>
-
-            <ThemeToggle />
-
+            {/* Left — hamburger + Menu */}
             <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="group relative flex h-12 w-12 items-center justify-center transition-all duration-300 active:scale-90 md:hidden"
-              aria-label="Toggle menu"
+              onClick={() => setOpen(!open)}
+              aria-label="Toggle navigation"
+              aria-expanded={open}
+              className="group flex items-center gap-2.5 justify-self-start focus-visible:outline-2 focus-visible:outline-accentColor"
             >
-              <div className="flex flex-col items-end gap-1.5">
+              <div className="flex flex-col gap-[4.5px]">
                 <motion.span
-                  animate={mobileOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-                  style={{ width: 20 }}
-                  className="bg-accentColor block h-0.5 rounded-full"
+                  animate={open ? { rotate: 45, y: 6.5 } : { rotate: 0, y: 0 }}
+                  transition={{ duration: 0.22, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="block h-[1.5px] w-4.5 origin-center rounded-full bg-textColor"
                 />
                 <motion.span
-                  animate={mobileOpen ? { opacity: 0, x: 10 } : { opacity: 1, x: 0 }}
-                  style={{ width: 14 }}
-                  className="bg-accentColor block h-0.5 rounded-full"
+                  animate={open ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+                  transition={{ duration: 0.18 }}
+                  className="block h-[1.5px] w-3 rounded-full bg-textColor/60"
                 />
                 <motion.span
-                  animate={mobileOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-                  style={{ width: 20 }}
-                  className="bg-accentColor block h-0.5 rounded-full"
+                  animate={open ? { rotate: -45, y: -6.5 } : { rotate: 0, y: 0 }}
+                  transition={{ duration: 0.22, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="block h-[1.5px] w-4.5 origin-center rounded-full bg-textColor"
                 />
               </div>
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-textColor/55 transition-colors duration-200 group-hover:text-textColor">
+                Menu
+              </span>
             </button>
-          </div>
-        </nav>
-      </header>
 
-      {/* Mobile Drawer */}
+            {/* Center — brand */}
+            <button
+              onClick={() => handleClick(navLinks[0])}
+              className="justify-self-center focus-visible:outline-2 focus-visible:outline-accentColor"
+              aria-label="Go to home"
+            >
+              <span className="text-lg font-black uppercase tracking-[0.25em] text-textColor transition-opacity duration-200 hover:opacity-70 sm:text-xl">
+                SHIV<span className="text-accentColor">.</span>
+              </span>
+            </button>
+
+            {/* Right — Resume + ThemeToggle */}
+            <div className="flex items-center justify-end gap-2">
+              <a
+                href={resumeFile}
+                download="resume.pdf"
+                className="flex items-center gap-1.5 rounded-xl bg-accentColor px-3 py-2 text-[10px] font-black uppercase tracking-wider text-mainBg transition-opacity duration-200 hover:opacity-85 sm:px-4 sm:text-xs"
+              >
+                <Icon icon="lucide:download" className="h-3 w-3 shrink-0 sm:h-3.5 sm:w-3.5" strokeWidth="3" />
+                <span className="hidden sm:inline">Resume</span>
+              </a>
+              <ThemeToggle />
+            </div>
+
+          </div>
+        </div>
+
+        {/* ── Ticker — sticky inside navbar, fades on scroll ── */}
+        <motion.div
+          animate={{
+            opacity: tickerVisible ? 1 : 0,
+            y: tickerVisible ? 0 : -6,
+          }}
+          transition={{
+            opacity: { duration: tickerVisible ? 0.45 : 0.2, ease: "easeInOut" },
+            y:       { duration: tickerVisible ? 0.45 : 0.2, ease: [0.25, 0.1, 0.25, 1] },
+          }}
+          style={{ pointerEvents: tickerVisible ? "auto" : "none" }}
+        >
+          <div className="mx-auto max-w-7xl overflow-hidden rounded-b-2xl bg-accentColor py-1.75">
+            <motion.div
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+              className="flex min-w-max"
+            >
+              {tickerItems.map((text, i) => (
+                <span
+                  key={i}
+                  className="mx-3 whitespace-nowrap text-[9px] font-black uppercase tracking-[0.22em] text-mainBg sm:mx-4 sm:text-[10px]"
+                >
+                  {text}
+                  <span className="mx-3 opacity-50 sm:mx-4">✦</span>
+                </span>
+              ))}
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* ── Drawer ── */}
       <AnimatePresence>
-        {mobileOpen && (
+        {open && (
           <>
+            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setMobileOpen(false)}
-              className="bg-mainBg/70 fixed inset-0 z-60 md:hidden"
+              transition={{ duration: 0.22 }}
+              onClick={() => setOpen(false)}
+              className="fixed inset-0 z-60 bg-mainBg/70 backdrop-blur-sm"
             />
 
+            {/* Panel */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              className="border-textColor/10 bg-mainBg fixed inset-y-0 right-0 z-70 flex w-75 flex-col border-l shadow-2xl md:hidden"
+              className="fixed inset-y-0 right-0 z-70 flex w-72 flex-col border-l border-explorerBorder/40 bg-articleBg shadow-2xl sm:w-80"
             >
-              <div className="flex items-center justify-end p-6">
+              {/* Drawer header */}
+              <div className="flex items-center justify-between border-b border-explorerBorder/40 px-7 py-5">
+                <span className="text-[11px] font-black uppercase tracking-[0.3em] text-textColor/30">
+                  SHIV<span className="text-accentColor">.</span>
+                </span>
                 <button
-                  onClick={() => setMobileOpen(false)}
-                  className="bg-textColor/5 text-textColor/60 hover:bg-textColor/10 flex h-10 w-10 items-center justify-center rounded-xl transition-colors"
+                  onClick={() => setOpen(false)}
+                  className="flex h-8 w-8 items-center justify-center rounded-lg bg-textColor/5 text-textColor/40 transition-colors hover:bg-textColor/10 hover:text-textColor/80"
+                  aria-label="Close navigation"
                 >
-                  <Icon icon="lucide:x" width="20" height="20" strokeWidth="2.5" />
+                  <Icon icon="lucide:x" width="16" height="16" strokeWidth="2.5" />
                 </button>
               </div>
 
-              <div className="flex flex-1 flex-col items-center justify-center gap-10 px-8 pb-12">
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="mb-4"
-                >
-                  <span className="text-textColor/40 text-sm font-black uppercase tracking-[0.3em]">
-                    SHIV<span className="text-accentColor">.</span>
-                  </span>
-                </motion.div>
-
-                <div className="flex flex-col items-center gap-6">
-                  {navLinks.map((link, i) => {
-                    const active = isActive(link);
-                    return (
-                      <motion.div
-                        key={refKey(link)}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.05 + 0.2 }}
-                      >
-                        <button
-                          onClick={() => handleClick(link)}
-                          className={`text-xl font-bold uppercase tracking-[0.15em] transition-all duration-300 ${
-                            active
-                              ? "text-accentColor scale-110"
-                              : "text-textColor/60 hover:text-textColor"
-                          }`}
-                        >
-                          {link.name}
-                        </button>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-                className="border-textColor/5 flex flex-col items-center gap-8 border-t p-12"
-              >
-                <div className="flex items-center gap-8">
-                  {[
-                    { id: "github",   icon: <Icon icon="mdi:github"   width="22" height="22" />, url: personal.github },
-                    { id: "linkedin", icon: <Icon icon="mdi:linkedin" width="22" height="22" />, url: personal.linkedin },
-                    { id: "email",    icon: <Icon icon="lucide:mail"  width="22" height="22" />, url: `mailto:${personal.email}` },
-                  ].map((social) => (
-                    <a
-                      key={social.id}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={social.id.charAt(0).toUpperCase() + social.id.slice(1)}
-                      className="flex h-11 w-11 items-center justify-center rounded-lg text-textColor/40 hover:text-accentColor transition-colors"
+              {/* Nav links */}
+              <nav className="flex flex-1 flex-col justify-center gap-0.5 px-5 py-8">
+                {navLinks.map((link, i) => {
+                  const active = isActive(link);
+                  return (
+                    <motion.div
+                      key={refKey(link)}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{
+                        delay: i * 0.045 + 0.06,
+                        duration: 0.28,
+                        ease: [0.25, 0.1, 0.25, 1],
+                      }}
                     >
-                      {social.icon}
-                    </a>
-                  ))}
-                </div>
+                      <button
+                        onClick={() => handleClick(link)}
+                        className={`group flex w-full items-center justify-between rounded-xl px-4 py-3 transition-all duration-200 ${
+                          active
+                            ? "bg-accentColor/15 text-accentColor"
+                            : "text-textColor/45 hover:bg-textColor/5 hover:text-textColor"
+                        }`}
+                      >
+                        <span className="text-base font-bold uppercase tracking-[0.14em]">
+                          {link.name}
+                        </span>
+                        {active ? (
+                          <div className="h-1.5 w-1.5 rounded-full bg-accentColor" />
+                        ) : (
+                          <Icon
+                            icon="lucide:arrow-up-right"
+                            className="h-3.5 w-3.5 opacity-0 transition-opacity duration-200 group-hover:opacity-40"
+                          />
+                        )}
+                      </button>
+                    </motion.div>
+                  );
+                })}
+              </nav>
+
+              {/* Socials */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.38, duration: 0.28 }}
+                className="flex items-center justify-center gap-5 border-t border-explorerBorder/40 px-7 py-6"
+              >
+                {[
+                  { id: "github",   icon: "mdi:github",   url: personal.github },
+                  { id: "linkedin", icon: "mdi:linkedin",  url: personal.linkedin },
+                  { id: "email",    icon: "lucide:mail",   url: `mailto:${personal.email}` },
+                ].map((s) => (
+                  <a
+                    key={s.id}
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.id}
+                    className="flex h-9 w-9 items-center justify-center rounded-lg text-textColor/30 transition-colors duration-200 hover:text-accentColor"
+                  >
+                    <Icon icon={s.icon} width="18" height="18" />
+                  </a>
+                ))}
               </motion.div>
             </motion.div>
           </>
