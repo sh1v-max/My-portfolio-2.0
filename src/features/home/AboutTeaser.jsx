@@ -23,12 +23,7 @@ const QUICK_STATS = [
 
 export default function AboutTeaser() {
   return (
-    <section className="relative overflow-hidden py-16 md:py-24">
-      {/* Ambient glow — accentColor atmosphere, upper-right */}
-      <div
-        className="pointer-events-none absolute -right-24 -top-12 h-96 w-96 rounded-full bg-accentColor/5 blur-[96px]"
-        aria-hidden="true"
-      />
+    <section className="py-16 md:py-24">
 
       <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
 

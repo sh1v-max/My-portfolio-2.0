@@ -16,12 +16,7 @@ const featured = projects.filter((p) => p.title !== "Coming Soon...").slice(0, 3
 
 export default function WorkTeaser() {
   return (
-    <section className="relative overflow-hidden py-16 md:py-24">
-      {/* Ambient glow — left-center, different position from AboutTeaser */}
-      <div
-        className="pointer-events-none absolute -left-32 top-1/3 h-96 w-96 rounded-full bg-accentColor/5 blur-[96px]"
-        aria-hidden="true"
-      />
+    <section className="py-16 md:py-24">
 
       <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
 

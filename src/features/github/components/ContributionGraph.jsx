@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import CalendarModule from "react-github-calendar";
-import { Icon } from "@iconify/react";
 
 const ActivityCalendar = CalendarModule.default || CalendarModule;
 
@@ -70,11 +69,13 @@ export default function ContributionGraph({ theme }) {
     };
   }, [year]);
 
+  const years = [currentYear, currentYear - 1, currentYear - 2, currentYear - 3];
+
   return (
     <div className="border-explorerBorder bg-articleBg flex flex-col overflow-hidden rounded-2xl border p-5 shadow-sm md:p-8">
-      <div className="mb-8 flex flex-col items-start justify-between gap-6 md:flex-row md:items-start">
+      <div className="mb-8 flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
         <div className="max-w-2xl space-y-3">
-          <h2 className="text-3xl font-bold tracking-tight text-white">
+          <h2 className="text-textColor text-3xl font-bold tracking-tight">
             GitHub Contributions
           </h2>
           <p className="text-textColor/70 font-mono text-sm leading-relaxed">
@@ -84,22 +85,26 @@ export default function ContributionGraph({ theme }) {
           </p>
         </div>
 
-        <div className="relative shrink-0">
-          <select
-            value={year}
-            onChange={(e) => setYear(Number(e.target.value))}
-            className="border-accentColor/40 bg-articleBg focus:border-accentColor focus:ring-accentColor/20 cursor-pointer appearance-none rounded-xl border px-6 py-2.5 pr-10 text-sm font-bold text-white transition-all focus:outline-none focus:ring-2"
-          >
-            <option value={currentYear}>{currentYear}</option>
-            <option value={currentYear - 1}>{currentYear - 1}</option>
-            <option value={currentYear - 2}>{currentYear - 2}</option>
-            <option value={currentYear - 3}>{currentYear - 3}</option>
-          </select>
-          <Icon
-            icon="lucide:chevron-down"
-            className="text-textColor/50 pointer-events-none absolute right-3 top-1/2 -translate-y-1/2"
-            width="16"
-          />
+        {/* Year tabs */}
+        <div className="border-explorerBorder flex shrink-0 items-center gap-1 rounded-xl border p-1">
+          {years.map((y) => {
+            const active = year === y;
+            return (
+              <button
+                key={y}
+                onClick={() => setYear(y)}
+                className={`rounded-lg px-3 py-1.5 text-xs font-bold tabular-nums transition-all duration-200 focus-visible:outline-2 focus-visible:outline-accentColor ${
+                  active
+                    ? "bg-accentColor/15 text-accentColor shadow-sm"
+                    : "text-textColor/45 hover:bg-explorerBorder/30 hover:text-textColor/80"
+                }`}
+                aria-pressed={active}
+                aria-label={`Show ${y} contributions`}
+              >
+                {y}
+              </button>
+            );
+          })}
         </div>
       </div>
 

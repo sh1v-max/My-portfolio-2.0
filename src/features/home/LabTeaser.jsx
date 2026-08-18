@@ -16,11 +16,7 @@ const preview = miniProjects.slice(0, 3);
 
 export default function LabTeaser() {
   return (
-    <section className="relative overflow-hidden py-16 md:py-20">
-      <div
-        className="pointer-events-none absolute right-0 top-0 h-64 w-64 rounded-full bg-accentColor/5 blur-[72px]"
-        aria-hidden="true"
-      />
+    <section className="py-16 md:py-20">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
 
         {/* Section header */}

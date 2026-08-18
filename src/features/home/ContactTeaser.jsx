@@ -38,12 +38,7 @@ const CHANNELS = [
 
 export default function ContactTeaser() {
   return (
-    <section className="relative overflow-hidden py-16 md:py-24">
-      {/* Ambient glow — bottom-left this time */}
-      <div
-        className="pointer-events-none absolute -bottom-12 -left-24 h-96 w-96 rounded-full bg-accentColor/5 blur-[96px]"
-        aria-hidden="true"
-      />
+    <section className="py-16 md:py-24">
 
       <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
 
