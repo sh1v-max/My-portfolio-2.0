@@ -13,7 +13,16 @@ const hi = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] } },
 };
 
-const SKILLS = ["React 19", "Node.js", "MongoDB", "Framer Motion", "Tailwind CSS v4"];
+const SKILLS = [
+  "React.js",
+  "JavaScript (ES6+)",
+  "Node.js",
+  "Express.js",
+  "MongoDB",
+  "REST APIs",
+  "Generative AI APIs",
+  "Git & GitHub",
+];
 
 const QUICK_STATS = [
   { icon: "lucide:layers", value: "5", label: "Production apps" },
@@ -119,15 +128,21 @@ export default function AboutTeaser() {
             </div>
 
             {/* Skill pills */}
-            <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
+            <div className="flex flex-col gap-3">
+              <p className="text-textColor/40 text-center text-xs font-medium italic lg:text-left">
+                Here are a few technologies I&apos;ve been working with recently:
+              </p>
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-2">
               {SKILLS.map((s) => (
-                <span
+                <li
                   key={s}
-                  className="border-accentColor/20 bg-accentColor/5 text-accentColor/80 rounded-full border px-3.5 py-1 text-xs font-medium"
+                  className="text-textColor/70 flex items-center gap-2 text-sm"
                 >
+                  <span className="text-accentColor shrink-0 text-xs">▹</span>
                   {s}
-                </span>
+                </li>
               ))}
+            </ul>
             </div>
 
             {/* CTA */}
