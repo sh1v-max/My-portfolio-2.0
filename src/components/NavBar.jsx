@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Icon } from "@iconify/react";
 import resumeFile from "../assets/docs/resume.pdf";
 import { personal } from "../data/config";
@@ -57,6 +57,7 @@ function NavBar() {
   const [pulseReady, setPulseReady] = useState(false);
   const { activeSection, isMainPage } = useActiveSection();
   const cardRef = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const onScroll = () => setTickerVisible(window.scrollY <= 4);
@@ -81,6 +82,14 @@ function NavBar() {
     const onScroll = () => setOpen(false);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, [open]);
+
+  // Escape key closes menu — keyboard accessibility
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
   const scrollTo = (id) =>
@@ -120,7 +129,7 @@ function NavBar() {
               onClick={() => setOpen(v => !v)}
               aria-label="Toggle navigation"
               aria-expanded={open}
-              className="group flex items-center gap-2.5 justify-self-start focus-visible:outline-2 focus-visible:outline-accentColor"
+              className="group flex self-stretch items-center gap-2.5 justify-self-start focus-visible:outline-2 focus-visible:outline-accentColor"
             >
               <div className="flex flex-col gap-[4.5px]">
                 <motion.span
@@ -169,7 +178,8 @@ function NavBar() {
               <a
                 href={resumeFile}
                 download="resume.pdf"
-                className="flex items-center gap-1.5 rounded-xl bg-accentColor px-3 py-2 text-[10px] font-black uppercase tracking-wider text-mainBg transition-opacity duration-200 hover:opacity-85 sm:px-4 sm:text-xs"
+                aria-label="Download resume PDF"
+                className="flex items-center gap-1.5 rounded-xl bg-accentColor px-3 py-2 text-[10px] font-black uppercase tracking-wider text-mainBg transition-opacity duration-200 hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentColor sm:px-4 sm:text-xs"
               >
                 <Icon icon="lucide:download" className="h-3 w-3 shrink-0 sm:h-3.5 sm:w-3.5" strokeWidth="3" />
                 <span className="hidden sm:inline">Resume</span>
@@ -185,10 +195,10 @@ function NavBar() {
             <motion.div
               key="mega"
               className="absolute left-0 right-0 top-full z-40 rounded-b-2xl bg-articleBg shadow-[0_20px_48px_rgba(0,0,0,0.38)]"
-              initial={{ clipPath: "inset(0 0 100% 0 round 0 0 1rem 1rem)", y: -10 }}
+              initial={{ clipPath: "inset(0 0 100% 0 round 0 0 1rem 1rem)", y: shouldReduceMotion ? 0 : -10 }}
               animate={{ clipPath: "inset(0 0 0% 0 round 0 0 1rem 1rem)", y: 0 }}
-              exit={{ clipPath: "inset(0 0 100% 0 round 0 0 1rem 1rem)", y: -4, transition: CLIP_CLOSE }}
-              transition={CLIP_OPEN}
+              exit={{ clipPath: "inset(0 0 100% 0 round 0 0 1rem 1rem)", y: 0, transition: shouldReduceMotion ? { duration: 0 } : CLIP_CLOSE }}
+              transition={shouldReduceMotion ? { duration: 0 } : CLIP_OPEN}
               onAnimationComplete={() => setPulseReady(true)}
             >
               {/* Separator */}
@@ -218,7 +228,7 @@ function NavBar() {
                           onClick={() => handleClick(link)}
                           whileHover="hover"
                           whileTap="tap"
-                          className="group flex w-full items-center justify-between border-b border-explorerBorder/15 py-3 text-left sm:py-3.5"
+                          className="group flex w-full cursor-pointer items-center justify-between border-b border-explorerBorder/15 py-3 text-left sm:py-3.5"
                         >
                           <motion.span
                             variants={{
@@ -272,7 +282,7 @@ function NavBar() {
                           onClick={() => handleClick(link)}
                           whileHover="hover"
                           whileTap="tap"
-                          className="group flex w-full items-center justify-between border-b border-explorerBorder/15 py-3 text-left sm:py-3.5"
+                          className="group flex w-full cursor-pointer items-center justify-between border-b border-explorerBorder/15 py-3 text-left sm:py-3.5"
                         >
                           <motion.span
                             variants={{
@@ -341,28 +351,29 @@ function NavBar() {
                   {/* Social links — icon spring-rotates, label slides right */}
                   <div className="flex flex-col gap-3">
                     {[
-                      { icon: "mdi:github",   label: "sh1v-max",    href: personal.github },
-                      { icon: "mdi:linkedin", label: "LinkedIn",      href: personal.linkedin },
-                      { icon: "lucide:mail",  label: personal.email, href: `mailto:${personal.email}` },
+                      { icon: "lucide:github",   label: "sh1v-max",    href: personal.github,   external: true },
+                      { icon: "lucide:linkedin", label: "LinkedIn",     href: personal.linkedin, external: true },
+                      { icon: "lucide:mail",     label: personal.email, sectionId: "contact",    external: false },
                     ].map((s, si) => (
                       <motion.a
                         key={s.icon}
                         custom={11 + si} variants={itemVar} initial="hidden" animate="show"
                         whileHover="hover"
                         whileTap="tap"
-                        href={s.href}
-                        target={s.href.startsWith("mailto") ? undefined : "_blank"}
-                        rel="noopener noreferrer"
-                        className="group flex items-center gap-3 text-textColor/40 transition-colors duration-200 hover:text-accentColor"
+                        href={s.external ? s.href : undefined}
+                        target={s.external ? "_blank" : undefined}
+                        rel={s.external ? "noopener noreferrer" : undefined}
+                        onClick={!s.external ? (e) => { e.preventDefault(); setOpen(false); navigate("/contact"); } : undefined}
+                        className="group flex cursor-pointer items-center gap-3 text-textColor/40 transition-colors duration-200 hover:text-accentColor"
                       >
                         <motion.div
                           variants={{
                             hover: { scale: 1.15, rotate: -10, transition: { type: "spring", stiffness: 380, damping: 14 } },
                             tap:   { scale: 0.88, rotate: 0,  transition: { duration: 0.1 } },
                           }}
-                          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-explorerBorder/25 bg-textColor/5 transition-all duration-200 group-hover:border-accentColor/30 group-hover:bg-accentColor/10"
+                          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-explorerBorder/25 bg-textColor/5 transition-all duration-200 group-hover:border-accentColor/30 group-hover:bg-accentColor/10"
                         >
-                          <Icon icon={s.icon} width="15" height="15" />
+                          <Icon icon={s.icon} width="18" height="18" />
                         </motion.div>
                         <motion.span
                           variants={{
@@ -395,10 +406,10 @@ function NavBar() {
         }}
         style={{ pointerEvents: showTicker ? "auto" : "none" }}
       >
-        <div className="mx-auto max-w-7xl overflow-hidden rounded-b-2xl bg-accentColor py-1.75">
+        <div className="mx-auto max-w-7xl overflow-hidden rounded-2xl bg-accentColor py-1.75">
           <motion.div
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+            animate={shouldReduceMotion ? {} : { x: ["0%", "-50%"] }}
+            transition={shouldReduceMotion ? {} : { duration: 28, repeat: Infinity, ease: "linear" }}
             className="flex min-w-max"
           >
             {tickerItems.map((text, i) => (

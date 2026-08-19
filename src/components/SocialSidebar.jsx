@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
+import { useNavigate } from "react-router-dom";
 import { personal } from "../data/config";
 
 const socialLinks = [
@@ -19,6 +20,7 @@ const hoverSpring  = { type: "spring", stiffness: 350, damping: 28 };
 const hoverTween   = { duration: 0.2, ease: "easeOut" };
 
 export default function SocialSidebar() {
+  const navigate = useNavigate();
   return (
     <>
       {/* ── Left: social icons ── */}
@@ -75,7 +77,8 @@ export default function SocialSidebar() {
             transition={{ delay: 1, duration: 0.45, ease: "easeOut" }}
           >
             <motion.a
-              href={`mailto:${personal.email}`}
+              href="/contact"
+              onClick={(e) => { e.preventDefault(); navigate("/contact"); }}
               whileHover={{ y: -3, scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               transition={hoverTween}

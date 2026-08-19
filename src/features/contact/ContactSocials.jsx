@@ -1,7 +1,17 @@
+import { useState } from "react";
 import { Icon } from "@iconify/react";
 import { personal } from "../../data/config";
 
 function ContactSocials() {
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText(personal.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
   const mainLinks = [
     {
       social: "Email",
@@ -66,7 +76,7 @@ function ContactSocials() {
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accentColor/5 text-accentColor transition-all duration-300 group-hover:scale-110 group-hover:bg-accentColor/10">
                 {link.icon}
               </div>
-              
+
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-semibold text-textColor/60">
                   {link.social}
@@ -75,6 +85,25 @@ function ContactSocials() {
                   {link.un}
                 </p>
               </div>
+
+              {/* Copy button — email only */}
+              {link.social === "Email" && (
+                <button
+                  onClick={copyEmail}
+                  title={copied ? "Copied!" : "Copy email"}
+                  className={`shrink-0 flex h-9 w-9 items-center justify-center rounded-xl border transition-all duration-200 ${
+                    copied
+                      ? "border-accentColor/50 bg-accentColor/15 text-accentColor"
+                      : "border-explorerBorder/50 bg-textColor/5 text-textColor/40 hover:border-accentColor/40 hover:bg-accentColor/10 hover:text-accentColor"
+                  }`}
+                >
+                  <Icon
+                    icon={copied ? "lucide:check" : "lucide:copy"}
+                    width="15"
+                    height="15"
+                  />
+                </button>
+              )}
             </a>
           ))}
         </div>

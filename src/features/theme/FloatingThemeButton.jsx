@@ -212,7 +212,7 @@ function MiniMockup({ p, name }) {
 }
 
 // ── Main component ────────────────────────────────────────────────────────────
-function ThemeToggle() {
+function ThemeToggle({ onAccent = false }) {
   const { theme: currentTheme, changeTheme } = useTheme();
   const [open, setOpen]             = useState(false);
   const [hoveredKey, setHoveredKey] = useState(null);
@@ -290,15 +290,21 @@ function ThemeToggle() {
         onClick={() => setOpen(!open)}
         aria-label="Change theme"
         aria-expanded={open}
-        className={`flex h-10 w-10 items-center justify-center rounded-xl transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-accentColor ${
-          open ? "bg-accentColor/10" : "hover:bg-explorerBorder/25"
+        className={`flex h-10 w-10 items-center justify-center rounded-xl transition-colors duration-200 focus-visible:outline-2 ${
+          onAccent
+            ? `focus-visible:outline-mainBg ${open ? "bg-mainBg/20" : "hover:bg-mainBg/15"}`
+            : `focus-visible:outline-accentColor ${open ? "bg-accentColor/10" : "hover:bg-explorerBorder/25"}`
         }`}
       >
         <motion.div
           className={`h-6 w-6 overflow-hidden rounded-full border-2 transition-all duration-300 ${
             open
-              ? "border-accentColor shadow-[0_0_12px_color-mix(in_srgb,var(--color-accentColor)_45%,transparent)]"
-              : "border-explorerBorder/60"
+              ? onAccent
+                ? "border-mainBg/70 shadow-[0_0_12px_rgba(0,0,0,0.3)]"
+                : "border-accentColor shadow-[0_0_12px_color-mix(in_srgb,var(--color-accentColor)_45%,transparent)]"
+              : onAccent
+                ? "border-mainBg/40 hover:border-mainBg/70"
+                : "border-explorerBorder/60"
           }`}
           animate={{ rotate: spinCount * 360 }}
           transition={SPRING_SOFT}
