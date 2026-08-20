@@ -1,4 +1,4 @@
-# Git Log
+# Git Commits
 
 | Hash | Date | Message |
 |------|------|---------|
