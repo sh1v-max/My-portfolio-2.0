@@ -33,17 +33,13 @@ function Projects({ asSection = false }) {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
 
-      // Use elementFromPoint so the View button (pointer-events-auto) never
-      // incorrectly resets hover — if the cursor is over the preview overlay
-      // we preserve the current hovered row.
-      const el = document.elementFromPoint(e.clientX, e.clientY);
+      const el  = document.elementFromPoint(e.clientX, e.clientY);
       const row = el?.closest("[data-project-row]");
       if (row) {
         setHoveredIdx(Number(row.dataset.projectRow));
       } else if (!el?.closest("[data-project-preview]")) {
         setHoveredIdx(-1);
       }
-      // cursor over preview → keep current index
     };
     window.addEventListener("mousemove", handle);
     return () => window.removeEventListener("mousemove", handle);
@@ -69,13 +65,15 @@ function Projects({ asSection = false }) {
           className="relative overflow-hidden rounded-2xl border border-white/10 shadow-[0_32px_80px_rgba(0,0,0,0.8)]"
           style={{ width: 420, height: 272 }}
         >
+          {/* All images always in DOM — only opacity animates.          */}
+          {/* No mount/unmount = zero jitter when crossing between rows. */}
           {cinemaProjects.map((project, i) => (
             <motion.img
               key={project.title}
               src={project.image}
               alt=""
               animate={{ opacity: hoveredIdx === i ? 1 : 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               className="absolute inset-0 h-full w-full object-cover object-top"
             />
           ))}
