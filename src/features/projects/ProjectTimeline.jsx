@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 
@@ -69,6 +70,14 @@ const fadeUp = {
 };
 
 export default function ProjectTimeline() {
+  const timelineRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 0.85", "end 0.15"],
+  });
+  // Spring-smoothed line that draws itself as you scroll
+  const lineScaleY = useSpring(scrollYProgress, { stiffness: 75, damping: 22, restDelta: 0.001 });
+
   return (
     <section className="pb-16 md:pb-24">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
@@ -91,10 +100,16 @@ export default function ProjectTimeline() {
         </motion.div>
 
         {/* ── Timeline ── */}
-        <div className="relative">
+        <div ref={timelineRef} className="relative">
 
-          {/* Vertical connector line — left on mobile, center on desktop */}
-          <div className="bg-explorerBorder absolute bottom-0 left-5 top-6 w-px md:left-1/2 md:-translate-x-1/2" />
+          {/* Faint track — always visible */}
+          <div className="bg-explorerBorder/40 absolute bottom-0 left-5 top-6 w-px md:left-1/2 md:-translate-x-1/2" />
+
+          {/* Scroll-driven accent fill line */}
+          <motion.div
+            style={{ scaleY: lineScaleY, originY: 0 }}
+            className="bg-accentColor/35 absolute bottom-0 left-5 top-6 w-px md:left-1/2 md:-translate-x-1/2"
+          />
 
           {timelineData.map((item, i) => (
             <TimelineEntry
@@ -118,12 +133,15 @@ function TimelineEntry({ item, index, isLast }) {
   const dotBg    = isCompleted ? "bg-successBg"         : "bg-accentColor/10";
   const iconColor = isCompleted ? "text-successText"    : "text-accentColor";
 
+  // Desktop: left cards slide from left, right cards from right
+  const desktopX = isLeft ? -40 : 40;
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, x: desktopX, y: 20 }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+      transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
       className={`relative ${isLast ? "pb-0" : "pb-10 md:pb-14"}`}
     >
 

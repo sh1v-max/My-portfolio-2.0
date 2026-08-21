@@ -24,6 +24,7 @@
  */
 
 import { useRef, useState, useEffect, useCallback } from "react";
+import { useScroll, useTransform } from "framer-motion";
 import { motion, AnimatePresence } from "framer-motion";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
@@ -185,22 +186,66 @@ function Projects({ asSection = false }) {
   );
 }
 
+// ─── Scene animation variants ────────────────────────────────────────────────
+const sceneContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.13, delayChildren: 0.05 } },
+};
+const tagsGroup = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.07 } },
+};
+const tagItem = {
+  hidden: { clipPath: "inset(0 100% 0 0)", opacity: 0.6 },
+  show: {
+    clipPath: "inset(0 0% 0 0)",
+    opacity: 1,
+    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+const titleGroup = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.09 } },
+};
+const wordSlide = {
+  hidden: { y: "108%", opacity: 0 },
+  show: { y: "0%", opacity: 1, transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] } },
+};
+const fadeSlide = {
+  hidden: { opacity: 0, y: 22 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] } },
+};
+
 // ─── CinematicScene ──────────────────────────────────────────────────────────
 function CinematicScene({ project, index, total }) {
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  // Parallax: bg travels ±8% as section scrolls through viewport
+  const bgY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
+
+  const words = project.title.split(" ");
+
   return (
     <section
+      ref={sectionRef}
       aria-label={`${project.title} — project ${index + 1} of ${total}`}
       className="relative flex min-h-screen items-center justify-center overflow-hidden"
     >
-      {/* ── Ambient background: blurred project screenshot ── */}
-      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <img
+      {/* ── Ambient background — parallax blurred screenshot ── */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <motion.img
           src={project.image}
           alt=""
-          className="h-full w-full scale-110 object-cover object-top opacity-[0.22]"
-          style={{ filter: "blur(52px) brightness(1.8) saturate(1.3)", willChange: "transform" }}
+          style={{
+            y: bgY,
+            filter: "blur(52px) brightness(1.8) saturate(1.3)",
+          }}
+          className="absolute inset-0 h-full w-full scale-110 object-cover object-top opacity-[0.22]"
         />
-        {/* Four-directional vignette via layered gradients — uses theme token */}
+        {/* Vignettes */}
         <div className="absolute inset-x-0 top-0 h-1/2 bg-linear-to-b from-mainBg/55 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-t from-mainBg via-mainBg/60 to-transparent" />
         <div className="absolute inset-y-0 left-0 w-1/3 bg-linear-to-r from-mainBg/55 to-transparent" />
@@ -219,39 +264,58 @@ function CinematicScene({ project, index, total }) {
         {String(index + 1).padStart(2, "0")}&thinsp;/&thinsp;{String(total).padStart(2, "0")}
       </motion.div>
 
-      {/* ── Main content ── */}
+      {/* ── Main content — staggered variant tree ── */}
       <motion.div
-        initial={{ opacity: 0, y: 52 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        variants={sceneContainer}
+        initial="hidden"
+        whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.95, ease: [0.25, 0.1, 0.25, 1] }}
         className="relative z-10 mx-auto max-w-3xl px-6 py-16 text-center"
       >
-        {/* Tech stack tags */}
-        <div className="mb-8 flex flex-wrap items-center justify-center gap-2">
+        {/* Tech stack tags — clip-path wipe stagger */}
+        <motion.div
+          variants={tagsGroup}
+          className="mb-8 flex flex-wrap items-center justify-center gap-2"
+        >
           {project.tags.slice(0, 5).map((tag) => (
-            <span
+            <motion.span
               key={tag}
+              variants={tagItem}
               className="rounded-full border border-accentColor/15 px-2.5 py-0.5 font-mono text-[10px] tracking-wide text-accentColor/55"
             >
               {tag}
+            </motion.span>
+          ))}
+        </motion.div>
+
+        {/* Project title — per-word masked slide-up */}
+        <motion.h2
+          variants={titleGroup}
+          className="mb-5 text-5xl font-bold leading-none tracking-tight text-textColor sm:text-6xl md:text-7xl lg:text-8xl"
+        >
+          {words.map((word, i) => (
+            <span key={i} className="inline-block overflow-hidden align-bottom leading-tight">
+              <motion.span variants={wordSlide} className="inline-block">
+                {word}
+                {i < words.length - 1 ? " " : ""}
+              </motion.span>
             </span>
           ))}
-        </div>
+        </motion.h2>
 
-        {/* Project title — the thesis of each scene */}
-        <h2 className="mb-5 text-5xl font-bold leading-none tracking-tight text-textColor sm:text-6xl md:text-7xl lg:text-8xl">
-          {project.title}
-        </h2>
-
-        {/* Description — clamped to 3 lines + min-height so title sits at the same
-            Y position across all scenes regardless of description length */}
-        <p className="mx-auto mb-10 line-clamp-3 min-h-20 max-w-xl text-base leading-relaxed text-textColor/55 md:min-h-22 md:text-lg">
+        {/* Description */}
+        <motion.p
+          variants={fadeSlide}
+          className="mx-auto mb-10 line-clamp-3 min-h-20 max-w-xl text-base leading-relaxed text-textColor/55 md:min-h-22 md:text-lg"
+        >
           {project.description}
-        </p>
+        </motion.p>
 
         {/* Action CTAs */}
-        <div className="flex flex-wrap items-center justify-center gap-4">
+        <motion.div
+          variants={fadeSlide}
+          className="flex flex-wrap items-center justify-center gap-4"
+        >
           {project.caseStudy && (
             <Link
               to={project.caseStudy}
@@ -287,10 +351,10 @@ function CinematicScene({ project, index, total }) {
               <Icon icon="lucide:github" className="h-4 w-4" />
             </a>
           )}
-        </div>
+        </motion.div>
       </motion.div>
 
-      {/* ── Project screenshot peek — emerges from bottom edge ── */}
+      {/* ── Project screenshot peek — browser chrome + bottom emerge ── */}
       <motion.div
         initial={{ opacity: 0, y: 28 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -298,16 +362,28 @@ function CinematicScene({ project, index, total }) {
         transition={{ duration: 1.1, delay: 0.42, ease: [0.25, 0.1, 0.25, 1] }}
         className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center"
       >
-        <div className="relative w-[76vw] max-w-3xl overflow-hidden rounded-t-2xl border-t border-l border-r border-textColor/5 shadow-[0_-24px_80px_rgba(0,0,0,0.4)]">
-          {/* Fade the screenshot into the background from the bottom */}
-          <div className="absolute inset-x-0 bottom-0 z-10 h-3/4 bg-linear-to-t from-mainBg via-mainBg/70 to-transparent" />
-          {/* Subtle top fade */}
-          <div className="absolute inset-x-0 top-0 z-10 h-1/4 bg-linear-to-b from-mainBg/60 to-transparent" />
+        <div className="relative w-[76vw] max-w-3xl overflow-hidden rounded-t-xl border-t border-l border-r border-textColor/8 shadow-[0_-24px_80px_rgba(0,0,0,0.45)]">
+          {/* Minimal browser chrome bar */}
+          <div className="flex items-center gap-1.5 border-b border-textColor/5 bg-mainBg/60 px-3 py-2 backdrop-blur-sm">
+            <span className="h-2 w-2 rounded-full bg-red-400/35" />
+            <span className="h-2 w-2 rounded-full bg-yellow-400/35" />
+            <span className="h-2 w-2 rounded-full bg-green-400/35" />
+            <div className="ml-2 flex-1 rounded-sm bg-white/5 px-2 py-0.5">
+              <span className="font-mono text-[9px] tracking-wide text-textColor/20">
+                {project.demo
+                  ? (() => { try { return new URL(project.demo).hostname; } catch { return "localhost"; } })()
+                  : "localhost:5173"}
+              </span>
+            </div>
+          </div>
+          {/* Screenshot */}
+          <div className="absolute inset-x-0 bottom-0 z-10 h-4/5 bg-linear-to-t from-mainBg via-mainBg/75 to-transparent" />
+          <div className="absolute inset-x-0 top-0 z-10 h-1/5 bg-linear-to-b from-mainBg/40 to-transparent" />
           <img
             src={project.image}
             alt=""
             aria-hidden="true"
-            className="w-full object-cover object-top opacity-30"
+            className="w-full object-cover object-top opacity-35"
             style={{ maxHeight: "220px" }}
           />
         </div>

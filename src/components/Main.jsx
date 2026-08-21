@@ -1,12 +1,13 @@
+import { useEffect } from "react";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
 import Pages from "./Pages";
 import BottomNav from "./BottomNav";
 import SocialSidebar from "./SocialSidebar";
 import { useTheme } from "../context/ThemeContext";
-import { useLocation } from "react-router-dom";
 import ScrollToTop from "./ScrollToTop";
 import { Toaster } from "react-hot-toast";
+import Lenis from "lenis";
 
 const themeTokens = {
   github:    { bg: "#24292e", accent: "#f9826c" },
@@ -20,6 +21,25 @@ const themeTokens = {
 function Main() {
   const { theme } = useTheme();
   const tokens = themeTokens[theme] ?? themeTokens.github;
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smooth: true,
+      smoothTouch: false,
+    });
+    let rafId;
+    function raf(time) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+    rafId = requestAnimationFrame(raf);
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+    };
+  }, []);
 
   return (
     <>
