@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
@@ -20,18 +20,16 @@ const headerItem = {
 
 function Projects({ asSection = false }) {
   const [hoveredIdx, setHoveredIdx] = useState(-1);
+  const lastHoveredRef = useRef(0);
+  if (hoveredIdx >= 0) lastHoveredRef.current = hoveredIdx;
 
-  // Cursor-tracking motion values for the floating image preview
   const cursorX = useMotionValue(-400);
   const cursorY = useMotionValue(-400);
-  const springX = useSpring(cursorX, { stiffness: 180, damping: 28, mass: 0.8 });
-  const springY = useSpring(cursorY, { stiffness: 180, damping: 28, mass: 0.8 });
+  const springX = useSpring(cursorX, { stiffness: 75, damping: 18, mass: 1.2 });
+  const springY = useSpring(cursorY, { stiffness: 75, damping: 18, mass: 1.2 });
 
   useEffect(() => {
-    const handle = (e) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
-    };
+    const handle = (e) => { cursorX.set(e.clientX); cursorY.set(e.clientY); };
     window.addEventListener("mousemove", handle);
     return () => window.removeEventListener("mousemove", handle);
   }, [cursorX, cursorY]);
@@ -40,34 +38,41 @@ function Projects({ asSection = false }) {
     <HelmetProvider>
       {!asSection && <Helmet><title>Shiv | Projects</title></Helmet>}
 
-      {/* ── Floating image preview — cursor-following, desktop only ── */}
+      {/* ── Floating image preview — cursor-centered, desktop only ── */}
+      {/* All images pre-rendered and stacked; only opacity changes — no mount/unmount */}
       <motion.div
-        aria-hidden="true"
-        className="pointer-events-none fixed z-[9998] hidden md:block"
-        style={{ left: springX, top: springY, translateX: "24px", translateY: "-50%" }}
-        animate={{ opacity: hoveredIdx >= 0 ? 1 : 0, scale: hoveredIdx >= 0 ? 1 : 0.84 }}
-        transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+        className="pointer-events-none fixed z-9998 hidden md:block"
+        style={{ left: springX, top: springY, translateX: "-50%", translateY: "-50%" }}
+        animate={{ opacity: hoveredIdx >= 0 ? 1 : 0, scale: hoveredIdx >= 0 ? 1 : 0.9 }}
+        transition={{
+          opacity: { duration: 0.2, delay: hoveredIdx >= 0 ? 0 : 0.25 },
+          scale:   { duration: 0.35, delay: hoveredIdx >= 0 ? 0 : 0.25, ease: [0.22, 1, 0.36, 1] },
+        }}
       >
-        <AnimatePresence mode="wait">
-          {hoveredIdx >= 0 && (
-            <motion.div
-              key={cinemaProjects[hoveredIdx]?.title}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.18 }}
-              className="overflow-hidden rounded-xl border border-white/8 shadow-[0_24px_64px_rgba(0,0,0,0.75)]"
-              style={{ width: 268 }}
-            >
-              <img
-                src={cinemaProjects[hoveredIdx]?.image}
-                alt=""
-                className="h-44 w-full object-cover object-top"
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent" />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <div
+          className="relative overflow-hidden rounded-2xl border border-white/10 shadow-[0_32px_80px_rgba(0,0,0,0.8)]"
+          style={{ width: 420, height: 272 }}
+        >
+          {cinemaProjects.map((project, i) => (
+            <motion.img
+              key={project.title}
+              src={project.image}
+              alt=""
+              animate={{ opacity: hoveredIdx === i ? 1 : 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="absolute inset-0 h-full w-full object-cover object-top"
+            />
+          ))}
+          <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent" />
+          {/* View badge — purely visual, pointer-events-none so it never */}
+          {/* fires mouseleave on the row beneath it                       */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-16 w-16 select-none items-center justify-center rounded-full bg-accentColor text-sm font-bold text-mainBg shadow-lg"
+          >
+            View
+          </div>
+        </div>
       </motion.div>
 
       {/* ── Page header — kept exactly as designed ── */}
@@ -140,8 +145,6 @@ function ProjectRow({ project, index, isFirst, hovered, onHover, onLeave }) {
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
-      onFocus={onHover}
-      onBlur={onLeave}
       className="group relative"
     >
       {/* Top rule — only on first entry (others get rule from previous entry's bottom) */}
@@ -153,7 +156,7 @@ function ProjectRow({ project, index, isFirst, hovered, onHover, onLeave }) {
         <div
           className={`pointer-events-none absolute inset-0 -mx-4 rounded-xl transition-opacity duration-500 sm:-mx-6 md:-mx-8 ${
             hovered ? "opacity-100" : "opacity-0"
-          } bg-accentColor/[0.03]`}
+          } bg-accentColor/3`}
           aria-hidden="true"
         />
 
