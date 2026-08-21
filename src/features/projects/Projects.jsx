@@ -168,7 +168,7 @@ function ProjectRow({ project, index, isFirst, hovered }) {
         <div
           className={`pointer-events-none absolute inset-0 -mx-4 rounded-xl transition-opacity duration-500 sm:-mx-6 md:-mx-8 ${
             hovered ? "opacity-100" : "opacity-0"
-          } bg-accentColor/3`}
+          } bg-accentColor/5`}
           aria-hidden="true"
         />
 
@@ -177,7 +177,7 @@ function ProjectRow({ project, index, isFirst, hovered }) {
           <span
             aria-hidden="true"
             className={`shrink-0 pt-1.5 font-mono text-xs leading-none transition-colors duration-400 md:pt-2.5 ${
-              hovered ? "text-accentColor/55" : "text-textColor/18"
+              hovered ? "text-accentColor/70" : "text-textColor/40"
             }`}
           >
             {String(index + 1).padStart(2, "0")}
@@ -195,7 +195,7 @@ function ProjectRow({ project, index, isFirst, hovered }) {
             </h2>
 
             {/* Description */}
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-textColor/40 md:text-[0.9375rem]">
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-textColor/65 md:text-[0.9375rem]">
               {project.description.length > 150
                 ? project.description.slice(0, 150) + "…"
                 : project.description}
@@ -208,8 +208,8 @@ function ProjectRow({ project, index, isFirst, hovered }) {
                   key={tag}
                   className={`rounded-full border px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider transition-colors duration-300 ${
                     hovered
-                      ? "border-accentColor/15 text-accentColor/50"
-                      : "border-textColor/8 text-textColor/22"
+                      ? "border-accentColor/30 text-accentColor/70"
+                      : "border-textColor/20 text-textColor/45"
                   }`}
                 >
                   {tag}
@@ -222,7 +222,7 @@ function ProjectRow({ project, index, isFirst, hovered }) {
               {project.caseStudy && (
                 <Link
                   to={project.caseStudy}
-                  className="group/cta inline-flex min-h-11 items-center gap-2 rounded-full border border-textColor/12 px-5 py-2.5 text-sm font-medium text-textColor/45 transition-all duration-300 hover:border-accentColor/40 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor"
+                  className="group/cta inline-flex min-h-11 items-center gap-2 rounded-full border border-textColor/25 px-5 py-2.5 text-sm font-medium text-textColor/70 transition-all duration-300 hover:border-accentColor/50 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor"
                 >
                   Case Study
                   <Icon
@@ -237,7 +237,7 @@ function ProjectRow({ project, index, isFirst, hovered }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${project.title} live demo, opens in new tab`}
-                  className="group/cta inline-flex min-h-11 items-center gap-2 rounded-full border border-textColor/12 px-5 py-2.5 text-sm text-textColor/35 transition-all duration-300 hover:border-accentColor/35 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor"
+                  className="group/cta inline-flex min-h-11 items-center gap-2 rounded-full border border-textColor/25 px-5 py-2.5 text-sm text-textColor/60 transition-all duration-300 hover:border-accentColor/50 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor"
                 >
                   Live Demo
                   <Icon
@@ -252,7 +252,7 @@ function ProjectRow({ project, index, isFirst, hovered }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${project.title} source code on GitHub`}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-textColor/10 text-textColor/22 transition-all duration-300 hover:border-accentColor/35 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-textColor/25 text-textColor/50 transition-all duration-300 hover:border-accentColor/50 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor"
                 >
                   <Icon icon="lucide:github" className="h-4 w-4" />
                 </a>
@@ -271,7 +271,7 @@ function ProjectRow({ project, index, isFirst, hovered }) {
 // Thin horizontal rule with accent sweep on hover (scaleX = no layout reflow)
 function Rule({ hovered }) {
   return (
-    <div className="relative h-px w-full bg-textColor/7">
+    <div className="relative h-px w-full bg-textColor/12">
       <motion.div
         className="absolute inset-0 origin-left bg-accentColor/40"
         animate={{ scaleX: hovered ? 1 : 0 }}
