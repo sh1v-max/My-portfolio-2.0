@@ -29,7 +29,22 @@ function Projects({ asSection = false }) {
   const springY = useSpring(cursorY, { stiffness: 75, damping: 18, mass: 1.2 });
 
   useEffect(() => {
-    const handle = (e) => { cursorX.set(e.clientX); cursorY.set(e.clientY); };
+    const handle = (e) => {
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
+
+      // Use elementFromPoint so the View button (pointer-events-auto) never
+      // incorrectly resets hover — if the cursor is over the preview overlay
+      // we preserve the current hovered row.
+      const el = document.elementFromPoint(e.clientX, e.clientY);
+      const row = el?.closest("[data-project-row]");
+      if (row) {
+        setHoveredIdx(Number(row.dataset.projectRow));
+      } else if (!el?.closest("[data-project-preview]")) {
+        setHoveredIdx(-1);
+      }
+      // cursor over preview → keep current index
+    };
     window.addEventListener("mousemove", handle);
     return () => window.removeEventListener("mousemove", handle);
   }, [cursorX, cursorY]);
@@ -41,6 +56,7 @@ function Projects({ asSection = false }) {
       {/* ── Floating image preview — cursor-centered, desktop only ── */}
       {/* All images pre-rendered and stacked; only opacity changes — no mount/unmount */}
       <motion.div
+        data-project-preview
         className="pointer-events-none fixed z-9998 hidden md:block"
         style={{ left: springX, top: springY, translateX: "-50%", translateY: "-50%" }}
         animate={{ opacity: hoveredIdx >= 0 ? 1 : 0, scale: hoveredIdx >= 0 ? 1 : 0.9 }}
@@ -64,14 +80,15 @@ function Projects({ asSection = false }) {
             />
           ))}
           <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent" />
-          {/* View badge — purely visual, pointer-events-none so it never */}
-          {/* fires mouseleave on the row beneath it                       */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-16 w-16 select-none items-center justify-center rounded-full bg-accentColor text-sm font-bold text-mainBg shadow-lg"
+          {/* View button — pointer-events-auto to be clickable;          */}
+          {/* elementFromPoint logic above handles hover-state correctly  */}
+          <Link
+            to={cinemaProjects[lastHoveredRef.current]?.caseStudy || "#"}
+            aria-label={`View ${cinemaProjects[lastHoveredRef.current]?.title} case study`}
+            className="pointer-events-auto absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-16 w-16 cursor-pointer items-center justify-center rounded-full bg-accentColor text-sm font-bold text-mainBg shadow-lg transition-transform duration-200 hover:scale-110 active:scale-95"
           >
             View
-          </div>
+          </Link>
         </div>
       </motion.div>
 
@@ -122,8 +139,6 @@ function Projects({ asSection = false }) {
               index={i}
               isFirst={i === 0}
               hovered={hoveredIdx === i}
-              onHover={() => setHoveredIdx(i)}
-              onLeave={() => setHoveredIdx(-1)}
             />
           ))}
         </div>
@@ -136,15 +151,14 @@ function Projects({ asSection = false }) {
 }
 
 // ─── Single project row ───────────────────────────────────────────────────────
-function ProjectRow({ project, index, isFirst, hovered, onHover, onLeave }) {
+function ProjectRow({ project, index, isFirst, hovered }) {
   return (
     <motion.article
+      data-project-row={index}
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.12 }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      onMouseEnter={onHover}
-      onMouseLeave={onLeave}
       className="group relative"
     >
       {/* Top rule — only on first entry (others get rule from previous entry's bottom) */}
