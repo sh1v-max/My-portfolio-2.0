@@ -24,8 +24,7 @@
  */
 
 import { useRef, useState, useEffect, useCallback } from "react";
-import { useScroll, useTransform } from "framer-motion";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
@@ -105,7 +104,7 @@ function Projects({ asSection = false }) {
                 key={p.title}
                 onClick={() => scrollToScene(i)}
                 aria-label={`${p.title}, chapter ${i + 1}`}
-                className="group relative flex items-center justify-center"
+                className="group relative flex min-h-11 min-w-11 items-center justify-center"
               >
                 {/* Hover tooltip — appears to the left */}
                 <span className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded-md border border-explorerBorder bg-articleBg px-2.5 py-1 text-xs text-textColor opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100">
@@ -223,8 +222,8 @@ function CinematicScene({ project, index, total }) {
     target: sectionRef,
     offset: ["start end", "end start"],
   });
-  // Parallax: bg travels ±8% as section scrolls through viewport
-  const bgY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
+  // Parallax: ±4% keeps translate within the scale-110 (5%) buffer — no edge bleed
+  const bgY = useTransform(scrollYProgress, [0, 1], ["-4%", "4%"]);
 
   const words = project.title.split(" ");
 
@@ -232,13 +231,15 @@ function CinematicScene({ project, index, total }) {
     <section
       ref={sectionRef}
       aria-label={`${project.title} — project ${index + 1} of ${total}`}
-      className="relative flex min-h-screen items-center justify-center overflow-hidden"
+      className="relative flex min-h-dvh items-center justify-center overflow-hidden"
     >
       {/* ── Ambient background — parallax blurred screenshot ── */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         <motion.img
           src={project.image}
           alt=""
+          aria-hidden="true"
+          loading={index === 0 ? "eager" : "lazy"}
           style={{
             y: bgY,
             filter: "blur(52px) brightness(1.8) saturate(1.3)",
@@ -383,6 +384,7 @@ function CinematicScene({ project, index, total }) {
             src={project.image}
             alt=""
             aria-hidden="true"
+            loading="lazy"
             className="w-full object-cover object-top opacity-35"
             style={{ maxHeight: "220px" }}
           />
