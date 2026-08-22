@@ -6,6 +6,16 @@ import portfolio from "../../assets/images/portfolio/portfolio.png";
 
 export const projects = [
   {
+    title: "Portfolio",
+    description:
+      "A developer portfolio with multiple themes, a beautiful UI, and smooth animations.",
+    image: portfolio,
+    tags: ["react", "tailwind", "vite", "react-router", "context-api", "tw-colors", "react-helmet-async"],
+    sourceCode: "https://github.com/sh1v-max/My-portfolio-2.0",
+    demo: "https://singhshiv.netlify.app/",
+    caseStudy: "/projects/portfolio",
+  },
+  {
     title: "TaskForge",
     description:
       "Full-stack task management app with JWT auth, CRUD operations, filtering, sorting, pagination, and a production-ready Express/MongoDB REST API backed by a 12-test suite.",
@@ -44,16 +54,6 @@ export const projects = [
     sourceCode: "https://github.com/sh1v-max/BookVerse",
     demo: "https://bookversedot.netlify.app/",
     caseStudy: "/projects/bookverse",
-  },
-  {
-    title: "Portfolio",
-    description:
-      "A developer portfolio with multiple themes, a beautiful UI, and smooth animations.",
-    image: portfolio,
-    tags: ["react", "tailwind", "vite", "react-router", "context-api", "tw-colors", "react-helmet-async"],
-    sourceCode: "https://github.com/sh1v-max/My-portfolio-2.0",
-    demo: "https://singhshiv.netlify.app/",
-    caseStudy: "/projects/portfolio",
   },
   {
     title: "Coming Soon...",

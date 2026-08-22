@@ -5,9 +5,16 @@ import { Link } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { projects } from "./project";
 import MiniProjectsCarousel from "./MiniProjectsCarousel";
-import ProjectTimeline from "./ProjectTimeline";
 
 const cinemaProjects = projects.filter((p) => p.title !== "Coming Soon...");
+
+const projectMeta = {
+  "Portfolio":  { period: "Oct 2024", periodEnd: null,       status: "ongoing"   },
+  "TaskForge":  { period: "Sep 2024", periodEnd: null,       status: "ongoing"   },
+  "BookVerse":  { period: "Jun 2024", periodEnd: "Aug 2024", status: "completed" },
+  "Cinegraph":  { period: "Mar 2024", periodEnd: "Jun 2024", status: "completed" },
+  "BiteSwift":  { period: "Nov 2023", periodEnd: "Mar 2024", status: "completed" },
+};
 
 const headerContainer = {
   hidden: { opacity: 0 },
@@ -137,19 +144,19 @@ function Projects({ asSection = false }) {
               index={i}
               isFirst={i === 0}
               hovered={hoveredIdx === i}
+              meta={projectMeta[project.title] ?? null}
             />
           ))}
         </div>
       </section>
 
-      <ProjectTimeline />
       <MiniProjectsCarousel />
     </HelmetProvider>
   );
 }
 
 // ─── Single project row ───────────────────────────────────────────────────────
-function ProjectRow({ project, index, isFirst, hovered }) {
+function ProjectRow({ project, index, isFirst, hovered, meta }) {
   return (
     <motion.article
       data-project-row={index}
@@ -193,6 +200,42 @@ function ProjectRow({ project, index, isFirst, hovered }) {
             >
               {project.title}
             </h2>
+
+            {/* Date + status — animated accent line, period, badge */}
+            {meta && (
+              <div className="mt-2 mb-1 flex flex-wrap items-center gap-2.5">
+                <motion.div
+                  initial={{ scaleX: 0, opacity: 0 }}
+                  whileInView={{ scaleX: 1, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  className="h-px w-10 origin-left bg-linear-to-r from-accentColor/55 to-transparent"
+                />
+                <span className="font-mono text-xs text-textColor/40">
+                  {meta.period}
+                  {meta.periodEnd ? ` — ${meta.periodEnd}` : " — Present"}
+                </span>
+                <span
+                  className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${
+                    meta.status === "completed"
+                      ? "bg-successBg text-successText"
+                      : "bg-accentColor/10 text-accentColor"
+                  }`}
+                >
+                  {meta.status === "completed" ? (
+                    <>
+                      <Icon icon="lucide:check" width="10" />
+                      Completed
+                    </>
+                  ) : (
+                    <>
+                      <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accentColor" />
+                      Ongoing
+                    </>
+                  )}
+                </span>
+              </div>
+            )}
 
             {/* Description */}
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-textColor/65 md:text-[0.9375rem]">
