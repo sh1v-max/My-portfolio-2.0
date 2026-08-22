@@ -348,12 +348,20 @@ p {
     border-radius: 50%;
   }
 
+  /* Neutralize looping / decorative keyframe animations (animate-pulse,
+     the blob, the typewriter caret).
+
+     Transitions are deliberately NOT flattened here. "Reduce" means reduce,
+     not remove: short in-place feedback such as a hover color fade or a
+     few-pixel lift carries no vestibular risk, and killing it makes the UI
+     read as broken rather than calm. Large traveling motion — the mini
+     project marquee, section entrances — is JS-driven and opts out through
+     useReducedMotion() instead, so it stays disabled regardless. */
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
   }
 }
 

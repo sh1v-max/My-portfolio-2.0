@@ -28,6 +28,7 @@ const headerItem = {
 function Projects({ asSection = false }) {
   const [hoveredIdx, setHoveredIdx] = useState(-1);
   const lastHoveredRef = useRef(0);
+  const listRef = useRef(null);
   if (hoveredIdx >= 0) lastHoveredRef.current = hoveredIdx;
 
   const cursorX = useMotionValue(-400);
@@ -37,6 +38,15 @@ function Projects({ asSection = false }) {
 
   useEffect(() => {
     const handle = (e) => {
+      // Bail out entirely once the cursor leaves the editorial list's bounds —
+      // without this, the preview (and its clickable "View" button) can get
+      // stuck live over unrelated sections below, like the mini-project marquee.
+      const bounds = listRef.current?.getBoundingClientRect();
+      if (!bounds || e.clientY < bounds.top || e.clientY > bounds.bottom) {
+        setHoveredIdx(-1);
+        return;
+      }
+
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
 
@@ -85,12 +95,15 @@ function Projects({ asSection = false }) {
             />
           ))}
           <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent" />
-          {/* View button — pointer-events-auto to be clickable;          */}
-          {/* elementFromPoint logic above handles hover-state correctly  */}
+          {/* View button — only clickable while actually hovering a row;   */}
+          {/* otherwise this fixed, cursor-tracking element must never      */}
+          {/* intercept clicks/hover meant for content elsewhere on the page */}
           <Link
             to={cinemaProjects[lastHoveredRef.current]?.caseStudy || "#"}
             aria-label={`View ${cinemaProjects[lastHoveredRef.current]?.title} case study`}
-            className="pointer-events-auto absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-16 w-16 cursor-pointer items-center justify-center rounded-full bg-accentColor text-sm font-bold text-mainBg shadow-lg transition-transform duration-200 hover:scale-110 active:scale-95"
+            tabIndex={hoveredIdx >= 0 ? 0 : -1}
+            style={{ pointerEvents: hoveredIdx >= 0 ? "auto" : "none" }}
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-16 w-16 cursor-pointer items-center justify-center rounded-full bg-accentColor text-sm font-bold text-mainBg shadow-lg transition-transform duration-200 hover:scale-110 active:scale-95"
           >
             View
           </Link>
@@ -135,7 +148,7 @@ function Projects({ asSection = false }) {
       </section>
 
       {/* ── Editorial project list ── */}
-      <section className="pb-8 pt-10 md:pb-16 md:pt-14" aria-label="Featured projects">
+      <section ref={listRef} className="pb-8 pt-10 md:pb-16 md:pt-14" aria-label="Featured projects">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
           {cinemaProjects.map((project, i) => (
             <ProjectRow
