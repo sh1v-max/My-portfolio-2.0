@@ -31,10 +31,19 @@ function Projects({ asSection = false }) {
   const listRef = useRef(null);
   if (hoveredIdx >= 0) lastHoveredRef.current = hoveredIdx;
 
+  // Slightly overdamped and light, so the preview tracks the cursor quickly
+  // with just a hint of trail and no wobble on direction changes.
+  const follow = { stiffness: 200, damping: 24, mass: 0.6 };
   const cursorX = useMotionValue(-400);
   const cursorY = useMotionValue(-400);
-  const springX = useSpring(cursorX, { stiffness: 75, damping: 18, mass: 1.2 });
-  const springY = useSpring(cursorY, { stiffness: 75, damping: 18, mass: 1.2 });
+  const springX = useSpring(cursorX, follow);
+  const springY = useSpring(cursorY, follow);
+
+  const previewOpen = hoveredIdx >= 0;
+  // While closing, keep showing the project we were last on. Binding the image
+  // to hoveredIdx alone fades every image out the instant the cursor leaves,
+  // which empties the preview before the box itself has finished leaving.
+  const shownIdx = previewOpen ? hoveredIdx : lastHoveredRef.current;
 
   useEffect(() => {
     const handle = (e) => {
@@ -67,17 +76,36 @@ function Projects({ asSection = false }) {
       {!asSection && <Helmet><title>Shiv | Projects</title></Helmet>}
 
       {/* ── Floating image preview — cursor-centered, desktop only ── */}
-      {/* All images pre-rendered and stacked; only opacity changes — no mount/unmount */}
+      {/*
+        Two nodes on purpose: the outer one carries position as a transform
+        (x/y rather than left/top, so following the cursor never triggers
+        layout), and the inner one owns the expand/shrink. Centering uses the
+        CSS `translate` property while Framer animates `transform`, so the two
+        compose instead of overwriting each other.
+      */}
       <motion.div
         data-project-preview
-        className="pointer-events-none fixed z-9998 hidden md:block"
-        style={{ left: springX, top: springY, translateX: "-50%", translateY: "-50%" }}
-        animate={{ opacity: hoveredIdx >= 0 ? 1 : 0, scale: hoveredIdx >= 0 ? 1 : 0.9 }}
-        transition={{
-          opacity: { duration: 0.2, delay: hoveredIdx >= 0 ? 0 : 0.25 },
-          scale:   { duration: 0.35, delay: hoveredIdx >= 0 ? 0 : 0.25, ease: [0.22, 1, 0.36, 1] },
-        }}
+        className="pointer-events-none fixed left-0 top-0 z-9998 hidden md:block"
+        style={{ x: springX, y: springY }}
       >
+        <motion.div
+          className="-translate-x-1/2 -translate-y-1/2"
+          animate={{ opacity: previewOpen ? 1 : 0, scale: previewOpen ? 1 : 0.82 }}
+          transition={
+            previewOpen
+              ? {
+                  // Springy expand on entry — the preview arrives with some life.
+                  opacity: { duration: 0.16, ease: "easeOut" },
+                  scale: { type: "spring", stiffness: 320, damping: 22, mass: 0.7 },
+                }
+              : {
+                  // Brief hold before shrinking, so a quick exit still reads as
+                  // the preview trailing the cursor rather than blinking out.
+                  opacity: { duration: 0.22, delay: 0.15, ease: "easeOut" },
+                  scale: { duration: 0.28, delay: 0.15, ease: [0.22, 1, 0.36, 1] },
+                }
+          }
+        >
         <div
           className="relative overflow-hidden rounded-2xl border border-white/10 shadow-[0_32px_80px_rgba(0,0,0,0.8)]"
           style={{ width: 420, height: 272 }}
@@ -89,7 +117,7 @@ function Projects({ asSection = false }) {
               key={project.title}
               src={project.image}
               alt=""
-              animate={{ opacity: hoveredIdx === i ? 1 : 0 }}
+              animate={{ opacity: shownIdx === i ? 1 : 0 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               className="absolute inset-0 h-full w-full object-cover object-top"
             />
@@ -99,15 +127,16 @@ function Projects({ asSection = false }) {
           {/* otherwise this fixed, cursor-tracking element must never      */}
           {/* intercept clicks/hover meant for content elsewhere on the page */}
           <Link
-            to={cinemaProjects[lastHoveredRef.current]?.caseStudy || "#"}
-            aria-label={`View ${cinemaProjects[lastHoveredRef.current]?.title} case study`}
-            tabIndex={hoveredIdx >= 0 ? 0 : -1}
-            style={{ pointerEvents: hoveredIdx >= 0 ? "auto" : "none" }}
+            to={cinemaProjects[shownIdx]?.caseStudy || "#"}
+            aria-label={`View ${cinemaProjects[shownIdx]?.title} case study`}
+            tabIndex={previewOpen ? 0 : -1}
+            style={{ pointerEvents: previewOpen ? "auto" : "none" }}
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-16 w-16 cursor-pointer items-center justify-center rounded-full bg-accentColor text-sm font-bold text-mainBg shadow-lg transition-transform duration-200 hover:scale-110 active:scale-95"
           >
             View
           </Link>
         </div>
+        </motion.div>
       </motion.div>
 
       {/* ── Page header — kept exactly as designed ── */}
