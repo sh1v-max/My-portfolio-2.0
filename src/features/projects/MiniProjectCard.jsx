@@ -56,19 +56,19 @@ function MiniProjectCard({ title, description, image, tags, sourceCode, demo, de
         }`}
       >
         {/* ── Browser chrome bar ── */}
-        <div className="flex h-9 shrink-0 items-center gap-1.5 border-b border-explorerBorder/25 bg-mainBg px-3.5">
+        <div className="flex h-8 shrink-0 items-center gap-1.5 border-b border-explorerBorder/25 bg-mainBg px-3 sm:h-9 sm:px-3.5">
           <span
-            className={`h-2.5 w-2.5 rounded-full transition-colors duration-200 ${
+            className={`h-2 w-2 rounded-full transition-colors duration-200 sm:h-2.5 sm:w-2.5 ${
               hovered ? "bg-[#ff5f57]" : "bg-textColor/15"
             }`}
           />
           <span
-            className={`h-2.5 w-2.5 rounded-full transition-colors duration-200 ${
+            className={`h-2 w-2 rounded-full transition-colors duration-200 sm:h-2.5 sm:w-2.5 ${
               hovered ? "bg-[#ffbd2e]" : "bg-textColor/15"
             }`}
           />
           <span
-            className={`h-2.5 w-2.5 rounded-full transition-colors duration-200 ${
+            className={`h-2 w-2 rounded-full transition-colors duration-200 sm:h-2.5 sm:w-2.5 ${
               hovered ? "bg-[#27c93f]" : "bg-textColor/15"
             }`}
           />
@@ -80,7 +80,7 @@ function MiniProjectCard({ title, description, image, tags, sourceCode, demo, de
         </div>
 
         {/* ── Screenshot ── */}
-        <div className="relative h-44 shrink-0 overflow-hidden">
+        <div className="relative h-32 shrink-0 overflow-hidden sm:h-44">
           <img
             src={image}
             alt={`${title} preview`}
@@ -93,9 +93,9 @@ function MiniProjectCard({ title, description, image, tags, sourceCode, demo, de
         </div>
 
         {/* ── Content ── */}
-        <div className="flex flex-1 flex-col gap-2.5 p-4 pt-3">
+        <div className="flex flex-1 flex-col gap-2 p-3 pt-2.5 sm:gap-2.5 sm:p-4 sm:pt-3">
           <div>
-            <h3 className="mb-2 text-[15px] font-bold leading-snug tracking-tight text-textColor">
+            <h3 className="mb-1.5 text-[13px] font-bold leading-snug tracking-tight text-textColor sm:mb-2 sm:text-[15px]">
               {title}
             </h3>
             <div
@@ -133,7 +133,7 @@ function MiniProjectCard({ title, description, image, tags, sourceCode, demo, de
                 rel="noopener noreferrer"
                 aria-label={`${title} live demo`}
                 tabIndex={linkTabIndex}
-                className="inline-flex h-9 flex-1 items-center justify-center gap-1.5 rounded-lg bg-accentColor/10 text-xs font-semibold text-accentColor transition-colors duration-200 hover:bg-accentColor/20 focus-visible:outline-2 focus-visible:outline-accentColor"
+                className="inline-flex h-11 flex-1 items-center justify-center gap-1.5 rounded-lg bg-accentColor/10 text-xs font-semibold text-accentColor transition-colors duration-200 hover:bg-accentColor/20 focus-visible:outline-2 focus-visible:outline-accentColor sm:h-9"
               >
                 <Icon icon="lucide:external-link" className="h-3 w-3" />
                 Live Demo
@@ -146,7 +146,7 @@ function MiniProjectCard({ title, description, image, tags, sourceCode, demo, de
                 rel="noopener noreferrer"
                 aria-label={`${title} source code`}
                 tabIndex={linkTabIndex}
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-explorerBorder/35 text-textColor/40 transition-colors duration-200 hover:border-accentColor/30 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-explorerBorder/35 text-textColor/40 transition-colors duration-200 hover:border-accentColor/30 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor sm:h-9 sm:w-9"
               >
                 <Icon icon="lucide:github" className="h-3.5 w-3.5" />
               </a>

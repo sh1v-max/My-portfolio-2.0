@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useEffect } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion, useMotionValue, useAnimationFrame, animate } from "framer-motion";
 import { Icon } from "@iconify/react";
@@ -17,16 +17,49 @@ const headerItem = {
 };
 
 // Visual card width, plus the gap between cards. Each slot spans the full
-// pitch (CARD_W + CARD_GAP) with the gap carried as padding inside the card,
-// so one set's width is an exact multiple of the pitch and the wrap lands
-// precisely on the set boundary.
-const CARD_W = 300;
-const CARD_GAP = 20;
+// pitch (width + gap) with the gap carried as padding inside the card, so one
+// set's width is an exact multiple of the pitch and the wrap lands precisely
+// on the set boundary.
+//
+// A 300px card fills most of a 375px phone, and two rows of them swallow the
+// screen — hence a smaller card below the sm breakpoint. The pitch feeds the
+// loop maths, so it has to be a real number rather than a Tailwind class.
+const CARD_METRICS = {
+  phone: { w: 232, gap: 14 },
+  wide:  { w: 300, gap: 20 },
+};
+const WIDE_QUERY = "(min-width: 640px)";
 const EASE = [0.22, 1, 0.36, 1];
 
-// The two rows run at slightly different speeds so they never look mechanically
-// locked to each other.
-const ROW_SECONDS = [40, 46];
+function useCardMetrics() {
+  const read = () =>
+    typeof window !== "undefined" && window.matchMedia(WIDE_QUERY).matches
+      ? CARD_METRICS.wide
+      : CARD_METRICS.phone;
+
+  const [metrics, setMetrics] = useState(read);
+
+  useEffect(() => {
+    const mq = window.matchMedia(WIDE_QUERY);
+    const onChange = () => setMetrics(mq.matches ? CARD_METRICS.wide : CARD_METRICS.phone);
+    onChange();
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  return metrics;
+}
+
+// Seconds to travel one full set. Because a set's width scales with the card
+// pitch, this keeps the perceived cadence — roughly one card every 5s — the
+// same on a phone as on a laptop. The two rows differ by ~15% so they never
+// look mechanically locked to each other.
+const ROW_SECONDS = [26, 30];
+
+// While the page is being scrolled the rows run at this multiple of their base
+// speed, then ease back down once scrolling settles.
+const SCROLL_BOOST = 4;
+const SCROLL_IDLE_MS = 140;
 
 // Split the projects across the rows rather than repeating all ten in both:
 // every project stays on screen, and none is announced twice to a screen reader.
@@ -34,10 +67,37 @@ const half = Math.ceil(miniProjects.length / 2);
 const rowItems = [miniProjects.slice(0, half), miniProjects.slice(half)];
 
 /**
+ * True while the page is actively scrolling, in either direction, falling back
+ * to false once scroll events stop arriving. Detected once for the whole
+ * section so both rows boost and settle in step.
+ */
+function useScrolling(idleMs = SCROLL_IDLE_MS) {
+  const [scrolling, setScrolling] = useState(false);
+
+  useEffect(() => {
+    let idle;
+    const onScroll = () => {
+      // Repeated `true` writes bail out inside React, so a scroll gesture
+      // costs two renders (start and end) rather than one per event.
+      setScrolling(true);
+      clearTimeout(idle);
+      idle = setTimeout(() => setScrolling(false), idleMs);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      clearTimeout(idle);
+    };
+  }, [idleMs]);
+
+  return scrolling;
+}
+
+/**
  * One marquee row. `direction` is -1 to travel left, +1 to travel right.
  */
-function MarqueeRow({ items, direction, loopSeconds, shouldReduceMotion }) {
-  const setWidth = items.length * (CARD_W + CARD_GAP);
+function MarqueeRow({ items, direction, loopSeconds, shouldReduceMotion, cardW, cardGap, scrolling }) {
+  const setWidth = items.length * (cardW + cardGap);
   const baseSpeed = setWidth / loopSeconds; // px/s
 
   // Two sets are rendered; x stays within [-setWidth, 0] and wraps at either
@@ -45,30 +105,62 @@ function MarqueeRow({ items, direction, loopSeconds, shouldReduceMotion }) {
   const x = useMotionValue(direction > 0 ? -setWidth : 0);
   const speed = useMotionValue(0);
 
-  // useReducedMotion resolves after mount, and can change at runtime if the
-  // visitor flips the OS setting, so drive the base speed from an effect.
+  // Hover/focus lives in a ref so pausing never re-renders the cards, while
+  // scrolling arrives as a prop. Both feed the same resolver below.
+  const suspendedRef = useRef(false);
+
+  // Crossing the breakpoint changes the pitch, so the old offset would no
+  // longer line up with the set boundary. Rare enough to just re-seat it.
   useEffect(() => {
-    speed.set(shouldReduceMotion ? 0 : baseSpeed);
-  }, [shouldReduceMotion, baseSpeed, speed]);
+    x.set(direction > 0 ? -setWidth : 0);
+  }, [setWidth, direction, x]);
+
+  // Single place that decides how fast the row should be running. Pausing wins
+  // over boosting, and reduced motion wins over everything.
+  const applySpeed = useCallback(
+    (isScrolling) => {
+      if (shouldReduceMotion) {
+        speed.set(0);
+        return;
+      }
+      const target = suspendedRef.current
+        ? 0
+        : baseSpeed * (isScrolling ? SCROLL_BOOST : 1);
+      animate(speed, target, {
+        // Catch up to the boost quickly, but ease back down gently so the
+        // row settles rather than snapping when scrolling stops.
+        duration: target === 0 ? 0.6 : isScrolling ? 0.3 : 0.55,
+        ease: EASE,
+      });
+    },
+    [shouldReduceMotion, baseSpeed, speed],
+  );
+
+  // Re-resolve whenever scrolling starts/stops, the breakpoint changes, or the
+  // visitor flips the OS reduced-motion setting.
+  useEffect(() => {
+    applySpeed(scrolling);
+  }, [scrolling, applySpeed]);
 
   useAnimationFrame((_, delta) => {
     const s = speed.get();
     if (!s) return;
-    let next = x.get() + direction * (s * delta) / 1000;
-    if (next <= -setWidth) next += setWidth;
-    else if (next >= 0) next -= setWidth;
-    x.set(next);
+    const next = x.get() + direction * (s * delta) / 1000;
+    // Wrap by modulo rather than a single ±setWidth correction: at boosted
+    // speed one long frame gap (a backgrounded tab resuming) can overshoot by
+    // more than a full set, which a single correction could not recover from.
+    x.set((((next % setWidth) + setWidth) % setWidth) - setWidth);
   });
 
   // Hover pauses for mouse users; focus does the same for keyboard users
   // tabbing through the card links.
   const suspend = () => {
-    if (shouldReduceMotion) return;
-    animate(speed, 0, { duration: 0.6, ease: EASE });
+    suspendedRef.current = true;
+    applySpeed(scrolling);
   };
   const resume = () => {
-    if (shouldReduceMotion) return;
-    animate(speed, baseSpeed, { duration: 0.7, ease: EASE });
+    suspendedRef.current = false;
+    applySpeed(scrolling);
   };
 
   const track = [...items, ...items];
@@ -96,7 +188,7 @@ function MarqueeRow({ items, direction, loopSeconds, shouldReduceMotion }) {
           return (
             <div
               key={`${project.title}-${i}`}
-              style={{ width: CARD_W + CARD_GAP, flexShrink: 0 }}
+              style={{ width: cardW + cardGap, flexShrink: 0 }}
               aria-hidden={isClone || undefined}
             >
               {/*
@@ -105,7 +197,7 @@ function MarqueeRow({ items, direction, loopSeconds, shouldReduceMotion }) {
                 would leave a strip with no hover target, and a moving marquee
                 drags that strip under the cursor.
               */}
-              <MiniProjectCard {...project} decorative={isClone} gutter={CARD_GAP} />
+              <MiniProjectCard {...project} decorative={isClone} gutter={cardGap} />
             </div>
           );
         })}
@@ -116,6 +208,8 @@ function MarqueeRow({ items, direction, loopSeconds, shouldReduceMotion }) {
 
 function MiniProjectsCarousel() {
   const shouldReduceMotion = useReducedMotion();
+  const { w: cardW, gap: cardGap } = useCardMetrics();
+  const scrolling = useScrolling();
 
   return (
     <section className="py-6 md:py-10">
@@ -161,12 +255,18 @@ function MiniProjectsCarousel() {
             direction={-1}
             loopSeconds={ROW_SECONDS[0]}
             shouldReduceMotion={shouldReduceMotion}
+            cardW={cardW}
+            cardGap={cardGap}
+            scrolling={scrolling}
           />
           <MarqueeRow
             items={rowItems[1]}
             direction={1}
             loopSeconds={ROW_SECONDS[1]}
             shouldReduceMotion={shouldReduceMotion}
+            cardW={cardW}
+            cardGap={cardGap}
+            scrolling={scrolling}
           />
         </motion.div>
 

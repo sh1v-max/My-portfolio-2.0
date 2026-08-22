@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
@@ -45,31 +45,67 @@ function Projects({ asSection = false }) {
   // which empties the preview before the box itself has finished leaving.
   const shownIdx = previewOpen ? hoveredIdx : lastHoveredRef.current;
 
-  useEffect(() => {
-    const handle = (e) => {
-      // Bail out entirely once the cursor leaves the editorial list's bounds —
-      // without this, the preview (and its clickable "View" button) can get
-      // stuck live over unrelated sections below, like the mini-project marquee.
-      const bounds = listRef.current?.getBoundingClientRect();
-      if (!bounds || e.clientY < bounds.top || e.clientY > bounds.bottom) {
-        setHoveredIdx(-1);
-        return;
-      }
+  const pointerRef = useRef({ x: -1, y: -1, seen: false });
+  const rafRef = useRef(0);
 
+  // Resolving which row sits under the pointer is kept separate from the
+  // mousemove handler so scrolling can re-run it. While scrolling the cursor
+  // holds still and the page moves beneath it, so no mousemove fires — without
+  // this the preview keeps describing the row it used to be over.
+  const syncHovered = useCallback(() => {
+    const { x, y, seen } = pointerRef.current;
+    if (!seen) return;
+
+    // Bail out entirely once the cursor leaves the editorial list's bounds —
+    // without this, the preview (and its clickable "View" button) can get
+    // stuck live over unrelated sections below, like the mini-project marquee.
+    const bounds = listRef.current?.getBoundingClientRect();
+    if (!bounds || y < bounds.top || y > bounds.bottom) {
+      setHoveredIdx(-1);
+      return;
+    }
+
+    // Look past the preview itself. It is centred on the cursor, so its "View"
+    // button sits directly under the pointer and would otherwise mask whichever
+    // row is actually being hovered.
+    const beneath = document
+      .elementsFromPoint(x, y)
+      .find((node) => !node.closest("[data-project-preview]"));
+
+    const row = beneath?.closest("[data-project-row]");
+    setHoveredIdx(row ? Number(row.dataset.projectRow) : -1);
+  }, []);
+
+  useEffect(() => {
+    // Hit-testing is coalesced to one pass per frame; the pointer position
+    // itself updates immediately so the preview never lags the cursor.
+    const schedule = () => {
+      if (rafRef.current) return;
+      rafRef.current = requestAnimationFrame(() => {
+        rafRef.current = 0;
+        syncHovered();
+      });
+    };
+
+    const onMove = (e) => {
+      pointerRef.current = { x: e.clientX, y: e.clientY, seen: true };
+      // Tracked even out of bounds so the preview keeps trailing the cursor
+      // while it fades out, rather than stalling at the edge of the list.
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
-
-      const el  = document.elementFromPoint(e.clientX, e.clientY);
-      const row = el?.closest("[data-project-row]");
-      if (row) {
-        setHoveredIdx(Number(row.dataset.projectRow));
-      } else if (!el?.closest("[data-project-preview]")) {
-        setHoveredIdx(-1);
-      }
+      schedule();
     };
-    window.addEventListener("mousemove", handle);
-    return () => window.removeEventListener("mousemove", handle);
-  }, [cursorX, cursorY]);
+
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [cursorX, cursorY, syncHovered]);
 
   return (
     <HelmetProvider>
