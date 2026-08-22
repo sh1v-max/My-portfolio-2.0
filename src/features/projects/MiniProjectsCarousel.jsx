@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion, useMotionValue, useAnimationFrame, animate } from "framer-motion";
@@ -15,26 +16,33 @@ const headerItem = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] } },
 };
 
-// Card width + right-margin per card.
-// Using marginRight (not flex gap) so total width = COUNT×2 × (CARD_W+CARD_GAP)
-// and the wrap point lands exactly at the duplicate set boundary.
+// Visual card width, plus the gap between cards. Each slot spans the full
+// pitch (CARD_W + CARD_GAP) with the gap carried as padding inside the card,
+// so one set's width is an exact multiple of the pitch and the wrap lands
+// precisely on the set boundary.
 const CARD_W = 300;
 const CARD_GAP = 20;
-const LOOP_SECONDS = 40; // time to travel one full set width
 const EASE = [0.22, 1, 0.36, 1];
 
-function MiniProjectsCarousel() {
-  const shouldReduceMotion = useReducedMotion();
+// The two rows run at slightly different speeds so they never look mechanically
+// locked to each other.
+const ROW_SECONDS = [40, 46];
 
-  // Duplicate the list for seamless infinite marquee loop
-  const track = [...miniProjects, ...miniProjects];
-  const setWidth = miniProjects.length * (CARD_W + CARD_GAP);
-  const baseSpeed = setWidth / LOOP_SECONDS; // px/s
+// Split the projects across the rows rather than repeating all ten in both:
+// every project stays on screen, and none is announced twice to a screen reader.
+const half = Math.ceil(miniProjects.length / 2);
+const rowItems = [miniProjects.slice(0, half), miniProjects.slice(half)];
 
-  // JS-driven position + velocity (rather than a CSS keyframe animation) so
-  // hover eases the speed down to a smooth stop instead of a hard freeze,
-  // and eases back up to speed on leave instead of snapping to full pace.
-  const x = useMotionValue(0);
+/**
+ * One marquee row. `direction` is -1 to travel left, +1 to travel right.
+ */
+function MarqueeRow({ items, direction, loopSeconds, shouldReduceMotion }) {
+  const setWidth = items.length * (CARD_W + CARD_GAP);
+  const baseSpeed = setWidth / loopSeconds; // px/s
+
+  // Two sets are rendered; x stays within [-setWidth, 0] and wraps at either
+  // end, so the seam is never visible.
+  const x = useMotionValue(direction > 0 ? -setWidth : 0);
   const speed = useMotionValue(0);
 
   // useReducedMotion resolves after mount, and can change at runtime if the
@@ -46,8 +54,9 @@ function MiniProjectsCarousel() {
   useAnimationFrame((_, delta) => {
     const s = speed.get();
     if (!s) return;
-    let next = x.get() - (s * delta) / 1000;
+    let next = x.get() + direction * (s * delta) / 1000;
     if (next <= -setWidth) next += setWidth;
+    else if (next >= 0) next -= setWidth;
     x.set(next);
   });
 
@@ -61,6 +70,52 @@ function MiniProjectsCarousel() {
     if (shouldReduceMotion) return;
     animate(speed, baseSpeed, { duration: 0.7, ease: EASE });
   };
+
+  const track = [...items, ...items];
+
+  return (
+    /*
+      relative + overflow-hidden on the same element so edge fades sit exactly
+      at the visible boundary. Negative margins bleed the row past the section
+      padding.
+    */
+    <div
+      className="relative -mx-4 overflow-hidden sm:-mx-6 md:-mx-8"
+      onMouseEnter={suspend}
+      onMouseLeave={resume}
+      onFocusCapture={suspend}
+      onBlurCapture={resume}
+    >
+      {/* Edge fades — inside the clipping container */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-linear-to-r from-mainBg to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-linear-to-l from-mainBg to-transparent" />
+
+      <motion.div className="flex py-4" style={{ x, width: "max-content" }}>
+        {track.map((project, i) => {
+          const isClone = i >= items.length;
+          return (
+            <div
+              key={`${project.title}-${i}`}
+              style={{ width: CARD_W + CARD_GAP, flexShrink: 0 }}
+              aria-hidden={isClone || undefined}
+            >
+              {/*
+                The slot spans the full pitch and the card carries the gap as
+                inner padding, so adjacent hover targets touch. A margin here
+                would leave a strip with no hover target, and a moving marquee
+                drags that strip under the cursor.
+              */}
+              <MiniProjectCard {...project} decorative={isClone} gutter={CARD_GAP} />
+            </div>
+          );
+        })}
+      </motion.div>
+    </div>
+  );
+}
+
+function MiniProjectsCarousel() {
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <section className="py-6 md:py-10">
@@ -93,46 +148,26 @@ function MiniProjectsCarousel() {
           />
         </motion.div>
 
-        {/* ── Marquee track ── */}
+        {/* ── Marquee rows — counter-scrolling ── */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.9, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+          className="flex flex-col gap-1"
         >
-          {/*
-            relative + overflow-hidden on the same element so edge fades
-            sit exactly at the visible boundary (not outside it).
-            Negative margins bleed the track past the section padding.
-          */}
-          <div
-            className="relative -mx-4 overflow-hidden sm:-mx-6 md:-mx-8"
-            onMouseEnter={suspend}
-            onMouseLeave={resume}
-            onFocusCapture={suspend}
-            onBlurCapture={resume}
-          >
-            {/* Edge fades — inside the clipping container */}
-            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-linear-to-r from-mainBg to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-linear-to-l from-mainBg to-transparent" />
-
-            {/*
-              marginRight per card (not flex gap) keeps total width an exact
-              multiple of (CARD_W + CARD_GAP) so the wrap hits the duplicate
-              set boundary with zero drift.
-            */}
-            <motion.div className="flex py-4" style={{ x, width: "max-content" }}>
-              {track.map((project, i) => (
-                <div
-                  key={`${project.title}-${i}`}
-                  style={{ width: CARD_W, marginRight: CARD_GAP, flexShrink: 0 }}
-                  aria-hidden={i >= miniProjects.length}
-                >
-                  <MiniProjectCard {...project} />
-                </div>
-              ))}
-            </motion.div>
-          </div>
+          <MarqueeRow
+            items={rowItems[0]}
+            direction={-1}
+            loopSeconds={ROW_SECONDS[0]}
+            shouldReduceMotion={shouldReduceMotion}
+          />
+          <MarqueeRow
+            items={rowItems[1]}
+            direction={1}
+            loopSeconds={ROW_SECONDS[1]}
+            shouldReduceMotion={shouldReduceMotion}
+          />
         </motion.div>
 
         {/* ── CTA ── */}

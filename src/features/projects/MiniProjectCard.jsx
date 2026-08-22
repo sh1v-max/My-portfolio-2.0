@@ -14,11 +14,21 @@ function getDisplayUrl(url) {
   }
 }
 
-function MiniProjectCard({ title, description, image, tags, sourceCode, demo }) {
+// `decorative` marks the duplicated cards a marquee needs for its seamless
+// loop: still clickable by mouse, but out of the tab order so keyboard users
+// don't traverse the same project twice.
+//
+// `gutter` puts the spacing between cards *inside* this hover target rather
+// than as a margin outside it. In a moving marquee an outside margin is a
+// dead zone: it slides under a stationary cursor, hover drops, and the card
+// falls back down — which reads as flicker.
+function MiniProjectCard({ title, description, image, tags, sourceCode, demo, decorative = false, gutter = 0 }) {
   const [hovered, setHovered] = useState(false);
+  const linkTabIndex = decorative ? -1 : undefined;
 
   return (
     <div
+      style={gutter ? { paddingRight: gutter } : undefined}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -27,8 +37,21 @@ function MiniProjectCard({ title, description, image, tags, sourceCode, demo }) 
         property, not `transform` — so `translate` (not `transform`) is what
         has to be in the transition list or the lift snaps instantly.
       */}
+      {/*
+        The lift steps in whole pixels. At a fractional vertical offset the
+        browser blends the hard chrome-bar/screenshot edge into an extra row
+        of pixels, and animating through fractional values makes that row's
+        brightness swing every frame — the thin flickering line. Stepping by
+        1px keeps the sub-pixel phase constant, so that edge renders
+        identically at every point of the animation. Six 1px steps over 350ms
+        reads as smooth; border-color still fades continuously.
+      */}
       <article
-        className={`relative flex flex-col overflow-hidden rounded-xl border bg-articleBg transition-[translate,border-color] duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        style={{
+          transition:
+            "translate 350ms steps(6, end), border-color 300ms cubic-bezier(0.22, 1, 0.36, 1)",
+        }}
+        className={`relative flex flex-col overflow-hidden rounded-xl border bg-articleBg ${
           hovered ? "-translate-y-1.5 border-accentColor/20" : "border-explorerBorder/30"
         }`}
       >
@@ -109,6 +132,7 @@ function MiniProjectCard({ title, description, image, tags, sourceCode, demo }) 
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${title} live demo`}
+                tabIndex={linkTabIndex}
                 className="inline-flex h-9 flex-1 items-center justify-center gap-1.5 rounded-lg bg-accentColor/10 text-xs font-semibold text-accentColor transition-colors duration-200 hover:bg-accentColor/20 focus-visible:outline-2 focus-visible:outline-accentColor"
               >
                 <Icon icon="lucide:external-link" className="h-3 w-3" />
@@ -121,6 +145,7 @@ function MiniProjectCard({ title, description, image, tags, sourceCode, demo }) 
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${title} source code`}
+                tabIndex={linkTabIndex}
                 className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-explorerBorder/35 text-textColor/40 transition-colors duration-200 hover:border-accentColor/30 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor"
               >
                 <Icon icon="lucide:github" className="h-3.5 w-3.5" />
