@@ -8,6 +8,10 @@ import portfolio from "../../assets/images/portfolio/portfolio.png";
 // they appear — the projects list, and both Home teasers (one of which clamps
 // to two lines). The case study page carries the depth.
 //
+// `role` is the one line a description cannot carry: what I actually did on the
+// project, as opposed to what the project is. It is what turns a screenshot into
+// evidence of work.
+//
 // `tags` is the core stack only, not the full dependency list: these are a
 // scan-in-one-second signal on a card, and every detail page already lists the
 // complete stack.
@@ -15,6 +19,8 @@ import portfolio from "../../assets/images/portfolio/portfolio.png";
 export const projects = [
   {
     title: "Portfolio",
+    role:
+      "Design and build — six-theme token system, motion language, live GitHub dashboard.",
     description:
       "A developer portfolio with six switchable themes, motion-driven UI, and a live GitHub dashboard.",
     image: portfolio,
@@ -25,6 +31,8 @@ export const projects = [
   },
   {
     title: "TaskForge",
+    role:
+      "Full-stack — JWT auth, REST API, filtering and pagination on Express/MongoDB.",
     description:
       "Full-stack task manager with JWT auth, CRUD, filtering and pagination on an Express/MongoDB REST API.",
     image: taskforge,
@@ -35,6 +43,8 @@ export const projects = [
   },
   {
     title: "Cinegraph",
+    role:
+      "Full-stack — computed taste profiles, Gemini prompt design, TMDB data layer.",
     description:
       "AI recommendation engine for movies, TV and anime, with taste profiles and Gemini-powered picks.",
     image: cinegraph,
@@ -45,6 +55,8 @@ export const projects = [
   },
   {
     title: "BiteSwift",
+    role:
+      "Frontend — Redux cart state, shimmer loading states, route-level code splitting.",
     description:
       "Food delivery app with real-time cart management, shimmer loading states, and lazy-loaded routes.",
     image: biteswift,
@@ -55,6 +67,8 @@ export const projects = [
   },
   {
     title: "BookVerse",
+    role:
+      "Frontend — debounced search, custom data-fetching hooks, responsive layout.",
     description:
       "Book discovery platform with search, trending sections, and detailed book pages via the Open Library API.",
     image: bookverse,

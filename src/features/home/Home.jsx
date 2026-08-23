@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Illustration from "./Illustration";
-import { personal, stats } from "../../data/config";
+import { personal } from "../../data/config";
 // import Illustration10X from "./Illustration10X";
 // import Illustration20X from "./Illustration20X";
 // import Illustration30X from "./Illustration30X";
@@ -153,7 +153,7 @@ function Home({ asSection = false }) {
                 className="flex flex-row items-center gap-4 py-4 lg:justify-start"
                 variants={ctaVariants}
               >
-                <Link to="/projects">
+                <Link to="/#projects">
                   <motion.button
                     className="bg-accentColor text-mainBg rounded-xl px-5 py-3 text-xs font-bold shadow-lg transition-all duration-200 ease-out hover:shadow-[0_0_25px_color-mix(in_srgb,var(--accentColor)_25%,transparent)] min-h-11 sm:px-8 sm:py-4 sm:text-sm"
                     style={{

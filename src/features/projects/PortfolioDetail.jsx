@@ -49,7 +49,7 @@ const features = [
   {
     icon: "lucide:github",
     title: "Live GitHub Dashboard",
-    desc: "A centralized GithubContext fetches user profile and all repos once on mount, shared across the GitHub page, Home, and About via useContext — no duplicate API calls. Shows contribution graph, pinned repos, and real-time stats.",
+    desc: "A centralized GithubContext fetches the user profile and all repos once on mount, shared by the GitHub dashboard and the home page section via useContext — no duplicate API calls. Drives the contribution graph, pinned repos, and live stats.",
   },
   {
     icon: "lucide:layout-grid",
@@ -69,7 +69,7 @@ const features = [
   {
     icon: "lucide:flask-conical",
     title: "The Build Archive",
-    desc: "A dedicated /frontend-lab page holding 33 graded builds — machine-coding challenges, UI components, and small apps that don't fit neatly into a project card.",
+    desc: "A dedicated /frontend-lab page holding every graded build — machine-coding challenges, UI components, and small apps that don't fit neatly into a project card.",
   },
   {
     icon: "lucide:database",
@@ -100,7 +100,7 @@ const challenges = [
     icon: "lucide:github",
     problem: "GitHub API called three times — once per page that needed user data",
     solution:
-      "GithubContext wraps the entire app and fetches user + repos once in a useEffect. All three consumers (Github page, Home, About) call useGithub() to read from the same cached state. The context also exposes a repoCount derived value and handles loading/error states centrally.",
+      "GithubContext wraps the entire app and fetches user + repos once in a useEffect. Both consumers — the Github dashboard and the home page's GitHub section — call useGithub() to read from the same cached state, so the data is fetched once per visit rather than per view. The context handles loading and error states centrally, so each consumer renders a skeleton or a recovery message without repeating that logic.",
   },
 ];
 
@@ -152,7 +152,7 @@ export default function PortfolioDetail() {
         {/* ── Back ── */}
         <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }}>
           <Link
-            to="/projects"
+            to="/#projects"
             className="text-textMuted hover:text-accentColor mb-10 inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200"
           >
             <Icon icon="lucide:arrow-left" width="16" />
@@ -266,7 +266,7 @@ export default function PortfolioDetail() {
               {[
                 { step: "01", label: "src/data/config.js", detail: "All personal info, social links, stats, pinned repos, skill lists — one file, referenced everywhere" },
                 { step: "02", label: "ThemeContext", detail: "Holds active theme name, applies CSS custom property overrides on :root — Tailwind reads them via tw-colors" },
-                { step: "03", label: "GithubContext", detail: "Fetches GitHub user + repos once on mount, exposes via useGithub() hook to Github page, Home, and About" },
+                { step: "03", label: "GithubContext", detail: "Fetches GitHub user + repos once on mount, exposed via the useGithub() hook to the Github dashboard and the home page section" },
                 { step: "04", label: "Feature Modules", detail: "Each page lives in src/features/<name>/ with its own components, data, and styles — no cross-page imports" },
                 { step: "05", label: "Netlify Function", detail: "netlify/functions/contact.js validates the form POST server-side and calls Resend — API key never reaches the browser" },
                 { step: "06", label: "React Router v6", detail: "Client-side routing with nested routes under a Main layout — project case study routes at /projects/:slug" },
@@ -411,7 +411,7 @@ export default function PortfolioDetail() {
               className="border-accentColor/40 text-textColor hover:border-accentColor hover:bg-accentColor/10 inline-flex items-center gap-2 rounded-xl border-2 px-6 py-3 text-sm font-bold transition-all duration-200">
               <Icon icon="mdi:github" width="16" />View Source
             </a>
-            <Link to="/projects"
+            <Link to="/#projects"
               className="text-textMuted hover:text-accentColor inline-flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors duration-200">
               <Icon icon="lucide:arrow-left" width="14" />All Projects
             </Link>

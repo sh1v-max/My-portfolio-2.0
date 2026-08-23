@@ -5,7 +5,10 @@ import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { projects } from "./project";
-import MiniProjectsCarousel from "./MiniProjectsCarousel";
+import {
+  sectionHeader as sectionHeaderVariants,
+  sectionItem as sectionItemVariants,
+} from "../../lib/motion";
 
 const cinemaProjects = projects.filter((p) => p.title !== "Coming Soon...");
 
@@ -17,16 +20,21 @@ const projectMeta = {
   "BiteSwift":  { period: "Nov 2023", periodEnd: "Mar 2024", status: "completed" },
 };
 
-const headerContainer = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.15 } },
-};
-const headerItem = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] } },
-};
+// Defined once at module scope so the identity never changes between renders.
+const MotionH1 = motion.h1;
+const MotionH2 = motion.h2;
+
+// Shared site-wide motion tokens rather than a fifth local copy of the same
+// two objects.
+const headerContainer = sectionHeaderVariants;
+const headerItem = sectionItemVariants;
 
 function Projects({ asSection = false }) {
+  // Mounted inside the home page, this is a section of a larger document whose
+  // <h1> is the hero. Demoting both levels keeps the outline valid rather than
+  // planting a second <h1> mid-page.
+  const MotionHeading = asSection ? MotionH2 : MotionH1;
+  const RowHeading = asSection ? "h3" : "h2";
   const [hoveredIdx, setHoveredIdx] = useState(-1);
   const lastHoveredRef = useRef(0);
   const listRef = useRef(null);
@@ -189,12 +197,14 @@ function Projects({ asSection = false }) {
       </motion.div>
 
       {/* ── Page header — kept exactly as designed ── */}
-      <section className="pt-16 pb-2 md:pt-20">
+      <section className={asSection ? "pt-16 pb-2 md:pt-24" : "pt-16 pb-2 md:pt-20"}>
         <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
           <motion.div
             variants={headerContainer}
             initial="hidden"
-            animate="show"
+            {...(asSection
+              ? { whileInView: "show", viewport: { once: true, amount: 0.3 } }
+              : { animate: "show" })}
             className="flex flex-col items-start gap-3"
           >
             <motion.span
@@ -204,12 +214,12 @@ function Projects({ asSection = false }) {
               <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
               Featured Projects
             </motion.span>
-            <motion.h1
+            <MotionHeading
               variants={headerItem}
               className="text-textColor text-4xl font-bold tracking-tight md:text-5xl"
             >
               Some of My Works
-            </motion.h1>
+            </MotionHeading>
             <motion.p
               variants={headerItem}
               className="text-textMuted max-w-xl text-base leading-relaxed"
@@ -236,18 +246,23 @@ function Projects({ asSection = false }) {
               isFirst={i === 0}
               hovered={hoveredIdx === i}
               meta={projectMeta[project.title] ?? null}
+              RowHeading={RowHeading}
             />
           ))}
         </div>
       </section>
 
-      <MiniProjectsCarousel />
+      {/* The Build Archive marquee used to hang off the bottom of this page.
+          It lives in its own home section now, so rendering it here would stack
+          two archives back to back — and with /projects retired the standalone
+          branch was unreachable anyway, leaving it as dead weight in the home
+          bundle. */}
     </HelmetProvider>
   );
 }
 
 // ─── Single project row ───────────────────────────────────────────────────────
-function ProjectRow({ project, index, isFirst, hovered, meta }) {
+function ProjectRow({ project, index, isFirst, hovered, meta, RowHeading = "h2" }) {
   return (
     <motion.article
       data-project-row={index}
@@ -290,7 +305,7 @@ function ProjectRow({ project, index, isFirst, hovered, meta }) {
                 works for touch and keyboard. Kept on the title rather than
                 wrapping the row in an <a>, which would nest the demo and source
                 links inside another link. */}
-            <h2
+            <RowHeading
               className={`text-[2rem] font-bold leading-tight tracking-tight transition-colors duration-300 sm:text-4xl md:text-5xl lg:text-6xl ${
                 hovered ? "text-accentColor" : "text-textColor"
               }`}
@@ -313,7 +328,7 @@ function ProjectRow({ project, index, isFirst, hovered, meta }) {
               ) : (
                 project.title
               )}
-            </h2>
+            </RowHeading>
 
             {/* Date + status — animated accent line, period, badge */}
             {meta && (

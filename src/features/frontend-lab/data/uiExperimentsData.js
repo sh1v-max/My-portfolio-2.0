@@ -413,3 +413,10 @@ export const uiExperiments = [
     sourceCode: "#",
   },
 ];
+
+// The archive's real size, derived rather than restated. This number was
+// hardcoded as "33+" in five separate places, which is exactly how a count goes
+// stale the first time a build is added.
+export const realBuildCount = uiExperiments.filter(
+  (p) => p.title !== "Coming Soon...",
+).length;

@@ -7,7 +7,7 @@ import resumeFile from "../../assets/docs/resume.pdf";
 import BentoSkills from "./BentoSkills";
 import MarqueeSkills from "./MarqueeSkills";
 import { Icon } from "@iconify/react";
-import { personal, stats } from "../../data/config";
+import { personal } from "../../data/config";
 
 // ─── Animation System (matches Projects / GitHub / Contact) ───
 const headerContainer = {
@@ -629,7 +629,7 @@ function About({ asSection = false }) {
                 Get In Touch
               </motion.button>
             </Link>
-            <Link to="/projects">
+            <Link to="/#projects">
               <motion.button
                 className="border-accentColor/40 text-textColor hover:border-accentColor hover:bg-accentColor/10 rounded-xl border-2 px-8 py-3 text-sm font-bold transition-all duration-200"
                 whileHover={{ scale: 1.05, y: -2 }}

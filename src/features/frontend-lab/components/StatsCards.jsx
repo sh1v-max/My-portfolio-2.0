@@ -1,8 +1,9 @@
 import { Icon } from "@iconify/react";
+import { realBuildCount } from "../data/uiExperimentsData";
 
 export default function StatsCards() {
   const stats = [
-    { label: "Total Projects", value: "33+", icon: "lucide:boxes" },
+    { label: "Total Projects", value: String(realBuildCount), icon: "lucide:boxes" },
     { label: "Difficulty Levels", value: "3", icon: "lucide:layers" },
     { label: "Core Stack", value: "React + JS", icon: "lucide:code-2" },
     { label: "Categories", value: "UI / Logic / API", icon: "lucide:terminal" },

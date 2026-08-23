@@ -103,7 +103,7 @@ export default function CinegraphDetail() {
         {/* ── Back ── */}
         <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }}>
           <Link
-            to="/projects"
+            to="/#projects"
             className="text-textMuted hover:text-accentColor mb-10 inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200"
           >
             <Icon icon="lucide:arrow-left" width="16" />
@@ -347,7 +347,7 @@ export default function CinegraphDetail() {
               className="border-accentColor/40 text-textColor hover:border-accentColor hover:bg-accentColor/10 inline-flex items-center gap-2 rounded-xl border-2 px-6 py-3 text-sm font-bold transition-all duration-200">
               <Icon icon="mdi:github" width="16" />View Source
             </a>
-            <Link to="/projects"
+            <Link to="/#projects"
               className="text-textMuted hover:text-accentColor inline-flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors duration-200">
               <Icon icon="lucide:arrow-left" width="14" />All Projects
             </Link>

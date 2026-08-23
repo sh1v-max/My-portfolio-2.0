@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import Home from "./Home";
 import AboutTeaser from "./AboutTeaser";
-import WorkTeaser from "./WorkTeaser";
+import Projects from "../projects/Projects";
 import LabTeaser from "./LabTeaser";
 import GithubTeaser from "./GithubTeaser";
 import ContactTeaser from "./ContactTeaser";
@@ -42,8 +42,15 @@ export default function MainScrollPage() {
         <AboutTeaser />
       </section>
 
+      {/*
+        The work section IS the projects page. /projects was retired: it showed
+        the same five projects this renders, so keeping both meant maintaining
+        one design twice and giving the visitor two routes to identical content.
+        `asSection` demotes the headings and drops the archive marquee, since
+        the Build Archive is its own section directly below.
+      */}
       <section id="projects">
-        <WorkTeaser />
+        <Projects asSection />
       </section>
 
       <section id="lab">

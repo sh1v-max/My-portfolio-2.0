@@ -5,7 +5,7 @@ clicks a single link should finish the page knowing who I am, what I build, how 
 work, and how to reach me. Detail pages stop being *required reading* and become
 *optional depth*.
 
-**Status:** Phases 1 and 2 complete. Phases 0, 3-7 outstanding.
+**Status:** Phases 1-5 complete. Phases 0 (largely absorbed) and 6-7 outstanding.
 **Basis:** full read of `src/` (86 files, 11,944 lines), `index.html`, `index.css`,
 `package.json`, and a production build. See §11 for the evidence log.
 
@@ -699,9 +699,9 @@ confirming round, then stop.
 - [ ] Phase 0 — Truth, tokens, foundations
 - [x] **Phase 1 — Assets and contrast — DONE (2026-08-24)**
 - [x] **Phase 2 — Contact form on home — DONE (2026-08-24)**
-- [ ] Phase 3 — Work Split Stage (all 5)
-- [ ] Phase 4 — GitHub becomes real
-- [ ] Phase 5 — About refinement + Archive
+- [x] **Phase 3 — Work section — DONE (2026-08-24)** *(Split Stage built, then replaced by the /projects UI; route retired — see 10c revision)*
+- [x] **Phase 4 — GitHub becomes real — DONE (2026-08-24)**
+- [x] **Phase 5 — About refinement + Archive — DONE (2026-08-24)**
 - [ ] Phase 6 — Hero + orientation rail
 - [ ] Phase 7 — Rhythm, type, verification
 
@@ -892,6 +892,326 @@ instance, `--explorerBorder` in `.theme-nord`, is correct and was left alone.
 The "Send a message" CTA is gone, as planned. `ContactSocials` still duplicates
 the three channels the home section also lists — acceptable while they live on
 different routes, worth revisiting in Phase 7.
+
+---
+
+## 10c. Phase 3 results (completed 2026-08-24)
+
+**All five projects now live on the home page**, in an editorial layout that
+shares no vocabulary with the Build Archive grid below it or the Projects page's
+cursor-preview rows.
+
+### What was built
+
+| File | Role |
+|---|---|
+| `src/lib/motion.js` | Shared motion tokens, replacing five copied `hc`/`hi` pairs |
+| `src/components/SectionHeader.jsx` | The header five sections duplicated, with a `size` prop that finally lets one section outrank another |
+| `src/features/home/work/WorkStage.jsx` | Sticky 16:10 frame, crossfades on the active project, progress counter |
+| `src/features/home/work/WorkEntry.jsx` | One project: index, title, description, **role**, tags, row-wide link |
+| `WorkTeaser.jsx` | 382 lines of card components -> 100 lines of composition |
+
+`project.js` gained a **`role`** field — the line a description cannot carry:
+what I actually did, as opposed to what the thing is. Drawn from each project's
+own case study, not invented.
+
+### Two bugs found by building this
+
+**1. `body { overflow-x: hidden }` was silently breaking `position: sticky`.**
+
+This is **D10** from the original audit, filed as a minor code-smell. It is not
+minor: `overflow-x: hidden` computes to `overflow: hidden auto`, which makes
+`<body>` a scroll container, and every `position: sticky` descendant then sticks
+to *body* instead of the viewport. Measured: the stage scrolled away at
+713 -> 319 -> -76 -> -470 instead of pinning.
+
+Fixed with `overflow-x: clip`, which masks horizontal overflow **without**
+creating a scroll container. Bonus: this also removed the 4px phantom overflow
+Phase 1 could not attribute — `clip` reports 0 where `hidden` reported 4.
+
+**2. `items-start` on the grid — my own error.**
+
+I added it believing a stretched grid item cannot stick. The opposite is true:
+the sticky element's *parent* must be tall enough to travel in. With
+`items-start` the stage column sized to its own content (360px) and had zero
+travel. Removing it let the column stretch to the row height (1833px) and sticky
+started working immediately.
+
+### Verification
+
+| Check | Result |
+|---|---|
+| Projects shown on home | **5 of 5** (was 3 of 5) |
+| Sticky pinning | pins at exactly `top: 112px` for 10 of 17 scroll samples, releases at section end |
+| Crossfade sequence, scrolling **down** | Portfolio -> TaskForge -> Cinegraph -> BiteSwift -> BookVerse |
+| Crossfade sequence, scrolling **up** | exact reverse, no flicker |
+| Row-wide hit area | 5 of 5 hit points across the entry resolve to the row link; effective target **500x378**, not the anchor's own 234x59 |
+| Contrast, 6 themes | **0 failures** (184 nodes each) |
+| Horizontal overflow | 0 at 768 / 1024 / 1440; 4px at 375 (pre-existing, unrelated) |
+| Text overflow / column overlap | none; 64px gutter |
+| Stage frame ratio | 1.60 (16:10), image `object-fit: cover`, natural 1600x900 |
+| Type scale | h2 60px desktop / 36px mobile; h3 48px / 30px |
+| Lint | 149 -> **119** problems (the retired card components carried 30) |
+
+### Honest numbers
+
+**Section height is 2366px on desktop, not the <=1600px the plan estimated.**
+That estimate was wrong. For context: the old section was 1301px for **three**
+projects (434px each); the new one is 473px each for **five**, and each entry now
+carries a role line the old cards did not have. Density is comparable; the plan's
+target was simply optimistic.
+
+Tablet (768px) came in at **4460px** on first build, because the inline
+screenshots rendered full-width at 16:10 (~450px tall each). Capping them to
+`max-w-md` — the same measure as the description — brought it to **3685px**.
+
+### Decision that departs from the plan
+
+The plan specified the section door become **"Explore the Build Archive ->"**.
+Built and then removed: the Build Archive is the **very next section on the same
+page**, so that door promised a two-second scroll. The Work section now has **no
+section-level CTA** — every entry carries its own case-study link, which is the
+genuinely deeper level. "View all projects" would also now be false, since all of
+them are here.
+
+### Not runtime-verified
+
+`prefers-reduced-motion` handling is implemented in both new components
+(`useReducedMotion()` drops the 8px rise and zeroes the progress transition,
+keeping opacity) and was code-reviewed, but **not** exercised at runtime this
+phase — CDP media emulation is not reachable through the tooling in use. Worth
+confirming in the Phase 7 pass.
+
+---
+
+### Phase 3 revised (2026-08-24, same day)
+
+**The Split Stage was removed and `/projects` was retired.** At the author's
+direction, the home work section now renders the existing `/projects` editorial
+UI as-is, and the separate route is gone.
+
+**Why this is the better call than what I built.** The Split Stage and the
+Projects page were two designs for one job. Keeping both meant maintaining the
+same five projects in two visual languages and offering two URLs for identical
+content. The Projects UI was also already the more developed of the two — it
+carries dates and status per project, a cursor-tracking preview, and a
+hover/no-hover split that was already correct. My Split Stage duplicated that
+work in a thinner form.
+
+**What changed**
+
+| Item | Result |
+|---|---|
+| `WorkTeaser.jsx`, `work/WorkStage.jsx`, `work/WorkEntry.jsx` | deleted |
+| `MainScrollPage` | renders `<Projects asSection />` in `#projects` |
+| `/projects` route | retired; kept as `<Navigate to="/#projects" replace />` so existing links and bookmarks still land correctly |
+| In-app links to `/projects` | **14** repointed to `/#projects` (2 per case-study page, plus About, Home hero, NavBar, PageNavigator) |
+| `MiniProjectsCarousel` | unhooked from `Projects` — with the route gone its branch was unreachable, and the Build Archive is already its own home section. Removed **14 kB** of dead weight from the eager home bundle |
+| `projectMeta` (dates + status) | now visible on home, which the Split Stage never showed |
+
+**Section mode adaptations**
+
+- Headings demote: page `h1` -> section `h2`, row `h2` -> `h3`. Home's only `h1`
+  stays the hero, so the document outline holds.
+- Header reveal switches from on-mount to `whileInView`, since it is now
+  mid-page rather than at the top of a route.
+- `Projects` adopts the shared `motion.js` variants instead of its own copy.
+
+**Verified**
+
+| Check | Result |
+|---|---|
+| Rows on home | 5 |
+| Heading outline | exactly one `h1`; section `h2`; five row `h3` |
+| `/projects` | redirects to `/#projects` |
+| Case-study back-links | both land on the home section, scrolled correctly |
+| Cursor preview containment | opens over rows; closes above the list, below it, and over the contact form; `pointer-events: none` when closed |
+| Preview vs buttons complement | preview `none` + 3 buttons at 375/414/768; preview `block` + 0 buttons at 1024/1440 — exact complement, no width gets both or neither |
+| Title tap target on phone | anchor box 182x40, but the `::after` extends +/-36px -> **112px effective**; hit-tested above, below and left of the title |
+| Horizontal overflow @375 (real viewport) | **0** — the 4px seen earlier was an iframe artifact; the `overflow-x: clip` fix resolved it |
+| Contrast, 6 themes | **0 failures** (196 nodes each) |
+| Type scale | 32px phone -> 48px tablet -> 60px desktop |
+| Section height | 2399px @375, 2141px @768, 1896px @1024+ |
+| Initial JS | 370.6 kB -> **356.2 kB** after removing the dead marquee (vs 334 kB before Projects became eager) |
+| Lint | 119 problems, unchanged from Phase 3 |
+
+**Cost accepted:** `Projects` is now part of the eager home bundle rather than a
+split route, so initial JS rose from 334 kB to 356 kB (+22 kB, gzip +9 kB). That
+is the price of home owning the content; it is still well under the 892 kB the
+project started at.
+
+**Kept as staged infrastructure, currently unused:** `SectionHeader.jsx` and
+parts of `motion.js`. Phase 7 migrates every section onto both. Flagging rather
+than hiding it — `SectionHeader` has no consumer today.
+
+---
+
+## 10d. Phase 4 results (completed 2026-08-24)
+
+**The fabricated data is gone.** Every figure in the GitHub section now traces to
+an API response, verified against the live endpoint at render time.
+
+### Before / after
+
+| | Before | After | Live API |
+|---|---|---|---|
+| Repositories | `"62+"` hardcoded | **62** | 62 |
+| Followers | `"23"` hardcoded | **25** | 25 |
+| Stars | `"2+"` hardcoded | **2** | derived sum |
+| Fourth tile | `"1K+"` commits (**unobtainable**) | **Building since 2020** | `created_at` |
+| Activity chart | 12 invented bar heights, captioned "last 12 months" | **real 365-day calendar** | jogruber API |
+| Lede | "all pulled live from the GitHub API" — **false** | same claim — **now true** | — |
+
+The old followers figure was also simply **wrong** (23 vs 25), which is what
+hardcoding a "live" metric always eventually produces.
+
+`StatsGrid` on `/github` carried the same `"1K+"` fiction; it now shows
+"Building since" too. `PortfolioDetail`'s architecture copy claimed three
+consumers of `useGithub()` when there was one — corrected to the two that now
+genuinely exist.
+
+**A commit total is still deliberately absent.** The REST endpoints in use carry
+none; it needs the GraphQL API and a token. The calendar shows the same activity
+honestly, so nothing is lost by refusing to invent the number.
+
+### Built
+
+| File | Role |
+|---|---|
+| `home/github/LanguageBar.jsx` | stacked language bar, swatch **and** written label + % |
+| `home/github/languageMix.js` | the pure derivation, split out so react-refresh stays clean |
+| `components/Skeleton.jsx` | placeholder sized to real content, pulse gated behind `motion-safe:` |
+| `GithubTeaser.jsx` | rewritten: 4 real tiles, language mix, 2 recently-pushed repos, real calendar, 3 states |
+| `ContributionGraph.jsx` | now reusable via `compact`; three defects fixed (below) |
+
+### Three defects found in `ContributionGraph`, all pre-existing on `/github`
+
+1. **The calendar was rendering in light mode.** `react-activity-calendar` picks
+   its palette from the OS `prefers-color-scheme` unless told otherwise, and only
+   reads `theme.dark` when it resolves to dark. All six site themes are dark, so
+   on a light-mode machine it rendered its **default greyscale** — measured
+   `rgb(235,235,235)` empty cells on a dark card — ignoring the greens passed in
+   entirely. Fixed by pinning `colorScheme="dark"`. Now verified
+   `rgb(57, 211, 83)` in every theme.
+2. **No reduced-motion guard.** The reveal repaints all 365 squares in sequence —
+   a large moving colour field. It now returns early under
+   `prefers-reduced-motion` and renders in its final state.
+3. **Empty cells were darker than the card.** GitHub's `#161B22` is tuned for
+   GitHub's near-black page; against these six theme cards it measured *darker*
+   in five of them and **1.01:1 on nightOwl**, where the grid vanished and the
+   green days floated unanchored. Replaced with a translucent white lift —
+   consistently 1.19-1.25:1 and always lighter, matching GitHub's own subtlety in
+   the right direction.
+
+Also: the hardcoded username is now `personal.githubUsername`, and the calendar
+carries a real `aria-label` describing what it shows.
+
+### Verification
+
+| Check | Result |
+|---|---|
+| Rendered figures vs live API | **exact match** on all four |
+| Loading -> loaded shift | **-1px** (1040 -> 1039). First attempt was 58px; skeleton heights were re-measured from the loaded layout rather than estimated, and the door row it had omitted was added |
+| Error state | forced by pointing the API at an unreachable host: `role="alert"`, cause + likely resolution, two 44px recovery actions, **no stale numbers shown**, rest of page unaffected |
+| Calendar palette | `rgb(57,211,83)` green in github / nord / nightOwl (was greyscale) |
+| Calendar at 375 / 768 / 1440 | 365 squares everywhere, contained in its own `overflow-x: auto` scroller, **page overflow 0** |
+| Tile grid | 2 columns phone/tablet, 4 desktop |
+| Contrast, 6 themes | **0 failures** (202 nodes each) |
+| Touch targets | all >= 44px at every width |
+| Lint | 119 problems — back to baseline after extracting the helper |
+
+### Note
+
+The calendar depends on a **second, different third-party API**
+(`github-contributions-api.jogruber.de`), not `api.github.com`. The error state
+built here covers the REST failure only; if that separate service fails the
+calendar renders its own empty state inside an otherwise-working section. Not
+addressed this phase — flagged for Phase 7.
+
+---
+
+## 10e. Phase 5 results (completed 2026-08-24)
+
+### About — refined, not rewritten
+
+The audit was right that this section was already rich (photo, intro, bio, stats,
+skills, CTA), so this kept all of it and fixed what was actually wrong.
+
+| Fix | Before | After |
+|---|---|---|
+| Duplicate heading | eyebrow "About Me" directly above `<h2>` "About Me" | eyebrow "The short version" — a different register |
+| Skills | one flat list of 8 | **3 groups** (Frontend / Backend / Tooling & AI), 16 items |
+| Layout | centred 2-column, `text-center` on mobile | 3-column on `lg`: identity / story / skills |
+| Availability | absent from home | pill whose **words** carry the status, dot is decoration |
+| "Currently learning" | 4-item list competing with the skills | one footnote line |
+| Quick stats | `"33+"` hardcoded | **derived** — 5 apps, 33 builds, both counted from their own arrays |
+| Door | "Read full profile" | "The full story — timeline, education, services" |
+
+### Archive — the marquee replaces the card grid
+
+The section was a three-card grid: the same rectangles-in-a-row shape as the
+sections above and below, which is what made the page read as one long
+undifferentiated column. It is now the dual counter-scrolling marquee.
+
+That choice does two things beyond variety. It is honest about what the archive
+*is* — a large continuous body of small work, not three selected pieces — and it
+**revives `MiniProjectsCarousel`, which the /projects retirement had left with no
+consumer at all**. A `chromeless` prop lets the host section own the header, count
+and door so nothing is announced twice.
+
+The inline `MiniCard` duplicate inside `LabTeaser` is gone; the marquee uses the
+real `MiniProjectCard`.
+
+### D7 closed — the count is derived everywhere
+
+`realBuildCount` is now exported from `uiExperimentsData.js` and consumed by
+`LabTeaser`, `AboutTeaser`, `HeroSection` and `StatsCards`. The literal `"33+"`
+appears nowhere. `PortfolioDetail`'s "33 graded builds" prose is now count-free.
+
+### Dead code found and removed
+
+`GithubContext` exposed a derived `repoCount` **consumed by nobody** — and its
+fallback used the archive build count (`stats.projects`) as a stand-in for a
+GitHub repository count, two unrelated numbers. Removed, along with the now-unused
+`stats` imports in `About.jsx` and `Home.jsx`. `PortfolioDetail`'s copy describing
+that value was corrected too.
+
+### The regression I introduced, and the fix
+
+Making the marquee full-bleed pushed **page overflow from 0 to 32px** at every
+width above 375.
+
+`MarqueeRow` bleeds outward with `-mx-4 sm:-mx-6 md:-mx-8`, written to cancel
+exactly the padding of the `max-w-5xl px-4 sm:px-6 md:px-8` container it used to
+sit in. `chromeless` had removed that container, so the negative margins had
+nothing left to cancel and the rows ran 56px past the viewport.
+
+Isolated by hiding each section in turn — with `#lab` hidden, overflow was 0.
+Fixed by keeping the container in chromeless mode; only the header and CTA are
+stripped. `labContributes: 0` at 375 / 768 / 1024 / 1440.
+
+### Verification
+
+| Check | Result |
+|---|---|
+| About columns | 1 on phone/tablet, **3** on `lg`+ |
+| Eyebrow vs title | no longer identical |
+| Skill groups | 3 labels, 16 items |
+| Derived counts | 5 production apps, 33 archive builds — both computed |
+| Archive headers | **1** (chromeless prevents the duplicate) |
+| Marquee | 22 card slots rendering at every width |
+| Page overflow | 0 at 768 / 1024 / 1440; 4px at 375 (pre-existing, present with the section hidden too) |
+| Contrast, themes | **0 failures** across 253 nodes |
+| Lint | 119 -> **106** problems (the inline MiniCard carried the difference) |
+
+### Flagged, not changed
+
+Inside the marquee cards, "Live Demo" and the source-code icon measure **36px**
+at `sm` and above (`h-11 sm:h-9`). That sizing was chosen deliberately earlier in
+this project when the cards were made smaller for phones, and it is not a
+regression — the previous inline `MiniCard` used `min-h-9` for the same links. It
+clears WCAG 2.2 AA (24px) but not the 44px floor used elsewhere on this site.
+Worth a decision in Phase 7 rather than a silent override here.
 
 ---
 

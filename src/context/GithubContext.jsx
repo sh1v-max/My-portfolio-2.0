@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getUser } from "../services/apiGithub";
-import { stats } from "../data/config";
 
 const GithubContext = createContext(null);
 
@@ -20,10 +19,8 @@ export function GithubProvider({ children }) {
       .finally(() => setLoading(false));
   }, []);
 
-  const repoCount = user ? `${user.public_repos}+` : stats.projects;
-
   return (
-    <GithubContext.Provider value={{ user, repos, loading, error, repoCount }}>
+    <GithubContext.Provider value={{ user, repos, loading, error }}>
       {children}
     </GithubContext.Provider>
   );

@@ -5,7 +5,7 @@ import { Icon } from "@iconify/react";
 const pageOrder = [
   { path: "/", label: "Home" },
   { path: "/about", label: "About" },
-  { path: "/projects", label: "Projects" },
+  // /projects retired — the work lives in the home page's #projects section.
   { path: "/frontend-lab", label: "Archive" },
   { path: "/github", label: "GitHub" },
   { path: "/contact", label: "Contact" },

@@ -166,15 +166,25 @@ function MarqueeRow({ items, direction, loopSeconds, shouldReduceMotion, cardW, 
   );
 }
 
-function MiniProjectsCarousel() {
+// `chromeless` strips the header and CTA so a host section can supply its own.
+// The home page's Build Archive section does exactly that — it already owns the
+// eyebrow, the derived build count and the door, and a second set inside would
+// be the same section announced twice.
+function MiniProjectsCarousel({ chromeless = false }) {
   const shouldReduceMotion = useReducedMotion();
   const { w: cardW, gap: cardGap } = useCardMetrics();
 
   return (
-    <section className="py-6 md:py-10">
+    <section className={chromeless ? "" : "py-6 md:py-10"}>
+      {/* The container stays even in chromeless mode. Each MarqueeRow bleeds
+          outward with `-mx-4 sm:-mx-6 md:-mx-8`, which is written to cancel
+          exactly this element's padding. Dropping the container left those
+          negative margins with nothing to cancel, and the rows pushed 56px past
+          the viewport — 32px of real page overflow where there had been none. */}
       <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
 
         {/* ── Section header ── */}
+        {!chromeless && (
         <motion.div
           variants={headerContainer}
           initial="hidden"
@@ -200,6 +210,7 @@ function MiniProjectsCarousel() {
             className="from-accentColor to-accentColor/30 mt-2 h-1 w-16 rounded-full bg-linear-to-r"
           />
         </motion.div>
+        )}
 
         {/* ── Marquee rows — counter-scrolling ── */}
         <motion.div
@@ -228,6 +239,7 @@ function MiniProjectsCarousel() {
         </motion.div>
 
         {/* ── CTA ── */}
+        {!chromeless && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -249,6 +261,7 @@ function MiniProjectsCarousel() {
             Beginner &nbsp;·&nbsp; Intermediate &nbsp;·&nbsp; Advanced
           </p>
         </motion.div>
+        )}
 
       </div>
     </section>

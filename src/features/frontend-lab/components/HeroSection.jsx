@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
+import { realBuildCount } from "../data/uiExperimentsData";
 
 const headerContainer = {
   hidden: { opacity: 0 },
@@ -34,7 +35,7 @@ export default function HeroSection() {
         className="inline-flex items-center gap-2 rounded-full border border-accentColor/30 bg-accentColor/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accentColor shadow-[0_0_15px_color-mix(in_srgb,var(--accentColor)_20%,transparent)]"
       >
         <span className="h-1.5 w-1.5 rounded-full bg-accentColor animate-pulse" />
-        33+ Builds
+        {realBuildCount} Builds
       </motion.span>
 
       {/* Title */}

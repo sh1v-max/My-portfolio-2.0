@@ -11,7 +11,7 @@ import BackButton from "./BackButton";
 const navLinks = [
   { name: "Home",     path: "/",            sectionId: "home" },
   { name: "About",    path: "/about",        sectionId: "about" },
-  { name: "Projects", path: "/projects",     sectionId: "projects" },
+  { name: "Projects", path: "/#projects",    sectionId: "projects" },
   { name: "Archive",  path: "/frontend-lab", sectionId: null },
   { name: "GitHub",   path: "/github",       sectionId: null },
   { name: "Contact",  path: "/contact",      sectionId: "contact" },

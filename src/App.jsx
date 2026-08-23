@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter, Navigate } from "react-router-dom";
 import Main from "./components/Main";
 import MainScrollPage from "./features/home/MainScrollPage";
 import { ThemeProvider } from "./context/ThemeContext";
@@ -15,9 +15,11 @@ import RouteFallback from "./components/RouteFallback";
 // Everything else is split. The five case-study pages alone are ~2,300 lines and
 // are reached by a minority of visitors, so they have no business sitting in the
 // initial download.
+// /projects is retired: the home page renders the same component as its work
+// section, so a separate route would be a second URL for identical content.
+// Deep links to it are redirected to the section below.
 const About = lazy(() => import("./features/about/About"));
 const Contact = lazy(() => import("./features/contact/Contact"));
-const Projects = lazy(() => import("./features/projects/Projects"));
 const TaskForgeDetail = lazy(() => import("./features/projects/TaskForgeDetail"));
 const NetflixGPTDetail = lazy(() => import("./features/projects/NetflixGPTDetail"));
 const BiteSwiftDetail = lazy(() => import("./features/projects/BiteSwiftDetail"));
@@ -42,9 +44,9 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { path: "/", element: <MainScrollPage /> },
+      { path: "/projects", element: <Navigate to="/#projects" replace /> },
       { path: "/about", element: split(About) },
       { path: "/contact", element: split(Contact) },
-      { path: "/projects", element: split(Projects) },
       { path: "/projects/taskforge", element: split(TaskForgeDetail) },
       { path: "/projects/cinegraph", element: split(NetflixGPTDetail) },
       { path: "/projects/biteswift", element: split(BiteSwiftDetail) },

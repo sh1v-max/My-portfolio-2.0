@@ -274,7 +274,14 @@ body,
 }
 
 body {
-  overflow-x: hidden;
+  /* `clip`, not `hidden`.
+     `overflow-x: hidden` computes to `overflow: hidden auto`, which turns body
+     into a scroll container — and that silently breaks `position: sticky` for
+     every descendant, because they then stick to body rather than the viewport.
+     It cost the Work section its sticky stage.
+     `overflow-x: clip` masks horizontal overflow without creating a scroll
+     container, so sticky keeps working. */
+  overflow-x: clip;
 }
 
 img,

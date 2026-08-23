@@ -18,8 +18,31 @@ export const personal = {
 };
 
 export const stats = {
-  projects: "33+",
   themes: "6",
+};
+
+// Grouped rather than one flat list: "React, Node, MongoDB, Git" in a single row
+// tells a reader what I have touched, but not where I actually work. The
+// grouping is the information.
+export const skillGroups = [
+  {
+    label: "Frontend",
+    items: ["React.js", "JavaScript (ES6+)", "Tailwind CSS", "Redux Toolkit", "Framer Motion"],
+  },
+  {
+    label: "Backend",
+    items: ["Node.js", "Express.js", "MongoDB", "REST APIs", "JWT Auth"],
+  },
+  {
+    label: "Tooling & AI",
+    items: ["Git & GitHub", "Vite", "Generative AI APIs"],
+  },
+];
+
+export const availability = {
+  open: true,
+  label: "Available for work",
+  detail: "Open to full-time roles and select freelance projects. Remote-friendly.",
 };
 
 export const pinnedRepos = [

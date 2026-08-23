@@ -1,75 +1,109 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect, useRef } from "react";
 import CalendarModule from "react-github-calendar";
+import { personal } from "../../../data/config";
 
 const ActivityCalendar = CalendarModule.default || CalendarModule;
 
-// eslint-disable-next-line react/prop-types
-export default function ContributionGraph({ theme }) {
-  // Default to the current year
+// Renders in two places now: the full /github dashboard, and the home page's
+// GitHub section. `compact` drops the chrome the home section supplies itself
+// (its own heading and lede) and the year tabs, which are a dashboard control
+// rather than something a summary needs.
+export default function ContributionGraph({ theme, compact = false, year: fixedYear }) {
   const currentYear = new Date().getFullYear();
-  const [year, setYear] = useState(currentYear);
+  const [year, setYear] = useState(fixedYear ?? currentYear);
   const containerRef = useRef(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
 
+    // The reveal repaints every square in sequence. That is a large, moving
+    // field of colour — exactly what prefers-reduced-motion exists to suppress —
+    // so under that setting the calendar simply renders in its final state.
+    const prefersReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+
     let timeoutIds = [];
 
     const animateBlocks = () => {
-      // Find all rect elements inside the calendar
       const rects = Array.from(containerRef.current.querySelectorAll("rect"));
-
-      // Filter out legend rects or non-day rects (they usually have data-level or data-date)
       const dayRects = rects.filter(
         (r) => r.hasAttribute("data-level") || r.hasAttribute("data-date"),
       );
-
       if (dayRects.length === 0) return;
 
-      // Prevent re-animating if the exact same elements were already animated for this year
-      // This stops infinite loops when we mutate the fill attribute
-      const firstRect = dayRects[0];
-      if (firstRect.dataset.animatedYear === year.toString()) {
-        return;
-      }
+      // Prevent re-animating the same elements — mutating `fill` retriggers the
+      // MutationObserver, which would otherwise loop forever.
+      if (dayRects[0].dataset.animatedYear === year.toString()) return;
 
-      // 1. Instantly blacken out all squares and save their true colors
+      // Empty-day colour comes from the palette in use rather than a literal,
+      // so the wipe starts from the same shade the calendar actually renders.
+      const emptyFill = theme?.dark?.[0] ?? "#161b22";
+
       dayRects.forEach((rect) => {
         rect.dataset.animatedYear = year.toString();
         rect.dataset.originalFill = rect.getAttribute("fill");
-
-        // #161b22 is a dark empty color typically used in GitHub dark mode
-        rect.setAttribute("fill", "#161b22");
+        rect.setAttribute("fill", emptyFill);
         rect.style.transition = "fill 0.4s ease-out";
       });
 
-      // 2. Sequentially fill them up one by one after a tiny delay per block
       dayRects.forEach((rect, i) => {
-        const tId = setTimeout(() => {
-          rect.setAttribute("fill", rect.dataset.originalFill);
-        }, i * 3); // 3ms delay between each block creates a fast, smooth wave
-
-        timeoutIds.push(tId);
+        timeoutIds.push(
+          setTimeout(() => {
+            rect.setAttribute("fill", rect.dataset.originalFill);
+          }, i * 3),
+        );
       });
     };
 
-    // Use MutationObserver to catch when react-github-calendar finishes loading and renders the SVG
-    const observer = new MutationObserver(() => {
-      animateBlocks();
-    });
-
+    const observer = new MutationObserver(animateBlocks);
     observer.observe(containerRef.current, { childList: true, subtree: true });
-
-    // Also try immediately in case it rendered instantly from cache
     animateBlocks();
 
     return () => {
       observer.disconnect();
       timeoutIds.forEach(clearTimeout);
     };
-  }, [year]);
+  }, [year, theme]);
 
   const years = [currentYear, currentYear - 1, currentYear - 2, currentYear - 3];
+
+  const calendar = (
+    <div
+      ref={containerRef}
+      className="flex w-full justify-start overflow-x-auto pb-2 md:justify-center"
+    >
+      {/* The calendar is a colour field with no text alternative of its own. */}
+      <div
+        className="text-textColor min-w-max"
+        role="img"
+        aria-label={`GitHub contribution calendar for ${year}, showing daily commit activity for @${personal.githubUsername}`}
+      >
+        <ActivityCalendar
+          username={personal.githubUsername}
+          year={year}
+          /* react-activity-calendar picks its palette from the OS
+             prefers-color-scheme unless told otherwise, and only reads
+             theme.dark when it resolves to dark. Every one of this site's six
+             themes is dark, so on a light-mode machine the calendar was
+             rendering its default LIGHT greyscale — near-white empty cells on a
+             dark card — and ignoring the greens passed in entirely. Pinning the
+             scheme makes the palette deterministic. */
+          colorScheme="dark"
+          fontSize={compact ? 10 : 12}
+          blockSize={compact ? 10 : 12}
+          blockMargin={compact ? 3 : 4}
+          theme={theme}
+          hideColorLegend={compact}
+          hideMonthLabels={false}
+        />
+      </div>
+    </div>
+  );
+
+  if (compact) return calendar;
 
   return (
     <div className="border-explorerBorder bg-articleBg flex flex-col overflow-hidden rounded-2xl border p-5 shadow-sm md:p-8">
@@ -79,9 +113,8 @@ export default function ContributionGraph({ theme }) {
             GitHub Contributions
           </h2>
           <p className="text-textSecondary font-mono text-sm leading-relaxed">
-            A visual snapshot of my coding activity, each green square
-            represents a day of learning, building, and pushing code.
-            Consistency over perfection 💻
+            A visual snapshot of my coding activity — each square is a day of
+            learning, building, and pushing code. Consistency over perfection.
           </p>
         </div>
 
@@ -93,7 +126,7 @@ export default function ContributionGraph({ theme }) {
               <button
                 key={y}
                 onClick={() => setYear(y)}
-                className={`rounded-lg px-3 py-1.5 text-xs font-bold tabular-nums transition-all duration-200 focus-visible:outline-2 focus-visible:outline-accentColor ${
+                className={`min-h-11 rounded-lg px-3 text-xs font-bold tabular-nums transition-all duration-200 focus-visible:outline-2 focus-visible:outline-accentColor ${
                   active
                     ? "bg-accentColor/15 text-accentColor shadow-sm"
                     : "text-textMuted hover:bg-explorerBorder/30 hover:text-textSecondary"
@@ -108,23 +141,7 @@ export default function ContributionGraph({ theme }) {
         </div>
       </div>
 
-      <div
-        ref={containerRef}
-        className="flex w-full justify-start overflow-x-auto pb-2 md:justify-center"
-      >
-        <div className="text-textColor min-w-max">
-          <ActivityCalendar
-            username="sh1v-max"
-            year={year}
-            fontSize={12}
-            blockSize={12}
-            blockMargin={4}
-            theme={theme}
-            hideColorLegend={false}
-            hideMonthLabels={false}
-          />
-        </div>
-      </div>
+      {calendar}
     </div>
   );
 }
