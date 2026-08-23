@@ -96,7 +96,7 @@ function Settings() {
             <h1 className="text-textColor text-4xl font-bold tracking-tight md:text-5xl">
               Appearance
             </h1>
-            <p className="text-textColor/60 max-w-xl text-base leading-relaxed">
+            <p className="text-textMuted max-w-xl text-base leading-relaxed">
               Personalize your workspace with a variety of themes inspired by
               popular code editors. Choose a style that matches your workflow.
             </p>
@@ -118,7 +118,7 @@ function Settings() {
                     <Icon icon="lucide:palette" width="24" height="24" />
                   </div>
                   <div>
-                    <p className="text-textColor/40 text-xs font-medium uppercase tracking-widest">
+                    <p className="text-textMuted text-xs font-medium uppercase tracking-widest">
                       Currently Active
                     </p>
                     <p className="text-textColor text-xl font-bold">
@@ -148,12 +148,12 @@ function Settings() {
             transition={{ duration: 0.7, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
             className="mb-6 flex items-center gap-3"
           >
-            <div className="text-textColor/40 flex items-center gap-2 text-sm font-semibold uppercase tracking-widest">
+            <div className="text-textMuted flex items-center gap-2 text-sm font-semibold uppercase tracking-widest">
               <Icon icon="lucide:layout-grid" className="text-accentColor" width="16" height="16" />
               Available Themes
             </div>
             <div className="bg-explorerBorder h-px flex-1" />
-            <span className="text-textColor/30 text-xs font-medium">
+            <span className="text-textMuted text-xs font-medium">
               {themeInfo.length} themes
             </span>
           </motion.div>

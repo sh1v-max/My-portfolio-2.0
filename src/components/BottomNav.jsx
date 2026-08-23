@@ -87,14 +87,14 @@ function BottomNav() {
               <motion.div
                 whileTap={{ scale: 0.85 }}
                 className={`flex h-11 w-11 items-center justify-center rounded-xl transition-all duration-200 ${
-                  active ? "text-accentColor" : "text-textColor/40 hover:text-textColor/70"
+                  active ? "text-accentColor" : "text-textMuted hover:text-textSecondary"
                 }`}
               >
                 {item.icon}
               </motion.div>
               <span
                 className={`text-[10px] font-medium transition-colors duration-200 ${
-                  active ? "text-accentColor" : "text-textColor/30"
+                  active ? "text-accentColor" : "text-textMuted"
                 }`}
               >
                 {item.name}

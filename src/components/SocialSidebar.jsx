@@ -45,7 +45,7 @@ export default function SocialSidebar() {
                 whileHover={{ y: -3, scale: 1.08 }}
                 whileTap={{ scale: 0.95 }}
                 transition={hoverSpring}
-                className="group relative block text-textColor/40 hover:text-accentColor transition-colors duration-200"
+                className="group relative block text-textMuted hover:text-accentColor transition-colors duration-200"
               >
                 <Icon icon={icon} width="23" height="23" />
                 <span className="pointer-events-none absolute left-full top-1/2 ml-3 -translate-y-1/2 whitespace-nowrap rounded-md bg-articleBg border border-explorerBorder px-2.5 py-1 text-[11px] font-semibold tracking-wide text-textColor opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100">
@@ -82,7 +82,7 @@ export default function SocialSidebar() {
               whileHover={{ y: -3, scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               transition={hoverTween}
-              className="group relative text-textColor/40 hover:text-accentColor text-[13px] font-semibold tracking-[0.15em] transition-colors duration-200"
+              className="group relative text-textMuted hover:text-accentColor text-[13px] font-semibold tracking-[0.15em] transition-colors duration-200"
               style={{ writingMode: "vertical-rl" }}
             >
               {personal.email}

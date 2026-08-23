@@ -38,10 +38,10 @@ export default function PageNavigator() {
             whileHover={{ x: -4 }}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
           >
-            <span className="text-[10px] font-medium uppercase tracking-widest text-textColor/30 transition-colors duration-200 group-hover:text-textColor/50">
+            <span className="text-[10px] font-medium uppercase tracking-widest text-textMuted transition-colors duration-200 group-hover:text-textSecondary">
               Previous
             </span>
-            <span className="flex items-center gap-2 text-sm font-medium text-textColor/60 transition-colors duration-200 group-hover:text-accentColor">
+            <span className="flex items-center gap-2 text-sm font-medium text-textMuted transition-colors duration-200 group-hover:text-accentColor">
               <Icon icon="lucide:arrow-left" width="16" height="16" />
               {prevPage.label}
             </span>
@@ -73,10 +73,10 @@ export default function PageNavigator() {
             whileHover={{ x: 4 }}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
           >
-            <span className="text-[10px] font-medium uppercase tracking-widest text-textColor/30 transition-colors duration-200 group-hover:text-textColor/50">
+            <span className="text-[10px] font-medium uppercase tracking-widest text-textMuted transition-colors duration-200 group-hover:text-textSecondary">
               Continue
             </span>
-            <span className="flex items-center gap-2 text-sm font-medium text-textColor/60 transition-colors duration-200 group-hover:text-accentColor">
+            <span className="flex items-center gap-2 text-sm font-medium text-textMuted transition-colors duration-200 group-hover:text-accentColor">
               {nextPage.label}
               <Icon icon="lucide:arrow-right" width="16" height="16" />
             </span>

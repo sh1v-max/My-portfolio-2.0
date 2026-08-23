@@ -21,7 +21,7 @@ function Articles() {
             <h1 className="text-textColor text-4xl font-extrabold tracking-tight sm:text-5xl">
               Technical Blog
             </h1>
-            <p className="text-textColor/60 max-w-xl text-base leading-relaxed">
+            <p className="text-textMuted max-w-xl text-base leading-relaxed">
               Recent posts from my{" "}
               <a
                 className="text-accentColor decoration-accentColor/30 hover:decoration-accentColor underline underline-offset-4 transition-colors"

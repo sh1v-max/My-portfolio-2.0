@@ -33,7 +33,7 @@ function LiveClock() {
       <span className="text-textColor text-sm font-black tracking-tight leading-none uppercase">
         {formatTime(time)}
       </span>
-      <span className="text-textColor/40 text-[9px] font-bold mt-1 uppercase tracking-[0.2em]">
+      <span className="text-textMuted text-[9px] font-bold mt-1 uppercase tracking-[0.2em]">
         {formatDate(time)}
       </span>
     </div>

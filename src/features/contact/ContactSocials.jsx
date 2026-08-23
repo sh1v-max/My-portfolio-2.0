@@ -73,12 +73,12 @@ function ContactSocials() {
               className="group flex items-center gap-5 rounded-2xl border border-explorerBorder bg-articleBg/40 p-4 transition-all duration-300 hover:border-accentColor/40 hover:bg-articleBg hover:shadow-lg"
             >
               {/* Icon Container */}
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accentColor/5 text-accentColor transition-all duration-300 group-hover:scale-110 group-hover:bg-accentColor/10">
+              <div aria-hidden="true" className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accentColor/5 text-accentColor transition-all duration-300 group-hover:scale-110 group-hover:bg-accentColor/10">
                 {link.icon}
               </div>
 
               <div className="min-w-0 flex-1">
-                <p className="text-sm font-semibold text-textColor/60">
+                <p className="text-sm font-semibold text-textMuted">
                   {link.social}
                 </p>
                 <p className="truncate text-base font-medium text-textColor">
@@ -94,7 +94,7 @@ function ContactSocials() {
                   className={`shrink-0 flex h-9 w-9 items-center justify-center rounded-xl border transition-all duration-200 ${
                     copied
                       ? "border-accentColor/50 bg-accentColor/15 text-accentColor"
-                      : "border-explorerBorder/50 bg-textColor/5 text-textColor/40 hover:border-accentColor/40 hover:bg-accentColor/10 hover:text-accentColor"
+                      : "border-explorerBorder/50 bg-textColor/5 text-textMuted hover:border-accentColor/40 hover:bg-accentColor/10 hover:text-accentColor"
                   }`}
                 >
                   <Icon
@@ -121,10 +121,11 @@ function ContactSocials() {
               href={link.href}
               target="_blank"
               rel="noreferrer"
-              className="flex h-16 w-16 items-center justify-center rounded-xl border border-explorerBorder bg-articleBg/40 text-textColor/70 transition-all duration-300 hover:border-accentColor hover:bg-accentColor/10 hover:text-accentColor hover:shadow-md"
+              className="flex h-16 w-16 items-center justify-center rounded-xl border border-explorerBorder bg-articleBg/40 text-textSecondary ring-1 ring-textColor/10 transition-all duration-300 hover:border-accentColor hover:bg-accentColor/10 hover:text-accentColor hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentColor"
+              aria-label={`${link.social} (opens in a new tab)`}
               title={link.social}
             >
-              {link.icon}
+              <span aria-hidden="true">{link.icon}</span>
             </a>
           ))}
         </div>

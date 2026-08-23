@@ -159,7 +159,7 @@ export default function BiteSwiftDetail() {
         <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }}>
           <Link
             to="/projects"
-            className="text-textColor/50 hover:text-accentColor mb-10 inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200"
+            className="text-textMuted hover:text-accentColor mb-10 inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200"
           >
             <Icon icon="lucide:arrow-left" width="16" />
             Back to Projects
@@ -178,7 +178,7 @@ export default function BiteSwiftDetail() {
             BiteSwift
           </motion.h1>
 
-          <motion.p variants={fadeUp} className="text-textColor/60 mb-6 max-w-2xl text-lg leading-relaxed">
+          <motion.p variants={fadeUp} className="text-textMuted mb-6 max-w-2xl text-lg leading-relaxed">
             A high-fidelity Swiggy clone built with React 19 and Redux Toolkit. Features real restaurant data
             through a Netlify Functions proxy, a fully working cart with checkout flow, a self-built CSS
             design system, and honest handling of a third-party API that actively resists being used outside a browser.
@@ -204,13 +204,13 @@ export default function BiteSwiftDetail() {
           </motion.div>
 
           <motion.div variants={fadeUp} className="border-explorerBorder overflow-hidden rounded-2xl border shadow-2xl">
-            <img src={heroImg} alt="BiteSwift — home page screenshot" className="w-full object-cover object-top" />
+            <img src={heroImg} alt="BiteSwift — home page screenshot" width={1600} height={900} loading="lazy" decoding="async" className="w-full object-cover object-top" />
           </motion.div>
         </motion.div>
 
         {/* ── Overview ── */}
         <Section title="Overview">
-          <p className="text-textColor/70 leading-relaxed">
+          <p className="text-textSecondary leading-relaxed">
             BiteSwift started as a Namaste React course project and was rebuilt page by page into something
             closer to a real product. It fetches <strong className="text-textColor">live restaurant data</strong> from
             Swiggy's public API through a serverless proxy layer, manages a globally accessible cart through
@@ -251,7 +251,7 @@ export default function BiteSwiftDetail() {
                   </div>
                   <div>
                     <p className="text-textColor text-sm font-semibold">{item.name}</p>
-                    <p className="text-textColor/40 text-xs">{item.note}</p>
+                    <p className="text-textMuted text-xs">{item.note}</p>
                   </div>
                 </div>
               ))}
@@ -261,7 +261,7 @@ export default function BiteSwiftDetail() {
 
         {/* ── Architecture ── */}
         <Section title="Architecture">
-          <p className="text-textColor/70 mb-6 leading-relaxed">
+          <p className="text-textSecondary mb-6 leading-relaxed">
             Three layers with strict separation: <strong className="text-textColor">Netlify Functions</strong> handle
             anything that can't run in a browser (CORS proxies, session cookie warm-ups),{" "}
             <strong className="text-textColor">custom hooks</strong> own all data-fetching logic, and{" "}
@@ -279,10 +279,10 @@ export default function BiteSwiftDetail() {
                 { step: "06", label: "CSS Token System", detail: "Every color in the app resolves through --bs-* custom properties defined once in index.css. RGB-triplet companions (--bs-amber-rgb) allow rgba() tints without hardcoding literals. One block to edit for a full re-theme." },
               ].map(({ step, label, detail }) => (
                 <div key={step} className="flex items-start gap-4">
-                  <span className="text-accentColor/50 w-8 shrink-0 font-mono text-xs font-bold">{step}</span>
+                  <span className="text-accentColor w-8 shrink-0 font-mono text-xs font-bold">{step}</span>
                   <div className="border-l border-explorerBorder pl-4">
                     <p className="text-textColor text-sm font-semibold">{label}</p>
-                    <p className="text-textColor/50 text-xs leading-relaxed">{detail}</p>
+                    <p className="text-textMuted text-xs leading-relaxed">{detail}</p>
                   </div>
                 </div>
               ))}
@@ -303,7 +303,7 @@ export default function BiteSwiftDetail() {
                   <Icon icon={f.icon} width="18" />
                 </div>
                 <h3 className="text-textColor mb-1.5 text-sm font-bold">{f.title}</h3>
-                <p className="text-textColor/60 text-sm leading-relaxed">{f.desc}</p>
+                <p className="text-textMuted text-sm leading-relaxed">{f.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -320,12 +320,12 @@ export default function BiteSwiftDetail() {
                 onClick={() => setLightboxIndex(i)}
               >
                 <div className="relative overflow-hidden">
-                  <img src={s.src} alt={s.alt} className="w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]" />
+                  <img width={1600} height={900} loading="lazy" decoding="async" src={s.src} alt={s.alt} className="w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]" />
                   <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover:bg-black/20">
                     <Icon icon="lucide:zoom-in" width="28" className="text-white opacity-0 drop-shadow-lg transition-opacity duration-200 group-hover:opacity-100" />
                   </div>
                 </div>
-                <p className="text-textColor/40 bg-articleBg border-explorerBorder border-t px-3 py-2 text-center text-xs font-medium">{s.label}</p>
+                <p className="text-textMuted bg-articleBg border-explorerBorder border-t px-3 py-2 text-center text-xs font-medium">{s.label}</p>
               </motion.div>
             ))}
           </div>
@@ -343,12 +343,12 @@ export default function BiteSwiftDetail() {
                   onClick={() => setLightboxIndex(laptopScreenshots.length + i)}
                 >
                   <div className="relative overflow-hidden">
-                    <img src={s.src} alt={s.alt} className="w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]" />
+                    <img src={s.src} alt={s.alt} width={409} height={912} loading="lazy" decoding="async" className="w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]" />
                     <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover:bg-black/20">
                       <Icon icon="lucide:zoom-in" width="24" className="text-white opacity-0 drop-shadow-lg transition-opacity duration-200 group-hover:opacity-100" />
                     </div>
                   </div>
-                  <p className="text-textColor/40 bg-articleBg border-explorerBorder border-t px-3 py-2 text-center text-xs font-medium">{s.label}</p>
+                  <p className="text-textMuted bg-articleBg border-explorerBorder border-t px-3 py-2 text-center text-xs font-medium">{s.label}</p>
                 </motion.div>
               ))}
             </div>
@@ -368,13 +368,13 @@ export default function BiteSwiftDetail() {
                   <div className="text-accentColor flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accentColor/10">
                     <Icon icon={c.icon} width="18" />
                   </div>
-                  <p className="text-textColor/50 text-sm font-medium">
-                    <span className="text-red-400/70 mr-1">Problem:</span>{c.problem}
+                  <p className="text-textMuted text-sm font-medium">
+                    <span className="text-dangerText mr-1">Problem:</span>{c.problem}
                   </p>
                 </div>
                 <div className="border-l-2 border-accentColor/30 pl-4">
-                  <p className="text-textColor/40 mb-1 text-xs font-semibold uppercase tracking-wider">Solution</p>
-                  <p className="text-textColor/70 text-sm leading-relaxed">{c.solution}</p>
+                  <p className="text-textMuted mb-1 text-xs font-semibold uppercase tracking-wider">Solution</p>
+                  <p className="text-textSecondary text-sm leading-relaxed">{c.solution}</p>
                 </div>
               </motion.div>
             ))}
@@ -394,7 +394,7 @@ export default function BiteSwiftDetail() {
             ].map((item) => (
               <div key={item.text} className="border-explorerBorder bg-articleBg flex items-start gap-3 rounded-xl border p-4">
                 <div className="text-accentColor mt-0.5 shrink-0"><Icon icon={item.icon} width="16" /></div>
-                <p className="text-textColor/65 text-sm leading-relaxed">{item.text}</p>
+                <p className="text-textSecondary text-sm leading-relaxed">{item.text}</p>
               </div>
             ))}
           </div>
@@ -412,10 +412,10 @@ export default function BiteSwiftDetail() {
                 { icon: "lucide:test-tube",       label: "Expand test coverage",      detail: "Update the three existing tests after the component reorganization; add tests for cartSlice reducers and custom hooks" },
               ].map(({ icon, label, detail }) => (
                 <div key={label} className="flex items-start gap-3">
-                  <div className="text-accentColor/60 mt-0.5 shrink-0"><Icon icon={icon} width="15" /></div>
+                  <div className="text-accentColor mt-0.5 shrink-0"><Icon icon={icon} width="15" /></div>
                   <div>
                     <p className="text-textColor text-sm font-semibold">{label}</p>
-                    <p className="text-textColor/45 text-xs leading-relaxed">{detail}</p>
+                    <p className="text-textMuted text-xs leading-relaxed">{detail}</p>
                   </div>
                 </div>
               ))}
@@ -429,7 +429,7 @@ export default function BiteSwiftDetail() {
           className="border-accentColor/20 bg-accentColor/5 mt-6 rounded-2xl border p-8 text-center"
         >
           <h3 className="text-textColor mb-2 text-xl font-bold">Try it out</h3>
-          <p className="text-textColor/60 mb-6 text-sm">Browse live restaurant data or explore the full source on GitHub.</p>
+          <p className="text-textMuted mb-6 text-sm">Browse live restaurant data or explore the full source on GitHub.</p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <a href="https://yourbiteswift.netlify.app/" target="_blank" rel="noopener noreferrer"
               className="bg-accentColor text-mainBg inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold transition-all duration-200 hover:opacity-90">
@@ -440,7 +440,7 @@ export default function BiteSwiftDetail() {
               <Icon icon="mdi:github" width="16" />View Source
             </a>
             <Link to="/projects"
-              className="text-textColor/50 hover:text-accentColor inline-flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors duration-200">
+              className="text-textMuted hover:text-accentColor inline-flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors duration-200">
               <Icon icon="lucide:arrow-left" width="14" />All Projects
             </Link>
           </div>
@@ -497,6 +497,7 @@ function Lightbox({ screenshots, index, onClose, onPrev, onNext }) {
             <img
               src={current.src}
               alt={current.alt}
+              decoding="async"
               className="max-h-[82vh] max-w-full rounded-xl object-contain shadow-2xl"
             />
             <p className="mt-3 text-sm font-medium text-white/60">{current.label}</p>
@@ -545,7 +546,7 @@ function Card({ icon, label, children }) {
         <Icon icon={icon} width="18" />
       </div>
       <p className="text-textColor mb-2 text-sm font-bold">{label}</p>
-      <p className="text-textColor/60 text-sm leading-relaxed">{children}</p>
+      <p className="text-textMuted text-sm leading-relaxed">{children}</p>
     </div>
   );
 }

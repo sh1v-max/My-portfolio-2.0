@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Icon } from "@iconify/react";
 import ProjectButton from "../../../components/ProjectButton";
+import ImagePlaceholder from "../../../components/ImagePlaceholder";
 import { motion } from "framer-motion";
 
 export default function ExperimentCard({ project }) {
@@ -11,7 +12,7 @@ export default function ExperimentCard({ project }) {
       case "Intermediate":
         return "border-yellow-500/30 bg-yellow-500/10 text-yellow-400";
       case "Advanced":
-        return "border-red-500/30 bg-red-500/10 text-red-400";
+        return "border-red-500/30 bg-red-500/10 text-dangerText";
       default:
         return "border-gray-500/30 bg-gray-500/10 text-gray-400";
     }
@@ -29,11 +30,19 @@ export default function ExperimentCard({ project }) {
       {/* Image Container */}
       <div className="relative h-48 overflow-hidden">
         <div className="absolute inset-0 z-10 bg-linear-to-t from-articleBg via-transparent to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-70" />
-        <img
-          src={project.image}
-          alt={project.title}
-          className="h-full w-full object-cover"
-        />
+        {project.image ? (
+          <img
+            src={project.image}
+            alt={`${project.title} screenshot`}
+            width={1600}
+            height={900}
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <ImagePlaceholder label="In the lab" icon="lucide:flask-conical" />
+        )}
         {/* Level Badge overlaid on image */}
         <div className="absolute right-3 top-3 z-20">
           <span
@@ -54,7 +63,7 @@ export default function ExperimentCard({ project }) {
         <h3 className="mb-2 text-lg font-bold text-textColor transition-colors duration-300 group-hover:text-accentColor">
           {project.title}
         </h3>
-        <p className="mb-4 flex-1 text-sm leading-relaxed text-textColor/60">
+        <p className="mb-4 flex-1 text-sm leading-relaxed text-textMuted">
           {project.description}
         </p>
 
@@ -63,7 +72,7 @@ export default function ExperimentCard({ project }) {
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded bg-explorerBorder/50 px-2 py-0.5 text-xs text-textColor/70"
+              className="rounded bg-explorerBorder/50 px-2 py-0.5 text-xs text-textSecondary"
             >
               #{tag}
             </span>

@@ -104,7 +104,7 @@ export default function CinegraphDetail() {
         <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }}>
           <Link
             to="/projects"
-            className="text-textColor/50 hover:text-accentColor mb-10 inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200"
+            className="text-textMuted hover:text-accentColor mb-10 inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200"
           >
             <Icon icon="lucide:arrow-left" width="16" />
             Back to Projects
@@ -125,7 +125,7 @@ export default function CinegraphDetail() {
             Cinegraph
           </motion.h1>
 
-          <motion.p variants={fadeUp} className="text-textColor/60 mb-6 max-w-2xl text-lg leading-relaxed">
+          <motion.p variants={fadeUp} className="text-textMuted mb-6 max-w-2xl text-lg leading-relaxed">
             An AI movie, TV & anime recommendation engine built on three pillars: a real TMDB-backed
             catalog, a preference graph that turns your ratings into a computed taste profile, and a
             Gemini-powered AI layer that reads that profile before answering — with multi-turn
@@ -162,13 +162,13 @@ export default function CinegraphDetail() {
           </motion.div>
 
           <motion.div variants={fadeUp} className="border-explorerBorder overflow-hidden rounded-2xl border shadow-2xl">
-            <img src={cinegraphImg} alt="Cinegraph browse page" className="w-full object-cover object-top" />
+            <img src={cinegraphImg} alt="Cinegraph browse page" width={1600} height={900} loading="lazy" decoding="async" className="w-full object-cover object-top" />
           </motion.div>
         </motion.div>
 
         {/* ── Overview ── */}
         <Section title="Overview">
-          <p className="text-textColor/70 leading-relaxed">
+          <p className="text-textSecondary leading-relaxed">
             Cinegraph isn&apos;t a Netflix clone and it isn&apos;t just a catalog with a search box bolted on.
             It started as a tutorial project and was rebuilt from the ground up — new identity, new design system,
             new architecture. The three pillars work together:{" "}
@@ -185,12 +185,12 @@ export default function CinegraphDetail() {
         <Section title="Screenshots">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="border-explorerBorder overflow-hidden rounded-xl border">
-              <img src={cinegraphLoginImg} alt="Cinegraph login page" className="w-full object-cover" />
-              <p className="text-textColor/40 p-3 text-center text-xs">Login / Sign-up Page</p>
+              <img src={cinegraphLoginImg} alt="Cinegraph login page" width={1600} height={900} loading="lazy" decoding="async" className="w-full object-cover" />
+              <p className="text-textMuted p-3 text-center text-xs">Login / Sign-up Page</p>
             </div>
             <div className="border-explorerBorder overflow-hidden rounded-xl border">
-              <img src={cinegraphMoviesImg} alt="Cinegraph catalog console" className="w-full object-cover" />
-              <p className="text-textColor/40 p-3 text-center text-xs">Catalog Console — Filterable Grid</p>
+              <img src={cinegraphMoviesImg} alt="Cinegraph catalog console" width={1600} height={900} loading="lazy" decoding="async" className="w-full object-cover" />
+              <p className="text-textMuted p-3 text-center text-xs">Catalog Console — Filterable Grid</p>
             </div>
           </div>
         </Section>
@@ -222,7 +222,7 @@ export default function CinegraphDetail() {
                   </div>
                   <div>
                     <p className="text-textColor text-sm font-semibold">{item.name}</p>
-                    <p className="text-textColor/40 text-xs">{item.note}</p>
+                    <p className="text-textMuted text-xs">{item.note}</p>
                   </div>
                 </div>
               ))}
@@ -232,7 +232,7 @@ export default function CinegraphDetail() {
 
         {/* ── Architecture ── */}
         <Section title="Architecture">
-          <p className="text-textColor/70 mb-6 leading-relaxed">
+          <p className="text-textSecondary mb-6 leading-relaxed">
             A strict SPA with unidirectional data flow. Seven Redux slices manage genuinely cross-cutting
             state. Custom hooks check the store before fetching — navigating back to a detail page
             never re-fetches. Route-level code splitting via React.lazy cut the main bundle from
@@ -249,10 +249,10 @@ export default function CinegraphDetail() {
                 { step: "06", label: "Multi-Turn Conversation", detail: "Prior turns (up to 5) sent as real user/assistant message pairs. The Worker converts them to Gemini's conversation history format before the new query." },
               ].map(({ step, label, detail }) => (
                 <div key={step} className="flex items-start gap-4">
-                  <span className="text-accentColor/50 w-8 shrink-0 font-mono text-xs font-bold">{step}</span>
+                  <span className="text-accentColor w-8 shrink-0 font-mono text-xs font-bold">{step}</span>
                   <div className="border-l border-explorerBorder pl-4">
                     <p className="text-textColor text-sm font-semibold">{label}</p>
-                    <p className="text-textColor/50 text-xs leading-relaxed">{detail}</p>
+                    <p className="text-textMuted text-xs leading-relaxed">{detail}</p>
                   </div>
                 </div>
               ))}
@@ -276,7 +276,7 @@ export default function CinegraphDetail() {
                   <Icon icon={f.icon} width="18" />
                 </div>
                 <h3 className="text-textColor mb-1.5 text-sm font-bold">{f.title}</h3>
-                <p className="text-textColor/60 text-sm leading-relaxed">{f.desc}</p>
+                <p className="text-textMuted text-sm leading-relaxed">{f.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -298,14 +298,14 @@ export default function CinegraphDetail() {
                   <div className="text-accentColor mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accentColor/10">
                     <Icon icon={c.icon} width="18" />
                   </div>
-                  <p className="text-textColor/50 text-sm font-medium">
-                    <span className="text-red-400/70 mr-1">Problem:</span>
+                  <p className="text-textMuted text-sm font-medium">
+                    <span className="text-dangerText mr-1">Problem:</span>
                     {c.problem}
                   </p>
                 </div>
                 <div className="border-l-2 border-accentColor/30 pl-4">
-                  <p className="text-textColor/40 mb-1 text-xs font-semibold uppercase tracking-wider">Solution</p>
-                  <p className="text-textColor/70 text-sm leading-relaxed">{c.solution}</p>
+                  <p className="text-textMuted mb-1 text-xs font-semibold uppercase tracking-wider">Solution</p>
+                  <p className="text-textSecondary text-sm leading-relaxed">{c.solution}</p>
                 </div>
               </motion.div>
             ))}
@@ -325,7 +325,7 @@ export default function CinegraphDetail() {
             ].map((item) => (
               <div key={item.text} className="border-explorerBorder bg-articleBg flex items-start gap-3 rounded-xl border p-4">
                 <div className="text-accentColor mt-0.5 shrink-0"><Icon icon={item.icon} width="16" /></div>
-                <p className="text-textColor/65 text-sm leading-relaxed">{item.text}</p>
+                <p className="text-textSecondary text-sm leading-relaxed">{item.text}</p>
               </div>
             ))}
           </div>
@@ -337,7 +337,7 @@ export default function CinegraphDetail() {
           className="border-accentColor/20 bg-accentColor/5 mt-6 rounded-2xl border p-8 text-center"
         >
           <h3 className="text-textColor mb-2 text-xl font-bold">See it in action</h3>
-          <p className="text-textColor/60 mb-6 text-sm">Rate a few titles on the live app and watch the AI recommendations personalize in real time.</p>
+          <p className="text-textMuted mb-6 text-sm">Rate a few titles on the live app and watch the AI recommendations personalize in real time.</p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <a href="https://cinewatchgraph-ai.web.app" target="_blank" rel="noopener noreferrer"
               className="bg-accentColor text-mainBg inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold transition-all duration-200 hover:opacity-90">
@@ -348,7 +348,7 @@ export default function CinegraphDetail() {
               <Icon icon="mdi:github" width="16" />View Source
             </a>
             <Link to="/projects"
-              className="text-textColor/50 hover:text-accentColor inline-flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors duration-200">
+              className="text-textMuted hover:text-accentColor inline-flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors duration-200">
               <Icon icon="lucide:arrow-left" width="14" />All Projects
             </Link>
           </div>
@@ -378,7 +378,7 @@ function Card({ icon, label, children }) {
         <Icon icon={icon} width="18" />
       </div>
       <p className="text-textColor mb-2 text-sm font-bold">{label}</p>
-      <p className="text-textColor/60 text-sm leading-relaxed">{children}</p>
+      <p className="text-textMuted text-sm leading-relaxed">{children}</p>
     </div>
   );
 }

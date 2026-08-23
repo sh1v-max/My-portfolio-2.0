@@ -59,7 +59,7 @@ export default function AboutTeaser() {
           </motion.h2>
           <motion.p
             variants={hi}
-            className="text-textColor/60 max-w-xl text-base leading-relaxed"
+            className="text-textMuted max-w-xl text-base leading-relaxed"
           >
             Full-Stack Developer specializing in the React ecosystem and Node.js backends,
             building fast, scalable, and motion-rich web applications.
@@ -84,6 +84,10 @@ export default function AboutTeaser() {
               <img
                 src={profile_pic}
                 alt={personal.name}
+                width={1200}
+                height={1200}
+                loading="lazy"
+                decoding="async"
                 className="h-full w-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
               />
             </div>
@@ -97,19 +101,19 @@ export default function AboutTeaser() {
           <div className="flex flex-1 flex-col gap-6 text-center lg:text-left">
             {/* Intro — the name gets full weight */}
             <div className="space-y-2">
-              <p className="text-textColor/80 text-xl leading-relaxed">
+              <p className="text-textSecondary text-xl leading-relaxed">
                 Hi, I&apos;m{" "}
                 <span className="text-textColor text-2xl font-black tracking-tight">
                   {personal.name}
                 </span>
               </p>
-              <p className="text-textColor/60 text-base leading-relaxed">
+              <p className="text-textMuted text-base leading-relaxed">
                 a Full-Stack Developer based in{" "}
                 <span className="text-accentColor font-semibold">{personal.location}</span>.
               </p>
             </div>
 
-            <p className="text-textColor/65 max-w-xl text-base leading-relaxed">
+            <p className="text-textSecondary max-w-xl text-base leading-relaxed">
               I specialize in the React ecosystem, building responsive, performant web
               applications with clean architecture and thoughtful UX. My toolkit spans
               the modern JavaScript stack — React and Redux on the front end to Node.js
@@ -122,21 +126,21 @@ export default function AboutTeaser() {
                 <div key={label} className="border-explorerBorder bg-articleBg flex items-center gap-2.5 rounded-xl border px-4 py-2.5">
                   <Icon icon={icon} className="text-accentColor h-4 w-4 shrink-0" />
                   <span className="text-textColor text-sm font-bold">{value}</span>
-                  <span className="text-textColor/40 text-xs">{label}</span>
+                  <span className="text-textMuted text-xs">{label}</span>
                 </div>
               ))}
             </div>
 
             {/* Skill pills */}
             <div className="flex flex-col gap-3">
-              <p className="text-textColor/40 text-center text-xs font-medium italic lg:text-left">
+              <p className="text-textMuted text-center text-xs font-medium italic lg:text-left">
                 Here are a few technologies I&apos;ve been working with recently:
               </p>
             <ul className="grid grid-cols-2 gap-x-4 gap-y-2">
               {SKILLS.map((s) => (
                 <li
                   key={s}
-                  className="text-textColor/70 flex items-center gap-2 text-sm"
+                  className="text-textSecondary flex items-center gap-2 text-sm"
                 >
                   <span className="text-accentColor shrink-0 text-xs">▹</span>
                   {s}

@@ -78,7 +78,7 @@ export default function ContributionGraph({ theme }) {
           <h2 className="text-textColor text-3xl font-bold tracking-tight">
             GitHub Contributions
           </h2>
-          <p className="text-textColor/70 font-mono text-sm leading-relaxed">
+          <p className="text-textSecondary font-mono text-sm leading-relaxed">
             A visual snapshot of my coding activity, each green square
             represents a day of learning, building, and pushing code.
             Consistency over perfection 💻
@@ -96,7 +96,7 @@ export default function ContributionGraph({ theme }) {
                 className={`rounded-lg px-3 py-1.5 text-xs font-bold tabular-nums transition-all duration-200 focus-visible:outline-2 focus-visible:outline-accentColor ${
                   active
                     ? "bg-accentColor/15 text-accentColor shadow-sm"
-                    : "text-textColor/45 hover:bg-explorerBorder/30 hover:text-textColor/80"
+                    : "text-textMuted hover:bg-explorerBorder/30 hover:text-textSecondary"
                 }`}
                 aria-pressed={active}
                 aria-label={`Show ${y} contributions`}

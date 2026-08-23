@@ -161,7 +161,7 @@ function NavBar() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -5 }}
                   transition={{ duration: 0.13 }}
-                  className="text-[11px] font-bold uppercase tracking-[0.2em] text-textColor/55 group-hover:text-textColor transition-colors duration-200"
+                  className="text-[11px] font-bold uppercase tracking-[0.2em] text-textMuted group-hover:text-textColor transition-colors duration-200"
                 >
                   {open ? "Close" : "Menu"}
                 </motion.span>
@@ -217,7 +217,7 @@ function NavBar() {
                 <div className="flex flex-col sm:border-r sm:border-explorerBorder/12 sm:pr-10 lg:pr-16">
                   <motion.p
                     custom={0} variants={itemVar} initial="hidden" animate="show"
-                    className="mb-5 text-[9px] font-black uppercase tracking-[0.28em] text-textColor/28"
+                    className="mb-5 text-[9px] font-black uppercase tracking-[0.28em] text-textMuted"
                   >
                     Navigate
                   </motion.p>
@@ -242,7 +242,7 @@ function NavBar() {
                               tap:   { x: 4,  transition: { duration: 0.1 } },
                             }}
                             className={`text-3xl font-black uppercase leading-none tracking-tight transition-colors duration-200 sm:text-4xl lg:text-5xl ${
-                              active ? "text-accentColor" : "text-textColor/65 group-hover:text-textColor"
+                              active ? "text-accentColor" : "text-textSecondary group-hover:text-textColor"
                             }`}
                           >
                             {link.name}
@@ -272,7 +272,7 @@ function NavBar() {
                 <div className="flex flex-col sm:border-r sm:border-explorerBorder/12 sm:px-10 lg:px-14">
                   <motion.p
                     custom={5} variants={itemVar} initial="hidden" animate="show"
-                    className="mb-5 text-[9px] font-black uppercase tracking-[0.28em] text-textColor/28"
+                    className="mb-5 text-[9px] font-black uppercase tracking-[0.28em] text-textMuted"
                   >
                     Explore
                   </motion.p>
@@ -296,7 +296,7 @@ function NavBar() {
                               tap:   { x: 4,  transition: { duration: 0.1 } },
                             }}
                             className={`text-3xl font-black uppercase leading-none tracking-tight transition-colors duration-200 sm:text-4xl ${
-                              active ? "text-accentColor" : "text-textColor/65 group-hover:text-textColor"
+                              active ? "text-accentColor" : "text-textSecondary group-hover:text-textColor"
                             }`}
                           >
                             {link.name}
@@ -322,7 +322,7 @@ function NavBar() {
 
                   <motion.p
                     custom={8} variants={itemVar} initial="hidden" animate="show"
-                    className="mt-5 text-[11px] leading-relaxed text-textColor/30"
+                    className="mt-5 text-[11px] leading-relaxed text-textMuted"
                   >
                     UI experiments, open-source work,<br className="hidden sm:block" /> and GitHub contributions.
                   </motion.p>
@@ -332,7 +332,7 @@ function NavBar() {
                 <div className="flex flex-col sm:pl-10 lg:pl-14">
                   <motion.p
                     custom={9} variants={itemVar} initial="hidden" animate="show"
-                    className="mb-5 text-[9px] font-black uppercase tracking-[0.28em] text-textColor/28"
+                    className="mb-5 text-[9px] font-black uppercase tracking-[0.28em] text-textMuted"
                   >
                     Connect
                   </motion.p>
@@ -370,7 +370,7 @@ function NavBar() {
                         target={s.external ? "_blank" : undefined}
                         rel={s.external ? "noopener noreferrer" : undefined}
                         onClick={!s.external ? (e) => { e.preventDefault(); setOpen(false); navigate("/contact"); } : undefined}
-                        className="group flex cursor-pointer items-center gap-3 text-textColor/40 transition-colors duration-200 hover:text-accentColor"
+                        className="group flex cursor-pointer items-center gap-3 text-textMuted transition-colors duration-200 hover:text-accentColor"
                       >
                         <motion.div
                           variants={{

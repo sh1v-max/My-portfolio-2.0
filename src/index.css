@@ -9,8 +9,11 @@
   --color-mainBg: var(--mainBg);
   --color-bgText: var(--bgText);
   --color-textColor: var(--textColor);
+  --color-textSecondary: var(--textSecondary);
+  --color-textMuted: var(--textMuted);
   --color-accentColor: var(--accentColor);
   --color-successText: var(--successText);
+  --color-dangerText: var(--dangerText);
   --color-successBg: var(--successBg);
   --color-successBorder: var(--successBorder);
   --color-titlebarBg: var(--titlebarBg);
@@ -42,6 +45,11 @@
 ============================================= */
 :root {
   --successText: #4ade80;
+  /* Form errors and other failure states. Tailwind's red-400 measured 3.67:1
+     against nord's card surface — the lightest background in the six themes —
+     so it failed AA exactly where errors matter most. This value is solved to
+     clear 4.8:1 on every surface any theme puts behind it. */
+  --dangerText: #ff8e91;
   --successBg: rgba(74, 222, 128, 0.1);
   --successBorder: rgba(74, 222, 128, 0.3);
 }
@@ -53,6 +61,12 @@
 
 /* --- GitHub Dark --- */
 .theme-github {
+  /* Text ramp — solved against this theme's own --mainBg.
+     Solved against this theme's LIGHTEST text surface (mainBg vs articleBg),
+     so the ramp holds on the page ground and on cards alike.
+     primary >= 7:1, secondary >= 5.8:1, muted >= 4.8:1 (WCAG AA + rounding margin). */
+  --textSecondary: #a2a4a6;
+  --textMuted: #919496;
   --mainBg: #24292e;
   --bgText: rgba(56, 58, 61, 0.35);
   --textColor: #efefef;
@@ -80,6 +94,12 @@
 
 /* --- Dracula --- */
 .theme-dracula {
+  /* Text ramp — solved against this theme's own --mainBg.
+     Solved against this theme's LIGHTEST text surface (mainBg vs articleBg),
+     so the ramp holds on the page ground and on cards alike.
+     primary >= 7:1, secondary >= 5.8:1, muted >= 4.8:1 (WCAG AA + rounding margin). */
+  --textSecondary: #a5a6ab;
+  --textMuted: #95969b;
   --mainBg: #282a36;
   --bgText: #313340;
   --textColor: #efefef;
@@ -107,6 +127,12 @@
 
 /* --- Ayu Dark --- */
 .theme-ayuDark {
+  /* Text ramp — solved against this theme's own --mainBg.
+     Solved against this theme's LIGHTEST text surface (mainBg vs articleBg),
+     so the ramp holds on the page ground and on cards alike.
+     primary >= 7:1, secondary >= 5.8:1, muted >= 4.8:1 (WCAG AA + rounding margin). */
+  --textSecondary: #8f9094;
+  --textMuted: #808185;
   --mainBg: #0a0e14;
   --bgText: #101620;
   --textColor: #efefef;
@@ -134,6 +160,12 @@
 
 /* --- Ayu Mirage --- */
 .theme-ayuMirage {
+  /* Text ramp — solved against this theme's own --mainBg.
+     Solved against this theme's LIGHTEST text surface (mainBg vs articleBg),
+     so the ramp holds on the page ground and on cards alike.
+     primary >= 7:1, secondary >= 5.8:1, muted >= 4.8:1 (WCAG AA + rounding margin). */
+  --textSecondary: #a6a9af;
+  --textMuted: #969aa1;
   --mainBg: #1f2430;
   --bgText: #21242b;
   --textColor: #efefef;
@@ -161,6 +193,12 @@
 
 /* --- Nord --- */
 .theme-nord {
+  /* Text ramp — solved against this theme's own --mainBg.
+     Solved against this theme's LIGHTEST text surface (mainBg vs articleBg),
+     so the ramp holds on the page ground and on cards alike.
+     primary >= 7:1, secondary >= 5.8:1, muted >= 4.8:1 (WCAG AA + rounding margin). */
+  --textSecondary: #bec1c5;
+  --textMuted: #abafb5;
   --mainBg: #2e3440;
   --bgText: #3b414d;
   --textColor: #efefef;
@@ -188,10 +226,20 @@
 
 /* --- Night Owl --- */
 .theme-nightOwl {
+  /* Text ramp — solved against this theme's own --mainBg.
+     Solved against this theme's LIGHTEST text surface (mainBg vs articleBg),
+     so the ramp holds on the page ground and on cards alike.
+     primary >= 7:1, secondary >= 5.8:1, muted >= 4.8:1 (WCAG AA + rounding margin). */
+  --textSecondary: #7f9ab0;
+  --textMuted: #708ba2;
   --mainBg: #011627;
   --bgText: #031d33;
   --textColor: #89a4bb;
-  --accentColor: rgb(95, 126, 151);
+  /* Lifted from the original rgb(95,126,151), which measured 4.01:1 against
+     this theme's card surface (--articleBg) — under the AA floor for the
+     tags, links and CTAs drawn in the accent. Solved against articleBg
+     rather than mainBg because that is the lighter of the two. */
+  --accentColor: #6d8ca5;
   --titlebarBg: #011627;
   --sidebarBg: #011627;
   --sidebarHoverBg: #0e293f;

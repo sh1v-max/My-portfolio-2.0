@@ -119,7 +119,7 @@ const methodColor = {
   GET: "text-green-400 bg-green-400/10",
   POST: "text-blue-400 bg-blue-400/10",
   PUT: "text-yellow-400 bg-yellow-400/10",
-  DELETE: "text-red-400 bg-red-400/10",
+  DELETE: "text-dangerText bg-red-400/10",
 };
 
 // ─── Component ─────────────────────────────────────────────────
@@ -136,7 +136,7 @@ export default function TaskForgeDetail() {
         <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }}>
           <Link
             to="/projects"
-            className="text-textColor/50 hover:text-accentColor mb-10 inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200"
+            className="text-textMuted hover:text-accentColor mb-10 inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200"
           >
             <Icon icon="lucide:arrow-left" width="16" />
             Back to Projects
@@ -162,7 +162,7 @@ export default function TaskForgeDetail() {
 
           <motion.p
             variants={fadeUp}
-            className="text-textColor/60 mb-6 max-w-2xl text-lg leading-relaxed"
+            className="text-textMuted mb-6 max-w-2xl text-lg leading-relaxed"
           >
             A production-grade full-stack task management platform — REST API built with Express 5 &
             MongoDB, paired with a React 19 client featuring JWT auth, advanced querying, and
@@ -211,6 +211,7 @@ export default function TaskForgeDetail() {
             <img
               src={taskforgeImg}
               alt="TaskForge application screenshot"
+              width={1600} height={900} loading="lazy" decoding="async"
               className="w-full object-cover object-top"
             />
           </motion.div>
@@ -218,7 +219,7 @@ export default function TaskForgeDetail() {
 
         {/* ── Overview ── */}
         <Section title="Overview">
-          <p className="text-textColor/70 leading-relaxed">
+          <p className="text-textSecondary leading-relaxed">
             TaskForge started as a goal to build a{" "}
             <strong className="text-textColor">truly production-ready REST API</strong> — not a
             tutorial clone, but something with real security, real validation, real documentation,
@@ -261,7 +262,7 @@ export default function TaskForgeDetail() {
 
         {/* ── Architecture ── */}
         <Section title="Architecture">
-          <p className="text-textColor/70 mb-6 leading-relaxed">
+          <p className="text-textSecondary mb-6 leading-relaxed">
             The backend follows a strict{" "}
             <strong className="text-textColor">MVC pattern</strong> with each layer having a single
             responsibility. Every incoming request travels through a predictable pipeline before a
@@ -278,10 +279,10 @@ export default function TaskForgeDetail() {
                 { step: "06", label: "Error Middleware", detail: "Catches any thrown error and returns a consistent JSON error shape" },
               ].map(({ step, label, detail }) => (
                 <div key={step} className="flex items-start gap-4">
-                  <span className="text-accentColor/50 w-8 shrink-0 font-mono text-xs font-bold">{step}</span>
+                  <span className="text-accentColor w-8 shrink-0 font-mono text-xs font-bold">{step}</span>
                   <div className="border-l border-explorerBorder pl-4">
                     <p className="text-textColor text-sm font-semibold">{label}</p>
-                    <p className="text-textColor/50 text-xs leading-relaxed">{detail}</p>
+                    <p className="text-textMuted text-xs leading-relaxed">{detail}</p>
                   </div>
                 </div>
               ))}
@@ -305,7 +306,7 @@ export default function TaskForgeDetail() {
                   <Icon icon={f.icon} width="18" />
                 </div>
                 <h3 className="text-textColor mb-1.5 text-sm font-bold">{f.title}</h3>
-                <p className="text-textColor/60 text-sm leading-relaxed">{f.desc}</p>
+                <p className="text-textMuted text-sm leading-relaxed">{f.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -313,7 +314,7 @@ export default function TaskForgeDetail() {
 
         {/* ── API Reference ── */}
         <Section title="API Reference">
-          <p className="text-textColor/60 mb-4 text-sm">
+          <p className="text-textMuted mb-4 text-sm">
             Base URL:{" "}
             <code className="bg-accentColor/10 text-accentColor rounded px-2 py-0.5 font-mono text-xs">
               https://taskforge-api.onrender.com
@@ -328,10 +329,10 @@ export default function TaskForgeDetail() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-explorerBorder bg-articleBg">
-                    <th className="text-textColor/50 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider">Method</th>
-                    <th className="text-textColor/50 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider">Endpoint</th>
-                    <th className="text-textColor/50 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider hidden sm:table-cell">Auth</th>
-                    <th className="text-textColor/50 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider hidden md:table-cell">Description</th>
+                    <th className="text-textMuted px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider">Method</th>
+                    <th className="text-textMuted px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider">Endpoint</th>
+                    <th className="text-textMuted px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider hidden sm:table-cell">Auth</th>
+                    <th className="text-textMuted px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider hidden md:table-cell">Description</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-explorerBorder">
@@ -342,22 +343,22 @@ export default function TaskForgeDetail() {
                           {r.method}
                         </span>
                       </td>
-                      <td className="text-textColor/80 px-4 py-3 font-mono text-xs">{r.path}</td>
+                      <td className="text-textSecondary px-4 py-3 font-mono text-xs">{r.path}</td>
                       <td className="px-4 py-3 hidden sm:table-cell">
                         {r.auth ? (
                           <span className="text-yellow-400 text-xs">🔒 JWT</span>
                         ) : (
-                          <span className="text-textColor/30 text-xs">Public</span>
+                          <span className="text-textMuted text-xs">Public</span>
                         )}
                       </td>
-                      <td className="text-textColor/50 px-4 py-3 text-xs hidden md:table-cell">{r.desc}</td>
+                      <td className="text-textMuted px-4 py-3 text-xs hidden md:table-cell">{r.desc}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
           </div>
-          <p className="text-textColor/40 mt-3 text-xs">
+          <p className="text-textMuted mt-3 text-xs">
             Query params for GET /api/tasks: <code className="font-mono">status</code>, <code className="font-mono">sortBy</code>, <code className="font-mono">page</code>, <code className="font-mono">limit</code>
           </p>
         </Section>
@@ -378,14 +379,14 @@ export default function TaskForgeDetail() {
                   <div className="text-accentColor flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accentColor/10">
                     <Icon icon={c.icon} width="18" />
                   </div>
-                  <p className="text-textColor/50 text-sm font-medium">
-                    <span className="text-red-400/70 mr-1">Problem:</span>
+                  <p className="text-textMuted text-sm font-medium">
+                    <span className="text-dangerText mr-1">Problem:</span>
                     {c.problem}
                   </p>
                 </div>
                 <div className="border-l-2 border-accentColor/30 pl-4">
-                  <p className="text-textColor/40 mb-1 text-xs font-semibold uppercase tracking-wider">Solution</p>
-                  <p className="text-textColor/70 text-sm leading-relaxed">{c.solution}</p>
+                  <p className="text-textMuted mb-1 text-xs font-semibold uppercase tracking-wider">Solution</p>
+                  <p className="text-textSecondary text-sm leading-relaxed">{c.solution}</p>
                 </div>
               </motion.div>
             ))}
@@ -407,7 +408,7 @@ export default function TaskForgeDetail() {
                 <div className="text-accentColor mt-0.5 shrink-0">
                   <Icon icon={item.icon} width="16" />
                 </div>
-                <p className="text-textColor/65 text-sm leading-relaxed">{item.text}</p>
+                <p className="text-textSecondary text-sm leading-relaxed">{item.text}</p>
               </div>
             ))}
           </div>
@@ -422,7 +423,7 @@ export default function TaskForgeDetail() {
           className="border-accentColor/20 bg-accentColor/5 mt-6 rounded-2xl border p-8 text-center"
         >
           <h3 className="text-textColor mb-2 text-xl font-bold">Want to see it live?</h3>
-          <p className="text-textColor/60 mb-6 text-sm">
+          <p className="text-textMuted mb-6 text-sm">
             Try the live app or explore the source code on GitHub.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
@@ -446,7 +447,7 @@ export default function TaskForgeDetail() {
             </a>
             <Link
               to="/projects"
-              className="text-textColor/50 hover:text-accentColor inline-flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors duration-200"
+              className="text-textMuted hover:text-accentColor inline-flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors duration-200"
             >
               <Icon icon="lucide:arrow-left" width="14" />
               All Projects
@@ -485,7 +486,7 @@ function Card({ icon, label, children }) {
         <Icon icon={icon} width="18" />
       </div>
       <p className="text-textColor mb-2 text-sm font-bold">{label}</p>
-      <p className="text-textColor/60 text-sm leading-relaxed">{children}</p>
+      <p className="text-textMuted text-sm leading-relaxed">{children}</p>
     </div>
   );
 }
@@ -502,7 +503,7 @@ function StackGroup({ label, items }) {
             </div>
             <div>
               <p className="text-textColor text-sm font-semibold">{item.name}</p>
-              <p className="text-textColor/40 text-xs">{item.note}</p>
+              <p className="text-textMuted text-xs">{item.note}</p>
             </div>
           </div>
         ))}

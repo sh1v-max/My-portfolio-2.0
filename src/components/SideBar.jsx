@@ -30,7 +30,7 @@ function SideBar() {
               <div className={`cursor-pointer p-2 transition-colors duration-200 ${isActive ? "opacity-100" : "opacity-40 group-hover:opacity-80"}`}>
                 <Icon
                   icon={icon}
-                  className={`w-7 h-7 ${isActive ? "text-textColor" : "text-textColor/40"}`}
+                  className={`w-7 h-7 ${isActive ? "text-textColor" : "text-textMuted"}`}
                 />
               </div>
             </Link>
@@ -49,7 +49,7 @@ function SideBar() {
               <div className={`cursor-pointer p-2 transition-colors duration-200 ${isActive ? "opacity-100" : "opacity-40 group-hover:opacity-80"}`}>
                 <Icon
                   icon={icon}
-                  className={`w-7 h-7 ${isActive ? "text-textColor" : "text-textColor/40"}`}
+                  className={`w-7 h-7 ${isActive ? "text-textColor" : "text-textMuted"}`}
                 />
               </div>
             </Link>

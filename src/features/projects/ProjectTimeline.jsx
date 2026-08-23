@@ -99,7 +99,7 @@ export default function ProjectTimeline() {
           >
             Timeline
           </motion.h2>
-          <motion.p variants={fadeUp} className="text-textColor/60 max-w-xl text-base leading-relaxed">
+          <motion.p variants={fadeUp} className="text-textMuted max-w-xl text-base leading-relaxed">
             Every project in the order it was built — what I made, when, and what it pushed me to learn next.
           </motion.p>
           <motion.div
@@ -186,7 +186,7 @@ function TimelineEntry({ item, isLast }) {
 
         {/* Period + status badge */}
         <div className="relative mb-2.5 flex flex-wrap items-center gap-2.5">
-          <span className="font-mono text-xs text-textColor/40">
+          <span className="font-mono text-xs text-textMuted">
             {item.period}
             {item.periodEnd ? ` — ${item.periodEnd}` : " — Present"}
           </span>
@@ -221,7 +221,7 @@ function TimelineEntry({ item, isLast }) {
         </h3>
 
         {/* Description */}
-        <p className="relative mb-4 max-w-2xl text-sm leading-relaxed text-textColor/65 md:text-[0.9375rem]">
+        <p className="relative mb-4 max-w-2xl text-sm leading-relaxed text-textSecondary md:text-[0.9375rem]">
           {item.desc}
         </p>
 
@@ -232,8 +232,8 @@ function TimelineEntry({ item, isLast }) {
               key={tag}
               className={`rounded-full border px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider transition-colors duration-300 ${
                 hovered
-                  ? "border-accentColor/30 text-accentColor/70"
-                  : "border-textColor/20 text-textColor/45"
+                  ? "border-accentColor/30 text-accentColor"
+                  : "border-textColor/20 text-textMuted"
               }`}
             >
               {tag}
@@ -246,7 +246,7 @@ function TimelineEntry({ item, isLast }) {
           {item.caseStudy && (
             <Link
               to={item.caseStudy}
-              className="group/link inline-flex min-h-11 items-center gap-2 rounded-full border border-textColor/25 px-5 py-2.5 text-sm font-medium text-textColor/70 transition-all duration-300 hover:border-accentColor/50 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor"
+              className="group/link inline-flex min-h-11 items-center gap-2 rounded-full border border-textColor/25 px-5 py-2.5 text-sm font-medium text-textSecondary transition-all duration-300 hover:border-accentColor/50 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor"
             >
               Case Study
               <Icon
@@ -261,7 +261,7 @@ function TimelineEntry({ item, isLast }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${item.title} live demo, opens in new tab`}
-              className="group/link inline-flex min-h-11 items-center gap-2 rounded-full border border-textColor/25 px-5 py-2.5 text-sm text-textColor/60 transition-all duration-300 hover:border-accentColor/50 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor"
+              className="group/link inline-flex min-h-11 items-center gap-2 rounded-full border border-textColor/25 px-5 py-2.5 text-sm text-textMuted transition-all duration-300 hover:border-accentColor/50 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor"
             >
               Live Demo
               <Icon

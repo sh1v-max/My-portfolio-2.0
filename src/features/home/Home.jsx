@@ -65,6 +65,11 @@ function Home({ asSection = false }) {
         <section className="relative flex h-[calc(100dvh-64px)] items-center justify-center overflow-hidden px-4 py-8 sm:px-6 md:px-8 md:py-12">
           {/* Background Decorative Text */}
           <motion.div
+            /* Decorative watermark, not content. It is deliberately near the
+               background luminance, so it is exempt from the text contrast
+               floor — and hidden from assistive tech, which would otherwise
+               read "I BUILD FOR THE WEB" as a stray heading before the name. */
+            aria-hidden="true"
             className="text-bgText absolute left-0 z-0 flex select-none flex-col gap-y-0 px-20 text-[10rem] font-extrabold leading-[0.85] tracking-tighter max-lg:hidden xl:text-[12rem] 2xl:text-[15rem]"
             initial={{ opacity: 0, scale: 1.05 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -121,7 +126,7 @@ function Home({ asSection = false }) {
 
               {/* Subheading - Bold & Wide */}
               <motion.h2
-                className="text-accentColor/80 mb-8 mt-4 text-lg font-bold uppercase tracking-[0.2em] sm:text-xl lg:text-2xl"
+                className="text-accentColor mb-8 mt-4 text-lg font-bold uppercase tracking-[0.2em] sm:text-xl lg:text-2xl"
                 variants={itemVariants}
               >
                 {personal.role}
@@ -129,7 +134,7 @@ function Home({ asSection = false }) {
 
               {/* Description - Focused & Clean */}
               <motion.p
-                className="text-textColor/70 mb-12 max-w-2xl text-xl leading-[1.6] md:text-2xl lg:text-3xl"
+                className="text-textSecondary mb-12 max-w-2xl text-xl leading-[1.6] md:text-2xl lg:text-3xl"
                 style={{ fontFamily: "'Satisfy', cursive" }}
                 variants={itemVariants}
               >
@@ -150,7 +155,7 @@ function Home({ asSection = false }) {
               >
                 <Link to="/projects">
                   <motion.button
-                    className="bg-accentColor text-mainBg rounded-xl px-5 py-3 text-xs font-bold shadow-lg transition-all duration-200 ease-out hover:shadow-[0_0_25px_rgba(136,192,208,0.25)] min-h-11 sm:px-8 sm:py-4 sm:text-sm"
+                    className="bg-accentColor text-mainBg rounded-xl px-5 py-3 text-xs font-bold shadow-lg transition-all duration-200 ease-out hover:shadow-[0_0_25px_color-mix(in_srgb,var(--accentColor)_25%,transparent)] min-h-11 sm:px-8 sm:py-4 sm:text-sm"
                     style={{
                       boxShadow:
                         "0 4px 20px color-mix(in srgb, var(--accentColor) 30%, transparent)",
@@ -185,7 +190,7 @@ function Home({ asSection = false }) {
                   aria-label="GitHub"
                 >
                   <motion.div
-                    className="border-textColor/20 text-textColor/60 hover:border-accentColor hover:text-accentColor flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-200"
+                    className="border-textColor/20 text-textMuted hover:border-accentColor hover:text-accentColor flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-200"
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -199,7 +204,7 @@ function Home({ asSection = false }) {
                   aria-label="LinkedIn"
                 >
                   <motion.div
-                    className="border-textColor/20 text-textColor/60 hover:border-accentColor hover:text-accentColor flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-200"
+                    className="border-textColor/20 text-textMuted hover:border-accentColor hover:text-accentColor flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-200"
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -213,7 +218,7 @@ function Home({ asSection = false }) {
                   aria-label="LeetCode"
                 >
                   <motion.div
-                    className="border-textColor/20 text-textColor/60 hover:border-accentColor hover:text-accentColor flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-200"
+                    className="border-textColor/20 text-textMuted hover:border-accentColor hover:text-accentColor flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-200"
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >

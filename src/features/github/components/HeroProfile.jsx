@@ -9,7 +9,10 @@ export default function HeroProfile({ user }) {
       <div className="relative z-10 flex flex-col items-center gap-8 md:flex-row md:items-start">
         <img
           src={user.avatar_url}
-          alt={user.login}
+          alt={`${user.login} GitHub avatar`}
+          width={128}
+          height={128}
+          decoding="async"
           className="h-32 w-32 rounded-full border-4 border-accentColor/20 shadow-md transition-transform hover:scale-105"
         />
 

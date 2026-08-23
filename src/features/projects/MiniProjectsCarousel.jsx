@@ -190,7 +190,7 @@ function MiniProjectsCarousel() {
           </motion.h2>
           <motion.p
             variants={headerItem}
-            className="text-textColor/60 max-w-xl text-sm leading-relaxed"
+            className="text-textMuted max-w-xl text-sm leading-relaxed"
           >
             Machine-coding challenges and interface experiments — each one built
             to drill a single pattern properly.
@@ -245,7 +245,7 @@ function MiniProjectsCarousel() {
               className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
             />
           </Link>
-          <p className="text-textColor/40 mb-12 text-xs tracking-wide">
+          <p className="text-textMuted mb-12 text-xs tracking-wide">
             Beginner &nbsp;·&nbsp; Intermediate &nbsp;·&nbsp; Advanced
           </p>
         </motion.div>

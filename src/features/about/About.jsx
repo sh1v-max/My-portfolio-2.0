@@ -162,7 +162,7 @@ function EducationAccordion({ items = [] }) {
                 <p className="text-accentColor mt-0.5 text-sm font-semibold">
                   {edu.institution}
                 </p>
-                <p className="text-textColor/40 mt-1 text-xs font-medium">
+                <p className="text-textMuted mt-1 text-xs font-medium">
                   {edu.year}
                 </p>
               </div>
@@ -170,7 +170,7 @@ function EducationAccordion({ items = [] }) {
               {/* Toggle button */}
               <button
                 onClick={() => toggle(i)}
-                className="border-explorerBorder text-textColor/40 hover:border-accentColor/40 hover:text-accentColor mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border transition-all duration-200"
+                className="border-explorerBorder text-textMuted hover:border-accentColor/40 hover:text-accentColor mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border transition-all duration-200"
                 aria-label={isOpen ? "Collapse" : "Expand"}
               >
                 <Icon
@@ -189,7 +189,7 @@ function EducationAccordion({ items = [] }) {
               className="overflow-hidden"
             >
               <div className="border-explorerBorder/50 border-t px-5 pb-5 pt-4">
-                <p className="text-textColor/60 font-mono text-sm leading-relaxed">
+                <p className="text-textMuted font-mono text-sm leading-relaxed">
                   {edu.note}
                 </p>
                 {edu.points && edu.points.length > 0 && (
@@ -197,7 +197,7 @@ function EducationAccordion({ items = [] }) {
                     {edu.points.map((pt, j) => (
                       <li
                         key={j}
-                        className="text-textColor/55 flex items-start gap-2 text-sm"
+                        className="text-textMuted flex items-start gap-2 text-sm"
                       >
                         <span className="bg-accentColor/60 mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" />
                         {pt}
@@ -252,7 +252,7 @@ function About({ asSection = false }) {
             </motion.h1>
             <motion.p
               variants={headerItem}
-              className="text-textColor/60 text-justify text-base leading-relaxed md:w-1/2"
+              className="text-textMuted text-justify text-base leading-relaxed md:w-1/2"
             >
               Full-Stack Developer specializing in the React ecosystem and Node.js backends, building
               fast, scalable, and motion-rich web applications.
@@ -274,6 +274,10 @@ function About({ asSection = false }) {
                 <img
                   src={profile_pic}
                   alt="Shiv Shankar Singh"
+                  width={1200}
+                  height={1200}
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
                 />
               </div>
@@ -283,7 +287,7 @@ function About({ asSection = false }) {
             {/* Bio */}
             <div className="flex flex-1 flex-col gap-6 text-center lg:text-left">
               <div className="space-y-4">
-                <p className="text-textColor/80 text-lg leading-relaxed">
+                <p className="text-textSecondary text-lg leading-relaxed">
                   Hi, I&apos;m{" "}
                   <span className="font-bold text-white">
                     {personal.name}
@@ -293,14 +297,14 @@ function About({ asSection = false }) {
                     {personal.location}.
                   </span>
                 </p>
-                <p className="text-textColor/70 text-base leading-relaxed">
+                <p className="text-textSecondary text-base leading-relaxed">
                   I specialize in the React ecosystem, building responsive,
                   performant web applications with clean architecture and
                   thoughtful UX. My toolkit spans the modern JavaScript stack,
                   from React and Redux on the front end to Node.js and MongoDB
                   on the back end.
                 </p>
-                <p className="text-textColor/70 text-base leading-relaxed">
+                <p className="text-textSecondary text-base leading-relaxed">
                   What excites me most is the intersection of design and
                   engineering, crafting interfaces that feel alive through
                   motion, micro-interactions, and meticulous attention to
@@ -327,7 +331,7 @@ function About({ asSection = false }) {
                       <p className="text-accentColor text-sm font-bold">
                         MongoDB
                       </p>
-                      <p className="text-textColor/60 text-sm">
+                      <p className="text-textMuted text-sm">
                         Learning NoSQL database design, schema modeling with Mongoose, and efficient querying patterns.
                       </p>
                     </div>
@@ -345,7 +349,7 @@ function About({ asSection = false }) {
                       <p className="text-accentColor text-sm font-bold">
                         Node.js & Express
                       </p>
-                      <p className="text-textColor/60 text-sm">
+                      <p className="text-textMuted text-sm">
                         Building REST APIs, handling authentication with JWT, and structuring scalable backend services.
                       </p>
                     </div>
@@ -363,7 +367,7 @@ function About({ asSection = false }) {
                       <p className="text-accentColor text-sm font-bold">
                         Ruby & Rails
                       </p>
-                      <p className="text-textColor/60 text-sm">
+                      <p className="text-textMuted text-sm">
                         Diving into Ruby and Rails to expand backend expertise and build scalable applications.
                       </p>
                     </div>
@@ -380,7 +384,7 @@ function About({ asSection = false }) {
                   className="group relative"
                 >
                   <motion.button
-                    className="bg-accentColor text-mainBg flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold shadow-lg transition-all duration-200 hover:shadow-[0_0_25px_rgba(136,192,208,0.25)] hover:brightness-110"
+                    className="bg-accentColor text-mainBg flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold shadow-lg transition-all duration-200 hover:shadow-[0_0_25px_color-mix(in_srgb,var(--accentColor)_25%,transparent)] hover:brightness-110"
                     whileHover={{ scale: 1.04, y: -2 }}
                     whileTap={{ scale: 0.97 }}
                   >
@@ -423,7 +427,7 @@ function About({ asSection = false }) {
                   <div className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
                   <div className="h-3 w-3 rounded-full bg-[#27c93f]" />
                 </div>
-                <span className="text-textColor/50 font-mono text-xs">
+                <span className="text-textMuted font-mono text-xs">
                   aboutMe.json
                 </span>
               </div>
@@ -511,7 +515,7 @@ function About({ asSection = false }) {
                       <p className="text-sm font-bold text-white">
                         {item.title}
                       </p>
-                      <p className="text-textColor/60 mt-1.5 text-sm leading-relaxed">
+                      <p className="text-textMuted mt-1.5 text-sm leading-relaxed">
                         {item.desc}
                       </p>
                     </div>
@@ -560,7 +564,7 @@ function About({ asSection = false }) {
                   <h3 className="mb-2 text-base font-bold text-white">
                     {s.title}
                   </h3>
-                  <p className="text-textColor/60 text-sm leading-relaxed">
+                  <p className="text-textMuted text-sm leading-relaxed">
                     {s.desc}
                   </p>
                 </motion.div>
@@ -618,7 +622,7 @@ function About({ asSection = false }) {
           >
             <Link to="/contact">
               <motion.button
-                className="bg-accentColor text-mainBg rounded-xl px-8 py-3 text-sm font-bold shadow-lg transition-all duration-200 hover:shadow-[0_0_25px_rgba(136,192,208,0.25)] hover:brightness-110"
+                className="bg-accentColor text-mainBg rounded-xl px-8 py-3 text-sm font-bold shadow-lg transition-all duration-200 hover:shadow-[0_0_25px_color-mix(in_srgb,var(--accentColor)_25%,transparent)] hover:brightness-110"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.97 }}
               >

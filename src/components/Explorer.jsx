@@ -40,7 +40,7 @@ function Explorer() {
 
   return (
     <div className="flex h-full w-64 flex-shrink-0 flex-col bg-explorerBg text-textColor select-none">
-      <h2 className="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-textColor/50">
+      <h2 className="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-textMuted">
         Explorer
       </h2>
       

@@ -48,7 +48,7 @@ export default function GithubTeaser() {
           </motion.h2>
           <motion.p
             variants={hi}
-            className="text-textColor/60 max-w-xl text-base leading-relaxed"
+            className="text-textMuted max-w-xl text-base leading-relaxed"
           >
             An overview of my open-source contributions, coding activity, and repositories
             — all pulled live from the GitHub API.
@@ -75,11 +75,11 @@ export default function GithubTeaser() {
                 key={label}
                 className="border-explorerBorder bg-articleBg group flex flex-col gap-3 rounded-2xl border p-5 transition-[border-color] duration-300 hover:border-accentColor/25"
               >
-                <Icon icon={icon} className="text-accentColor/50 h-4 w-4" />
+                <Icon icon={icon} className="text-accentColor h-4 w-4" />
                 <span className="text-textColor text-4xl font-black leading-none tracking-tight">
                   {value}
                 </span>
-                <span className="text-textColor/40 text-xs font-medium uppercase tracking-widest">
+                <span className="text-textMuted text-xs font-medium uppercase tracking-widest">
                   {label}
                 </span>
               </div>
@@ -114,19 +114,19 @@ export default function GithubTeaser() {
                 <p className="text-textColor text-base font-bold leading-tight">
                   @{personal.githubUsername}
                 </p>
-                <p className="text-textColor/45 mt-0.5 text-xs leading-snug">
+                <p className="text-textMuted mt-0.5 text-xs leading-snug">
                   Full Stack JS Developer · Shipping projects daily
                 </p>
               </div>
               <Icon
                 icon="lucide:external-link"
-                className="text-textColor/25 group-hover:text-accentColor h-4 w-4 shrink-0 transition-colors duration-300"
+                className="text-textMuted group-hover:text-accentColor h-4 w-4 shrink-0 transition-colors duration-300"
               />
             </a>
 
             {/* Contribution activity bar */}
             <div className="border-explorerBorder bg-articleBg rounded-2xl border p-5">
-              <p className="text-textColor/40 mb-3 text-xs font-semibold uppercase tracking-widest">
+              <p className="text-textMuted mb-3 text-xs font-semibold uppercase tracking-widest">
                 Activity
               </p>
               <div className="flex items-end gap-1" aria-hidden="true">
@@ -138,21 +138,21 @@ export default function GithubTeaser() {
                   />
                 ))}
               </div>
-              <p className="text-textColor/30 mt-2 text-xs">
+              <p className="text-textMuted mt-2 text-xs">
                 Consistent contributions — last 12 months
               </p>
             </div>
 
             {/* Core skills */}
             <div className="border-explorerBorder bg-articleBg rounded-2xl border p-5">
-              <p className="text-textColor/40 mb-3 text-xs font-semibold uppercase tracking-widest">
+              <p className="text-textMuted mb-3 text-xs font-semibold uppercase tracking-widest">
                 Core stack
               </p>
               <div className="flex flex-wrap gap-2">
                 {githubSkills.slice(0, 8).map((skill) => (
                   <span
                     key={skill}
-                    className="border-accentColor/15 bg-accentColor/5 text-accentColor/75 rounded-full border px-3 py-1 text-xs font-medium"
+                    className="border-accentColor/15 bg-accentColor/5 text-accentColor rounded-full border px-3 py-1 text-xs font-medium"
                   >
                     {skill}
                   </span>

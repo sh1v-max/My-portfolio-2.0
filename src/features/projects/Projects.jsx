@@ -212,7 +212,7 @@ function Projects({ asSection = false }) {
             </motion.h1>
             <motion.p
               variants={headerItem}
-              className="text-textColor/60 max-w-xl text-base leading-relaxed"
+              className="text-textMuted max-w-xl text-base leading-relaxed"
             >
               Five production-grade applications built to go beyond tutorials —
               real APIs, AI integrations, and polished interfaces.
@@ -275,7 +275,7 @@ function ProjectRow({ project, index, isFirst, hovered, meta }) {
           <span
             aria-hidden="true"
             className={`shrink-0 pt-1.5 font-mono text-xs leading-none transition-colors duration-400 md:pt-2.5 ${
-              hovered ? "text-accentColor/70" : "text-textColor/40"
+              hovered ? "text-accentColor" : "text-textMuted"
             }`}
           >
             {String(index + 1).padStart(2, "0")}
@@ -325,7 +325,7 @@ function ProjectRow({ project, index, isFirst, hovered, meta }) {
                   transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                   className="h-px w-10 origin-left bg-linear-to-r from-accentColor/55 to-transparent"
                 />
-                <span className="font-mono text-xs text-textColor/55 sm:text-[0.8125rem]">
+                <span className="font-mono text-xs text-textMuted sm:text-[0.8125rem]">
                   {meta.period}
                   {meta.periodEnd ? ` — ${meta.periodEnd}` : " — Present"}
                 </span>
@@ -355,7 +355,7 @@ function ProjectRow({ project, index, isFirst, hovered, meta }) {
             {/* Printed in full — descriptions are written short enough in
                 project.js that clipping is never needed. Truncating here just
                 hid the fact that the copy was too long. */}
-            <p className="mt-3.5 max-w-2xl text-[0.9375rem] leading-relaxed text-textColor/70 md:text-base">
+            <p className="mt-3.5 max-w-2xl text-[0.9375rem] leading-relaxed text-textSecondary md:text-base">
               {project.description}
             </p>
 
@@ -367,8 +367,8 @@ function ProjectRow({ project, index, isFirst, hovered, meta }) {
                   key={tag}
                   className={`rounded-full border px-3 py-1 font-mono text-[11px] uppercase tracking-wider transition-colors duration-300 sm:text-xs ${
                     hovered
-                      ? "border-accentColor/40 text-accentColor/80"
-                      : "border-textColor/25 text-textColor/60"
+                      ? "border-accentColor/40 text-accentColor"
+                      : "border-textColor/25 text-textMuted"
                   }`}
                 >
                   {tag}
@@ -406,7 +406,7 @@ function ProjectRow({ project, index, isFirst, hovered, meta }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${project.title} live demo, opens in new tab`}
-                  className="group/cta inline-flex min-h-11 items-center gap-2 rounded-full border border-textColor/25 px-4 py-2.5 text-sm text-textColor/60 transition-all duration-300 hover:border-accentColor/50 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor"
+                  className="group/cta inline-flex min-h-11 items-center gap-2 rounded-full border border-textColor/25 px-4 py-2.5 text-sm text-textMuted transition-all duration-300 hover:border-accentColor/50 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor"
                 >
                   Live Demo
                   <Icon
@@ -421,7 +421,7 @@ function ProjectRow({ project, index, isFirst, hovered, meta }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${project.title} source code on GitHub`}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-textColor/25 text-textColor/50 transition-all duration-300 hover:border-accentColor/50 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-textColor/25 text-textMuted transition-all duration-300 hover:border-accentColor/50 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor"
                 >
                   <Icon icon="lucide:github" className="h-4 w-4" />
                 </a>

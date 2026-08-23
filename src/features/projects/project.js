@@ -67,7 +67,8 @@ export const projects = [
     title: "Coming Soon...",
     description:
       "I'm currently brewing up something exciting! Stay tuned for my next big project.",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Coming+Soon",
+    // No screenshot yet — consumers render <ImagePlaceholder /> when image is null.
+    image: null,
     tags: ["top-secret", "cooking", "stay-tuned"],
     sourceCode: null,
     demo: null,

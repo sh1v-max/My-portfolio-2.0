@@ -153,7 +153,7 @@ export default function PortfolioDetail() {
         <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }}>
           <Link
             to="/projects"
-            className="text-textColor/50 hover:text-accentColor mb-10 inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200"
+            className="text-textMuted hover:text-accentColor mb-10 inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200"
           >
             <Icon icon="lucide:arrow-left" width="16" />
             Back to Projects
@@ -172,7 +172,7 @@ export default function PortfolioDetail() {
             This Portfolio
           </motion.h1>
 
-          <motion.p variants={fadeUp} className="text-textColor/60 mb-6 max-w-2xl text-lg leading-relaxed">
+          <motion.p variants={fadeUp} className="text-textMuted mb-6 max-w-2xl text-lg leading-relaxed">
             A cinematic, motion-heavy developer portfolio with 6 dynamic themes, a live GitHub
             dashboard, serverless contact form, centralized data config, and per-project case study
             pages — built with React 18, Tailwind CSS 4, and Framer Motion.
@@ -198,13 +198,13 @@ export default function PortfolioDetail() {
           </motion.div>
 
           <motion.div variants={fadeUp} className="border-explorerBorder overflow-hidden rounded-2xl border shadow-2xl">
-            <img src={heroImg} alt="Portfolio home page" className="w-full object-cover object-top" />
+            <img src={heroImg} alt="Portfolio home page" width={1600} height={900} loading="lazy" decoding="async" className="w-full object-cover object-top" />
           </motion.div>
         </motion.div>
 
         {/* ── Overview ── */}
         <Section title="Overview">
-          <p className="text-textColor/70 leading-relaxed">
+          <p className="text-textSecondary leading-relaxed">
             This portfolio started as a simple project showcase and evolved into a full{" "}
             <strong className="text-textColor">design system and architecture exercise</strong>.
             The goal was to build something that felt premium — cinematic animations, a theming
@@ -246,7 +246,7 @@ export default function PortfolioDetail() {
                   </div>
                   <div>
                     <p className="text-textColor text-sm font-semibold">{item.name}</p>
-                    <p className="text-textColor/40 text-xs">{item.note}</p>
+                    <p className="text-textMuted text-xs">{item.note}</p>
                   </div>
                 </div>
               ))}
@@ -256,7 +256,7 @@ export default function PortfolioDetail() {
 
         {/* ── Architecture ── */}
         <Section title="Architecture">
-          <p className="text-textColor/70 mb-6 leading-relaxed">
+          <p className="text-textSecondary mb-6 leading-relaxed">
             Feature-based folder structure with a strict{" "}
             <strong className="text-textColor">single source of truth</strong> for data and a
             context layer for shared async state.
@@ -272,10 +272,10 @@ export default function PortfolioDetail() {
                 { step: "06", label: "React Router v6", detail: "Client-side routing with nested routes under a Main layout — project case study routes at /projects/:slug" },
               ].map(({ step, label, detail }) => (
                 <div key={step} className="flex items-start gap-4">
-                  <span className="text-accentColor/50 w-8 shrink-0 font-mono text-xs font-bold">{step}</span>
+                  <span className="text-accentColor w-8 shrink-0 font-mono text-xs font-bold">{step}</span>
                   <div className="border-l border-explorerBorder pl-4">
                     <p className="text-textColor text-sm font-semibold">{label}</p>
-                    <p className="text-textColor/50 text-xs leading-relaxed">{detail}</p>
+                    <p className="text-textMuted text-xs leading-relaxed">{detail}</p>
                   </div>
                 </div>
               ))}
@@ -296,7 +296,7 @@ export default function PortfolioDetail() {
                   <Icon icon={f.icon} width="18" />
                 </div>
                 <h3 className="text-textColor mb-1.5 text-sm font-bold">{f.title}</h3>
-                <p className="text-textColor/60 text-sm leading-relaxed">{f.desc}</p>
+                <p className="text-textMuted text-sm leading-relaxed">{f.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -313,12 +313,12 @@ export default function PortfolioDetail() {
                 onClick={() => setLightboxIndex(i)}
               >
                 <div className="relative overflow-hidden">
-                  <img src={s.src} alt={s.alt} className="w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]" />
+                  <img width={1600} height={900} loading="lazy" decoding="async" src={s.src} alt={s.alt} className="w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]" />
                   <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover:bg-black/20">
                     <Icon icon="lucide:zoom-in" width="28" className="text-white opacity-0 drop-shadow-lg transition-opacity duration-200 group-hover:opacity-100" />
                   </div>
                 </div>
-                <p className="text-textColor/40 bg-articleBg border-explorerBorder border-t px-3 py-2 text-center text-xs font-medium">{s.label}</p>
+                <p className="text-textMuted bg-articleBg border-explorerBorder border-t px-3 py-2 text-center text-xs font-medium">{s.label}</p>
               </motion.div>
             ))}
           </div>
@@ -336,12 +336,12 @@ export default function PortfolioDetail() {
                   onClick={() => setLightboxIndex(desktopScreenshots.length + i)}
                 >
                   <div className="relative overflow-hidden">
-                    <img src={s.src} alt={s.alt} className="w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]" />
+                    <img src={s.src} alt={s.alt} width={409} height={912} loading="lazy" decoding="async" className="w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]" />
                     <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover:bg-black/20">
                       <Icon icon="lucide:zoom-in" width="24" className="text-white opacity-0 drop-shadow-lg transition-opacity duration-200 group-hover:opacity-100" />
                     </div>
                   </div>
-                  <p className="text-textColor/40 bg-articleBg border-explorerBorder border-t px-3 py-2 text-center text-xs font-medium">{s.label}</p>
+                  <p className="text-textMuted bg-articleBg border-explorerBorder border-t px-3 py-2 text-center text-xs font-medium">{s.label}</p>
                 </motion.div>
               ))}
             </div>
@@ -361,13 +361,13 @@ export default function PortfolioDetail() {
                   <div className="text-accentColor flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accentColor/10">
                     <Icon icon={c.icon} width="18" />
                   </div>
-                  <p className="text-textColor/50 text-sm font-medium">
-                    <span className="text-red-400/70 mr-1">Problem:</span>{c.problem}
+                  <p className="text-textMuted text-sm font-medium">
+                    <span className="text-dangerText mr-1">Problem:</span>{c.problem}
                   </p>
                 </div>
                 <div className="border-l-2 border-accentColor/30 pl-4">
-                  <p className="text-textColor/40 mb-1 text-xs font-semibold uppercase tracking-wider">Solution</p>
-                  <p className="text-textColor/70 text-sm leading-relaxed">{c.solution}</p>
+                  <p className="text-textMuted mb-1 text-xs font-semibold uppercase tracking-wider">Solution</p>
+                  <p className="text-textSecondary text-sm leading-relaxed">{c.solution}</p>
                 </div>
               </motion.div>
             ))}
@@ -387,7 +387,7 @@ export default function PortfolioDetail() {
             ].map((item) => (
               <div key={item.text} className="border-explorerBorder bg-articleBg flex items-start gap-3 rounded-xl border p-4">
                 <div className="text-accentColor mt-0.5 shrink-0"><Icon icon={item.icon} width="16" /></div>
-                <p className="text-textColor/65 text-sm leading-relaxed">{item.text}</p>
+                <p className="text-textSecondary text-sm leading-relaxed">{item.text}</p>
               </div>
             ))}
           </div>
@@ -399,7 +399,7 @@ export default function PortfolioDetail() {
           className="border-accentColor/20 bg-accentColor/5 mt-6 rounded-2xl border p-8 text-center"
         >
           <h3 className="text-textColor mb-2 text-xl font-bold">You&apos;re already here</h3>
-          <p className="text-textColor/60 mb-6 text-sm">
+          <p className="text-textMuted mb-6 text-sm">
             Explore the rest of the site or check the full source code on GitHub.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
@@ -412,7 +412,7 @@ export default function PortfolioDetail() {
               <Icon icon="mdi:github" width="16" />View Source
             </a>
             <Link to="/projects"
-              className="text-textColor/50 hover:text-accentColor inline-flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors duration-200">
+              className="text-textMuted hover:text-accentColor inline-flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors duration-200">
               <Icon icon="lucide:arrow-left" width="14" />All Projects
             </Link>
           </div>
@@ -469,6 +469,7 @@ function Lightbox({ screenshots, index, onClose, onPrev, onNext }) {
             <img
               src={current.src}
               alt={current.alt}
+              decoding="async"
               className="max-h-[82vh] max-w-full rounded-xl object-contain shadow-2xl"
             />
             <p className="mt-3 text-sm font-medium text-white/60">{current.label}</p>
@@ -517,7 +518,7 @@ function Card({ icon, label, children }) {
         <Icon icon={icon} width="18" />
       </div>
       <p className="text-textColor mb-2 text-sm font-bold">{label}</p>
-      <p className="text-textColor/60 text-sm leading-relaxed">{children}</p>
+      <p className="text-textMuted text-sm leading-relaxed">{children}</p>
     </div>
   );
 }

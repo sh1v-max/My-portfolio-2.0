@@ -70,7 +70,7 @@ export default function WorkTeaser() {
 
           <motion.p
             variants={hi}
-            className="text-textColor/60 max-w-xl text-base leading-relaxed"
+            className="text-textMuted max-w-xl text-base leading-relaxed"
           >
             Production-grade applications built with real APIs, AI integrations,
             and polished interfaces — each one going further than tutorials.
@@ -158,7 +158,7 @@ function FeaturedCard({ project }) {
         <div className="flex flex-1 flex-col justify-between gap-7 p-7 lg:p-9">
           <div className="space-y-4">
             <div className="flex items-center gap-2.5">
-              <span className="font-mono text-[10px] tracking-[0.22em] text-accentColor/60 uppercase">
+              <span className="font-mono text-[10px] tracking-[0.22em] text-accentColor uppercase">
                 Featured
               </span>
               <span className="h-px w-8 bg-accentColor/30" />
@@ -168,7 +168,7 @@ function FeaturedCard({ project }) {
               {project.title}
             </h3>
 
-            <p className="text-textColor/55 max-w-sm text-sm leading-relaxed">
+            <p className="text-textMuted max-w-sm text-sm leading-relaxed">
               {project.description}
             </p>
           </div>
@@ -180,7 +180,7 @@ function FeaturedCard({ project }) {
                 key={tag}
                 whileHover={{ scale: 1.07 }}
                 transition={{ type: "spring", stiffness: 420, damping: 20 }}
-                className="border-accentColor/15 bg-accentColor/5 text-accentColor/60 cursor-default select-none rounded-md border px-2.5 py-1 text-xs font-medium hover:border-accentColor/30 hover:text-accentColor/85 transition-colors duration-200"
+                className="border-accentColor/15 bg-accentColor/5 text-accentColor cursor-default select-none rounded-md border px-2.5 py-1 text-xs font-medium hover:border-accentColor/30 hover:text-accentColor transition-colors duration-200"
               >
                 {tag}
               </motion.span>
@@ -207,7 +207,7 @@ function FeaturedCard({ project }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${project.title} live demo, opens in new tab`}
-                className="inline-flex min-h-10 items-center gap-2 rounded-full border border-textColor/15 px-5 py-2.5 text-sm font-medium text-textColor/50 transition-all duration-300 hover:border-accentColor/25 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor"
+                className="inline-flex min-h-10 items-center gap-2 rounded-full border border-textColor/15 px-5 py-2.5 text-sm font-medium text-textMuted transition-all duration-300 hover:border-accentColor/25 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor"
               >
                 Live Demo
                 <Icon icon="lucide:external-link" className="h-3.5 w-3.5" />
@@ -235,6 +235,9 @@ function FeaturedCard({ project }) {
             <img
               src={project.image}
               alt={`${project.title} screenshot`}
+              width={1600}
+              height={900}
+              decoding="async"
               className="h-full w-full object-cover object-top"
               loading="lazy"
             />
@@ -286,7 +289,7 @@ function SupportingCard({ project }) {
           <span className="h-2 w-2 rounded-full bg-yellow-400/45" />
           <span className="h-2 w-2 rounded-full bg-green-400/45" />
           <div className="ml-2 flex-1 truncate rounded-sm bg-white/5 px-2.5 py-0.5">
-            <span className="font-mono text-[9px] tracking-wide text-textColor/20">
+            <span className="font-mono text-[9px] tracking-wide text-textMuted">
               {demoHost}
             </span>
           </div>
@@ -305,6 +308,9 @@ function SupportingCard({ project }) {
             <img
               src={project.image}
               alt={`${project.title} screenshot`}
+              width={1600}
+              height={900}
+              decoding="async"
               className="h-44 w-full object-cover object-top"
               loading="lazy"
             />
@@ -322,7 +328,7 @@ function SupportingCard({ project }) {
         </h3>
         {/* Three lines until the card is genuinely wide. It stays slim through
             tablet widths, where two lines clipped the longer summaries. */}
-        <p className="text-textColor/55 line-clamp-3 flex-1 text-sm leading-relaxed lg:line-clamp-2">
+        <p className="text-textMuted line-clamp-3 flex-1 text-sm leading-relaxed lg:line-clamp-2">
           {project.description}
         </p>
 
@@ -334,7 +340,7 @@ function SupportingCard({ project }) {
               variants={{
                 hover: { borderColor: "var(--color-accentColor)", transition: { duration: 0.2 } },
               }}
-              className="border-accentColor/15 bg-accentColor/5 text-accentColor/60 rounded-md border px-2 py-0.5 text-xs font-medium"
+              className="border-accentColor/15 bg-accentColor/5 text-accentColor rounded-md border px-2 py-0.5 text-xs font-medium"
             >
               {tag}
             </motion.span>
@@ -358,7 +364,7 @@ function SupportingCard({ project }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${project.title} live demo`}
-              className="text-textColor/40 hover:text-accentColor inline-flex min-h-9 items-center gap-1.5 rounded-lg px-3 text-xs font-medium transition-colors duration-200 hover:bg-accentColor/5"
+              className="text-textMuted hover:text-accentColor inline-flex min-h-9 items-center gap-1.5 rounded-lg px-3 text-xs font-medium transition-colors duration-200 hover:bg-accentColor/5"
             >
               <Icon icon="lucide:external-link" className="h-3 w-3" />
               Live Demo
@@ -370,7 +376,7 @@ function SupportingCard({ project }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${project.title} source code on GitHub`}
-              className="text-textColor/25 hover:text-textColor/60 ml-auto inline-flex min-h-9 items-center rounded-lg px-2 transition-colors duration-200"
+              className="text-textMuted hover:text-accentColor ml-auto inline-flex min-h-9 items-center rounded-lg px-2 transition-colors duration-200"
             >
               <Icon icon="lucide:github" className="h-4 w-4" />
             </a>

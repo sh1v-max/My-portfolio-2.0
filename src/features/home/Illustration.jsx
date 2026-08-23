@@ -31,7 +31,7 @@ function Illustration() {
           <div className="h-3 w-3 rounded-full bg-[#ff5f56]" />
           <div className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
           <div className="h-3 w-3 rounded-full bg-[#27c93f]" />
-          <div className="bg-textColor/10 text-textColor/50 ml-2 rounded px-2 py-0.5 text-[10px]">
+          <div className="bg-textColor/10 text-textMuted ml-2 rounded px-2 py-0.5 text-[10px]">
             src/Hero.tsx
           </div>
         </div>
@@ -70,7 +70,7 @@ function Illustration() {
           />
           <div className="mt-auto flex items-center gap-2">
             <span className="bg-accentColor h-2 w-2 animate-pulse rounded-full" />
-            <span className="text-textColor/40 text-xs">Compiling...</span>
+            <span className="text-textMuted text-xs">Compiling...</span>
           </div>
         </div>
       </motion.div>
@@ -141,7 +141,7 @@ function Illustration() {
       />
 
       {/* Decorative Plus Signs */}
-      <div className="text-accentColor/30 absolute right-0 top-0">
+      <div className="text-accentColor absolute right-0 top-0">
         <svg
           width="24"
           height="24"
@@ -153,7 +153,7 @@ function Illustration() {
           <path d="M12 5v14M5 12h14" />
         </svg>
       </div>
-      <div className="text-accentColor/30 absolute bottom-0 left-0">
+      <div className="text-accentColor absolute bottom-0 left-0">
         <svg
           width="24"
           height="24"

@@ -407,7 +407,7 @@ export const uiExperiments = [
     description: "Currently brewing something awesome in the lab. Stay tuned!",
     level: "Advanced",
     category: "UI",
-    image: "https://placehold.co/600x400/1f2428/88c0d0?text=Work+In+Progress",
+    image: null,
     tags: ["react", "frontend", "magic"],
     demo: "#",
     sourceCode: "#",

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 export default function Illustration20X() {
   return (
     <div className="relative flex h-100 w-full max-w-112.5 items-center justify-center">
-      <div className="absolute text-textColor/50 top-0 text-sm font-bold">20X - Isometric Layers</div>
+      <div className="absolute text-textMuted top-0 text-sm font-bold">20X - Isometric Layers</div>
 
       <motion.div
         className="relative flex items-center justify-center"
@@ -21,7 +21,7 @@ export default function Illustration20X() {
         
         {/* Layer 2 (Middle) */}
         <motion.div
-          className="absolute h-48 w-48 rounded-xl border-2 border-accentColor/50 bg-mainBg/60 shadow-[0_0_30px_rgba(136,192,208,0.2)] backdrop-blur-md"
+          className="absolute h-48 w-48 rounded-xl border-2 border-accentColor/50 bg-mainBg/60 shadow-[0_0_30px_color-mix(in_srgb,var(--accentColor)_20%,transparent)] backdrop-blur-md"
           animate={{ z: [0, 0, 0] }}
         >
           <div className="flex h-full w-full flex-col gap-3 p-4">

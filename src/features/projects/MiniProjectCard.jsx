@@ -73,7 +73,7 @@ function MiniProjectCard({ title, description, image, tags, sourceCode, demo, de
             }`}
           />
           <div className="ml-2 flex min-w-0 flex-1 justify-center">
-            <span className="truncate rounded bg-explorerBorder/10 px-2.5 py-0.5 font-mono text-[10px] tracking-wide text-textColor/30">
+            <span className="truncate rounded bg-explorerBorder/10 px-2.5 py-0.5 font-mono text-[10px] tracking-wide text-textMuted">
               {demo ? getDisplayUrl(demo) : title.toLowerCase().replace(/\s+/g, "-")}
             </span>
           </div>
@@ -84,7 +84,10 @@ function MiniProjectCard({ title, description, image, tags, sourceCode, demo, de
           <img
             src={image}
             alt={`${title} preview`}
+            width={1600}
+            height={900}
             loading="lazy"
+            decoding="async"
             className={`h-full w-full object-cover object-top transition-transform duration-500 ease-out ${
               hovered ? "scale-[1.06]" : "scale-100"
             }`}
@@ -105,7 +108,7 @@ function MiniProjectCard({ title, description, image, tags, sourceCode, demo, de
             />
           </div>
 
-          <p className="line-clamp-2 text-xs leading-relaxed text-textColor/50">
+          <p className="line-clamp-2 text-xs leading-relaxed text-textMuted">
             {description}
           </p>
 
@@ -113,13 +116,13 @@ function MiniProjectCard({ title, description, image, tags, sourceCode, demo, de
             {tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
-                className="rounded border border-accentColor/15 bg-accentColor/5 px-2 py-0.5 font-mono text-[10px] text-accentColor/65"
+                className="rounded border border-accentColor/15 bg-accentColor/5 px-2 py-0.5 font-mono text-[10px] text-accentColor"
               >
                 {tag}
               </span>
             ))}
             {tags.length > 3 && (
-              <span className="self-center text-[10px] text-textColor/25">
+              <span className="self-center text-[10px] text-textMuted">
                 +{tags.length - 3}
               </span>
             )}
@@ -146,7 +149,7 @@ function MiniProjectCard({ title, description, image, tags, sourceCode, demo, de
                 rel="noopener noreferrer"
                 aria-label={`${title} source code`}
                 tabIndex={linkTabIndex}
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-explorerBorder/35 text-textColor/40 transition-colors duration-200 hover:border-accentColor/30 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor sm:h-9 sm:w-9"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-explorerBorder/35 text-textMuted transition-colors duration-200 hover:border-accentColor/30 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor sm:h-9 sm:w-9"
               >
                 <Icon icon="lucide:github" className="h-3.5 w-3.5" />
               </a>

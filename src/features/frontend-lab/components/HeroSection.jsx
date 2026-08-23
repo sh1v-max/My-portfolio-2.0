@@ -31,7 +31,7 @@ export default function HeroSection() {
       {/* Badge */}
       <motion.span 
         variants={headerItem}
-        className="inline-flex items-center gap-2 rounded-full border border-accentColor/30 bg-accentColor/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accentColor shadow-[0_0_15px_rgba(136,192,208,0.2)]"
+        className="inline-flex items-center gap-2 rounded-full border border-accentColor/30 bg-accentColor/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accentColor shadow-[0_0_15px_color-mix(in_srgb,var(--accentColor)_20%,transparent)]"
       >
         <span className="h-1.5 w-1.5 rounded-full bg-accentColor animate-pulse" />
         33+ Builds
@@ -48,7 +48,7 @@ export default function HeroSection() {
       {/* Subtitle */}
       <motion.p 
         variants={headerItem}
-        className="text-base leading-relaxed text-textColor/70 text-justify md:w-1/2"
+        className="text-base leading-relaxed text-textSecondary text-justify md:w-1/2"
       >
         A collection of UI systems, machine coding challenges, and frontend experiments built to sharpen real-world development skills.
       </motion.p>

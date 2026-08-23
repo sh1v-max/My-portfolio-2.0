@@ -34,7 +34,7 @@ function ThemeCard({
       onClick={handleApply}
       className={`group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl border backdrop-blur-sm transition duration-300 ${
         isActive
-          ? "border-accentColor/50 bg-accentColor/3 shadow-[0_0_40px_rgba(136,192,208,0.1)]"
+          ? "border-accentColor/50 bg-accentColor/3 shadow-[0_0_40px_color-mix(in_srgb,var(--accentColor)_10%,transparent)]"
           : "border-explorerBorder/60 bg-articleBg/20 hover:border-accentColor/30 hover:shadow-[0_12px_40px_rgba(0,0,0,0.35)]"
       }`}
     >
@@ -72,14 +72,14 @@ function ThemeCard({
           <h3 className="text-textColor group-hover:text-accentColor text-lg font-bold transition-colors duration-200">
             {name}
           </h3>
-          <p className="text-textColor/40 flex items-center gap-1.5 text-xs">
+          <p className="text-textMuted flex items-center gap-1.5 text-xs">
             <Icon icon="lucide:user" className="opacity-50" width="11" height="11" />
             {publisher}
           </p>
         </div>
 
         {/* Description */}
-        <p className="text-textColor/45 mb-4 text-[11px] leading-relaxed">
+        <p className="text-textMuted mb-4 text-[11px] leading-relaxed">
           {description}
         </p>
 
@@ -102,7 +102,7 @@ function ThemeCard({
 
           {/* Downloads */}
           {downloads && (
-            <span className="text-textColor/25 flex items-center gap-1 text-[10px] font-medium">
+            <span className="text-textMuted flex items-center gap-1 text-[10px] font-medium">
               <Icon icon="lucide:download" width="11" height="11" />
               {downloads}
             </span>

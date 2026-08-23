@@ -42,7 +42,7 @@ export default function LabTeaser() {
           </motion.h2>
           <motion.p
             variants={hi}
-            className="text-textColor/60 max-w-xl text-base leading-relaxed"
+            className="text-textMuted max-w-xl text-base leading-relaxed"
           >
             Thirty-three component builds, from OTP inputs and star ratings to
             nested comments and infinite scroll.
@@ -104,7 +104,10 @@ function MiniCard({ project }) {
       <div className="relative overflow-hidden">
         <img
           src={project.image}
-          alt={project.title}
+          alt={`${project.title} preview`}
+          width={1600}
+          height={900}
+          decoding="async"
           className="h-40 w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
         />
@@ -116,7 +119,7 @@ function MiniCard({ project }) {
         <h3 className="text-textColor text-base font-bold tracking-tight">
           {project.title}
         </h3>
-        <p className="text-textColor/55 line-clamp-2 text-sm leading-relaxed">
+        <p className="text-textMuted line-clamp-2 text-sm leading-relaxed">
           {project.description}
         </p>
 
@@ -125,7 +128,7 @@ function MiniCard({ project }) {
           {project.tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="border-accentColor/15 bg-accentColor/5 text-accentColor/70 rounded-md border px-2 py-0.5 text-xs font-medium"
+              className="border-accentColor/15 bg-accentColor/5 text-accentColor rounded-md border px-2 py-0.5 text-xs font-medium"
             >
               {tag}
             </span>
@@ -139,7 +142,7 @@ function MiniCard({ project }) {
               href={project.demo}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-accentColor hover:text-accentColor/70 inline-flex min-h-9 items-center gap-1.5 rounded-lg px-3 text-xs font-bold transition-colors hover:bg-accentColor/5"
+              className="text-accentColor hover:text-textSecondary inline-flex min-h-9 items-center gap-1.5 rounded-lg px-3 text-xs font-bold transition-colors hover:bg-accentColor/5"
             >
               <Icon icon="lucide:external-link" className="h-3.5 w-3.5" />
               Live Demo
@@ -150,7 +153,7 @@ function MiniCard({ project }) {
               href={project.sourceCode}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-textColor/40 hover:text-accentColor inline-flex min-h-9 items-center gap-1.5 rounded-lg px-3 text-xs font-medium transition-colors hover:bg-accentColor/5"
+              className="text-textMuted hover:text-accentColor inline-flex min-h-9 items-center gap-1.5 rounded-lg px-3 text-xs font-medium transition-colors hover:bg-accentColor/5"
             >
               <Icon icon="lucide:github" className="h-3.5 w-3.5" />
               Source

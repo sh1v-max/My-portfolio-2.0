@@ -396,7 +396,7 @@ function ThemeToggle({ onAccent = false }) {
               initial={{ opacity: 0, y: -4 }}
               animate={{ opacity: 1,  y: 0  }}
               transition={{ delay: 0.05, duration: 0.2, ease: EASE_EXPO }}
-              className="text-textColor/30 px-2 pb-1 pt-0.5 text-[10px] font-semibold uppercase tracking-widest"
+              className="text-textMuted px-2 pb-1 pt-0.5 text-[10px] font-semibold uppercase tracking-widest"
             >
               Themes
             </motion.span>
@@ -447,7 +447,7 @@ function ThemeToggle({ onAccent = false }) {
                     {/* Name — nudges right on hover */}
                     <motion.span
                       className={`flex-1 whitespace-nowrap text-xs font-medium transition-colors duration-150 ${
-                        isActive ? "text-accentColor" : "text-textColor/60 group-hover:text-textColor"
+                        isActive ? "text-accentColor" : "text-textMuted group-hover:text-textColor"
                       }`}
                       animate={{ x: isHovered ? 2 : 0 }}
                       transition={{ ...SPRING_SNAPPY }}

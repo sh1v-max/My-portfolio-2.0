@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 export default function Illustration10X() {
   return (
     <div className="relative flex h-100 w-full max-w-112.5 items-center justify-center">
-      <div className="absolute text-textColor/50 top-0 text-sm font-bold">10X - Orbital System</div>
+      <div className="absolute text-textMuted top-0 text-sm font-bold">10X - Orbital System</div>
       
       {/* Central Glow */}
       <motion.div

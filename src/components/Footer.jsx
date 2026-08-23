@@ -31,7 +31,7 @@ function Footer() {
           <Link to="/" className="text-sm font-bold tracking-tight text-textColor">
             Shiv<span className="text-accentColor">.</span>
           </Link>
-          <p className="text-xs text-textColor/40">
+          <p className="text-xs text-textMuted">
             © {currentYear} {personal.name}. All rights reserved.
           </p>
         </div>
@@ -45,7 +45,7 @@ function Footer() {
               target="_blank"
               rel="noreferrer"
               aria-label={social.name}
-              className="flex h-11 w-11 items-center justify-center rounded-lg text-textColor/40 transition-all duration-200 hover:bg-explorerBorder/30 hover:text-accentColor"
+              className="flex h-11 w-11 items-center justify-center rounded-lg text-textMuted transition-all duration-200 hover:bg-explorerBorder/30 hover:text-accentColor"
             >
               {social.icon}
             </a>

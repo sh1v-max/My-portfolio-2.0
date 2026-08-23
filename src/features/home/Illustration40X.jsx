@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 export default function Illustration40X() {
   return (
     <div className="relative flex h-100 w-full max-w-112.5 items-center justify-center">
-      <div className="absolute text-textColor/50 top-0 text-sm font-bold z-50">40X - Neural Network</div>
+      <div className="absolute text-textMuted top-0 text-sm font-bold z-50">40X - Neural Network</div>
 
       {/* SVG Network Lines */}
       <svg className="absolute inset-0 h-full w-full opacity-40">
@@ -45,7 +45,7 @@ export default function Illustration40X() {
 
       {/* Giant central glass orb */}
       <motion.div
-        className="z-10 h-40 w-40 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl shadow-[inset_0_0_50px_rgba(136,192,208,0.2)] flex items-center justify-center"
+        className="z-10 h-40 w-40 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl shadow-[inset_0_0_50px_color-mix(in_srgb,var(--accentColor)_20%,transparent)] flex items-center justify-center"
         animate={{ rotate: 360 }}
         transition={{ duration: 20, repeat: Infinity, linear: true }}
       >

@@ -241,7 +241,7 @@ export default function BentoSkills() {
               >
                 {skill.name}
               </h4>
-              <p className="mt-0.5 text-[8px] font-semibold uppercase tracking-[0.2em] text-textColor/40 md:text-[9px]">
+              <p className="mt-0.5 text-[8px] font-semibold uppercase tracking-[0.2em] text-textMuted md:text-[9px]">
                 {skill.category}
               </p>
             </div>

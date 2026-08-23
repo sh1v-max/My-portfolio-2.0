@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { personal } from "../../data/config";
+import ContactForm from "../contact/ContactForm";
 
 const hc = {
   hidden: { opacity: 0 },
@@ -18,28 +18,24 @@ const CHANNELS = [
     label: "Email",
     value: personal.email,
     href: `mailto:${personal.email}`,
-    description: "Best for project inquiries",
   },
   {
     icon: "lucide:linkedin",
     label: "LinkedIn",
     value: `in/${personal.linkedinUsername}`,
     href: personal.linkedin,
-    description: "Professional network",
   },
   {
     icon: "lucide:github",
     label: "GitHub",
     value: `@${personal.githubUsername}`,
     href: personal.github,
-    description: "Browse my open-source work",
   },
 ];
 
 export default function ContactTeaser() {
   return (
     <section className="py-16 md:py-24">
-
       <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
 
         {/* Section header */}
@@ -61,14 +57,14 @@ export default function ContactTeaser() {
             variants={hi}
             className="text-textColor text-4xl font-bold tracking-tight md:text-5xl"
           >
-            Contact Me
+            Let&apos;s build something great
           </motion.h2>
           <motion.p
             variants={hi}
-            className="text-textColor/60 max-w-xl text-base leading-relaxed"
+            className="text-textSecondary max-w-2xl text-base leading-relaxed"
           >
             Open to full-stack and frontend roles, freelance work, and creative web
-            projects. If you've made it this far, let's talk.
+            projects. If you&apos;ve made it this far, let&apos;s talk.
           </motion.p>
           <motion.div
             variants={hi}
@@ -76,109 +72,93 @@ export default function ContactTeaser() {
           />
         </motion.div>
 
-        {/* Bold statement + channel cards */}
-        <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-16">
+        {/*
+          The form itself, not a link to it.
 
-          {/* Left: bold statement + availability */}
+          This is the last section of the page, so it is the moment a visitor is
+          most likely to act — and it used to be the one section that could not
+          be acted on without navigating somewhere else. On mobile the form
+          comes first (`order-first`), because someone who scrolled this far
+          already knows how to reach me; the channels below are the fallback.
+        */}
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-16">
+
+          {/* Left: availability + direct channels */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-            className="flex flex-col gap-6 lg:max-w-xs lg:shrink-0"
+            className="flex flex-col gap-6"
           >
-            <p className="text-textColor text-2xl font-bold leading-tight tracking-tight md:text-3xl">
-              Let&apos;s build something{" "}
-              <span className="text-accentColor">great</span>{" "}
-              together.
-            </p>
-            <p className="text-textColor/60 text-sm leading-relaxed">
-              I respond to emails within 24 hours. For quick questions, LinkedIn or
-              GitHub works just as well.
-            </p>
-
             {/* Availability status card */}
-            <div className="border-explorerBorder bg-articleBg rounded-2xl border p-5">
+            <div className="border-explorerBorder bg-articleBg rounded-2xl border p-5 ring-1 ring-textColor/10">
               <div className="mb-3 flex items-center gap-2.5">
                 <div className="relative flex h-2.5 w-2.5 shrink-0">
                   <span className="bg-accentColor absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" />
                   <span className="bg-accentColor relative inline-flex h-2.5 w-2.5 rounded-full" />
                 </div>
+                {/* The words carry the meaning, not the colour of the dot. */}
                 <span className="text-accentColor text-xs font-bold uppercase tracking-widest">
                   Available for work
                 </span>
               </div>
-              <p className="text-textColor/50 text-xs leading-relaxed">
+              <p className="text-textSecondary text-xs leading-relaxed">
                 Currently open to full-time roles and select freelance projects.
-                Remote-friendly, flexible timezones.
+                Remote-friendly, flexible timezones. I reply to email within 24 hours.
               </p>
+            </div>
+
+            {/* Direct channels — for anyone who would rather not use a form */}
+            <div className="flex flex-col gap-3">
+              <p className="text-textMuted text-[11px] font-bold uppercase tracking-[0.2em]">
+                Or reach me directly
+              </p>
+              {CHANNELS.map(({ icon, label, value, href }, i) => (
+                <motion.a
+                  key={label}
+                  href={href}
+                  target={href.startsWith("mailto") ? undefined : "_blank"}
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, delay: i * 0.08, ease: [0.25, 0.1, 0.25, 1] }}
+                  whileHover={{ y: -2 }}
+                  className="group border-explorerBorder bg-articleBg hover:border-accentColor/30 flex min-h-14 items-center gap-4 rounded-2xl border p-4 ring-1 ring-textColor/10 transition-[border-color,box-shadow] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentColor"
+                >
+                  <div className="bg-accentColor/10 group-hover:bg-accentColor/20 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-colors duration-300">
+                    <Icon icon={icon} aria-hidden="true" className="text-accentColor h-4.5 w-4.5" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-textMuted text-[10px] font-bold uppercase tracking-[0.18em]">
+                      {label}
+                    </p>
+                    <p className="text-textColor mt-0.5 truncate text-sm font-semibold">
+                      {value}
+                    </p>
+                  </div>
+                  <Icon
+                    icon="lucide:arrow-up-right"
+                    aria-hidden="true"
+                    className="text-textMuted group-hover:text-accentColor h-4 w-4 shrink-0 transition-colors duration-300"
+                  />
+                </motion.a>
+              ))}
             </div>
           </motion.div>
 
-          {/* Right: contact channels */}
+          {/* Right: the working form */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-            className="flex flex-1 flex-col gap-4"
+            className="order-first lg:order-none"
           >
-            {CHANNELS.map(({ icon, label, value, href, description }, i) => (
-              <motion.a
-                key={label}
-                href={href}
-                target={href.startsWith("mailto") ? undefined : "_blank"}
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.6, delay: i * 0.08, ease: [0.25, 0.1, 0.25, 1] }}
-                whileHover={{ y: -2 }}
-                className="group border-explorerBorder bg-articleBg hover:border-accentColor/30 flex items-center gap-5 rounded-2xl border p-5 transition-[border-color,box-shadow] duration-300 hover:shadow-[0_8px_32px_rgba(0,0,0,0.25)]"
-              >
-                <div className="bg-accentColor/10 group-hover:bg-accentColor/20 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-colors duration-300">
-                  <Icon icon={icon} className="text-accentColor h-5 w-5" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-textColor/40 text-xs font-semibold uppercase tracking-wider">
-                    {label}
-                  </p>
-                  <p className="text-textColor mt-0.5 truncate text-sm font-bold">
-                    {value}
-                  </p>
-                  <p className="text-textColor/35 mt-0.5 text-xs">
-                    {description}
-                  </p>
-                </div>
-                <Icon
-                  icon="lucide:arrow-up-right"
-                  className="text-textColor/20 group-hover:text-accentColor h-5 w-5 shrink-0 transition-colors duration-300"
-                />
-              </motion.a>
-            ))}
+            <ContactForm idPrefix="contact-home" />
           </motion.div>
         </div>
-
-        {/* Footer CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.7, delay: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
-          className="mt-10 flex justify-start"
-        >
-          <Link
-            to="/contact"
-            className="group inline-flex min-h-11 items-center gap-2.5 rounded-full border border-accentColor/40 bg-accentColor/10 px-6 py-3 text-sm font-semibold text-accentColor transition-all duration-300 hover:bg-accentColor hover:text-mainBg focus-visible:outline-2 focus-visible:outline-accentColor"
-          >
-            Send a message
-            <Icon
-              icon="lucide:arrow-right"
-              className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-            />
-          </Link>
-        </motion.div>
-
       </div>
     </section>
   );

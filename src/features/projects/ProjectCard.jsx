@@ -35,7 +35,7 @@ function ProjectCard({ img, title, desc, tags, srcCode, demo, caseStudy }) {
         </h3>
 
         {/* description */}
-        <p className="flex-1 text-sm leading-relaxed text-textColor/70">
+        <p className="flex-1 text-sm leading-relaxed text-textSecondary">
           {desc}
         </p>
 

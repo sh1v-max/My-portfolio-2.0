@@ -92,7 +92,7 @@ export default function BookVerseDetail() {
         <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }}>
           <Link
             to="/projects"
-            className="text-textColor/50 hover:text-accentColor mb-10 inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200"
+            className="text-textMuted hover:text-accentColor mb-10 inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200"
           >
             <Icon icon="lucide:arrow-left" width="16" />
             Back to Projects
@@ -111,7 +111,7 @@ export default function BookVerseDetail() {
             BookVerse
           </motion.h1>
 
-          <motion.p variants={fadeUp} className="text-textColor/60 mb-6 max-w-2xl text-lg leading-relaxed">
+          <motion.p variants={fadeUp} className="text-textMuted mb-6 max-w-2xl text-lg leading-relaxed">
             A modern book discovery platform built with React and the Open Library API. Features
             full-text book search, daily/weekly/monthly trending sections, detailed book pages,
             custom scroll navigation, and a glassmorphic UI with smooth animations.
@@ -137,13 +137,13 @@ export default function BookVerseDetail() {
           </motion.div>
 
           <motion.div variants={fadeUp} className="border-explorerBorder overflow-hidden rounded-2xl border shadow-2xl">
-            <img src={bookverseImg} alt="BookVerse home page" className="w-full object-cover object-top" />
+            <img src={bookverseImg} alt="BookVerse home page" width={1600} height={900} loading="lazy" decoding="async" className="w-full object-cover object-top" />
           </motion.div>
         </motion.div>
 
         {/* ── Overview ── */}
         <Section title="Overview">
-          <p className="text-textColor/70 leading-relaxed">
+          <p className="text-textSecondary leading-relaxed">
             BookVerse is a{" "}
             <strong className="text-textColor">book discovery platform</strong> built on top of the
             Open Library API — a completely free, no-key-required public API with millions of books.
@@ -159,12 +159,12 @@ export default function BookVerseDetail() {
         <Section title="Screenshots">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="border-explorerBorder overflow-hidden rounded-xl border">
-              <img src={bookverseSearchImg} alt="BookVerse search results" className="w-full object-cover" />
-              <p className="text-textColor/40 p-3 text-center text-xs">Search Results</p>
+              <img src={bookverseSearchImg} alt="BookVerse search results" width={1600} height={900} loading="lazy" decoding="async" className="w-full object-cover" />
+              <p className="text-textMuted p-3 text-center text-xs">Search Results</p>
             </div>
             <div className="border-explorerBorder overflow-hidden rounded-xl border">
-              <img src={bookverseFeaturedImg} alt="BookVerse book detail" className="w-full object-cover" />
-              <p className="text-textColor/40 p-3 text-center text-xs">Book Detail Page</p>
+              <img src={bookverseFeaturedImg} alt="BookVerse book detail" width={1600} height={900} loading="lazy" decoding="async" className="w-full object-cover" />
+              <p className="text-textMuted p-3 text-center text-xs">Book Detail Page</p>
             </div>
           </div>
         </Section>
@@ -198,7 +198,7 @@ export default function BookVerseDetail() {
                   </div>
                   <div>
                     <p className="text-textColor text-sm font-semibold">{item.name}</p>
-                    <p className="text-textColor/40 text-xs">{item.note}</p>
+                    <p className="text-textMuted text-xs">{item.note}</p>
                   </div>
                 </div>
               ))}
@@ -208,7 +208,7 @@ export default function BookVerseDetail() {
 
         {/* ── Architecture ── */}
         <Section title="Architecture">
-          <p className="text-textColor/70 mb-6 leading-relaxed">
+          <p className="text-textSecondary mb-6 leading-relaxed">
             Clean <strong className="text-textColor">hooks-driven architecture</strong> — UI components are purely responsible for rendering. All data fetching, loading state, and error handling lives in custom hooks.
           </p>
           <div className="border-explorerBorder bg-articleBg rounded-2xl border p-6">
@@ -222,10 +222,10 @@ export default function BookVerseDetail() {
                 { step: "06", label: "Horizontal Scroll", detail: "ref.current.scrollBy() on arrow click — no library, works with touch natively on mobile" },
               ].map(({ step, label, detail }) => (
                 <div key={step} className="flex items-start gap-4">
-                  <span className="text-accentColor/50 w-8 shrink-0 font-mono text-xs font-bold">{step}</span>
+                  <span className="text-accentColor w-8 shrink-0 font-mono text-xs font-bold">{step}</span>
                   <div className="border-l border-explorerBorder pl-4">
                     <p className="text-textColor text-sm font-semibold">{label}</p>
-                    <p className="text-textColor/50 text-xs leading-relaxed">{detail}</p>
+                    <p className="text-textMuted text-xs leading-relaxed">{detail}</p>
                   </div>
                 </div>
               ))}
@@ -246,7 +246,7 @@ export default function BookVerseDetail() {
                   <Icon icon={f.icon} width="18" />
                 </div>
                 <h3 className="text-textColor mb-1.5 text-sm font-bold">{f.title}</h3>
-                <p className="text-textColor/60 text-sm leading-relaxed">{f.desc}</p>
+                <p className="text-textMuted text-sm leading-relaxed">{f.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -265,13 +265,13 @@ export default function BookVerseDetail() {
                   <div className="text-accentColor flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accentColor/10">
                     <Icon icon={c.icon} width="18" />
                   </div>
-                  <p className="text-textColor/50 text-sm font-medium">
-                    <span className="text-red-400/70 mr-1">Problem:</span>{c.problem}
+                  <p className="text-textMuted text-sm font-medium">
+                    <span className="text-dangerText mr-1">Problem:</span>{c.problem}
                   </p>
                 </div>
                 <div className="border-l-2 border-accentColor/30 pl-4">
-                  <p className="text-textColor/40 mb-1 text-xs font-semibold uppercase tracking-wider">Solution</p>
-                  <p className="text-textColor/70 text-sm leading-relaxed">{c.solution}</p>
+                  <p className="text-textMuted mb-1 text-xs font-semibold uppercase tracking-wider">Solution</p>
+                  <p className="text-textSecondary text-sm leading-relaxed">{c.solution}</p>
                 </div>
               </motion.div>
             ))}
@@ -291,7 +291,7 @@ export default function BookVerseDetail() {
             ].map((item) => (
               <div key={item.text} className="border-explorerBorder bg-articleBg flex items-start gap-3 rounded-xl border p-4">
                 <div className="text-accentColor mt-0.5 shrink-0"><Icon icon={item.icon} width="16" /></div>
-                <p className="text-textColor/65 text-sm leading-relaxed">{item.text}</p>
+                <p className="text-textSecondary text-sm leading-relaxed">{item.text}</p>
               </div>
             ))}
           </div>
@@ -303,7 +303,7 @@ export default function BookVerseDetail() {
           className="border-accentColor/20 bg-accentColor/5 mt-6 rounded-2xl border p-8 text-center"
         >
           <h3 className="text-textColor mb-2 text-xl font-bold">Discover a book</h3>
-          <p className="text-textColor/60 mb-6 text-sm">Search millions of books live or browse the source on GitHub.</p>
+          <p className="text-textMuted mb-6 text-sm">Search millions of books live or browse the source on GitHub.</p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <a href="https://bookversedot.netlify.app/" target="_blank" rel="noopener noreferrer"
               className="bg-accentColor text-mainBg inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold transition-all duration-200 hover:opacity-90">
@@ -314,7 +314,7 @@ export default function BookVerseDetail() {
               <Icon icon="mdi:github" width="16" />View Source
             </a>
             <Link to="/projects"
-              className="text-textColor/50 hover:text-accentColor inline-flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors duration-200">
+              className="text-textMuted hover:text-accentColor inline-flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors duration-200">
               <Icon icon="lucide:arrow-left" width="14" />All Projects
             </Link>
           </div>
@@ -344,7 +344,7 @@ function Card({ icon, label, children }) {
         <Icon icon={icon} width="18" />
       </div>
       <p className="text-textColor mb-2 text-sm font-bold">{label}</p>
-      <p className="text-textColor/60 text-sm leading-relaxed">{children}</p>
+      <p className="text-textMuted text-sm leading-relaxed">{children}</p>
     </div>
   );
 }
