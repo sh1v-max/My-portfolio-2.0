@@ -56,47 +56,15 @@ function useCardMetrics() {
 // look mechanically locked to each other.
 const ROW_SECONDS = [26, 30];
 
-// While the page is being scrolled the rows run at this multiple of their base
-// speed, then ease back down once scrolling settles.
-const SCROLL_BOOST = 4;
-const SCROLL_IDLE_MS = 140;
-
 // Split the projects across the rows rather than repeating all ten in both:
 // every project stays on screen, and none is announced twice to a screen reader.
 const half = Math.ceil(miniProjects.length / 2);
 const rowItems = [miniProjects.slice(0, half), miniProjects.slice(half)];
 
 /**
- * True while the page is actively scrolling, in either direction, falling back
- * to false once scroll events stop arriving. Detected once for the whole
- * section so both rows boost and settle in step.
- */
-function useScrolling(idleMs = SCROLL_IDLE_MS) {
-  const [scrolling, setScrolling] = useState(false);
-
-  useEffect(() => {
-    let idle;
-    const onScroll = () => {
-      // Repeated `true` writes bail out inside React, so a scroll gesture
-      // costs two renders (start and end) rather than one per event.
-      setScrolling(true);
-      clearTimeout(idle);
-      idle = setTimeout(() => setScrolling(false), idleMs);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      clearTimeout(idle);
-    };
-  }, [idleMs]);
-
-  return scrolling;
-}
-
-/**
  * One marquee row. `direction` is -1 to travel left, +1 to travel right.
  */
-function MarqueeRow({ items, direction, loopSeconds, shouldReduceMotion, cardW, cardGap, scrolling }) {
+function MarqueeRow({ items, direction, loopSeconds, shouldReduceMotion, cardW, cardGap }) {
   const setWidth = items.length * (cardW + cardGap);
   const baseSpeed = setWidth / loopSeconds; // px/s
 
@@ -105,8 +73,7 @@ function MarqueeRow({ items, direction, loopSeconds, shouldReduceMotion, cardW, 
   const x = useMotionValue(direction > 0 ? -setWidth : 0);
   const speed = useMotionValue(0);
 
-  // Hover/focus lives in a ref so pausing never re-renders the cards, while
-  // scrolling arrives as a prop. Both feed the same resolver below.
+  // Hover/focus lives in a ref so pausing never re-renders the cards.
   const suspendedRef = useRef(false);
 
   // Crossing the breakpoint changes the pitch, so the old offset would no
@@ -116,39 +83,32 @@ function MarqueeRow({ items, direction, loopSeconds, shouldReduceMotion, cardW, 
   }, [setWidth, direction, x]);
 
   // Single place that decides how fast the row should be running. Pausing wins
-  // over boosting, and reduced motion wins over everything.
-  const applySpeed = useCallback(
-    (isScrolling) => {
-      if (shouldReduceMotion) {
-        speed.set(0);
-        return;
-      }
-      const target = suspendedRef.current
-        ? 0
-        : baseSpeed * (isScrolling ? SCROLL_BOOST : 1);
-      animate(speed, target, {
-        // Catch up to the boost quickly, but ease back down gently so the
-        // row settles rather than snapping when scrolling stops.
-        duration: target === 0 ? 0.6 : isScrolling ? 0.3 : 0.55,
-        ease: EASE,
-      });
-    },
-    [shouldReduceMotion, baseSpeed, speed],
-  );
+  // over the base speed, and reduced motion wins over everything.
+  const applySpeed = useCallback(() => {
+    if (shouldReduceMotion) {
+      speed.set(0);
+      return;
+    }
+    const target = suspendedRef.current ? 0 : baseSpeed;
+    animate(speed, target, {
+      duration: target === 0 ? 0.6 : 0.7,
+      ease: EASE,
+    });
+  }, [shouldReduceMotion, baseSpeed, speed]);
 
-  // Re-resolve whenever scrolling starts/stops, the breakpoint changes, or the
-  // visitor flips the OS reduced-motion setting.
+  // Re-resolve when the breakpoint changes or the visitor flips the OS
+  // reduced-motion setting.
   useEffect(() => {
-    applySpeed(scrolling);
-  }, [scrolling, applySpeed]);
+    applySpeed();
+  }, [applySpeed]);
 
   useAnimationFrame((_, delta) => {
     const s = speed.get();
     if (!s) return;
     const next = x.get() + direction * (s * delta) / 1000;
-    // Wrap by modulo rather than a single ±setWidth correction: at boosted
-    // speed one long frame gap (a backgrounded tab resuming) can overshoot by
-    // more than a full set, which a single correction could not recover from.
+    // Wrap by modulo rather than a single ±setWidth correction: one long frame
+    // gap (a backgrounded tab resuming) can overshoot by more than a full set,
+    // which a single correction could not recover from.
     x.set((((next % setWidth) + setWidth) % setWidth) - setWidth);
   });
 
@@ -156,11 +116,11 @@ function MarqueeRow({ items, direction, loopSeconds, shouldReduceMotion, cardW, 
   // tabbing through the card links.
   const suspend = () => {
     suspendedRef.current = true;
-    applySpeed(scrolling);
+    applySpeed();
   };
   const resume = () => {
     suspendedRef.current = false;
-    applySpeed(scrolling);
+    applySpeed();
   };
 
   const track = [...items, ...items];
@@ -209,7 +169,6 @@ function MarqueeRow({ items, direction, loopSeconds, shouldReduceMotion, cardW, 
 function MiniProjectsCarousel() {
   const shouldReduceMotion = useReducedMotion();
   const { w: cardW, gap: cardGap } = useCardMetrics();
-  const scrolling = useScrolling();
 
   return (
     <section className="py-6 md:py-10">
@@ -257,7 +216,6 @@ function MiniProjectsCarousel() {
             shouldReduceMotion={shouldReduceMotion}
             cardW={cardW}
             cardGap={cardGap}
-            scrolling={scrolling}
           />
           <MarqueeRow
             items={rowItems[1]}
@@ -266,7 +224,6 @@ function MiniProjectsCarousel() {
             shouldReduceMotion={shouldReduceMotion}
             cardW={cardW}
             cardGap={cardGap}
-            scrolling={scrolling}
           />
         </motion.div>
 

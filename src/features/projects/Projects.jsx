@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { Icon } from "@iconify/react";
@@ -119,9 +120,21 @@ function Projects({ asSection = false }) {
         CSS `translate` property while Framer animates `transform`, so the two
         compose instead of overwriting each other.
       */}
+      {/* Hidden from assistive tech: it is a hover-only flourish that duplicates
+          the row's own link, so exposing it would just add a second identical
+          destination to the screen reader tree. Safe only because the row title
+          is now a real link. */}
       <motion.div
         data-project-preview
-        className="pointer-events-none fixed left-0 top-0 z-9998 hidden md:block"
+        aria-hidden="true"
+        /* Gated on hover capability, not width alone: every tablet is >=768px,
+           so a width-only rule rendered this on iPads where no mousemove ever
+           fires — the preview stayed invisible and the row's buttons were
+           hidden too. The width floor is 1024 because this box is 420x272 and
+           trails the cursor; below that it crowds the viewport, so narrow
+           windows get the buttons instead even with a mouse attached.
+           This must remain the exact complement of the CTA row's rule below. */
+        className="pointer-events-none fixed left-0 top-0 z-9998 hidden [@media(hover:hover)_and_(min-width:1024px)]:block"
         style={{ x: springX, y: springY }}
       >
         <motion.div
@@ -159,13 +172,13 @@ function Projects({ asSection = false }) {
             />
           ))}
           <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent" />
-          {/* View button — only clickable while actually hovering a row;   */}
-          {/* otherwise this fixed, cursor-tracking element must never      */}
-          {/* intercept clicks/hover meant for content elsewhere on the page */}
+          {/* Only clickable while actually hovering a row; otherwise this fixed,
+              cursor-tracking element would intercept clicks meant for content
+              elsewhere on the page. Never focusable — it sits inside an
+              aria-hidden subtree, and the row title is the keyboard path. */}
           <Link
             to={cinemaProjects[shownIdx]?.caseStudy || "#"}
-            aria-label={`View ${cinemaProjects[shownIdx]?.title} case study`}
-            tabIndex={previewOpen ? 0 : -1}
+            tabIndex={-1}
             style={{ pointerEvents: previewOpen ? "auto" : "none" }}
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-16 w-16 cursor-pointer items-center justify-center rounded-full bg-accentColor text-sm font-bold text-mainBg shadow-lg transition-transform duration-200 hover:scale-110 active:scale-95"
           >
@@ -270,13 +283,36 @@ function ProjectRow({ project, index, isFirst, hovered, meta }) {
 
           {/* Content */}
           <div className="min-w-0 flex-1">
-            {/* Project title */}
+            {/* Project title — the row's single navigation target.
+                Its ::after spans the row body, so clicking anywhere in the row
+                opens the case study; that is what the floating preview's "View"
+                button has always implied, and it is the only path that also
+                works for touch and keyboard. Kept on the title rather than
+                wrapping the row in an <a>, which would nest the demo and source
+                links inside another link. */}
             <h2
               className={`text-[2rem] font-bold leading-tight tracking-tight transition-colors duration-300 sm:text-4xl md:text-5xl lg:text-6xl ${
                 hovered ? "text-accentColor" : "text-textColor"
               }`}
             >
-              {project.title}
+              {project.caseStudy ? (
+                <Link
+                  to={project.caseStudy}
+                  className="inline-flex items-center gap-2 rounded-sm after:absolute after:inset-x-0 after:-inset-y-9 after:content-[''] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accentColor md:after:-inset-y-12"
+                >
+                  {project.title}
+                  {/* Carries the affordance where there is no hover to rely on */}
+                  <Icon
+                    icon="lucide:arrow-up-right"
+                    aria-hidden="true"
+                    className={`h-[0.55em] w-[0.55em] shrink-0 transition-transform duration-300 ease-out ${
+                      hovered ? "translate-x-1 -translate-y-1" : ""
+                    }`}
+                  />
+                </Link>
+              ) : (
+                project.title
+              )}
             </h2>
 
             {/* Date + status — animated accent line, period, badge */}
@@ -338,17 +374,27 @@ function ProjectRow({ project, index, isFirst, hovered, meta }) {
               ))}
             </div>
 
-            {/* CTAs */}
-            <div className="mt-5 flex flex-wrap items-center gap-3">
+            {/* Shown wherever the hover preview is not — the exact complement of
+                the preview's rule above, so every device gets one or the other
+                and never neither. Tablets have no hover, so they get these
+                buttons despite being wide. On a hover-capable laptop the preview
+                carries the case study and the row itself is the link, so these
+                would be noise. Raised above the title's row-spanning ::after so
+                they stay independently clickable. */}
+            <div className="relative z-10 mt-5 flex flex-wrap items-center gap-2 [@media(hover:hover)_and_(min-width:1024px)]:hidden">
               {project.caseStudy && (
                 <Link
                   to={project.caseStudy}
-                  className="group/cta inline-flex min-h-11 items-center gap-2 rounded-full border border-textColor/25 px-5 py-2.5 text-sm font-medium text-textColor/70 transition-all duration-300 hover:border-accentColor/50 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor"
+                  /* Full width on phones so the primary action reads as primary
+                     and the two secondary controls pair off beneath it — the
+                     three do not fit on one line at 375px, and letting the lone
+                     icon orphan looked accidental. */
+                  className="group/cta inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-accentColor/40 bg-accentColor/10 px-4 py-2.5 text-sm font-semibold text-accentColor transition-all duration-300 hover:border-accentColor/60 hover:bg-accentColor/15 focus-visible:outline-2 focus-visible:outline-accentColor sm:w-auto sm:justify-start"
                 >
-                  Case Study
+                  Know More
                   <Icon
-                    icon="lucide:arrow-up-right"
-                    className="h-3.5 w-3.5 transition-transform duration-300 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5"
+                    icon="lucide:arrow-right"
+                    className="h-3.5 w-3.5 transition-transform duration-300 group-hover/cta:translate-x-0.5"
                   />
                 </Link>
               )}
@@ -358,7 +404,7 @@ function ProjectRow({ project, index, isFirst, hovered, meta }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${project.title} live demo, opens in new tab`}
-                  className="group/cta inline-flex min-h-11 items-center gap-2 rounded-full border border-textColor/25 px-5 py-2.5 text-sm text-textColor/60 transition-all duration-300 hover:border-accentColor/50 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor"
+                  className="group/cta inline-flex min-h-11 items-center gap-2 rounded-full border border-textColor/25 px-4 py-2.5 text-sm text-textColor/60 transition-all duration-300 hover:border-accentColor/50 hover:text-accentColor focus-visible:outline-2 focus-visible:outline-accentColor"
                 >
                   Live Demo
                   <Icon
