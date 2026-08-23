@@ -6,6 +6,7 @@ import resumeFile from "../assets/docs/resume.pdf";
 import { personal } from "../data/config";
 import { useActiveSection } from "../hooks/useActiveSection";
 import ThemeToggle from "../features/theme/FloatingThemeButton";
+import BackButton from "./BackButton";
 
 const navLinks = [
   { name: "Home",     path: "/",            sectionId: "home" },
@@ -112,6 +113,11 @@ function NavBar() {
     return !isMainPage && location.pathname === link.path;
   };
 
+  // The ticker is identity-setting copy, so it belongs on the landing page and
+  // nowhere else — elsewhere it repeats itself and pushes content down. It also
+  // keeps the header stack unambiguous: the back button never appears on home,
+  // the ticker only appears on home, so the two can never stack awkwardly.
+  const isHome = location.pathname === "/";
   const showTicker = tickerVisible && !open;
 
   return (
@@ -394,7 +400,19 @@ function NavBar() {
         </AnimatePresence>
       </div>
 
-      {/* ── Ticker — fades at top, hides when menu open ── */}
+      {/* Inside the navbar's own sticky container on purpose: the button then
+          travels with the header for free, rather than needing its own `top`
+          offset that would drift as the header height changes.
+          Placed directly under the card, above the ticker — the ticker fades
+          out on scroll but keeps its space, so sitting below it would leave a
+          gap with page content scrolling through. */}
+      <BackButton />
+
+      {/* ── Ticker — home only; fades at top, hides when menu open ──
+          Gated on render, not just opacity: an invisible ticker would still
+          reserve its height and leave a dead band under the back button with
+          page content scrolling through it. */}
+      {isHome && (
       <motion.div
         animate={{
           opacity: showTicker ? 1 : 0,
@@ -424,6 +442,7 @@ function NavBar() {
           </motion.div>
         </div>
       </motion.div>
+      )}
     </div>
   );
 }
