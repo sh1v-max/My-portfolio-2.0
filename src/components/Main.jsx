@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
 import Pages from "./Pages";
@@ -21,6 +21,7 @@ const themeTokens = {
 function Main() {
   const { theme } = useTheme();
   const tokens = themeTokens[theme] ?? themeTokens.github;
+  const contentRef = useRef(null);
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -35,7 +36,23 @@ function Main() {
       rafId = requestAnimationFrame(raf);
     }
     rafId = requestAnimationFrame(raf);
+
+    // Lenis measures the document once on init and caches the scroll limit.
+    // A client-side route change swaps in content of a different height without
+    // it noticing, so it keeps the previous page's limit and the bottom of any
+    // taller page becomes unreachable.
+    //
+    // The observed element has to be this content wrapper, not <body>: Lenis
+    // pins html and body to the viewport height, so their boxes never change
+    // and a ResizeObserver on them reports nothing. This node is stable across
+    // route changes and its height tracks the real content, so one observer
+    // covers route changes, late-loading images, and in-page height changes
+    // (filters, accordions) alike.
+    const observer = new ResizeObserver(() => lenis.resize());
+    if (contentRef.current) observer.observe(contentRef.current);
+
     return () => {
+      observer.disconnect();
       cancelAnimationFrame(rafId);
       lenis.destroy();
     };
@@ -61,7 +78,10 @@ function Main() {
           },
         }}
       />
-      <div className={`theme-${theme} flex min-h-screen flex-col bg-mainBg text-textColor`}>
+      <div
+        ref={contentRef}
+        className={`theme-${theme} flex min-h-screen flex-col bg-mainBg text-textColor`}
+      >
         <NavBar />
         <main className="flex-1 pb-16 md:pb-0">
           <Pages />
