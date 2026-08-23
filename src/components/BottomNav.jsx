@@ -17,7 +17,7 @@ const bottomNavItems = [
     icon: <Icon icon="lucide:code" className="h-5 w-5" strokeWidth="2" />,
   },
   {
-    name: "Lab",
+    name: "Archive",
     sectionId: null,
     path: "/frontend-lab",
     icon: <Icon icon="lucide:flask-conical" className="h-5 w-5" strokeWidth="2" />,

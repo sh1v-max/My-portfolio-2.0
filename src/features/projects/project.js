@@ -4,13 +4,21 @@ import biteswift from "../../assets/images/BiteSwift/biteswift.png";
 import bookverse from "../../assets/images/bookverse.png";
 import portfolio from "../../assets/images/portfolio/portfolio.png";
 
+// Descriptions are kept under ~120 characters so they render in full wherever
+// they appear — the projects list, and both Home teasers (one of which clamps
+// to two lines). The case study page carries the depth.
+//
+// `tags` is the core stack only, not the full dependency list: these are a
+// scan-in-one-second signal on a card, and every detail page already lists the
+// complete stack.
+
 export const projects = [
   {
     title: "Portfolio",
     description:
-      "A developer portfolio with multiple themes, a beautiful UI, and smooth animations.",
+      "A developer portfolio with six switchable themes, motion-driven UI, and a live GitHub dashboard.",
     image: portfolio,
-    tags: ["react", "tailwind", "vite", "react-router", "context-api", "tw-colors", "react-helmet-async"],
+    tags: ["react", "tailwind", "framer-motion", "vite"],
     sourceCode: "https://github.com/sh1v-max/My-portfolio-2.0",
     demo: "https://singhshiv.netlify.app/",
     caseStudy: "/projects/portfolio",
@@ -18,9 +26,9 @@ export const projects = [
   {
     title: "TaskForge",
     description:
-      "Full-stack task management app with JWT auth, CRUD operations, filtering, sorting, pagination, and a production-ready Express/MongoDB REST API backed by a 12-test suite.",
+      "Full-stack task manager with JWT auth, CRUD, filtering and pagination on an Express/MongoDB REST API.",
     image: taskforge,
-    tags: ["node.js", "express", "mongodb", "mongoose", "jwt", "zod", "rest-api", "swagger", "react", "tailwind"],
+    tags: ["node.js", "express", "mongodb", "jwt", "react"],
     sourceCode: "https://github.com/sh1v-max/Taskforge",
     demo: "https://taskforge-eight-xi.vercel.app",
     caseStudy: "/projects/taskforge",
@@ -28,9 +36,9 @@ export const projects = [
   {
     title: "Cinegraph",
     description:
-      "AI movie, TV & anime recommendation engine built on your own taste graph — rate titles, get a computed taste profile, and let Gemini suggest what to watch next with multi-turn conversation, personalized 'For You' rows, and a full filterable TMDB-backed catalog.",
+      "AI recommendation engine for movies, TV and anime, with taste profiles and Gemini-powered picks.",
     image: cinegraph,
-    tags: ["react-19", "redux-toolkit", "firebase", "gemini-ai", "tailwind-v4", "react-router-7", "tmdb-api", "vite-6", "cloudflare-worker", "framer-motion", "shadcn-ui", "cloudinary"],
+    tags: ["react-19", "redux-toolkit", "gemini-ai", "firebase", "tmdb-api"],
     sourceCode: "https://github.com/sh1v-max/Netflix-GPT",
     demo: "https://cinewatchgraph-ai.web.app",
     caseStudy: "/projects/cinegraph",
@@ -38,9 +46,9 @@ export const projects = [
   {
     title: "BiteSwift",
     description:
-      "High-fidelity food delivery app with real-time cart management, shimmer UI, and lazy-loaded routes.",
+      "Food delivery app with real-time cart management, shimmer loading states, and lazy-loaded routes.",
     image: biteswift,
-    tags: ["react", "redux-toolkit", "tailwind", "vite", "react-router", "swiggy-api", "custom-hooks"],
+    tags: ["react", "redux-toolkit", "tailwind", "swiggy-api"],
     sourceCode: "https://github.com/sh1v-max/BiteSwift",
     demo: "https://yourbiteswift.netlify.app/",
     caseStudy: "/projects/biteswift",
@@ -48,9 +56,9 @@ export const projects = [
   {
     title: "BookVerse",
     description:
-      "Modern book discovery platform with search, trending sections, and detailed book pages via Open Library API.",
+      "Book discovery platform with search, trending sections, and detailed book pages via the Open Library API.",
     image: bookverse,
-    tags: ["react", "tailwind", "react-router", "open-library-api", "vite", "custom-hooks"],
+    tags: ["react", "tailwind", "react-router", "open-library-api"],
     sourceCode: "https://github.com/sh1v-max/BookVerse",
     demo: "https://bookversedot.netlify.app/",
     caseStudy: "/projects/bookverse",

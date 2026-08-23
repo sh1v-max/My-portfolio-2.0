@@ -32,20 +32,20 @@ export default function LabTeaser() {
             className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
           >
             <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
-            Frontend Lab
+            Build Archive
           </motion.span>
           <motion.h2
             variants={hi}
             className="text-textColor text-4xl font-bold tracking-tight md:text-5xl"
           >
-            Mini Projects
+            Machine-Coding Challenges
           </motion.h2>
           <motion.p
             variants={hi}
             className="text-textColor/60 max-w-xl text-base leading-relaxed"
           >
-            Focused UI experiments, machine-coding challenges, and creative builds —
-            each one sharpening a specific skill.
+            Thirty-three component builds, from OTP inputs and star ratings to
+            nested comments and infinite scroll.
           </motion.p>
           <motion.div
             variants={hi}
@@ -53,7 +53,7 @@ export default function LabTeaser() {
           />
         </motion.div>
 
-        {/* Mini project cards */}
+        {/* Lab build cards */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {preview.map((project, i) => (
             <motion.div
@@ -80,7 +80,7 @@ export default function LabTeaser() {
             to="/frontend-lab"
             className="group inline-flex min-h-11 items-center gap-2.5 rounded-full border border-accentColor/40 bg-accentColor/10 px-6 py-3 text-sm font-semibold text-accentColor transition-all duration-300 hover:bg-accentColor hover:text-mainBg focus-visible:outline-2 focus-visible:outline-accentColor"
           >
-            Explore the lab
+            Explore the archive
             <Icon
               icon="lucide:arrow-right"
               className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"

@@ -186,14 +186,14 @@ function MiniProjectsCarousel() {
             variants={headerItem}
             className="text-textColor text-4xl font-bold tracking-tight md:text-5xl"
           >
-            Mini Projects &amp; Creative Builds
+            From the Build Archive
           </motion.h2>
           <motion.p
             variants={headerItem}
             className="text-textColor/60 max-w-xl text-sm leading-relaxed"
           >
-            A collection of focused UI experiments, interactive components,
-            and creative builds — each one sharpening a specific skill.
+            Machine-coding challenges and interface experiments — each one built
+            to drill a single pattern properly.
           </motion.p>
           <motion.div
             variants={headerItem}
@@ -239,7 +239,7 @@ function MiniProjectsCarousel() {
             to="/frontend-lab"
             className="border-accentColor/30 bg-accentColor/5 text-accentColor hover:border-accentColor/60 hover:bg-accentColor/15 group inline-flex items-center gap-3 rounded-xl border px-7 py-3.5 text-sm font-semibold backdrop-blur-sm transition-all duration-300 [&:hover]:shadow-[0_0_24px_color-mix(in_srgb,var(--color-accentColor)_15%,transparent)] active:scale-[0.97]"
           >
-            Explore All Mini Projects
+            Explore the Build Archive
             <Icon
               icon="lucide:arrow-right"
               className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"

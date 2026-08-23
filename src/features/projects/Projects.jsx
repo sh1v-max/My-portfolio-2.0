@@ -59,7 +59,7 @@ function Projects({ asSection = false }) {
 
     // Bail out entirely once the cursor leaves the editorial list's bounds —
     // without this, the preview (and its clickable "View" button) can get
-    // stuck live over unrelated sections below, like the mini-project marquee.
+    // stuck live over unrelated sections below, like the Build Archive marquee.
     const bounds = listRef.current?.getBoundingClientRect();
     if (!bounds || y < bounds.top || y > bounds.bottom) {
       setHoveredIdx(-1);
@@ -208,7 +208,7 @@ function Projects({ asSection = false }) {
               variants={headerItem}
               className="text-textColor text-4xl font-bold tracking-tight md:text-5xl"
             >
-              My Projects
+              Some of My Works
             </motion.h1>
             <motion.p
               variants={headerItem}
@@ -325,7 +325,7 @@ function ProjectRow({ project, index, isFirst, hovered, meta }) {
                   transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                   className="h-px w-10 origin-left bg-linear-to-r from-accentColor/55 to-transparent"
                 />
-                <span className="font-mono text-xs text-textColor/40">
+                <span className="font-mono text-xs text-textColor/55 sm:text-[0.8125rem]">
                   {meta.period}
                   {meta.periodEnd ? ` — ${meta.periodEnd}` : " — Present"}
                 </span>
@@ -352,21 +352,23 @@ function ProjectRow({ project, index, isFirst, hovered, meta }) {
             )}
 
             {/* Description */}
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-textColor/65 md:text-[0.9375rem]">
-              {project.description.length > 150
-                ? project.description.slice(0, 150) + "…"
-                : project.description}
+            {/* Printed in full — descriptions are written short enough in
+                project.js that clipping is never needed. Truncating here just
+                hid the fact that the copy was too long. */}
+            <p className="mt-3.5 max-w-2xl text-[0.9375rem] leading-relaxed text-textColor/70 md:text-base">
+              {project.description}
             </p>
 
-            {/* Tech tags */}
-            <div className="mt-3 flex flex-wrap gap-x-2.5 gap-y-1.5">
+            {/* Tech tags — were 10px at 45% opacity, under the readable floor on
+                both counts. Sized and weighted so they can actually be scanned. */}
+            <div className="mt-4 flex flex-wrap gap-x-2 gap-y-2">
               {project.tags.slice(0, 6).map((tag) => (
                 <span
                   key={tag}
-                  className={`rounded-full border px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider transition-colors duration-300 ${
+                  className={`rounded-full border px-3 py-1 font-mono text-[11px] uppercase tracking-wider transition-colors duration-300 sm:text-xs ${
                     hovered
-                      ? "border-accentColor/30 text-accentColor/70"
-                      : "border-textColor/20 text-textColor/45"
+                      ? "border-accentColor/40 text-accentColor/80"
+                      : "border-textColor/25 text-textColor/60"
                   }`}
                 >
                   {tag}

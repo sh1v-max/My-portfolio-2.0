@@ -320,7 +320,9 @@ function SupportingCard({ project }) {
         <h3 className="text-textColor text-xl font-bold tracking-tight">
           {project.title}
         </h3>
-        <p className="text-textColor/55 line-clamp-2 flex-1 text-sm leading-relaxed">
+        {/* Three lines until the card is genuinely wide. It stays slim through
+            tablet widths, where two lines clipped the longer summaries. */}
+        <p className="text-textColor/55 line-clamp-3 flex-1 text-sm leading-relaxed lg:line-clamp-2">
           {project.description}
         </p>
 

@@ -6,7 +6,7 @@ const pageOrder = [
   { path: "/", label: "Home" },
   { path: "/about", label: "About" },
   { path: "/projects", label: "Projects" },
-  { path: "/frontend-lab", label: "Lab" },
+  { path: "/frontend-lab", label: "Archive" },
   { path: "/github", label: "GitHub" },
   { path: "/contact", label: "Contact" },
 ];

@@ -68,8 +68,8 @@ const features = [
   },
   {
     icon: "lucide:flask-conical",
-    title: "Frontend Lab",
-    desc: "A dedicated /frontend-lab page for experimental UI components and technical demonstrations — a space to show creative frontend work that doesn't fit neatly into a project card.",
+    title: "The Build Archive",
+    desc: "A dedicated /frontend-lab page holding 33 graded builds — machine-coding challenges, UI components, and small apps that don't fit neatly into a project card.",
   },
   {
     icon: "lucide:database",
@@ -107,7 +107,7 @@ const challenges = [
 const desktopScreenshots = [
   { src: aboutImg,    alt: "Portfolio about page",         label: "About" },
   { src: projectsImg, alt: "Portfolio projects page",      label: "Projects" },
-  { src: labImg,      alt: "Portfolio frontend lab page",  label: "Frontend Lab" },
+  { src: labImg,      alt: "Portfolio build archive page", label: "Build Archive" },
   { src: githubImg,   alt: "Portfolio GitHub dashboard",   label: "GitHub" },
   { src: contactImg,  alt: "Portfolio contact page",       label: "Contact" },
 ];
@@ -116,7 +116,7 @@ const phoneScreenshots = [
   { src: phoneHomeImg,    alt: "Portfolio mobile — home",          label: "Home" },
   { src: phoneAboutImg,   alt: "Portfolio mobile — about",         label: "About" },
   { src: phoneProjectsImg,alt: "Portfolio mobile — projects",      label: "Projects" },
-  { src: phoneLabImg,     alt: "Portfolio mobile — frontend lab",  label: "Frontend Lab" },
+  { src: phoneLabImg,     alt: "Portfolio mobile — build archive", label: "Build Archive" },
   { src: phoneGithubImg,  alt: "Portfolio mobile — github",        label: "GitHub" },
   { src: phoneContactImg, alt: "Portfolio mobile — contact",       label: "Contact" },
 ];

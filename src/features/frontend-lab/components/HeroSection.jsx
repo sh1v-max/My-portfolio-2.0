@@ -42,7 +42,7 @@ export default function HeroSection() {
         variants={headerItem}
         className="text-4xl font-extrabold tracking-tight text-textColor sm:text-5xl"
       >
-        Frontend Lab
+        The Build Archive
       </motion.h1>
 
       {/* Subtitle */}

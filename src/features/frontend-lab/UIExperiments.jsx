@@ -38,7 +38,7 @@ export default function UIExperiments() {
   return (
     <HelmetProvider>
       <Helmet>
-        <title>Shiv | Frontend Lab</title>
+        <title>Shiv | The Build Archive</title>
       </Helmet>
 
       <section className="py-16 md:py-20">

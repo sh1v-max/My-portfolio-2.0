@@ -11,11 +11,15 @@ import {
   selectableGrid,
 } from "../../assets/frontend-lab";
 
+// Descriptions stay under ~75 characters so they fit the card's two-line clamp
+// in full. Anything longer renders with a trailing ellipsis, which reads as
+// truncated copy rather than a deliberately short summary.
+
 export const miniProjects = [
   {
     title: "Countdown Timer",
     description:
-      "Configurable countdown component with real-time tick, pause/resume controls, and smooth circular progress ring.",
+      "Live countdown with pause, resume, and a progress ring.",
     image: countdownTimer,
     tags: ["react", "setInterval", "time-calc"],
     sourceCode:
@@ -25,7 +29,7 @@ export const miniProjects = [
   {
     title: "File Explorer",
     description:
-      "Hierarchical file system UI with recursive tree rendering, expand/collapse, and file-type icons.",
+      "Recursive file tree with expand, collapse, and type icons.",
     image: fileExplorer,
     tags: ["react", "recursion", "tree-structure"],
     sourceCode:
@@ -35,7 +39,7 @@ export const miniProjects = [
   {
     title: "Interactive Grid",
     description:
-      "Click-to-select grid system with multi-select, highlight states, and useRef-driven grid state management.",
+      "Click-to-select grid with multi-select and highlight states.",
     image: interactiveGrid,
     tags: ["react", "useRef", "grid-state"],
     sourceCode:
@@ -45,7 +49,7 @@ export const miniProjects = [
   {
     title: "Typing Effect",
     description:
-      "Animated typing text simulation with configurable speed, looping, and backspace deletion effect.",
+      "Typing animation with configurable speed, looping, and backspace.",
     image: typingEffect,
     tags: ["react", "string-manipulation", "timers"],
     sourceCode:
@@ -55,7 +59,7 @@ export const miniProjects = [
   {
     title: "Drag & Drop Upload",
     description:
-      "File upload zone with drag-and-drop support, file previews, and File API integration.",
+      "Drag-and-drop upload zone with previews, built on the File API.",
     image: dragAndDropUpload,
     tags: ["react", "file-api", "drag-events"],
     sourceCode:
@@ -65,7 +69,7 @@ export const miniProjects = [
   {
     title: "Indeterminate Checkbox",
     description:
-      "Hierarchical checkbox system with DFS-powered indeterminate states, parent-child sync logic.",
+      "Nested checkboxes with DFS-driven indeterminate parent states.",
     image: indeterminateCheckbox,
     tags: ["react", "dfs", "refs"],
     sourceCode:
@@ -75,7 +79,7 @@ export const miniProjects = [
   {
     title: "Traffic Light",
     description:
-      "Animated traffic light simulator with state machine transitions, configurable durations per phase.",
+      "Traffic light simulator driven by a state machine with timed phases.",
     image: trafficLight,
     tags: ["react", "state-machines", "timers"],
     sourceCode:
@@ -85,7 +89,7 @@ export const miniProjects = [
   {
     title: "Multi Select Search",
     description:
-      "Advanced user search with pill-style selections, API integration, and full keyboard navigation support.",
+      "User search with pill selections and full keyboard navigation.",
     image: multiSelectSearch,
     tags: ["react", "api", "keyboard-nav"],
     sourceCode:
@@ -95,7 +99,7 @@ export const miniProjects = [
   {
     title: "QuizGuru",
     description:
-      "Interactive quiz app with scoring, progress tracking, timed questions, and result breakdown.",
+      "Quiz app with scoring, timed questions, and a result breakdown.",
     image: quizGuru,
     tags: ["react", "quiz-logic", "progress"],
     sourceCode:
@@ -105,7 +109,7 @@ export const miniProjects = [
   {
     title: "Selectable Grid",
     description:
-      "Multi-select grid with drag-to-select, shift-click range selection, and complex selection state logic.",
+      "Grid with drag-to-select and shift-click range selection.",
     image: selectableGrid,
     tags: ["react", "drag-select", "complex-state"],
     sourceCode:
