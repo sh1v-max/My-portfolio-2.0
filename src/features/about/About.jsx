@@ -8,6 +8,7 @@ import BentoSkills from "./BentoSkills";
 import MarqueeSkills from "./MarqueeSkills";
 import { Icon } from "@iconify/react";
 import { personal } from "../../data/config";
+import PageNavigator from "../../components/PageNavigator";
 
 // ─── Animation System (matches Projects / GitHub / Contact) ───
 const headerContainer = {
@@ -642,6 +643,11 @@ function About({ asSection = false }) {
         </div>
       </section>
 
+      {!asSection && (
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
+          <PageNavigator />
+        </div>
+      )}
     </HelmetProvider>
   );
 }

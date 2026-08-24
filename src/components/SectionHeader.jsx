@@ -39,7 +39,7 @@ export default function SectionHeader({
       {eyebrow && (
         <motion.span
           variants={sectionItem}
-          className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
+          className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[13px] font-semibold uppercase tracking-widest"
         >
           <span aria-hidden="true" className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
           {eyebrow}
@@ -73,7 +73,7 @@ export default function SectionHeader({
         <motion.div variants={sectionItem} className="mt-1">
           <Link
             to={href}
-            className="group text-textColor hover:text-accentColor inline-flex min-h-11 items-center gap-2 text-sm font-semibold transition-colors duration-200 focus-visible:rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accentColor"
+            className="group text-textColor hover:text-accentColor inline-flex min-h-11 items-center gap-2 text-[15px] font-semibold transition-colors duration-200 focus-visible:rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accentColor"
           >
             {cta}
             <Icon

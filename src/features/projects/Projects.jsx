@@ -209,7 +209,7 @@ function Projects({ asSection = false }) {
           >
             <motion.span
               variants={headerItem}
-              className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
+              className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[13px] font-semibold uppercase tracking-widest"
             >
               <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
               Featured Projects

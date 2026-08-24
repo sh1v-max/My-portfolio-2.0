@@ -60,7 +60,7 @@ function ContactSocials() {
     <div className="space-y-10">
       {/* Contact Information Section */}
       <div className="space-y-5">
-        <h3 className="text-xl font-bold text-textColor">
+        <h3 className="text-lg font-bold tracking-tight text-textColor">
           Contact Information
         </h3>
         <div className="grid grid-cols-1 gap-4">
@@ -70,7 +70,7 @@ function ContactSocials() {
               href={link.href}
               target="_blank"
               rel="noreferrer"
-              className="group flex items-center gap-5 rounded-2xl border border-explorerBorder bg-articleBg/40 p-4 transition-all duration-300 hover:border-accentColor/40 hover:bg-articleBg hover:shadow-lg"
+              className="group flex items-center gap-5 rounded-2xl border border-explorerBorder bg-articleBg/40 p-5 transition-all duration-300 hover:border-accentColor/40 hover:bg-articleBg hover:shadow-lg"
             >
               {/* Icon Container */}
               <div aria-hidden="true" className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accentColor/5 text-accentColor transition-all duration-300 group-hover:scale-110 group-hover:bg-accentColor/10">
@@ -81,7 +81,7 @@ function ContactSocials() {
                 <p className="text-sm font-semibold text-textMuted">
                   {link.social}
                 </p>
-                <p className="truncate text-base font-medium text-textColor">
+                <p className="mt-0.5 truncate text-base font-semibold text-textColor">
                   {link.un}
                 </p>
               </div>
@@ -111,7 +111,7 @@ function ContactSocials() {
 
       {/* Socials Section */}
       <div className="space-y-5">
-        <h3 className="text-xl font-bold text-textColor">
+        <h3 className="text-lg font-bold tracking-tight text-textColor">
           Socials
         </h3>
         <div className="flex flex-wrap gap-4">

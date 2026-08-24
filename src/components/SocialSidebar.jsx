@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { personal } from "../data/config";
+import SectionRail from "./SectionRail";
 
 const socialLinks = [
   { icon: "mdi:github",            href: personal.github,    label: "GitHub" },
@@ -21,6 +22,8 @@ const hoverTween   = { duration: 0.2, ease: "easeOut" };
 
 export default function SocialSidebar() {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
   return (
     <>
       {/* ── Left: social icons ── */}
@@ -65,35 +68,48 @@ export default function SocialSidebar() {
         />
       </aside>
 
-      {/* ── Right: email ── */}
+      {/* ── Right: section rail on home, email everywhere else ──
+          The contact form is embedded on home (see ContactTeaser), so the
+          floating email link is a duplicate there — the rail replaces it
+          rather than displacing anything a home visitor still needs. */}
       <aside className="fixed bottom-0 right-8 z-40 hidden flex-col items-center xl:flex" style={{ gap: GAP }}>
         <div
           className="flex items-center justify-center"
           style={{ height: CONTENT_H }}
         >
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.45, ease: "easeOut" }}
-          >
-            <motion.a
-              href="/contact"
-              onClick={(e) => { e.preventDefault(); navigate("/contact"); }}
-              whileHover={{ y: -3, scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              transition={hoverTween}
-              className="group relative text-textMuted hover:text-accentColor text-[13px] font-semibold tracking-[0.15em] transition-colors duration-200"
-              style={{ writingMode: "vertical-rl" }}
+          {isHome ? (
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 0.45, ease: "easeOut" }}
             >
-              {personal.email}
-              <span
-                className="pointer-events-none absolute bottom-full right-1/2 mb-3 translate-x-1/2 whitespace-nowrap rounded-md bg-articleBg border border-explorerBorder px-2.5 py-1 text-[11px] font-semibold tracking-wide text-textColor opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100"
-                style={{ writingMode: "horizontal-tb" }}
+              <SectionRail />
+            </motion.div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 0.45, ease: "easeOut" }}
+            >
+              <motion.a
+                href="/contact"
+                onClick={(e) => { e.preventDefault(); navigate("/contact"); }}
+                whileHover={{ y: -3, scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                transition={hoverTween}
+                className="group relative text-textMuted hover:text-accentColor text-[13px] font-semibold tracking-[0.15em] transition-colors duration-200"
+                style={{ writingMode: "vertical-rl" }}
               >
-                Say hello
-              </span>
-            </motion.a>
-          </motion.div>
+                {personal.email}
+                <span
+                  className="pointer-events-none absolute bottom-full right-1/2 mb-3 translate-x-1/2 whitespace-nowrap rounded-md bg-articleBg border border-explorerBorder px-2.5 py-1 text-[11px] font-semibold tracking-wide text-textColor opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100"
+                  style={{ writingMode: "horizontal-tb" }}
+                >
+                  Say hello
+                </span>
+              </motion.a>
+            </motion.div>
+          )}
         </div>
 
         <motion.span

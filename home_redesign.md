@@ -696,14 +696,14 @@ confirming round, then stop.
 
 ## 9. Progress
 
-- [ ] Phase 0 — Truth, tokens, foundations
+- [x] **Phase 0 — Truth, tokens, foundations — DONE (2026-08-24)** *(closed out last, after 1–7 had already absorbed most of it — see 10h)*
 - [x] **Phase 1 — Assets and contrast — DONE (2026-08-24)**
 - [x] **Phase 2 — Contact form on home — DONE (2026-08-24)**
 - [x] **Phase 3 — Work section — DONE (2026-08-24)** *(Split Stage built, then replaced by the /projects UI; route retired — see 10c revision)*
 - [x] **Phase 4 — GitHub becomes real — DONE (2026-08-24)**
 - [x] **Phase 5 — About refinement + Archive — DONE (2026-08-24)**
-- [ ] Phase 6 — Hero + orientation rail
-- [ ] Phase 7 — Rhythm, type, verification
+- [x] **Phase 6 — Hero + orientation rail — DONE (2026-08-24)**
+- [x] **Phase 7 — Rhythm, type, verification — DONE (2026-08-24)**
 
 ---
 
@@ -1212,6 +1212,262 @@ this project when the cards were made smaller for phones, and it is not a
 regression — the previous inline `MiniCard` used `min-h-9` for the same links. It
 clears WCAG 2.2 AA (24px) but not the 44px floor used elsewhere on this site.
 Worth a decision in Phase 7 rather than a silent override here.
+
+---
+
+### About & Contact — type and density pass (2026-08-24)
+
+Reported as "too congested, small fonts". Measured before touching anything, and
+the complaint was precise:
+
+| Section | Text nodes under 14px | Largest body size |
+|---|---|---|
+| Contact | **15 of 21 (71%)** | one node at 16px |
+| About | 10 under 14px + 19 *at* 14px = **85% <=14px** | two nodes at 16px |
+| Projects *(not complained about)* | 38 of 51 | **five nodes at 60px** |
+
+So density was not the difference. Projects has huge type creating hierarchy and
+air; About and Contact had **nothing between 18px and 48px** and put nearly
+everything at 11-14px. The small uppercase label voice had been applied to
+sections that need reading sizes.
+
+**Raised the floor rather than scaling everything up.**
+
+| Element | Before | After |
+|---|---|---|
+| Form inputs | 14px | **16px** — also stops iOS zooming the page on focus |
+| Form labels | 11px uppercase @ 0.2em tracking | 13px sentence case, normal tracking |
+| Form errors | 11px | 13px |
+| Channel labels / values | 10px / 14px | 13px / 16px |
+| About story | 16px / 1.5 | 17px / **1.7** |
+| Skill items | 14px | 15px |
+| Name / role / location | 18 / 14 / 14 | 20 / 16 / 15 |
+| Section doors | 14px | 15px |
+| Eyebrow pills | 12px | 13px |
+
+Spacing opened alongside it: column gaps 10->12 and 16->20, card padding 4->5/6,
+field rhythm `space-y-4`->`space-y-5`.
+
+**Result:** Contact's smallest text is now **13px with zero nodes below it** (was
+10px). About runs **71% of nodes at 15px or larger** (was 12%). Section heights
+grew ~80px each — that is the breathing room, not bloat.
+
+### A bug this pass exposed
+
+Contact's two columns entered from `x: -20` and `x: 20`. A **rightward** entrance
+transform extends the page's scrollable overflow box, so while the section sat
+below the fold un-animated it pushed **15px of horizontal scroll onto the whole
+page** at 375px. Only the rightward one showed up — in LTR, negative-x space is
+not scrollable, which is why the left column was invisible in the measurement.
+
+Isolated by hiding each section in turn (`#contact` hidden -> overflow 0). Both
+columns now enter vertically, matching the motion vocabulary every other section
+already uses. Overflow is **0 at 375 / 768 / 1440**.
+
+Contrast re-verified after all of it: **0 failures across 253 nodes** in every
+theme.
+
+---
+
+## 10f. Phase 6 results (completed 2026-08-24)
+
+### What changed
+
+- **Hero shortened**: `h-[calc(100dvh-64px)]` → `h-[82dvh] min-h-140`. Section
+  two (About) now peeks above the fold on load instead of requiring a scroll
+  to discover it exists.
+- **`StatRail`** (new, `src/features/home/StatRail.jsx`) — one line under the
+  social icons: `5 projects · 33 builds · 6 themes · MERN + AI`. All four
+  figures are derived from the same arrays the rest of the page renders
+  (`projects`, `realBuildCount`, `stats.themes`), so they cannot drift out of
+  sync — same discipline as the GitHub teaser's numbers.
+- **Scroll cue** — a bouncing chevron pinned to the hero's bottom edge,
+  `aria-label="Scroll to About"`, gated on `asSection` so it never renders on
+  a route that isn't the scroll-page, reads `useReducedMotion()`.
+- **`SectionRail`** (new, `src/components/SectionRail.jsx`) — vertical dot nav
+  for the six scroll sections, active state from the existing
+  `useActiveSection` hook. Visual language matches `PageNavigator`'s dot row
+  (`w-6`/`bg-accentColor` active, `w-1.5`/`bg-textColor/15` inactive) turned
+  90°, so page-level and section-level orientation read as one system.
+- **`SocialSidebar` collision resolved**: took an `isHome` check
+  (`pathname === "/"`) and now renders `<SectionRail />` in the right rail
+  slot in place of the vertical email link, only on home. Every other route
+  keeps the email exactly as before. This doesn't lose the email as a contact
+  path on home — the full contact form is already embedded there (Phase 2),
+  so the floating email link was a duplicate on that one route.
+
+### Verified
+
+- Screenshots at 1440×900 and 375×812: StatRail wraps cleanly on mobile,
+  scroll cue sits clear of `BottomNav`, section rail's active dot visibly
+  grows and tracks scroll position (confirmed by scrolling to `#projects` —
+  the third dot, "Work", lit up).
+- `document.documentElement.scrollWidth - clientWidth` = **0 at 375 / 768 /
+  1440** — no new horizontal overflow introduced.
+- `npx eslint` on all four touched/new files: **0 errors** after adding
+  `/* eslint-disable react/prop-types */` to `Home.jsx` (matches the
+  convention already used in `SectionHeader.jsx`, `GithubTeaser.jsx`).
+
+---
+
+## 10g. Phase 7 results (completed 2026-08-24)
+
+### What changed
+
+- **Bands + container width** — About, Archive, GitHub, and Contact all moved
+  from `py-16 md:py-24` / `max-w-5xl` to `py-20 md:py-28` / `max-w-6xl` per
+  §4.4/§4.3. About and Contact additionally took `bg-articleBg/40`, and
+  Archive kept it (was already close); GitHub and Work stay on the bare
+  `mainBg` band. Sequence down the page is now a strict alternation: mainBg
+  (Hero) → articleBg (About) → mainBg (Work) → articleBg (Archive) → mainBg
+  (GitHub) → articleBg (Contact). Verified on a real render — the seam is
+  subtle by construction (as the plan predicted) but present; no hairline
+  border was needed.
+- **Deliberate exception — Work/Projects section left untouched.** §4.4 and
+  §4.3 call for `py-24 md:py-36` and the `lg` (centerpiece) type scale on
+  Work. The Work section *is* the retired `/projects` page's exact editorial
+  UI, mounted verbatim per an explicit earlier instruction ("add the same UI
+  in /project page on the main page entirely as is, same UI"). Resizing its
+  padding or heading would break that promise for a padding/scale gain the
+  brief doesn't actually need — this section was never the one that looked
+  cramped. Recorded here rather than silently deviating from §4.3/§4.4.
+- **`ContactTeaser` migrated onto `SectionHeader`** — the last home section
+  still carrying a copy-pasted `hc`/`hi` header pair. All five non-hero home
+  sections now share one header component. (About, Archive, GitHub already
+  used it going into this phase.)
+- **CTA audit** — checked against the plan's rewrite list: Archive's door
+  already read "Explore the Build Archive", GitHub's already read "Full
+  GitHub dashboard", About's already read "The full story — timeline,
+  education, services" (deeper than the plan's minimum, kept as-is), Contact
+  has no CTA (it *is* the destination). No changes needed — this list was
+  completed inside Phase 3/4/5 without being logged against this task.
+- **`PageNavigator` made consistent** — it rendered on `/frontend-lab` and
+  `/github` only. Added to `/about` and `/contact` (both gated on
+  `!asSection`, matching how every other conditional in those two files
+  already handles the home-mount case, even though neither is actually
+  mounted `asSection` anywhere today). All four standalone detail pages now
+  carry the same prev/next chrome.
+- **Mega-menu focus trap added** (D15, previously "consider"). Before this,
+  Tab could walk keyboard focus out of the open panel and onto page content
+  still visible underneath it, and closing the menu left focus wherever Tab
+  had wandered. Now: opening the menu moves focus to the first link inside
+  the panel; Tab/Shift+Tab wrap within the header card + panel (reusing the
+  existing `cardRef` click-outside boundary, so the trapped region is exactly
+  what's visibly interactive); Escape closes the menu **and** returns focus
+  to the hamburger button, instead of only closing it as before.
+- **Hardcoded-colour sweep** — grepped every home-section file plus the new
+  Phase 6 components for raw hex/`rgba()`. Found only the two already-
+  documented, deliberate exceptions: the GitHub contribution calendar's
+  levels (recognizable GitHub green palette, commented in `GithubTeaser.jsx`)
+  and the traffic-light dots in the code-editor illustration (decorative,
+  theme-independent). No undocumented raw colour found.
+
+### Verified
+
+- `document.documentElement.scrollWidth - clientWidth` = **0 at 375 / 768 /
+  1024 / 1440**.
+- Scrolled to each section (`#about` through `#contact`) and confirmed the
+  `SectionRail` dot lights up in sync at every stop, band backgrounds render
+  in the correct alternation, and the Contact section's new `SectionHeader`
+  matches the others' type/spacing exactly.
+- `/about` and `/contact`: confirmed `PageNavigator` now renders at the
+  bottom of both (Previous/Continue links correct), and the right rail still
+  shows the vertical email link on these non-home routes — the Phase 6
+  `isHome` swap is unaffected.
+- Mega-menu keyboard flow, driven programmatically: opening focuses the
+  first panel link ("Home"); tabbing from the last focusable element in the
+  header card wraps to the hamburger button; **Escape closes the menu and
+  restores focus to the hamburger button** (previously it only closed).
+- `npx eslint` on every touched file: **0 errors** (one new
+  `/* eslint-disable react/prop-types */` in `Contact.jsx`, matching the
+  existing convention, needed once `asSection` became referenced in JSX).
+
+---
+
+## 10h. Phase 0 results (completed 2026-08-24)
+
+Phase 0 was written to run first; in practice items 1–7 were absorbed
+piecemeal into Phases 1, 4, and 5 without being checked off here (real
+`useGithub()` data, `motion.js`, `SectionHeader.jsx`, the `nightOwl` AA fix,
+and `config.js` derived counts all shipped earlier). This pass closed the
+remaining items and, in re-auditing them, found two real defects the earlier
+phases hadn't caught.
+
+### What was verified already done (no change needed)
+
+- Item 1 (fabricated GitHub data) — resolved in Phase 4.
+- Item 2 (`PortfolioDetail`'s `useGithub()` claim) — re-read against current
+  `GithubTeaser.jsx`: the claim is now **true**, not stale copy. It self-
+  corrected when Phase 4 rewrote the component; no separate fix needed.
+- Items 3, 4, 6, 8, 9 (`motion.js`, `SectionHeader`, `nightOwl` AA, derived
+  counts, `project.js` `role` field) — confirmed present and correct.
+
+### What was actually broken (found and fixed here)
+
+- **D8, font tokens — silently broken, not just "not yet renamed."** The
+  `@theme inline` keys were `--font-family-Inter` / `-Inconsolata` /
+  `-Cursive`. Tailwind v4 only generates a `font-*` utility from a `--font-*`
+  key — the `-family-` keys generated `font-family-Inter` etc., which nothing
+  ever referenced. Renamed to `--font-Inter` / `--font-Inconsolata` /
+  `--font-Cursive`. `About.jsx`'s `font-Inconsolata` class (on the
+  `aboutMe.json` code block) had been silently falling back to the sans body
+  font since the day it was written — verified fixed by computed style
+  (`font-family: Inconsolata, monospace`). Replaced the two remaining inline
+  `style={{ fontFamily: "'Satisfy', cursive" }}` in `Home.jsx` with
+  `font-Cursive` per the plan.
+- **A second, unrelated bug the token fix exposed**: `index.html` had a
+  static `<body class="font-Inconsolata">` — dead markup, presumably a stray
+  test that was never cleaned up. While the token was broken this was a
+  harmless no-op; the moment `.font-Inconsolata` started resolving, it would
+  have put the entire site body in monospace, except that `body { font-family:
+  "Inter" }` in `index.css` is un-layered CSS, which beats any `@layer
+  utilities` rule regardless of specificity — so it stayed masked by luck,
+  not by design. Removed the stray class from `index.html` rather than leave
+  a correctness accident load-bearing.
+- **D5, `explorerBorder: transparent` on `ayuDark` / `ayuMirage` / `nightOwl`
+  — a real, previously-unflagged visibility bug.** All three themes had this
+  token set to `transparent`, meaning every `border-explorerBorder` element
+  built across Phases 1–7 — cards, the availability pill, channel rows, the
+  `SectionRail` tooltip border — had **no visible edge at all** on half the
+  site's six themes. Verified by screenshot: on `nightOwl`, the About page's
+  photo ring and "Available for work" pill previously had zero border; on
+  `ayuMirage`, every Contact card and form field was borderless. Fixed by
+  giving each theme a real value in its own idiom rather than one shared
+  fallback: `ayuDark`/`ayuMirage` got a recessed border darker than
+  `mainBg` (matching github/dracula's existing pattern — `#05070a` and
+  `#171b24`), `nightOwl` reused its own already-established
+  `bottombarBorder` value (`#262a39`), which fits the lighter-than-`mainBg`
+  border family that theme already uses for `tabBorder`.
+- **D11, `.box { transition: all 1s ease-in-out }`.** The blob's
+  `border-radius` shape-shift is driven entirely by its `animation`;
+  nothing else on `.box` changes, so the transition was inert dead weight —
+  and `transition: all` is exactly the anti-pattern the plan's own motion
+  rules ban elsewhere (animate named properties, never `all`). Removed.
+  Also deleted the now-fully-unused `.typewriter` / `.line-container` /
+  `blink-caret` CSS (D1 — the hardcoded `orange` border-color lived here):
+  neither class had any consumer left in `src/`, so the correct fix was
+  deletion, not reskinning dead code onto a token.
+- **D13, dead code.** Confirmed zero importers (`grep`, not assumption) for
+  all eight candidates, then removed them: `CustomCursor.jsx`,
+  `ProjectTimeline.jsx`, `Explorer.jsx`, `SideBar.jsx`, `LiveClock.jsx`,
+  `ProjectCard.jsx` + `Tag.jsx` (the latter only ever imported by the
+  former), and the entire `features/articles/` folder + its now-orphaned
+  `services/apiArticles.js`.
+
+### Verified
+
+- `npx eslint src`: **0 problems** (down from a documented 151-problem
+  baseline at the start of this redesign — the last of it cleared across
+  Phases 1–7, not newly here).
+- `npm run build`: succeeds; only the pre-existing >500 KB main-chunk
+  advisory remains (accepted in Phase 1 — Home is deliberately eager as the
+  landing route).
+- Computed-style check on `/about`: the code block resolves to
+  `"Inconsolata, monospace"`; page headings remain `"Inter, sans-serif"`
+  (confirms the stray `index.html` body class isn't leaking font-family
+  anywhere once removed).
+- Screenshots on `nightOwl` and `ayuMirage`: borders now render on cards,
+  pills, and form fields that were previously edgeless.
 
 ---
 

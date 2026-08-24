@@ -50,12 +50,12 @@ function buildStats(user, repos) {
 
 function StatTile({ label, value, icon, plain }) {
   return (
-    <div className="border-explorerBorder bg-articleBg flex flex-col gap-3 rounded-2xl border p-5 ring-1 ring-textColor/10">
-      <Icon icon={icon} aria-hidden="true" className="text-accentColor h-4 w-4" />
-      <span className="text-textColor text-3xl font-black leading-none tracking-tight tabular-nums">
+    <div className="border-explorerBorder bg-articleBg flex flex-col gap-4 rounded-2xl border p-6 ring-1 ring-textColor/10">
+      <Icon icon={icon} aria-hidden="true" className="text-accentColor h-5 w-5" />
+      <span className="text-textColor text-4xl font-black leading-none tracking-tight tabular-nums">
         {plain ? value : Number(value).toLocaleString()}
       </span>
-      <span className="text-textMuted text-xs font-medium uppercase tracking-widest">
+      <span className="text-textMuted text-[13px] font-semibold uppercase tracking-wide">
         {label}
       </span>
     </div>
@@ -64,19 +64,19 @@ function StatTile({ label, value, icon, plain }) {
 
 function LoadingState() {
   return (
-    // Heights are measured from the loaded layout, not estimated: 128 / 155 /
-    // 192 / 44 with the same space-y-8 rhythm. The door row is included even
+    // Heights are measured from the loaded layout, not estimated: 158 / 202 /
+    // 202 / 44 with the same space-y-10 rhythm. The door row is included even
     // though it holds only a link — leaving it out was worth 58px of shift when
     // the data arrived.
-    <div className="space-y-8" role="status" aria-live="polite">
+    <div className="space-y-10" role="status" aria-live="polite">
       <span className="sr-only">Loading GitHub activity</span>
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
         {[0, 1, 2, 3].map((i) => (
-          <Skeleton key={i} className="h-32" rounded="rounded-2xl" />
+          <Skeleton key={i} className="h-39.5" rounded="rounded-2xl" />
         ))}
       </div>
-      <Skeleton className="h-[155px]" rounded="rounded-2xl" />
-      <Skeleton className="h-48" rounded="rounded-2xl" />
+      <Skeleton className="h-50.5" rounded="rounded-2xl" />
+      <Skeleton className="h-50.5" rounded="rounded-2xl" />
       <Skeleton className="h-11 w-48" rounded="rounded-lg" />
     </div>
   );
@@ -137,8 +137,8 @@ export default function GithubTeaser() {
     : [];
 
   return (
-    <section className="py-16 md:py-24">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
+    <section className="py-20 md:py-28">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
         <SectionHeader
           eyebrow="Open source"
           title="What I've been building"
@@ -156,33 +156,33 @@ export default function GithubTeaser() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={REVEAL_ONCE}
             transition={{ duration: DUR_ENTER, ease: EASE_OUT }}
-            className="space-y-8"
+            className="space-y-10 md:space-y-12"
           >
             {/* Real numbers, all four derived above */}
-            <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
               {stats.map((s) => (
                 <StatTile key={s.label} {...s} />
               ))}
             </div>
 
             {/* Language mix + most recently pushed repositories */}
-            <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-              <div className="border-explorerBorder bg-articleBg rounded-2xl border p-5 ring-1 ring-textColor/10">
+            <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-6">
+              <div className="border-explorerBorder bg-articleBg rounded-2xl border p-6 ring-1 ring-textColor/10">
                 <LanguageBar repos={repos ?? []} />
               </div>
 
-              <div className="border-explorerBorder bg-articleBg rounded-2xl border p-5 ring-1 ring-textColor/10">
-                <p className="text-textMuted mb-3 text-[11px] font-bold uppercase tracking-[0.2em]">
+              <div className="border-explorerBorder bg-articleBg rounded-2xl border p-6 ring-1 ring-textColor/10">
+                <p className="text-textMuted mb-4 text-[13px] font-semibold uppercase tracking-wide">
                   Recently pushed
                 </p>
-                <ul className="flex flex-col gap-2">
+                <ul className="flex flex-col gap-3">
                   {recent.map((repo) => (
                     <li key={repo.id}>
                       <a
                         href={repo.html_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group flex min-h-11 items-center gap-3 rounded-xl px-2 transition-colors duration-200 hover:bg-accentColor/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentColor"
+                        className="group flex min-h-12 items-center gap-4 rounded-xl px-3 py-2 transition-colors duration-200 hover:bg-accentColor/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentColor"
                       >
                         <Icon
                           icon="lucide:git-branch"
@@ -190,10 +190,10 @@ export default function GithubTeaser() {
                           className="text-textMuted group-hover:text-accentColor h-4 w-4 shrink-0 transition-colors"
                         />
                         <span className="min-w-0 flex-1">
-                          <span className="text-textColor block truncate text-sm font-semibold">
+                          <span className="text-textColor block truncate text-[15px] font-semibold">
                             {repo.name}
                           </span>
-                          <span className="text-textMuted block text-xs">
+                          <span className="text-textMuted mt-0.5 block text-[13px]">
                             {repo.language ?? "—"} · updated{" "}
                             {new Date(repo.pushed_at).toLocaleDateString(undefined, {
                               day: "numeric",
@@ -214,18 +214,22 @@ export default function GithubTeaser() {
               </div>
             </div>
 
-            {/* The real contribution calendar, replacing twelve invented bars */}
-            <div className="border-explorerBorder bg-articleBg overflow-hidden rounded-2xl border p-5 ring-1 ring-textColor/10">
-              <p className="text-textMuted mb-4 text-[11px] font-bold uppercase tracking-[0.2em]">
-                Contributions this year
+            {/* The real contribution calendar, replacing twelve invented bars.
+                `year="last"` shows a rolling 12 months ending today rather than
+                the calendar year — a Jan-Dec grid run today would trail off
+                into four months of flat grey "future", which reads as missing
+                data rather than a full year of real activity. */}
+            <div className="border-explorerBorder bg-articleBg overflow-hidden rounded-2xl border p-6 ring-1 ring-textColor/10">
+              <p className="text-textMuted mb-5 text-[13px] font-semibold uppercase tracking-wide">
+                Contributions, past 12 months
               </p>
-              <ContributionGraph theme={CALENDAR_THEME} compact />
+              <ContributionGraph theme={CALENDAR_THEME} year="last" compact />
             </div>
 
             <div>
               <Link
                 to="/github"
-                className="group text-textColor hover:text-accentColor inline-flex min-h-11 items-center gap-2 text-sm font-semibold transition-colors duration-200 focus-visible:rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accentColor"
+                className="group text-textColor hover:text-accentColor inline-flex min-h-11 items-center gap-2 text-base font-semibold transition-colors duration-200 focus-visible:rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accentColor"
               >
                 Full GitHub dashboard
                 <Icon

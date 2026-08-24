@@ -6,8 +6,8 @@ import { DUR_ENTER, EASE_OUT, REVEAL_ONCE } from "../../lib/motion";
 
 export default function LabTeaser() {
   return (
-    <section className="py-16 md:py-24">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
+    <section className="bg-articleBg/40 py-20 md:py-28">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
         <SectionHeader
           eyebrow="Build archive"
           title="Machine-Coding Challenges"

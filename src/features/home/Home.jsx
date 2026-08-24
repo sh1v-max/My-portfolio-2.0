@@ -1,5 +1,7 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import Illustration from "./Illustration";
+import StatRail from "./StatRail";
 import { personal } from "../../data/config";
 // import Illustration10X from "./Illustration10X";
 // import Illustration20X from "./Illustration20X";
@@ -62,7 +64,7 @@ function Home({ asSection = false }) {
       {!asSection && <Helmet><title>Shiv | Home</title></Helmet>}
 
       <div className="flex w-full flex-col">
-        <section className="relative flex h-[calc(100dvh-64px)] items-center justify-center overflow-hidden px-4 py-8 sm:px-6 md:px-8 md:py-12">
+        <section className="relative flex h-[82dvh] min-h-140 items-center justify-center overflow-hidden px-4 py-8 sm:px-6 md:px-8 md:py-12">
           {/* Background Decorative Text */}
           <motion.div
             /* Decorative watermark, not content. It is deliberately near the
@@ -109,8 +111,7 @@ function Home({ asSection = false }) {
                 variants={itemVariants}
               >
                 <span
-                  className="text-accentColor mb-2 text-xl tracking-wide sm:text-2xl"
-                  style={{ fontFamily: "'Satisfy', cursive" }}
+                  className="font-Cursive text-accentColor mb-2 text-xl tracking-wide sm:text-2xl"
                 >
                   Hi, I&apos;m
                 </span>
@@ -134,8 +135,7 @@ function Home({ asSection = false }) {
 
               {/* Description - Focused & Clean */}
               <motion.p
-                className="text-textSecondary mb-12 max-w-2xl text-xl leading-[1.6] md:text-2xl lg:text-3xl"
-                style={{ fontFamily: "'Satisfy', cursive" }}
+                className="font-Cursive text-textSecondary mb-12 max-w-2xl text-xl leading-[1.6] md:text-2xl lg:text-3xl"
                 variants={itemVariants}
               >
                 I build{" "}
@@ -227,6 +227,10 @@ function Home({ asSection = false }) {
                 </a>
               </motion.div>
 
+              {/* Proof line — every figure traces to the sections below it */}
+              <motion.div className="mt-8" variants={ctaVariants}>
+                <StatRail />
+              </motion.div>
             </motion.div>
 
             {/* Right: Illustration - Hidden on mobile for maximum focus */}
@@ -255,6 +259,29 @@ function Home({ asSection = false }) {
             </motion.div>
           </motion.div>
 
+          {/* Scroll cue — the shortened hero leaves the next section
+              peeking above the fold; this makes "there's more" explicit. */}
+          {asSection && (
+            <motion.a
+              href="#about"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              aria-label="Scroll to About"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.4, duration: 0.6, ease: "easeOut" }}
+              className="text-textMuted hover:text-accentColor absolute bottom-6 left-1/2 z-10 -translate-x-1/2 rounded-full p-2 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentColor"
+            >
+              <motion.div
+                animate={shouldReduceMotion ? {} : { y: [0, 6, 0] }}
+                transition={{ duration: 1.8, repeat: shouldReduceMotion ? 0 : Infinity, ease: "easeInOut" }}
+              >
+                <Icon icon="lucide:chevron-down" width="22" height="22" />
+              </motion.div>
+            </motion.a>
+          )}
         </section>
       </div>
     </HelmetProvider>

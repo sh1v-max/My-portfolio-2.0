@@ -58,6 +58,7 @@ function NavBar() {
   const [pulseReady, setPulseReady] = useState(false);
   const { activeSection, isMainPage } = useActiveSection();
   const cardRef = useRef(null);
+  const toggleRef = useRef(null);
   const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -85,12 +86,45 @@ function NavBar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [open]);
 
-  // Escape key closes menu — keyboard accessibility
+  // Escape closes the menu and returns focus to the trigger; Tab is trapped
+  // inside the card while open, so keyboard focus never falls behind onto
+  // page content the panel is visually covering.
   useEffect(() => {
     if (!open) return;
-    const onKey = (e) => { if (e.key === "Escape") setOpen(false); };
+
+    const onKey = (e) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        toggleRef.current?.focus();
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      const focusable = cardRef.current?.querySelectorAll(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusable || focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  // Move focus into the panel once it has content to land on, so a keyboard
+  // user opening the menu doesn't have to tab past the header controls again.
+  useEffect(() => {
+    if (!open) return;
+    const firstLink = cardRef.current?.querySelector('[data-mega-panel] button, [data-mega-panel] a');
+    firstLink?.focus();
   }, [open]);
 
   const scrollTo = (id) =>
@@ -132,9 +166,11 @@ function NavBar() {
 
             {/* Left — hamburger */}
             <button
+              ref={toggleRef}
               onClick={() => setOpen(v => !v)}
               aria-label="Toggle navigation"
               aria-expanded={open}
+              aria-haspopup="true"
               className="group flex self-stretch items-center gap-2.5 justify-self-start focus-visible:outline-2 focus-visible:outline-accentColor"
             >
               <div className="flex flex-col gap-[4.5px]">
@@ -200,6 +236,9 @@ function NavBar() {
           {open && (
             <motion.div
               key="mega"
+              data-mega-panel
+              role="menu"
+              aria-label="Site navigation"
               className="absolute left-0 right-0 top-full z-40 rounded-b-2xl bg-articleBg shadow-[0_20px_48px_rgba(0,0,0,0.38)]"
               initial={{ clipPath: "inset(0 0 100% 0 round 0 0 1rem 1rem)", y: shouldReduceMotion ? 0 : -10 }}
               animate={{ clipPath: "inset(0 0 0% 0 round 0 0 1rem 1rem)", y: 0 }}

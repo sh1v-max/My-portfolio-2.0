@@ -35,9 +35,9 @@
   --color-scrollbarThumbBg: var(--scrollbarThumbBg);
   --color-articleBg: var(--articleBg);
   --color-secondaryBg: var(--secondaryBg);
-  --font-family-Inter: "Inter", sans-serif;
-  --font-family-Inconsolata: "Inconsolata", monospace;
-  --font-family-Cursive: "Satisfy", cursive;
+  --font-Inter: "Inter", sans-serif;
+  --font-Inconsolata: "Inconsolata", monospace;
+  --font-Cursive: "Satisfy", cursive;
 }
 
 /* =============================================
@@ -142,7 +142,10 @@
   --sidebarHoverBg: #00010a;
   --explorerBg: #0a0e14;
   --explorerHoverBg: #00010a;
-  --explorerBorder: transparent;
+  /* Recessed border, darker than mainBg — matches the github/dracula
+     pattern rather than a lifted highlight edge, since Ayu's own palette
+     reads as a dark recess rather than a raised surface. */
+  --explorerBorder: #05070a;
   --tabsBg: #0a0e14;
   --tabBg: #0a0e14;
   --tabActiveBg: #0a0e14;
@@ -175,7 +178,8 @@
   --sidebarHoverBg: #191e2a;
   --explorerBg: #1f2430;
   --explorerHoverBg: #191e2a;
-  --explorerBorder: transparent;
+  /* Recessed border, darker than mainBg — same reasoning as ayuDark. */
+  --explorerBorder: #171b24;
   --tabsBg: #1f2430;
   --tabBg: #1f2430;
   --tabActiveBg: #1f2430;
@@ -245,7 +249,10 @@
   --sidebarHoverBg: #0e293f;
   --explorerBg: #011627;
   --explorerHoverBg: #0e293f;
-  --explorerBorder: transparent;
+  /* Reuses this theme's own bottombarBorder value — nightOwl already
+     establishes a lighter-than-mainBg border family (tabBorder,
+     bottombarBorder), unlike the recessed-dark pattern github/dracula/ayu use. */
+  --explorerBorder: #262a39;
   --tabsBg: #011627;
   --tabBg: #01111d;
   --tabActiveBg: #0b2942;
@@ -318,54 +325,6 @@ p {
 }
 
 /* =============================================
-   TYPEWRITER ANIMATION
-============================================= */
-.typewriter {
-  overflow: hidden;
-  border-right: 0.15em solid orange;
-  white-space: nowrap;
-  margin: 0 auto;
-  letter-spacing: 0.15em;
-  animation:
-    typing 3.5s steps(23),
-    blink-caret 0.75s step-end infinite;
-}
-
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 70%;
-  }
-}
-
-@keyframes blink-caret {
-  from,
-  to {
-    border-color: transparent;
-  }
-  50% {
-    border-color: orange;
-  }
-}
-
-/* =============================================
-   LINE COUNTER
-============================================= */
-.line-container {
-  counter-reset: line;
-}
-
-.line-container p.line::before,
-.line-container div.line::before {
-  color: gray;
-  content: counter(line);
-  counter-increment: line;
-  margin-right: 1rem;
-}
-
-/* =============================================
    FORM INPUT
 ============================================= */
 .input {
@@ -392,19 +351,13 @@ p {
    REDUCED MOTION
 ============================================= */
 @media (prefers-reduced-motion: reduce) {
-  .typewriter {
-    animation: none;
-    border-right: none;
-    width: auto;
-  }
-
   .box {
     animation: none;
     border-radius: 50%;
   }
 
   /* Neutralize looping / decorative keyframe animations (animate-pulse,
-     the blob, the typewriter caret).
+     the blob).
 
      Transitions are deliberately NOT flattened here. "Reduce" means reduce,
      not remove: short in-place feedback such as a hover color fade or a
@@ -427,7 +380,6 @@ p {
   height: 250px;
   width: 250px;
   animation: animate 5s ease-in-out infinite;
-  transition: all 1s ease-in-out;
 }
 
 @keyframes animate {

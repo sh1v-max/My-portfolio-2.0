@@ -1,7 +1,9 @@
+/* eslint-disable react/prop-types */
 import ContactSocials from "./ContactSocials";
 import ContactForm from "./ContactForm";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { motion } from "framer-motion";
+import PageNavigator from "../../components/PageNavigator";
 
 const headerContainer = {
   hidden: { opacity: 0 },
@@ -39,7 +41,7 @@ function Contact({ asSection = false }) {
           >
             <motion.span
               variants={headerItem}
-              className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
+              className="border-accentColor/30 bg-accentColor/10 text-accentColor inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[13px] font-semibold uppercase tracking-widest"
             >
               <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
               Get in Touch
@@ -122,6 +124,11 @@ function Contact({ asSection = false }) {
         </div>
       </section>
 
+      {!asSection && (
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
+          <PageNavigator />
+        </div>
+      )}
     </HelmetProvider>
   );
 }

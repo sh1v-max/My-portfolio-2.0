@@ -92,9 +92,9 @@ export default function ContributionGraph({ theme, compact = false, year: fixedY
              dark card — and ignoring the greens passed in entirely. Pinning the
              scheme makes the palette deterministic. */
           colorScheme="dark"
-          fontSize={compact ? 10 : 12}
-          blockSize={compact ? 10 : 12}
-          blockMargin={compact ? 3 : 4}
+          fontSize={compact ? 11 : 12}
+          blockSize={compact ? 11 : 12}
+          blockMargin={compact ? 4 : 4}
           theme={theme}
           hideColorLegend={compact}
           hideMonthLabels={false}

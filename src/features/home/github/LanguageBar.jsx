@@ -34,11 +34,11 @@ export default function LanguageBar({ repos }) {
 
   return (
     <div>
-      <div className="mb-3 flex items-baseline justify-between gap-3">
-        <p className="text-textMuted text-[11px] font-bold uppercase tracking-[0.2em]">
+      <div className="mb-4 flex items-baseline justify-between gap-3">
+        <p className="text-textMuted text-[13px] font-semibold uppercase tracking-wide">
           Languages
         </p>
-        <p className="text-textMuted text-[11px]">
+        <p className="text-textMuted text-[13px]">
           by repository · {total} repos
         </p>
       </div>
@@ -47,7 +47,7 @@ export default function LanguageBar({ repos }) {
           as text. Hidden from assistive tech so it is not read twice. */}
       <div
         aria-hidden="true"
-        className="flex h-2.5 w-full overflow-hidden rounded-full bg-textColor/10"
+        className="flex h-3 w-full overflow-hidden rounded-full bg-textColor/10"
       >
         {rows.map((row, i) => (
           <motion.span
@@ -64,12 +64,12 @@ export default function LanguageBar({ repos }) {
         ))}
       </div>
 
-      <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5">
+      <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2.5">
         {rows.map((row, i) => (
-          <li key={row.name} className="flex items-center gap-2 text-xs">
+          <li key={row.name} className="flex items-center gap-2 text-[14px]">
             <span
               aria-hidden="true"
-              className={`h-2 w-2 shrink-0 rounded-full ${SWATCHES[i] ?? SWATCHES.at(-1)}`}
+              className={`h-2.5 w-2.5 shrink-0 rounded-full ${SWATCHES[i] ?? SWATCHES.at(-1)}`}
             />
             <span className="text-textSecondary font-medium">{row.name}</span>
             <span className="text-textMuted tabular-nums">
