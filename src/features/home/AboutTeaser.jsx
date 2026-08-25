@@ -6,6 +6,7 @@ import { personal, skillGroups, availability, currentlyLearning } from "../../da
 import { realBuildCount } from "../frontend-lab/data/uiExperimentsData";
 import { projects } from "../projects/project";
 import SectionHeader from "../../components/SectionHeader";
+import { useCopyToClipboard } from "../../hooks/useCopyToClipboard";
 import { DUR_ENTER, EASE_OUT, REVEAL_ONCE } from "../../lib/motion";
 
 const shippedCount = projects.filter((p) => p.title !== "Coming Soon...").length;
@@ -18,6 +19,8 @@ const QUICK_STATS = [
 ];
 
 export default function AboutTeaser() {
+  const [copied, copy] = useCopyToClipboard();
+
   return (
     <section className="bg-articleBg/40 py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
@@ -67,6 +70,25 @@ export default function AboutTeaser() {
                 <Icon icon="lucide:map-pin" aria-hidden="true" className="h-3.5 w-3.5" />
                 {personal.location}
               </p>
+              {/* mailto: doesn't reliably open a compose window on every
+                  browser/OS — this button copies the address instead of
+                  betting on a redirect. */}
+              <button
+                type="button"
+                onClick={() => copy(personal.email)}
+                title={copied ? "Copied!" : "Copy email"}
+                className={`flex items-center gap-1.5 text-[15px] transition-colors duration-200 ${
+                  copied ? "text-accentColor" : "text-textMuted hover:text-accentColor"
+                }`}
+              >
+                <Icon icon="lucide:mail" aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
+                {personal.email}
+                <Icon
+                  icon={copied ? "lucide:check" : "lucide:copy"}
+                  aria-hidden="true"
+                  className="h-3 w-3 shrink-0"
+                />
+              </button>
             </div>
 
             {/* The words carry the status, not the colour of the dot — the dot

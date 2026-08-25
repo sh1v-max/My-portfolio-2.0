@@ -3,6 +3,7 @@ import { Icon } from "@iconify/react";
 import { personal } from "../../data/config";
 import ContactForm from "../contact/ContactForm";
 import SectionHeader from "../../components/SectionHeader";
+import { useCopyToClipboard } from "../../hooks/useCopyToClipboard";
 
 const CHANNELS = [
   {
@@ -10,6 +11,7 @@ const CHANNELS = [
     label: "Email",
     value: personal.email,
     href: `mailto:${personal.email}`,
+    copyable: true,
   },
   {
     icon: "lucide:linkedin",
@@ -26,6 +28,8 @@ const CHANNELS = [
 ];
 
 export default function ContactTeaser() {
+  const [copied, copy] = useCopyToClipboard();
+
   return (
     <section className="bg-articleBg/40 py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
@@ -55,7 +59,7 @@ export default function ContactTeaser() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-            className="flex flex-col gap-8"
+            className="flex min-w-0 flex-col gap-8"
           >
             {/* Availability status card */}
             <div className="border-explorerBorder bg-articleBg rounded-2xl border p-6 ring-1 ring-textColor/10">
@@ -80,7 +84,7 @@ export default function ContactTeaser() {
               <p className="text-textMuted text-[13px] font-bold uppercase tracking-[0.16em]">
                 Or reach me directly
               </p>
-              {CHANNELS.map(({ icon, label, value, href }, i) => (
+              {CHANNELS.map(({ icon, label, value, href, copyable }, i) => (
                 <motion.a
                   key={label}
                   href={href}
@@ -91,7 +95,7 @@ export default function ContactTeaser() {
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.6, delay: i * 0.08, ease: [0.25, 0.1, 0.25, 1] }}
                   whileHover={{ y: -2 }}
-                  className="group border-explorerBorder bg-articleBg hover:border-accentColor/30 flex min-h-16 items-center gap-4 rounded-2xl border p-5 ring-1 ring-textColor/10 transition-[border-color,box-shadow] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentColor"
+                  className="group border-explorerBorder bg-articleBg hover:border-accentColor/30 flex min-h-16 min-w-0 items-center gap-4 rounded-2xl border p-5 ring-1 ring-textColor/10 transition-[border-color,box-shadow] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accentColor"
                 >
                   <div className="bg-accentColor/10 group-hover:bg-accentColor/20 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-colors duration-300">
                     <Icon icon={icon} aria-hidden="true" className="text-accentColor h-5 w-5" />
@@ -104,6 +108,28 @@ export default function ContactTeaser() {
                       {value}
                     </p>
                   </div>
+                  {/* Not every browser/OS honours a mailto: link — some open
+                      nothing, others open a mail app nobody signed into.
+                      Copy is the one path that always works. */}
+                  {copyable && (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        copy(value);
+                      }}
+                      title={copied ? "Copied!" : "Copy email"}
+                      aria-label={copied ? "Email copied" : "Copy email address"}
+                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border transition-all duration-200 ${
+                        copied
+                          ? "border-accentColor/50 bg-accentColor/15 text-accentColor"
+                          : "border-explorerBorder/60 bg-textColor/5 text-textMuted hover:border-accentColor/40 hover:bg-accentColor/10 hover:text-accentColor"
+                      }`}
+                    >
+                      <Icon icon={copied ? "lucide:check" : "lucide:copy"} width="15" height="15" />
+                    </button>
+                  )}
                   <Icon
                     icon="lucide:arrow-up-right"
                     aria-hidden="true"

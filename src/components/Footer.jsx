@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { personal } from "../data/config";
+import { useCopyToClipboard } from "../hooks/useCopyToClipboard";
 
 function Footer() {
   const currentYear = new Date().getFullYear();
+  const [copied, copy] = useCopyToClipboard();
 
   const socialLinks = [
     {
@@ -50,6 +52,19 @@ function Footer() {
               {social.icon}
             </a>
           ))}
+          {/* mailto: doesn't reliably open a compose window on every
+              browser/OS — copy is the fallback that always works. */}
+          <button
+            type="button"
+            onClick={() => copy(personal.email)}
+            title={copied ? "Copied!" : "Copy email"}
+            aria-label={copied ? "Email copied" : "Copy email address"}
+            className={`flex h-11 w-11 items-center justify-center rounded-lg transition-all duration-200 ${
+              copied ? "text-accentColor" : "text-textMuted hover:bg-explorerBorder/30 hover:text-accentColor"
+            }`}
+          >
+            <Icon icon={copied ? "lucide:check" : "lucide:copy"} width="16" height="16" />
+          </button>
         </div>
       </div>
     </footer>

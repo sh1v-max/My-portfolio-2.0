@@ -9,6 +9,7 @@ import MarqueeSkills from "./MarqueeSkills";
 import { Icon } from "@iconify/react";
 import { personal } from "../../data/config";
 import PageNavigator from "../../components/PageNavigator";
+import { useCopyToClipboard } from "../../hooks/useCopyToClipboard";
 
 // ─── Animation System (matches Projects / GitHub / Contact) ───
 const headerContainer = {
@@ -217,6 +218,8 @@ function EducationAccordion({ items = [] }) {
 
 // ─── Component ────────────────────────────────────────────────
 function About({ asSection = false }) {
+  const [emailCopied, copyEmail] = useCopyToClipboard();
+
   return (
     <HelmetProvider>
       {!asSection && (
@@ -407,6 +410,23 @@ function About({ asSection = false }) {
                     Get In Touch
                   </motion.button>
                 </Link>
+                {/* mailto: doesn't reliably open a compose window on every
+                    browser/OS — this button copies the address instead of
+                    betting on a redirect. */}
+                <motion.button
+                  type="button"
+                  onClick={() => copyEmail(personal.email)}
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  className={`flex items-center gap-2 rounded-xl border-2 px-6 py-3 text-sm font-bold transition-all duration-200 ${
+                    emailCopied
+                      ? "border-accentColor bg-accentColor/10 text-accentColor"
+                      : "border-explorerBorder text-textMuted hover:border-accentColor/40 hover:text-accentColor"
+                  }`}
+                >
+                  <Icon icon={emailCopied ? "lucide:check" : "lucide:copy"} width="16" height="16" />
+                  {emailCopied ? "Copied!" : personal.email}
+                </motion.button>
               </div>
             </div>
           </motion.div>

@@ -36,7 +36,8 @@ const CALENDAR_THEME = {
 // Deliberately absent: a commit/contribution total. The REST endpoints in use
 // (/users/:name and /users/:name/repos) do not carry one — that needs the
 // GraphQL API and an auth token. The calendar below shows the same activity
-// honestly, so nothing is lost by refusing to invent the number.
+// honestly (with its own real total in its footer), so nothing is lost by
+// refusing to invent the number here.
 function buildStats(user, repos) {
   const totalStars = repos.reduce((sum, r) => sum + (r.stargazers_count ?? 0), 0);
   const since = user.created_at ? new Date(user.created_at).getFullYear() : null;
@@ -50,22 +51,28 @@ function buildStats(user, repos) {
 
 function StatTile({ label, value, icon, plain }) {
   return (
-    <div className="border-explorerBorder bg-articleBg flex flex-col gap-4 rounded-2xl border p-6 ring-1 ring-textColor/10">
-      <Icon icon={icon} aria-hidden="true" className="text-accentColor h-5 w-5" />
+    <motion.div
+      whileHover={{ y: -2 }}
+      transition={{ duration: 0.2, ease: EASE_OUT }}
+      className="border-explorerBorder bg-articleBg hover:border-accentColor/30 flex flex-col gap-4 rounded-2xl border p-6 ring-1 ring-textColor/10 transition-colors duration-200"
+    >
+      <div className="bg-accentColor/10 flex h-9 w-9 items-center justify-center rounded-lg">
+        <Icon icon={icon} aria-hidden="true" className="text-accentColor h-4 w-4" />
+      </div>
       <span className="text-textColor text-4xl font-black leading-none tracking-tight tabular-nums">
         {plain ? value : Number(value).toLocaleString()}
       </span>
       <span className="text-textMuted text-[13px] font-semibold uppercase tracking-wide">
         {label}
       </span>
-    </div>
+    </motion.div>
   );
 }
 
 function LoadingState() {
   return (
     // Heights are measured from the loaded layout, not estimated: 158 / 202 /
-    // 202 / 44 with the same space-y-10 rhythm. The door row is included even
+    // 44 with the same space-y-10 rhythm. The door row is included even
     // though it holds only a link — leaving it out was worth 58px of shift when
     // the data arrived.
     <div className="space-y-10" role="status" aria-live="polite">
@@ -75,7 +82,10 @@ function LoadingState() {
           <Skeleton key={i} className="h-39.5" rounded="rounded-2xl" />
         ))}
       </div>
-      <Skeleton className="h-50.5" rounded="rounded-2xl" />
+      <div className="grid gap-5 lg:grid-cols-2">
+        <Skeleton className="h-50.5" rounded="rounded-2xl" />
+        <Skeleton className="h-50.5" rounded="rounded-2xl" />
+      </div>
       <Skeleton className="h-50.5" rounded="rounded-2xl" />
       <Skeleton className="h-11 w-48" rounded="rounded-lg" />
     </div>
@@ -141,7 +151,7 @@ export default function GithubTeaser() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
         <SectionHeader
           eyebrow="Open source"
-          title="What I've been building"
+          title="The Commit Record"
           lede="Repositories, stars and daily commit activity — read live from the GitHub API when this page loads."
           size="sm"
           className="mb-14"
@@ -220,7 +230,7 @@ export default function GithubTeaser() {
                 into four months of flat grey "future", which reads as missing
                 data rather than a full year of real activity. */}
             <div className="border-explorerBorder bg-articleBg overflow-hidden rounded-2xl border p-6 ring-1 ring-textColor/10">
-              <p className="text-textMuted mb-5 text-[13px] font-semibold uppercase tracking-wide">
+              <p className="text-textMuted mb-8 text-[13px] font-semibold uppercase tracking-wide">
                 Contributions, past 12 months
               </p>
               <ContributionGraph theme={CALENDAR_THEME} year="last" compact />

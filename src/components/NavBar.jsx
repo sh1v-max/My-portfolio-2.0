@@ -7,6 +7,7 @@ import { personal } from "../data/config";
 import { useActiveSection } from "../hooks/useActiveSection";
 import ThemeToggle from "../features/theme/FloatingThemeButton";
 import BackButton from "./BackButton";
+import { useCopyToClipboard } from "../hooks/useCopyToClipboard";
 
 const navLinks = [
   { name: "Home",     path: "/",            sectionId: "home" },
@@ -56,6 +57,7 @@ function NavBar() {
   const [open, setOpen]             = useState(false);
   const [tickerVisible, setTickerVisible] = useState(true);
   const [pulseReady, setPulseReady] = useState(false);
+  const [emailCopied, copyEmail] = useCopyToClipboard();
   const { activeSection, isMainPage } = useActiveSection();
   const cardRef = useRef(null);
   const toggleRef = useRef(null);
@@ -409,7 +411,7 @@ function NavBar() {
                         target={s.external ? "_blank" : undefined}
                         rel={s.external ? "noopener noreferrer" : undefined}
                         onClick={!s.external ? (e) => { e.preventDefault(); setOpen(false); navigate("/contact"); } : undefined}
-                        className="group flex cursor-pointer items-center gap-3 text-textMuted transition-colors duration-200 hover:text-accentColor"
+                        className="group flex min-w-0 cursor-pointer items-center gap-3 text-textMuted transition-colors duration-200 hover:text-accentColor"
                       >
                         <motion.div
                           variants={{
@@ -425,10 +427,26 @@ function NavBar() {
                             hover: { x: 5, transition: { duration: 0.22, ease: EASE_EXPO } },
                             tap:   { x: 2 },
                           }}
-                          className="text-xs font-medium tracking-wide"
+                          className="min-w-0 flex-1 truncate text-xs font-medium tracking-wide"
                         >
                           {s.label}
                         </motion.span>
+                        {/* mailto: doesn't reliably open a compose window on
+                            every browser/OS — copy is the fallback that
+                            always works. */}
+                        {!s.external && (
+                          <button
+                            type="button"
+                            onClick={(e) => { e.preventDefault(); e.stopPropagation(); copyEmail(personal.email); }}
+                            title={emailCopied ? "Copied!" : "Copy email"}
+                            aria-label={emailCopied ? "Email copied" : "Copy email address"}
+                            className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-md transition-colors duration-200 ${
+                              emailCopied ? "text-accentColor" : "text-textMuted hover:text-accentColor"
+                            }`}
+                          >
+                            <Icon icon={emailCopied ? "lucide:check" : "lucide:copy"} width="13" height="13" />
+                          </button>
+                        )}
                       </motion.a>
                     ))}
                   </div>

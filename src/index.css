@@ -270,38 +270,52 @@
 
 /* =============================================
    GLOBAL RESETS
+   Wrapped in @layer base so these plain-element defaults lose to ANY
+   Tailwind utility, in any layer order, on specificity alone — which is
+   the behaviour every reset here was written assuming. Left unlayered,
+   these rules sit *above* the whole `@layer theme, base, components,
+   utilities` stack regardless of specificity, and silently beat utilities
+   they were never meant to fight: this `p,h1,h2{margin:0}` was cancelling
+   every `space-y-*` gap where a paragraph or heading wasn't the last
+   child, `font-family:Inter` here was the reason `.font-Inconsolata` and
+   `.font-Cursive` rendered as plain sans for months, and the vendored
+   calendar's own `footer{display:flex}` needed a JS-side override instead
+   of a `hidden` class for the same reason. `@layer base` is exactly
+   Tailwind's own answer to this class of bug — use it.
 ============================================= */
-html,
-body,
-#root {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: "Inter", sans-serif;
-}
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+  }
 
-body {
-  /* `clip`, not `hidden`.
-     `overflow-x: hidden` computes to `overflow: hidden auto`, which turns body
-     into a scroll container — and that silently breaks `position: sticky` for
-     every descendant, because they then stick to body rather than the viewport.
-     It cost the Work section its sticky stage.
-     `overflow-x: clip` masks horizontal overflow without creating a scroll
-     container, so sticky keeps working. */
-  overflow-x: clip;
-}
+  body {
+    /* `clip`, not `hidden`.
+       `overflow-x: hidden` computes to `overflow: hidden auto`, which turns body
+       into a scroll container — and that silently breaks `position: sticky` for
+       every descendant, because they then stick to body rather than the viewport.
+       It cost the Work section its sticky stage.
+       `overflow-x: clip` masks horizontal overflow without creating a scroll
+       container, so sticky keeps working. */
+    overflow-x: clip;
+  }
 
-img,
-svg {
-  display: block;
-  max-width: 100%;
-}
+  img,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
 
-h1,
-h2,
-p {
-  padding: 0;
-  margin: 0;
+  h1,
+  h2,
+  p {
+    padding: 0;
+    margin: 0;
+  }
 }
 
 /* =============================================

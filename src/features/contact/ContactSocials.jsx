@@ -1,16 +1,14 @@
-import { useState } from "react";
 import { Icon } from "@iconify/react";
 import { personal } from "../../data/config";
+import { useCopyToClipboard } from "../../hooks/useCopyToClipboard";
 
 function ContactSocials() {
-  const [copied, setCopied] = useState(false);
+  const [copied, copy] = useCopyToClipboard();
 
   const copyEmail = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    navigator.clipboard.writeText(personal.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    copy(personal.email);
   };
   const mainLinks = [
     {
@@ -70,7 +68,7 @@ function ContactSocials() {
               href={link.href}
               target="_blank"
               rel="noreferrer"
-              className="group flex items-center gap-5 rounded-2xl border border-explorerBorder bg-articleBg/40 p-5 transition-all duration-300 hover:border-accentColor/40 hover:bg-articleBg hover:shadow-lg"
+              className="group flex min-w-0 items-center gap-5 rounded-2xl border border-explorerBorder bg-articleBg/40 p-5 transition-all duration-300 hover:border-accentColor/40 hover:bg-articleBg hover:shadow-lg"
             >
               {/* Icon Container */}
               <div aria-hidden="true" className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accentColor/5 text-accentColor transition-all duration-300 group-hover:scale-110 group-hover:bg-accentColor/10">

@@ -10,10 +10,10 @@ export default function LabTeaser() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
         <SectionHeader
           eyebrow="Build archive"
-          title="Machine-Coding Challenges"
+          title="The Build Log"
           /* Count derived from the data rather than written out, so it cannot
              go stale the next time a build lands. */
-          lede={`${realBuildCount} component builds — OTP inputs, star ratings, nested comments, infinite scroll. Each one exists to drill a single pattern properly.`}
+          lede={`${realBuildCount} mini projects — OTP inputs, star ratings, nested comments, infinite scroll. Small, self-contained builds, each one shipped to sharpen a specific skill.`}
           size="sm"
           href="/frontend-lab"
           cta="Explore the Build Archive"
