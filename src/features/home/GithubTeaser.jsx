@@ -151,8 +151,8 @@ export default function GithubTeaser() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
         <SectionHeader
           eyebrow="Open source"
-          title="The Commit Record"
-          lede="Repositories, stars and daily commit activity — read live from the GitHub API when this page loads."
+          title="GitHub Activity"
+          lede="Repos, stars, and commits — pulled live from the GitHub API."
           size="sm"
           className="mb-14"
         />
