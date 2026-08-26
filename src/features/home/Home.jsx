@@ -111,7 +111,7 @@ function Home({ asSection = false }) {
                 variants={itemVariants}
               >
                 <span
-                  className="font-Cursive text-accentColor mb-2 text-xl tracking-wide sm:text-2xl"
+                  className="text-accentColor mb-2 text-lg font-semibold tracking-wide sm:text-xl"
                 >
                   Hi, I&apos;m
                 </span>
@@ -135,7 +135,7 @@ function Home({ asSection = false }) {
 
               {/* Description - Focused & Clean */}
               <motion.p
-                className="font-Cursive text-textSecondary mb-12 max-w-2xl text-xl leading-[1.6] md:text-2xl lg:text-3xl"
+                className="text-textSecondary mb-12 max-w-2xl text-lg leading-[1.6] md:text-xl lg:text-2xl"
                 variants={itemVariants}
               >
                 I build{" "}
