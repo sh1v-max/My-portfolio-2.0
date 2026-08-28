@@ -24,11 +24,12 @@ Viewed primarily on desktop (recruiters at a desk), secondarily on mobile (engin
 
 ## Capabilities and Constraints
 
-- Stack: React 19 + Vite + Tailwind CSS v4 + Framer Motion + React Router v6
-- Design system: CSS custom properties with 6 switchable themes (github, dracula, ayuDark, ayuMirage, nord, nightOwl) via tw-colors
-- Token set: `accentColor`, `textColor`, `mainBg`, `articleBg`, `explorerBorder`, `successText/Bg/Border`
-- Projects data: static JS array in `project.js` and `miniProjects.js`; timeline in `ProjectTimeline.jsx`
-- The Projects page is one scroll section inside a single-page scroll layout (`MainScrollPage`)
+- Stack: React 18.2 + Vite 8 (rolldown) + Tailwind CSS v4 + Framer Motion 12 + React Router v6, Lenis smooth scroll
+- Design system: CSS custom properties with 6 switchable themes (github, dracula, ayuDark, ayuMirage, nord, nightOwl), mapped through Tailwind v4's `@theme inline`
+- Token set: `accentColor`, `textColor`, `textSecondary`, `textMuted`, `mainBg`, `articleBg`, `explorerBorder`, `dangerText`, `successText/Bg/Border`
+- Projects data: static JS array in `project.js` and `miniProjects.js`
+- Home (`/`) is a single continuous scroll assembling six sections via `MainScrollPage.jsx`: hero, About, Work (the retired `/projects` page's exact UI, reused), Build Archive, GitHub, Contact. `/projects` itself redirects to `/#projects` — it was retired, not duplicated, once its content moved onto home.
+- Shared infra: `src/hooks/useActiveSection.js`, `src/hooks/useCopyToClipboard.js`, `src/lib/motion.js` (shared motion tokens), `src/components/SectionHeader.jsx`/`SectionRail.jsx`
 - All visual design must work across all 6 themes via CSS tokens — no hardcoded palette
 
 ## Brand Commitments

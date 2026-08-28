@@ -1,7 +1,40 @@
 # Git Commits
 
+Full commit history, newest first — regenerated from `git log`.
+
 | Hash | Date | Message |
 |------|------|---------|
+| c26d784 | 2026-08-28 | readme main updated |
+| f933c9e | 2026-08-26 | font changed on home page |
+| 35e1717 | 2026-08-26 | responsive done |
+| 47ba758 | 2026-08-25 | responsive done |
+| a719a52 | 2026-08-24 | about and archive fixed, make responsive |
+| 9ec8561 | 2026-08-24 | projects done for home page |
+| 1411315 | 2026-08-24 | home redesign phase 2 done |
+| 74f4ee5 | 2026-08-23 | fixed navigation, UX |
+| acbe38f | 2026-08-23 | lenis page re measure scroll issue fixed |
+| 26b7232 | 2026-08-23 | project page done |
+| 5c24558 | 2026-08-23 | project made responsive |
+| ece9d16 | 2026-08-22 | project preview view button fixed, and extra buttons deleted |
+| 1d5ce9f | 2026-08-22 | hover during preview fixed |
+| 6489fed | 2026-08-22 | mini projects updated, made marque smooth and added motion |
+| c270e63 | 2026-08-22 | fixed motion of lab |
+| debf0d7 | 2026-08-22 | fixed project order |
+| 15b16be | 2026-08-22 | contrast fixed for projects |
+| 5091dba | 2026-08-22 | fixed transition for preview on different project |
+| e6175dd | 2026-08-21 | build clickable view button on preview |
+| f45f2d7 | 2026-08-21 | added curson following image preview on the projects |
+| 2ecfa9d | 2026-08-21 | project section updated |
+| fafde87 | 2026-08-21 | carousel fixed |
+| 5b05fdf | 2026-08-21 | added lenis library for animations and easy scroll on carousel |
+| d70966e | 2026-08-21 | project updated |
+| 4da0d6e | 2026-08-20 | added git commits history to help building timeline and verions of portfolio |
+| 1f4105c | 2026-08-19 | contact and menu icons fixed, mailto and email made more accessible |
+| 2ef7b07 | 2026-08-19 | added transition in menu and navbar |
+| 5a8b529 | 2026-08-19 | navbar redesigned aand fixed |
+| 30c0144 | 2026-08-18 | navbar done |
+| c54a4af | 2026-08-18 | navbar fixed |
+| e85577f | 2026-08-18 | added git-log |
 | 3cf6be1 | 2026-08-18 | github contribution page fixed |
 | 6a4c2c8 | 2026-08-17 | updated resume |
 | 1ee7d15 | 2026-08-17 | theme button updated |
