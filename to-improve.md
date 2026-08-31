@@ -37,19 +37,18 @@
 ~~- Fix: Either hide the demo button when there's no live URL, or add a "Backend Only — No Live Demo" badge~~
 
 **11. 🟡 No project tag filtering**
-Flat grid works now but won't scale as you add more projects.
-- Fix: Add filter tabs (All / Frontend / Full-Stack / Backend) above the grid in `Projects.jsx`
+*Re-scoped by the redesign, not fixed.* The projects grid became an editorial row list (`Projects.jsx`) instead of a card grid — a flat list of 5 rows doesn't need filter tabs the way a grid might have. Revisit only if the featured-project count grows well past 5; the Build Archive (`/frontend-lab`) already has full filter/search for the 33-entry list, which is where this concern actually applies now.
 
-**12. 🟡 No per-project case study page**
-Clicking opens GitHub — you don't own that experience. A `/projects/:slug` page (problem → solution → learnings) is what separates junior from senior portfolios.
-- Fix: Add a `ProjectDetail.jsx` with a route, even for just TaskForge and Netflix-GPT to start
+- [x] ~~**12. 🟡 No per-project case study page**~~
+~~Clicking opens GitHub — you don't own that experience. A `/projects/:slug` page (problem → solution → learnings) is what separates junior from senior portfolios.~~
+~~- Done: TaskForge, Cinegraph, BiteSwift, BookVerse, and Portfolio all have full case-study pages at `/projects/:slug` with screenshots, lightbox, tech stack, and lessons. Duplicate of #23 below.~~
 
-**13. 🟢 No skeleton loaders on project images**
-Images flash in from blank. A shimmer placeholder while loading would feel polished.
-- Fix: Add a loading shimmer to the image container in `ProjectCard.jsx`
+- [x] ~~**13. 🟢 No skeleton loaders on project images**~~
+~~Images flash in from blank. A shimmer placeholder while loading would feel polished.~~
+~~- Done: `src/components/Skeleton.jsx` is now a shared component, sized to the exact measured height of the real content it precedes, used across the home page's async sections (GitHub stats, language mix, etc.). `ProjectCard.jsx` itself was deleted in the redesign — the projects list is no longer card-based.~~
 
 **14. 🟢 Resume opens as immediate download**
-Recruiters on mobile want to preview first. Forcing a download is friction.
+Still `download="resume.pdf"` in `About.jsx` — unresolved.
 - Fix: Open in new tab (`target="_blank"`) instead of `download` attribute, or add a preview modal
 
 ---
@@ -65,40 +64,40 @@ Helmet only sets `<title>` — Google picks random page text for search results,
 - Fix: Add `<meta name="description">` to `Home.jsx` Helmet — 150 chars, mention "full-stack developer Varanasi"
 
 **17. 🟡 No sitemap.xml or robots.txt**
-Without a sitemap, crawlers have to discover pages on their own.
+Still missing — `public/_redirects` exists (handles the SPA fallback) but there's no `sitemap.xml` or `robots.txt`.
 - Fix: Create `public/sitemap.xml` and `public/robots.txt` — Netlify serves them automatically
 
 **18. 🟡 Page titles don't include your full name**
-`Shiv | Projects` won't rank for "Shiv Shankar Singh portfolio".
-- Fix: Update all Helmet titles to `Shiv Shankar Singh | Projects` etc.
+Still just `Shiv | About`, `Shiv | Github Dashboard`, etc. across every page — unresolved. (Note: `/projects` no longer has its own title since it redirects to `/#projects`; MainScrollPage's title is `Shiv | Portfolio`.)
+- Fix: Update all Helmet titles to `Shiv Shankar Singh | About` etc.
 
 ---
 
 ## ♿ Accessibility & Performance
 
-**19. 🔴 No lazy loading on project images**
-All images load immediately, including ones below the fold. Slow on mobile.
-- Fix: Add `loading="lazy"` to `<img>` in `ProjectCard.jsx`; convert PNGs to WebP
+- [x] ~~**19. 🔴 No lazy loading on project images / no WebP**~~
+~~All images load immediately, including ones below the fold. Slow on mobile.~~
+~~- Done, and further than originally scoped: every image now passes through `vite-imagetools` at build time (WebP, quality 78, capped 1600px width) with no call-site changes — the pipeline handles it rather than a per-image attribute. `width`/`height`/`loading`/`decoding` are set explicitly on rendered `<img>` tags across the redesigned sections. `ProjectCard.jsx` (the original fix target) no longer exists — the projects list is an editorial row layout now.~~
 
 **20. 🟡 No skip-to-content link**
-Keyboard users tab through the entire navbar before hitting content.
+Still missing — unresolved.
 - Fix: Add a visually hidden `<a href="#main-content">` skip link in `NavBar.jsx`, visible only on focus
 
-**21. 🟡 No custom 404 page**
-Mistyped URLs hit Netlify's generic 404. `ErrorPage.jsx` exists — check if it's wired to the router.
-- Fix: Wire `ErrorPage.jsx` to the router and add a `_redirects` file in `public/`
+- [x] ~~**21. 🟡 No custom 404 page**~~
+~~Mistyped URLs hit Netlify's generic 404. `ErrorPage.jsx` exists — check if it's wired to the router.~~
+~~- Done: `errorElement: <ErrorPage />` is set on the root route in `App.jsx`, and `public/_redirects` exists for the SPA fallback.~~
 
-**22. 🟢 Icon-only buttons have no aria-label**
-Theme toggle and nav icon buttons are unreadable by screen readers.
-- Fix: Add `aria-label="Toggle theme"` etc. to all icon-only interactive elements
+- [x] ~~**22. 🟢 Icon-only buttons have no aria-label**~~
+~~Theme toggle and nav icon buttons are unreadable by screen readers.~~
+~~- Done for the theme switcher (`aria-label="Change theme"` / `aria-label={\`Apply ${t.name} theme\`}` in `FloatingThemeButton.jsx`) and the mega-menu's icon-only copy/social buttons. Worth a fresh sweep if new icon-only controls get added.~~
 
 ---
 
 ## 🚀 Next-Level Additions
 
-**23. ⭐ Project case study pages**
-Single biggest differentiator. Own the narrative: problem → tech decisions → what you learned → result. This is what gets callbacks.
-- Add `/projects/taskforge`, `/projects/netflix-gpt` — 3 short paragraphs + screenshots each is enough
+- [x] ~~**23. ⭐ Project case study pages**~~
+~~Single biggest differentiator. Own the narrative: problem → tech decisions → what you learned → result. This is what gets callbacks.~~
+~~- Done: all 5 featured projects have full case-study pages. Duplicate of #12 above.~~
 
 **24. ⭐ Analytics**
 You're blind right now — no idea which projects get clicks, where visitors drop off, or if anyone reads About.
