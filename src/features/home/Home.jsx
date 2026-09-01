@@ -154,19 +154,25 @@ function Home({ asSection = false }) {
                 className="flex flex-row items-center gap-4 py-4 lg:justify-start"
                 variants={ctaVariants}
               >
-                <Link to="/#projects">
-                  <motion.button
-                    className="bg-accentColor text-mainBg rounded-xl px-5 py-3 text-xs font-bold shadow-lg transition-all duration-200 ease-out hover:shadow-[0_0_25px_color-mix(in_srgb,var(--accentColor)_25%,transparent)] min-h-11 sm:px-8 sm:py-4 sm:text-sm"
-                    style={{
-                      boxShadow:
-                        "0 4px 20px color-mix(in srgb, var(--accentColor) 30%, transparent)",
-                    }}
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.97 }}
-                  >
-                    View My Work
-                  </motion.button>
-                </Link>
+                {/* A plain scroll, not a `<Link to="/#projects">`. React
+                    Router only re-runs the hash-change effect when the hash
+                    actually changes — scroll away and click this a second
+                    time and the hash is already "#projects", so nothing
+                    would fire. Scrolling directly works every time
+                    regardless of the current URL state. */}
+                <motion.button
+                  type="button"
+                  onClick={() => scrollToId("projects")}
+                  className="bg-accentColor text-mainBg rounded-xl px-5 py-3 text-xs font-bold shadow-lg transition-all duration-200 ease-out hover:shadow-[0_0_25px_color-mix(in_srgb,var(--accentColor)_25%,transparent)] min-h-11 sm:px-8 sm:py-4 sm:text-sm"
+                  style={{
+                    boxShadow:
+                      "0 4px 20px color-mix(in srgb, var(--accentColor) 30%, transparent)",
+                  }}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  View My Work
+                </motion.button>
 
                 <Link to="/contact">
                   <motion.button
