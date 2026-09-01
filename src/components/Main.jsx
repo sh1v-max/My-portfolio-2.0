@@ -8,6 +8,7 @@ import { useTheme } from "../context/ThemeContext";
 import ScrollToTop from "./ScrollToTop";
 import { Toaster } from "react-hot-toast";
 import Lenis from "lenis";
+import { registerLenis, unregisterLenis } from "../lib/lenis";
 
 const themeTokens = {
   github:    { bg: "#24292e", accent: "#f9826c" },
@@ -30,6 +31,8 @@ function Main() {
       smooth: true,
       smoothTouch: false,
     });
+    registerLenis(lenis);
+
     let rafId;
     function raf(time) {
       lenis.raf(time);
@@ -54,6 +57,7 @@ function Main() {
     return () => {
       observer.disconnect();
       cancelAnimationFrame(rafId);
+      unregisterLenis(lenis);
       lenis.destroy();
     };
   }, []);

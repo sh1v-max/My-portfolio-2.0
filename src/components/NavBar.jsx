@@ -8,6 +8,7 @@ import { useActiveSection } from "../hooks/useActiveSection";
 import ThemeToggle from "../features/theme/FloatingThemeButton";
 import BackButton from "./BackButton";
 import { useCopyToClipboard } from "../hooks/useCopyToClipboard";
+import { scrollToId } from "../lib/lenis";
 
 const navLinks = [
   { name: "Home",     path: "/",            sectionId: "home" },
@@ -129,13 +130,10 @@ function NavBar() {
     firstLink?.focus();
   }, [open]);
 
-  const scrollTo = (id) =>
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-
   const handleClick = (link) => {
     setOpen(false);
     if (link.sectionId) {
-      isMainPage ? scrollTo(link.sectionId) : navigate(`/#${link.sectionId}`);
+      isMainPage ? scrollToId(link.sectionId) : navigate(`/#${link.sectionId}`);
     } else {
       navigate(link.path);
     }

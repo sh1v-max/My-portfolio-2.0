@@ -7,23 +7,24 @@ import Projects from "../projects/Projects";
 import LabTeaser from "./LabTeaser";
 import GithubTeaser from "./GithubTeaser";
 import ContactTeaser from "./ContactTeaser";
+import { scrollToId } from "../../lib/lenis";
 
 export default function MainScrollPage() {
   const location = useLocation();
 
-  // Scroll to section when navigating here with a hash (e.g. /#about)
+  // Scroll to section when navigating here with a hash (e.g. /#about).
+  // Goes through `scrollToId` (Lenis), not native `scrollIntoView` — Lenis
+  // re-applies its own tracked scroll position every frame, so a native
+  // scroll request here got silently overwritten and the page never moved
+  // even though the URL hash updated correctly.
   useEffect(() => {
     if (!location.hash) {
       window.scrollTo({ top: 0, behavior: "instant" });
       return;
     }
     const id = location.hash.slice(1);
-    const el = document.getElementById(id);
-    if (el) {
-      const timer = setTimeout(
-        () => el.scrollIntoView({ behavior: "smooth" }),
-        120
-      );
+    if (document.getElementById(id)) {
+      const timer = setTimeout(() => scrollToId(id), 120);
       return () => clearTimeout(timer);
     }
   }, [location.hash]);

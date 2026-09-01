@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
 import { useActiveSection } from "../hooks/useActiveSection";
+import { scrollToId } from "../lib/lenis";
 
 const bottomNavItems = [
   {
@@ -42,7 +43,7 @@ function BottomNav() {
   const { activeSection, isMainPage } = useActiveSection();
 
   const scrollTo = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    scrollToId(id);
   };
 
   const handleClick = (item) => {

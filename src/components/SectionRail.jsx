@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useActiveSection } from "../hooks/useActiveSection";
+import { scrollToId } from "../lib/lenis";
 
 // The vertical counterpart to PageNavigator's dot row (`w-6` active / `w-1.5`
 // inactive) so section-level and page-level orientation read as one system.
@@ -11,10 +12,6 @@ const SECTIONS = [
   { id: "github", label: "GitHub" },
   { id: "contact", label: "Contact" },
 ];
-
-function scrollTo(id) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-}
 
 export default function SectionRail() {
   const { activeSection } = useActiveSection();
@@ -29,7 +26,7 @@ export default function SectionRail() {
             href={`#${id}`}
             onClick={(e) => {
               e.preventDefault();
-              scrollTo(id);
+              scrollToId(id);
             }}
             aria-label={label}
             aria-current={active ? "true" : undefined}

@@ -12,6 +12,7 @@ import { personal } from "../../data/config";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { motion, useReducedMotion } from "framer-motion";
 import { Icon } from "@iconify/react";
+import { scrollToId } from "../../lib/lenis";
 
 function Home({ asSection = false }) {
   const shouldReduceMotion = useReducedMotion();
@@ -266,7 +267,7 @@ function Home({ asSection = false }) {
               href="#about"
               onClick={(e) => {
                 e.preventDefault();
-                document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+                scrollToId("about");
               }}
               aria-label="Scroll to About"
               initial={{ opacity: 0 }}
