@@ -55,7 +55,7 @@ const FIELDS = [
 // --explorerBorder is `transparent` in three of the six themes, so a
 // border-explorerBorder input would render edgeless for half of visitors.
 const FIELD_CLASS =
-  "w-full rounded-xl bg-articleBg px-4 py-3.5 text-base text-textColor ring-1 ring-textColor/15 " +
+  "w-full rounded-xl bg-articleBg px-4 py-3 text-base text-textColor ring-1 ring-textColor/15 " +
   "placeholder:text-textMuted transition-[box-shadow,background-color] duration-200 " +
   "hover:ring-textColor/25 focus:outline-none focus:ring-2 focus:ring-accentColor " +
   "aria-[invalid=true]:ring-dangerText/70";
@@ -107,7 +107,7 @@ export default function ContactForm({ idPrefix = "contact" }) {
   };
 
   return (
-    <form className="space-y-5" onSubmit={handleSubmit(sendEmail)} noValidate>
+    <form className="space-y-3" onSubmit={handleSubmit(sendEmail)} noValidate>
       {FIELDS.map(({ name, label, textarea, rules, ...input }) => {
         const id = `${idPrefix}-${name}`;
         const errorId = `${id}-error`;
@@ -121,7 +121,7 @@ export default function ContactForm({ idPrefix = "contact" }) {
                 when they most need to know what the field was. */}
             <label
               htmlFor={id}
-              className="mb-2 block text-[13px] font-semibold tracking-wide text-textSecondary"
+              className="mb-1.5 block text-[13px] font-semibold tracking-wide text-textSecondary"
             >
               {label}
               <span className="ml-1 text-accentColor" aria-hidden="true">*</span>
@@ -132,7 +132,7 @@ export default function ContactForm({ idPrefix = "contact" }) {
               rows={textarea ? 5 : undefined}
               aria-invalid={error ? "true" : "false"}
               aria-describedby={error ? errorId : undefined}
-              className={`${FIELD_CLASS} ${textarea ? "resize-y min-h-32" : "min-h-11"}`}
+              className={`${FIELD_CLASS} ${textarea ? "resize-y min-h-24" : "min-h-11"}`}
               {...input}
               {...register(name, rules)}
             />
@@ -142,7 +142,7 @@ export default function ContactForm({ idPrefix = "contact" }) {
             <p
               id={errorId}
               role="alert"
-              className="mt-1.5 min-h-5 text-[13px] leading-5 text-dangerText"
+              className="mt-1 min-h-4 text-[13px] leading-4 text-dangerText"
             >
               {error?.message ?? ""}
             </p>
