@@ -1,10 +1,33 @@
+/* eslint-disable react/prop-types */
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Icon } from "@iconify/react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import cinegraphImg from "../../assets/images/cinegraph.png";
-import cinegraphLoginImg from "../../assets/images/netflix-login.png";
-import cinegraphMoviesImg from "../../assets/images/netflix-featured-movies.png";
+
+import cinegraphImg from "../../assets/images/cinegraph/home.png";
+import signinHomeImg from "../../assets/images/cinegraph/signin_home.png";
+import signUpImg from "../../assets/images/cinegraph/sign_up_page.png";
+import moviesImg from "../../assets/images/cinegraph/movies.png";
+import showsImg from "../../assets/images/cinegraph/shows.png";
+import animeImg from "../../assets/images/cinegraph/anime.png";
+import discoverImg from "../../assets/images/cinegraph/discover.png";
+import aiSearchImg from "../../assets/images/cinegraph/ai_search.png";
+import aiRecommendationImg from "../../assets/images/cinegraph/ai_recommendation.png";
+import profileImg from "../../assets/images/cinegraph/profile.png";
+import watchlistImg from "../../assets/images/cinegraph/watchlist.png";
+
+import phoneHomeImg from "../../assets/images/cinegraph/home_phone.png";
+import phoneSigninHomeImg from "../../assets/images/cinegraph/signin_home_phone.png";
+import phoneSignUpImg from "../../assets/images/cinegraph/sign_up_page_phone.png";
+import phoneMoviesImg from "../../assets/images/cinegraph/movies_phone.png";
+import phoneShowsImg from "../../assets/images/cinegraph/shows_phone.png";
+import phoneAnimeImg from "../../assets/images/cinegraph/anime_phone.png";
+import phoneDiscoverImg from "../../assets/images/cinegraph/discover_phone.png";
+import phoneAiSearchImg from "../../assets/images/cinegraph/ai_search_phone.png";
+import phoneAiRecommendationImg from "../../assets/images/cinegraph/ai_recommendation_phone.png";
+import phoneProfileImg from "../../assets/images/cinegraph/profile_phone.png";
+import phoneWatchlistImg from "../../assets/images/cinegraph/watchlist_phone.png";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -91,7 +114,53 @@ const challenges = [
   },
 ];
 
+const desktopScreenshots = [
+  { src: signinHomeImg,       alt: "Cinegraph landing page, signed out",              label: "Landing Page" },
+  { src: signUpImg,           alt: "Cinegraph sign-up page",                          label: "Sign Up" },
+  { src: moviesImg,           alt: "Cinegraph movies catalog console",                label: "Movies Catalog" },
+  { src: showsImg,            alt: "Cinegraph TV shows catalog",                      label: "Shows Catalog" },
+  { src: animeImg,            alt: "Cinegraph anime catalog",                         label: "Anime Catalog" },
+  { src: discoverImg,         alt: "Cinegraph discover page",                         label: "Discover" },
+  { src: aiRecommendationImg, alt: "Cinegraph personalized For You rows",             label: "For You Rows" },
+  { src: aiSearchImg,         alt: "Cinegraph multi-turn AI search results",          label: "AI Search" },
+  { src: profileImg,          alt: "Cinegraph taste graph profile page",              label: "Taste Graph" },
+  { src: watchlistImg,        alt: "Cinegraph watchlist page",                        label: "Watchlist" },
+];
+
+const phoneScreenshots = [
+  { src: phoneHomeImg,             alt: "Cinegraph mobile — signed-in home",       label: "Home" },
+  { src: phoneSigninHomeImg,       alt: "Cinegraph mobile — landing page",         label: "Landing Page" },
+  { src: phoneSignUpImg,           alt: "Cinegraph mobile — sign-up page",         label: "Sign Up" },
+  { src: phoneMoviesImg,           alt: "Cinegraph mobile — movies catalog",       label: "Movies" },
+  { src: phoneShowsImg,            alt: "Cinegraph mobile — shows catalog",        label: "Shows" },
+  { src: phoneAnimeImg,            alt: "Cinegraph mobile — anime catalog",        label: "Anime" },
+  { src: phoneDiscoverImg,         alt: "Cinegraph mobile — discover page",        label: "Discover" },
+  { src: phoneAiRecommendationImg, alt: "Cinegraph mobile — For You rows",         label: "For You Rows" },
+  { src: phoneAiSearchImg,         alt: "Cinegraph mobile — AI search results",    label: "AI Search" },
+  { src: phoneProfileImg,          alt: "Cinegraph mobile — taste graph profile",  label: "Taste Graph" },
+  { src: phoneWatchlistImg,        alt: "Cinegraph mobile — watchlist",            label: "Watchlist" },
+];
+
+const allScreenshots = [...desktopScreenshots, ...phoneScreenshots];
+
 export default function CinegraphDetail() {
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+
+  const closeLightbox = useCallback(() => setLightboxIndex(null), []);
+  const prev = useCallback(() => setLightboxIndex((i) => (i - 1 + allScreenshots.length) % allScreenshots.length), []);
+  const next = useCallback(() => setLightboxIndex((i) => (i + 1) % allScreenshots.length), []);
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const onKey = (e) => {
+      if (e.key === "Escape")     closeLightbox();
+      if (e.key === "ArrowLeft")  prev();
+      if (e.key === "ArrowRight") next();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightboxIndex, closeLightbox, prev, next]);
+
   return (
     <HelmetProvider>
       <Helmet>
@@ -162,7 +231,7 @@ export default function CinegraphDetail() {
           </motion.div>
 
           <motion.div variants={fadeUp} className="border-explorerBorder overflow-hidden rounded-2xl border shadow-2xl">
-            <img src={cinegraphImg} alt="Cinegraph browse page" width={1600} height={900} loading="lazy" decoding="async" className="w-full object-cover object-top" />
+            <img src={cinegraphImg} alt="Cinegraph AI search home, signed in" width={1600} height={900} loading="lazy" decoding="async" className="w-full object-cover object-top" />
           </motion.div>
         </motion.div>
 
@@ -181,16 +250,48 @@ export default function CinegraphDetail() {
           </p>
         </Section>
 
-        {/* ── Screenshots ── */}
-        <Section title="Screenshots">
+        {/* ── Desktop Screenshots ── */}
+        <Section title="Desktop Screenshots">
           <div className="grid gap-4 sm:grid-cols-2">
-            <div className="border-explorerBorder overflow-hidden rounded-xl border">
-              <img src={cinegraphLoginImg} alt="Cinegraph login page" width={1600} height={900} loading="lazy" decoding="async" className="w-full object-cover" />
-              <p className="text-textMuted p-3 text-center text-xs">Login / Sign-up Page</p>
-            </div>
-            <div className="border-explorerBorder overflow-hidden rounded-xl border">
-              <img src={cinegraphMoviesImg} alt="Cinegraph catalog console" width={1600} height={900} loading="lazy" decoding="async" className="w-full object-cover" />
-              <p className="text-textMuted p-3 text-center text-xs">Catalog Console — Filterable Grid</p>
+            {desktopScreenshots.map((s, i) => (
+              <motion.div
+                key={s.label}
+                variants={fadeUp} whileInView="show" initial="hidden" viewport={{ once: true, amount: 0.1 }}
+                className="border-explorerBorder group cursor-zoom-in overflow-hidden rounded-xl border"
+                onClick={() => setLightboxIndex(i)}
+              >
+                <div className="relative overflow-hidden">
+                  <img width={1600} height={900} loading="lazy" decoding="async" src={s.src} alt={s.alt} className="w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover:bg-black/20">
+                    <Icon icon="lucide:zoom-in" width="28" className="text-white opacity-0 drop-shadow-lg transition-opacity duration-200 group-hover:opacity-100" />
+                  </div>
+                </div>
+                <p className="text-textMuted bg-articleBg border-explorerBorder border-t px-3 py-2 text-center text-xs font-medium">{s.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </Section>
+
+        {/* ── Mobile Screenshots ── */}
+        <Section title="Mobile Views">
+          <div className="overflow-x-auto pb-3">
+            <div className="flex gap-4" style={{ minWidth: "max-content" }}>
+              {phoneScreenshots.map((s, i) => (
+                <motion.div
+                  key={s.label}
+                  variants={fadeUp} whileInView="show" initial="hidden" viewport={{ once: true, amount: 0.1 }}
+                  className="border-explorerBorder group w-44 shrink-0 cursor-zoom-in overflow-hidden rounded-2xl border shadow-lg sm:w-52"
+                  onClick={() => setLightboxIndex(desktopScreenshots.length + i)}
+                >
+                  <div className="relative overflow-hidden">
+                    <img src={s.src} alt={s.alt} width={409} height={912} loading="lazy" decoding="async" className="w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]" />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover:bg-black/20">
+                      <Icon icon="lucide:zoom-in" width="24" className="text-white opacity-0 drop-shadow-lg transition-opacity duration-200 group-hover:opacity-100" />
+                    </div>
+                  </div>
+                  <p className="text-textMuted bg-articleBg border-explorerBorder border-t px-3 py-2 text-center text-xs font-medium">{s.label}</p>
+                </motion.div>
+              ))}
             </div>
           </div>
         </Section>
@@ -355,7 +456,83 @@ export default function CinegraphDetail() {
         </motion.div>
 
       </article>
+
+      <Lightbox
+        screenshots={allScreenshots}
+        index={lightboxIndex}
+        onClose={closeLightbox}
+        onPrev={prev}
+        onNext={next}
+      />
     </HelmetProvider>
+  );
+}
+
+function Lightbox({ screenshots, index, onClose, onPrev, onNext }) {
+  const isOpen = index !== null;
+  const current = isOpen ? screenshots[index] : null;
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          key="lightbox-backdrop"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
+          onClick={onClose}
+        >
+          {/* Prev */}
+          <button
+            onClick={(e) => { e.stopPropagation(); onPrev(); }}
+            className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-2.5 text-white backdrop-blur-sm transition-colors hover:bg-white/25 sm:left-6"
+            aria-label="Previous image"
+          >
+            <Icon icon="lucide:chevron-left" width="22" />
+          </button>
+
+          {/* Image */}
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, scale: 0.93 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.93 }}
+            transition={{ duration: 0.2 }}
+            className="relative flex max-h-[90vh] max-w-5xl flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={current.src}
+              alt={current.alt}
+              decoding="async"
+              className="max-h-[82vh] max-w-full rounded-xl object-contain shadow-2xl"
+            />
+            <p className="mt-3 text-sm font-medium text-white/60">{current.label}</p>
+            <p className="text-xs text-white/30">{index + 1} / {screenshots.length}</p>
+          </motion.div>
+
+          {/* Next */}
+          <button
+            onClick={(e) => { e.stopPropagation(); onNext(); }}
+            className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-2.5 text-white backdrop-blur-sm transition-colors hover:bg-white/25 sm:right-6"
+            aria-label="Next image"
+          >
+            <Icon icon="lucide:chevron-right" width="22" />
+          </button>
+
+          {/* Close */}
+          <button
+            onClick={onClose}
+            className="absolute right-3 top-3 rounded-full bg-white/10 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/25 sm:right-6 sm:top-6"
+            aria-label="Close lightbox"
+          >
+            <Icon icon="lucide:x" width="20" />
+          </button>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
