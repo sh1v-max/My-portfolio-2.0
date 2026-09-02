@@ -18,18 +18,6 @@ import portfolio from "../../assets/images/portfolio/portfolio.png";
 
 export const projects = [
   {
-    title: "Portfolio",
-    role:
-      "Design and build — six-theme token system, motion language, live GitHub dashboard.",
-    description:
-      "A developer portfolio with six switchable themes, motion-driven UI, and a live GitHub dashboard.",
-    image: portfolio,
-    tags: ["react", "tailwind", "framer-motion", "vite"],
-    sourceCode: "https://github.com/sh1v-max/My-portfolio-2.0",
-    demo: "https://singhshiv.netlify.app/",
-    caseStudy: "/projects/portfolio",
-  },
-  {
     title: "TaskForge",
     role:
       "Full-stack — JWT auth, REST API, filtering and pagination on Express/MongoDB.",
@@ -64,6 +52,18 @@ export const projects = [
     sourceCode: "https://github.com/sh1v-max/BiteSwift",
     demo: "https://yourbiteswift.netlify.app/",
     caseStudy: "/projects/biteswift",
+  },
+  {
+    title: "Portfolio",
+    role:
+      "Design and build — six-theme token system, motion language, live GitHub dashboard.",
+    description:
+      "A developer portfolio with six switchable themes, motion-driven UI, and a live GitHub dashboard.",
+    image: portfolio,
+    tags: ["react", "tailwind", "framer-motion", "vite"],
+    sourceCode: "https://github.com/sh1v-max/My-portfolio-2.0",
+    demo: "https://singhshiv.netlify.app/",
+    caseStudy: "/projects/portfolio",
   },
   {
     title: "BookVerse",

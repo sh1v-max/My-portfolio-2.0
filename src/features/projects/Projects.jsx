@@ -16,8 +16,8 @@ const projectMeta = {
   "Portfolio":  { period: "Oct 2024", periodEnd: null,       status: "ongoing"   },
   "TaskForge":  { period: "Sep 2024", periodEnd: null,       status: "ongoing"   },
   "BookVerse":  { period: "Jun 2024", periodEnd: "Aug 2024", status: "completed" },
-  "Cinegraph":  { period: "Mar 2024", periodEnd: "Jun 2024", status: "completed" },
-  "BiteSwift":  { period: "Nov 2023", periodEnd: "Mar 2024", status: "completed" },
+  "Cinegraph":  { period: "Mar 2024", periodEnd: "Sep 2026", status: "completed" },
+  "BiteSwift":  { period: "Nov 2023", periodEnd: "Jul 2026", status: "completed" },
 };
 
 // Defined once at module scope so the identity never changes between renders.
