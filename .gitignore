@@ -19,6 +19,11 @@ readme_archive/
 # Local History (VS Code extension)
 .history
 
+# Claude Code tooling artifacts
+.claude
+.impeccable
+.playwright-mcp
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
