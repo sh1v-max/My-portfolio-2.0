@@ -15,6 +15,7 @@ const navLinks = [
   { name: "About",    path: "/about",        sectionId: "about" },
   { name: "Projects", path: "/#projects",    sectionId: "projects" },
   { name: "Archive",  path: "/frontend-lab", sectionId: null },
+  { name: "Docs",     path: "/docs",         sectionId: null },
   { name: "GitHub",   path: "/github",       sectionId: null },
   { name: "Contact",  path: "/contact",      sectionId: "contact" },
 ];
