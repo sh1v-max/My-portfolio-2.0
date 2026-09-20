@@ -7,7 +7,6 @@ const pageOrder = [
   { path: "/about", label: "About" },
   // /projects retired — the work lives in the home page's #projects section.
   { path: "/frontend-lab", label: "Archive" },
-  { path: "/docs", label: "Docs" },
   { path: "/github", label: "GitHub" },
   { path: "/contact", label: "Contact" },
 ];

@@ -28,8 +28,6 @@ const PortfolioDetail = lazy(() => import("./features/projects/PortfolioDetail")
 const Github = lazy(() => import("./features/github/Github"));
 const Settings = lazy(() => import("./features/theme/Settings"));
 const UIExperiments = lazy(() => import("./features/frontend-lab/UIExperiments"));
-const Docs = lazy(() => import("./features/docs/Docs"));
-
 // One Suspense boundary per route rather than a single one around the outlet, so
 // a slow chunk only ever blanks the page body — the nav, footer and back button
 // stay mounted and interactive while it loads.
@@ -58,9 +56,7 @@ const router = createBrowserRouter([
         element: split(Github),
         errorElement: <GithubError />,
       },
-      { path: "/frontend-lab", element: split(UIExperiments) },
-      { path: "/docs", element: split(Docs) },
-      { path: "/settings", element: split(Settings) },
+      { path: "/frontend-lab", element: split(UIExperiments) },      { path: "/settings", element: split(Settings) },
     ],
   },
 ]);
