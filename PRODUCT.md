@@ -40,7 +40,7 @@ Viewed primarily on desktop (recruiters at a desk), secondarily on mobile (engin
 
 ## Evidence on Hand
 
-- 6 featured projects: DocMind, Portfolio, TaskForge, BookVerse, Cinegraph, BiteSwift
+- 7 featured projects: DocMind, Portfolio, TaskForge, BookVerse, Cinegraph, BharatDiet, BiteSwift
 - 33+ mini/practice projects in Frontend Lab
 - All project images exist as PNGs in `src/assets/images/`
 - Live demo URLs exist for all featured projects

@@ -35,7 +35,7 @@ export const skillGroups = [
   },
   {
     label: "AI & Tooling",
-    items: ["RAG & vector search", "LLM APIs (Gemini) + SSE streaming", "Structured output with Zod", "Git & GitHub, Vite"],
+    items: ["RAG & vector search", "LLM APIs (Gemini) + SSE streaming", "Structured output with Zod", "Git & GitHub, Vite, Vitest"],
   },
 ];
 
@@ -51,6 +51,7 @@ export const availability = {
 export const pinnedRepos = [
   "AI-Backend",
   "CineGraph",
+  "BharatDiet",
   "BiteSwift",
   "BookVerse",
   "Backend-Projects",

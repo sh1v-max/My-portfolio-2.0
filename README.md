@@ -40,7 +40,7 @@ A single-page-scroll developer portfolio built with React 18 and Tailwind CSS v4
 
 **Contact Form, embedded** — The same `ContactForm` component mounts both on `/contact` and inline in home's Contact section, so a visitor never has to leave the page to reach out. `react-hook-form` for validation → Netlify serverless function → Resend API → delivered to `singhshiv0427@gmail.com`.
 
-**Case Studies** — Dedicated pages for DocMind, TaskForge, Netflix-GPT, BiteSwift, BookVerse, and Portfolio. Desktop + mobile screenshots with a click-to-enlarge lightbox (keyboard nav: `←`, `→`, `Esc`), tech stack, key features, architecture decisions, roadmap.
+**Case Studies** — Dedicated pages for DocMind, TaskForge, Netflix-GPT, BharatDiet, BiteSwift, BookVerse, and Portfolio. Desktop + mobile screenshots with a click-to-enlarge lightbox (keyboard nav: `←`, `→`, `Esc`), tech stack, key features, architecture decisions, roadmap.
 
 **Build Archive** — 33 focused UI experiments categorized by difficulty (Beginner / Intermediate / Advanced) and category (UI / API / Games / Forms / Logic), filterable and searchable. Surfaces on home as a full-bleed, counter-scrolling marquee.
 
@@ -134,7 +134,8 @@ src/
 │   │   ├── BiteSwiftDetail.jsx
 │   │   ├── BookVerseDetail.jsx
 │   │   ├── PortfolioDetail.jsx
-│   │   └── DocMindDetail.jsx
+│   │   ├── DocMindDetail.jsx
+│   │   └── BharatDietDetail.jsx
 │   ├── github/
 │   │   ├── Github.jsx               # GitHub dashboard page (/github)
 │   │   └── components/

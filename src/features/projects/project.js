@@ -4,6 +4,7 @@ import biteswift from "../../assets/images/BiteSwift/biteswift.png";
 import bookverse from "../../assets/images/bookverse.png";
 import portfolio from "../../assets/images/portfolio/portfolio.png";
 import docmind from "../../assets/images/docmind/chat.png";
+import bharatdiet from "../../assets/images/bharatdiet/home.png";
 
 // Descriptions are kept under ~120 characters so they render in full wherever
 // they appear — the projects list, and both Home teasers (one of which clamps
@@ -53,6 +54,18 @@ export const projects = [
     sourceCode: "https://github.com/sh1v-max/Netflix-GPT",
     demo: "https://cinewatchgraph-ai.web.app",
     caseStudy: "/projects/cinegraph",
+  },
+  {
+    title: "BharatDiet",
+    role:
+      "Frontend + engine — greedy meal allocator, nutrition maths, 164 Vitest tests.",
+    description:
+      "Nutrition planner for real Indian food. Meal plans by region, diet and budget, backed by 164 tests.",
+    image: bharatdiet,
+    tags: ["react-19", "vitest", "algorithms", "tailwind", "seo"],
+    sourceCode: "https://github.com/sh1v-max/BharatDiet",
+    demo: "https://bharat-diet.vercel.app/",
+    caseStudy: "/projects/bharatdiet",
   },
   {
     title: "BiteSwift",

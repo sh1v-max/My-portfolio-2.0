@@ -18,6 +18,7 @@ const projectMeta = {
   "TaskForge":  { period: "Sep 2024", periodEnd: null,       status: "ongoing"   },
   "BookVerse":  { period: "Jun 2024", periodEnd: "Aug 2024", status: "completed" },
   "Cinegraph":  { period: "Mar 2024", periodEnd: "Sep 2026", status: "completed" },
+  "BharatDiet": { period: "Jul 2026", periodEnd: "Jul 2026", status: "completed" },
   "BiteSwift":  { period: "Nov 2023", periodEnd: "Jul 2026", status: "completed" },
 };
 
@@ -225,7 +226,7 @@ function Projects({ asSection = false }) {
               variants={headerItem}
               className="text-textMuted max-w-xl text-base leading-relaxed"
             >
-              Six applications built to go beyond tutorials — an AI backend,
+              Seven applications built to go beyond tutorials — an AI backend,
               real APIs, and polished interfaces.
             </motion.p>
             <motion.div

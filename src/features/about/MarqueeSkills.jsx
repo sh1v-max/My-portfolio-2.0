@@ -25,6 +25,7 @@ const row1 = [
   { name: "Gemini API", icon: "material-icon-theme:gemini-ai" },
   { name: "pgvector", icon: "logos:postgresql" },
   { name: "Zod", icon: "simple-icons:zod" },
+  { name: "Vitest", icon: "logos:vitest" },
 ];
 
 const row2 = [
