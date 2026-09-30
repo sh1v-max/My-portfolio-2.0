@@ -13,6 +13,7 @@ import {
 const cinemaProjects = projects.filter((p) => p.title !== "Coming Soon...");
 
 const projectMeta = {
+  "DocMind":    { period: "Sep 2026", periodEnd: null,       status: "ongoing"   },
   "Portfolio":  { period: "Oct 2024", periodEnd: null,       status: "ongoing"   },
   "TaskForge":  { period: "Sep 2024", periodEnd: null,       status: "ongoing"   },
   "BookVerse":  { period: "Jun 2024", periodEnd: "Aug 2024", status: "completed" },
@@ -224,8 +225,8 @@ function Projects({ asSection = false }) {
               variants={headerItem}
               className="text-textMuted max-w-xl text-base leading-relaxed"
             >
-              Five production-grade applications built to go beyond tutorials —
-              real APIs, AI integrations, and polished interfaces.
+              Six applications built to go beyond tutorials — an AI backend,
+              real APIs, and polished interfaces.
             </motion.p>
             <motion.div
               variants={headerItem}

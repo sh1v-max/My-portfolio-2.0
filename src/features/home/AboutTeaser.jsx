@@ -32,7 +32,7 @@ export default function AboutTeaser() {
         <SectionHeader
           eyebrow="The short version"
           title="About Me"
-          lede="Full-stack developer working across the React ecosystem and Node.js backends — building fast, scalable, motion-rich web applications."
+          lede="Full-stack developer working across the React ecosystem, Node.js backends and, lately, AI backends — building fast, scalable, motion-rich web applications."
           size="md"
           className="mb-14"
         />
@@ -113,7 +113,8 @@ export default function AboutTeaser() {
               I specialise in the React ecosystem — building responsive, performant
               interfaces with clean architecture and thoughtful UX. My toolkit spans
               the modern JavaScript stack, from React and Redux on the front end to
-              Node.js and MongoDB behind it.
+              Node.js, MongoDB and PostgreSQL behind it. Lately that includes the AI
+              layer too: RAG, vector search and streamed LLM replies.
             </p>
             <p className="text-textSecondary max-w-prose text-[17px] leading-[1.7]">
               What pulls me in is the seam between design and engineering — the part

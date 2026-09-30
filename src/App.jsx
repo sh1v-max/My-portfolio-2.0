@@ -12,7 +12,7 @@ import RouteFallback from "./components/RouteFallback";
 // splitting it would only trade a smaller bundle for a flash of fallback on the
 // one page that must feel instant.
 //
-// Everything else is split. The five case-study pages alone are ~2,300 lines and
+// Everything else is split. The six case-study pages alone are ~2,900 lines and
 // are reached by a minority of visitors, so they have no business sitting in the
 // initial download.
 // /projects is retired: the home page renders the same component as its work
@@ -25,6 +25,7 @@ const NetflixGPTDetail = lazy(() => import("./features/projects/NetflixGPTDetail
 const BiteSwiftDetail = lazy(() => import("./features/projects/BiteSwiftDetail"));
 const BookVerseDetail = lazy(() => import("./features/projects/BookVerseDetail"));
 const PortfolioDetail = lazy(() => import("./features/projects/PortfolioDetail"));
+const DocMindDetail = lazy(() => import("./features/projects/DocMindDetail"));
 const Github = lazy(() => import("./features/github/Github"));
 const Settings = lazy(() => import("./features/theme/Settings"));
 const UIExperiments = lazy(() => import("./features/frontend-lab/UIExperiments"));
@@ -51,6 +52,7 @@ const router = createBrowserRouter([
       { path: "/projects/biteswift", element: split(BiteSwiftDetail) },
       { path: "/projects/bookverse", element: split(BookVerseDetail) },
       { path: "/projects/portfolio", element: split(PortfolioDetail) },
+      { path: "/projects/docmind", element: split(DocMindDetail) },
       {
         path: "/github",
         element: split(Github),

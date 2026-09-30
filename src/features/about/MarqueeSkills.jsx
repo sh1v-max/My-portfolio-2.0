@@ -22,6 +22,9 @@ const row1 = [
   { name: "Vite", icon: "logos:vitejs" },
   { name: "Axios", icon: "logos:axios" },
   { name: "MySQL", icon: "logos:mysql" },
+  { name: "Gemini API", icon: "material-icon-theme:gemini-ai" },
+  { name: "pgvector", icon: "logos:postgresql" },
+  { name: "Zod", icon: "simple-icons:zod" },
 ];
 
 const row2 = [
@@ -46,6 +49,9 @@ const row2 = [
   { name: "VS Code", icon: "logos:visual-studio-code" },
   { name: "Bootstrap", icon: "logos:bootstrap" },
   { name: "React Query", icon: "logos:react-query-icon" },
+  { name: "Drizzle ORM", icon: "simple-icons:drizzle" },
+  { name: "RAG", icon: "lucide:brain-circuit" },
+  { name: "Render", icon: "simple-icons:render" },
 ];
 
 export default function MarqueeSkills() {

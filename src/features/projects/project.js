@@ -3,6 +3,7 @@ import cinegraph from "../../assets/images/cinegraph/home.png";
 import biteswift from "../../assets/images/BiteSwift/biteswift.png";
 import bookverse from "../../assets/images/bookverse.png";
 import portfolio from "../../assets/images/portfolio/portfolio.png";
+import docmind from "../../assets/images/docmind/chat.png";
 
 // Descriptions are kept under ~120 characters so they render in full wherever
 // they appear — the projects list, and both Home teasers (one of which clamps
@@ -17,6 +18,18 @@ import portfolio from "../../assets/images/portfolio/portfolio.png";
 // complete stack.
 
 export const projects = [
+  {
+    title: "DocMind",
+    role:
+      "Backend + AI — RAG over pgvector, SSE streaming, Zod-validated LLM output.",
+    description:
+      "Upload a PDF, chat with it, get quizzed on it. RAG with memory, streamed answers and validated quizzes.",
+    image: docmind,
+    tags: ["typescript", "express", "postgres-pgvector", "gemini-ai", "rag", "sse"],
+    sourceCode: "https://github.com/sh1v-max/AI-Backend",
+    demo: "https://docmind-jet.vercel.app/",
+    caseStudy: "/projects/docmind",
+  },
   {
     title: "TaskForge",
     role:
@@ -76,15 +89,5 @@ export const projects = [
     sourceCode: "https://github.com/sh1v-max/BookVerse",
     demo: "https://bookversedot.netlify.app/",
     caseStudy: "/projects/bookverse",
-  },
-  {
-    title: "Coming Soon...",
-    description:
-      "I'm currently brewing up something exciting! Stay tuned for my next big project.",
-    // No screenshot yet — consumers render <ImagePlaceholder /> when image is null.
-    image: null,
-    tags: ["top-secret", "cooking", "stay-tuned"],
-    sourceCode: null,
-    demo: null,
   },
 ];

@@ -64,6 +64,11 @@ const services = [
     title: "Backend Development",
     desc: "Building production-grade REST APIs with Node.js & Express — JWT auth, rate limiting, input validation (Zod), Swagger docs, and automated test suites.",
   },
+  {
+    icon: <Icon icon="lucide:brain-circuit" width="22" height="22" />,
+    title: "AI Backend Development",
+    desc: "RAG pipelines on Postgres + pgvector, LLM replies streamed over SSE, and model output validated with Zod before it ever reaches the UI.",
+  },
 ];
 
 const education = [
@@ -94,8 +99,8 @@ const education = [
 const timeline = [
   {
     year: "2026",
-    title: "Going Full-Stack",
-    desc: "Deep-diving into Node.js, Express, and MongoDB to build complete backend systems. Exploring Ruby on Rails, SQL, and shipping full-stack apps end-to-end.",
+    title: "Full-Stack & AI Backends",
+    desc: "Went deep on Node.js, Express, and MongoDB, shipping full-stack apps end-to-end. Then built DocMind, an AI backend from scratch: embeddings, pgvector search, RAG, SSE streaming, and Zod-validated LLM output.",
   },
   {
     year: "2025",
@@ -227,7 +232,7 @@ function About({ asSection = false }) {
           <title>Shiv | About</title>
           <meta
             name="description"
-            content="Shiv Shankar Singh — Full-Stack Developer specializing in React, Node.js, and MongoDB. Building fast, scalable web applications. Based in Varanasi, India."
+            content="Shiv Shankar Singh — Full-Stack Developer specializing in React, Node.js, and AI backends (RAG, vector search, streaming). Building fast, scalable web applications. Based in Varanasi, India."
           />
         </Helmet>
       )}
@@ -305,8 +310,10 @@ function About({ asSection = false }) {
                   I specialize in the React ecosystem, building responsive,
                   performant web applications with clean architecture and
                   thoughtful UX. My toolkit spans the modern JavaScript stack,
-                  from React and Redux on the front end to Node.js and MongoDB
-                  on the back end.
+                  from React and Redux on the front end to Node.js, MongoDB and
+                  PostgreSQL on the back end. Lately I&apos;ve been building the
+                  AI layer too: embeddings, vector search, RAG and streamed LLM
+                  replies.
                 </p>
                 <p className="text-textSecondary text-base leading-relaxed">
                   What excites me most is the intersection of design and
@@ -323,38 +330,38 @@ function About({ asSection = false }) {
 
                 {/* Timeline */}
                 <div className="relative space-y-6">
-                  {/* MongoDB */}
+                  {/* Background jobs */}
                   <div className="flex gap-4">
                     <div className="flex flex-col items-center">
                       <div className="bg-accentColor/20 text-accentColor flex h-10 w-10 items-center justify-center rounded-full text-lg">
-                        🍃
+                        ⏳
                       </div>
                       <div className="h-12 w-0.5 bg-linear-to-b from-accentColor/40 to-accentColor/20"></div>
                     </div>
                     <div className="border-accentColor/10 bg-accentColor/5 flex-1 rounded-xl border p-4 pt-2">
                       <p className="text-accentColor text-sm font-bold">
-                        MongoDB
+                        BullMQ & Redis
                       </p>
                       <p className="text-textMuted text-sm">
-                        Learning NoSQL database design, schema modeling with Mongoose, and efficient querying patterns.
+                        Moving slow work like PDF ingestion out of the request into background jobs, with retries and progress.
                       </p>
                     </div>
                   </div>
 
-                  {/* Node / Express */}
+                  {/* AI agents */}
                   <div className="flex gap-4">
                     <div className="flex flex-col items-center">
                       <div className="bg-accentColor/20 text-accentColor flex h-10 w-10 items-center justify-center rounded-full text-lg">
-                        ⚙️
+                        🤖
                       </div>
                       <div className="h-12 w-0.5 bg-linear-to-b from-accentColor/40 to-accentColor/20"></div>
                     </div>
                     <div className="border-accentColor/10 bg-accentColor/5 flex-1 rounded-xl border p-4 pt-2">
                       <p className="text-accentColor text-sm font-bold">
-                        Node.js & Express
+                        AI Agents & Tool Calling
                       </p>
                       <p className="text-textMuted text-sm">
-                        Building REST APIs, handling authentication with JWT, and structuring scalable backend services.
+                        Letting the model pick tools and route questions, then multi-step workflows that can pause and resume.
                       </p>
                     </div>
                   </div>
@@ -491,8 +498,8 @@ function About({ asSection = false }) {
                   <p>
                     <span className="text-blue-300">learning:</span>{" "}
                     <span className="text-yellow-200">[</span>
-                    <span className="text-green-300">&apos;MongoDB&apos;</span>,{" "}
-                    <span className="text-green-300">&apos;Node.js&apos;</span>,{" "}
+                    <span className="text-green-300">&apos;BullMQ&apos;</span>,{" "}
+                    <span className="text-green-300">&apos;AI Agents&apos;</span>,{" "}
                     <span className="text-green-300">&apos;Rails&apos;</span>
                     <span className="text-yellow-200">]</span>,
                   </p>

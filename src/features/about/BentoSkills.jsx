@@ -178,6 +178,66 @@ const skills = [
     col: "col-span-1",
     row: "row-span-1",
   },
+
+  // Row 5 — the AI-backend layer, all of it used for real in DocMind.
+  // Eight cells on purpose: it keeps the grid a full rectangle at both 4 and 6
+  // columns, so no row ends in a gap.
+  {
+    name: "Gemini API",
+    category: "AI",
+    icon: "material-icon-theme:gemini-ai",
+    watermark: "material-icon-theme:gemini-ai",
+    col: "col-span-2",
+    row: "row-span-1",
+  },
+  {
+    name: "RAG",
+    category: "AI",
+    icon: "lucide:brain-circuit",
+    watermark: "lucide:brain-circuit",
+    col: "col-span-1",
+    row: "row-span-1",
+  },
+  {
+    name: "PostgreSQL",
+    category: "DATABASE",
+    icon: "logos:postgresql",
+    watermark: "logos:postgresql",
+    col: "col-span-1",
+    row: "row-span-1",
+  },
+  {
+    name: "pgvector",
+    category: "DATABASE",
+    icon: "lucide:scatter-chart",
+    watermark: "lucide:scatter-chart",
+    col: "col-span-1",
+    row: "row-span-1",
+  },
+  {
+    name: "Drizzle ORM",
+    category: "DATABASE",
+    icon: "simple-icons:drizzle",
+    watermark: "simple-icons:drizzle",
+    col: "col-span-1",
+    row: "row-span-1",
+  },
+  {
+    name: "Zod",
+    category: "BACKEND",
+    icon: "simple-icons:zod",
+    watermark: "simple-icons:zod",
+    col: "col-span-1",
+    row: "row-span-1",
+  },
+  {
+    name: "Render",
+    category: "HOSTING",
+    icon: "simple-icons:render",
+    watermark: "simple-icons:render",
+    col: "col-span-1",
+    row: "row-span-1",
+  },
 ];
 
 // ─── Animation Variants ───────────────────────────────────

@@ -102,7 +102,7 @@ function Home({ asSection = false }) {
               <motion.div variants={itemVariants}>
                 <span className="border-accentColor/20 bg-accentColor/5 text-accentColor mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[10px] font-semibold uppercase tracking-widest sm:text-xs">
                   <span className="bg-accentColor h-1.5 w-1.5 animate-pulse rounded-full" />
-                  Available for work — frontend, full-stack & backend
+                  Available for work — full-stack, backend & AI
                 </span>
               </motion.div>
 

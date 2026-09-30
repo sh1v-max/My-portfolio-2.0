@@ -31,11 +31,11 @@ export const skillGroups = [
   },
   {
     label: "Backend",
-    items: ["Node.js", "Express.js", "MongoDB", "REST APIs", "JWT Auth"],
+    items: ["Node.js + TypeScript", "Express.js", "MongoDB", "PostgreSQL + pgvector", "REST APIs & JWT Auth"],
   },
   {
-    label: "Tooling & AI",
-    items: ["Git & GitHub", "Vite", "Generative AI APIs"],
+    label: "AI & Tooling",
+    items: ["RAG & vector search", "LLM APIs (Gemini) + SSE streaming", "Structured output with Zod", "Git & GitHub, Vite"],
   },
 ];
 
@@ -45,8 +45,12 @@ export const availability = {
   detail: "Open to full-time roles and select freelance projects. Remote-friendly.",
 };
 
+// Matched against the live repo names from the GitHub API, so these must be the
+// current names. Netflix-GPT was renamed to CineGraph, and the old name matched
+// nothing, which quietly dropped it from the featured list.
 export const pinnedRepos = [
-  "Netflix-GPT",
+  "AI-Backend",
+  "CineGraph",
   "BiteSwift",
   "BookVerse",
   "Backend-Projects",
@@ -64,11 +68,15 @@ export const githubSkills = [
   "Git & GitHub",
   "REST APIs",
   "Node.js",
+  "TypeScript",
+  "PostgreSQL",
+  "RAG & Vector Search",
 ];
 
+// Next phases of DocMind first. The first three are what the About teaser shows.
 export const currentlyLearning = [
-  "Backend APIs with Node.js & Express",
-  "MongoDB & Database Design",
-  "Advanced React Patterns",
+  "Background jobs with BullMQ & Redis",
+  "AI agents & tool calling",
+  "Testing & observability",
   "Full-Stack Next.js Applications",
 ];

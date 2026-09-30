@@ -45,7 +45,7 @@ export default function MainScrollPage() {
 
       {/*
         The work section IS the projects page. /projects was retired: it showed
-        the same five projects this renders, so keeping both meant maintaining
+        the same projects this renders, so keeping both meant maintaining
         one design twice and giving the visitor two routes to identical content.
         `asSection` demotes the headings and drops the archive marquee, since
         the Build Archive is its own section directly below.
