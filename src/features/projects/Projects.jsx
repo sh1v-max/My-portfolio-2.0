@@ -200,7 +200,7 @@ function Projects({ asSection = false }) {
 
       {/* ── Page header — kept exactly as designed ── */}
       <section className={asSection ? "pt-16 pb-2 md:pt-24" : "pt-16 pb-2 md:pt-20"}>
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
           <motion.div
             variants={headerContainer}
             initial="hidden"
@@ -239,7 +239,7 @@ function Projects({ asSection = false }) {
 
       {/* ── Editorial project list ── */}
       <section ref={listRef} className="pb-8 pt-10 md:pb-16 md:pt-14" aria-label="Featured projects">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
           {cinemaProjects.map((project, i) => (
             <ProjectRow
               key={project.title}
