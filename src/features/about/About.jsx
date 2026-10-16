@@ -100,7 +100,7 @@ const timeline = [
   {
     year: "2026",
     title: "Full-Stack & AI Backends",
-    desc: "Went deep on Node.js, Express, and MongoDB, shipping full-stack apps end-to-end. Then built DocMind, an AI backend from scratch: embeddings, pgvector search, RAG, SSE streaming, and Zod-validated LLM output.",
+    desc: "Went deep on Node.js, Express, and MongoDB, shipping full-stack apps end-to-end. Then built DocMind, an AI backend from scratch: embeddings, pgvector search, RAG, SSE streaming, Zod-validated LLM output, JWT auth, and background jobs on BullMQ + Redis.",
   },
   {
     year: "2025",
@@ -330,24 +330,6 @@ function About({ asSection = false }) {
 
                 {/* Timeline */}
                 <div className="relative space-y-6">
-                  {/* Background jobs */}
-                  <div className="flex gap-4">
-                    <div className="flex flex-col items-center">
-                      <div className="bg-accentColor/20 text-accentColor flex h-10 w-10 items-center justify-center rounded-full text-lg">
-                        ⏳
-                      </div>
-                      <div className="h-12 w-0.5 bg-linear-to-b from-accentColor/40 to-accentColor/20"></div>
-                    </div>
-                    <div className="border-accentColor/10 bg-accentColor/5 flex-1 rounded-xl border p-4 pt-2">
-                      <p className="text-accentColor text-sm font-bold">
-                        BullMQ & Redis
-                      </p>
-                      <p className="text-textMuted text-sm">
-                        Moving slow work like PDF ingestion out of the request into background jobs, with retries and progress.
-                      </p>
-                    </div>
-                  </div>
-
                   {/* AI agents */}
                   <div className="flex gap-4">
                     <div className="flex flex-col items-center">
@@ -362,6 +344,24 @@ function About({ asSection = false }) {
                       </p>
                       <p className="text-textMuted text-sm">
                         Letting the model pick tools and route questions, then multi-step workflows that can pause and resume.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Prompt quality */}
+                  <div className="flex gap-4">
+                    <div className="flex flex-col items-center">
+                      <div className="bg-accentColor/20 text-accentColor flex h-10 w-10 items-center justify-center rounded-full text-lg">
+                        🎯
+                      </div>
+                      <div className="h-12 w-0.5 bg-linear-to-b from-accentColor/40 to-accentColor/20"></div>
+                    </div>
+                    <div className="border-accentColor/10 bg-accentColor/5 flex-1 rounded-xl border p-4 pt-2">
+                      <p className="text-accentColor text-sm font-bold">
+                        Prompt Quality & Evals
+                      </p>
+                      <p className="text-textMuted text-sm">
+                        Measuring answer quality instead of eyeballing it, then improving retrieval and prompts against those numbers.
                       </p>
                     </div>
                   </div>

@@ -76,8 +76,8 @@ export const githubSkills = [
 
 // Next phases of DocMind first. The first three are what the About teaser shows.
 export const currentlyLearning = [
-  "Background jobs with BullMQ & Redis",
   "AI agents & tool calling",
+  "Prompt quality & evals",
   "Testing & observability",
   "Full-Stack Next.js Applications",
 ];

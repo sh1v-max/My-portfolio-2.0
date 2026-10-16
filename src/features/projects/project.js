@@ -3,7 +3,7 @@ import cinegraph from "../../assets/images/cinegraph/home.png";
 import biteswift from "../../assets/images/BiteSwift/biteswift.png";
 import bookverse from "../../assets/images/bookverse.png";
 import portfolio from "../../assets/images/portfolio/portfolio.png";
-import docmind from "../../assets/images/docmind/chat.png";
+import docmind from "../../assets/images/docmind/sources.png";
 import bharatdiet from "../../assets/images/bharatdiet/home.png";
 
 // Descriptions are kept under ~120 characters so they render in full wherever
@@ -22,11 +22,11 @@ export const projects = [
   {
     title: "DocMind",
     role:
-      "Backend + AI — RAG over pgvector, SSE streaming, Zod-validated LLM output.",
+      "Backend + AI — RAG over pgvector, SSE streaming, BullMQ jobs, JWT guest auth.",
     description:
-      "Upload a PDF, chat with it, get quizzed on it. RAG with memory, streamed answers and validated quizzes.",
+      "Upload a PDF, chat with it, get quizzed on it. RAG with memory, streamed answers, background ingestion.",
     image: docmind,
-    tags: ["typescript", "express", "postgres-pgvector", "gemini-ai", "rag", "sse"],
+    tags: ["typescript", "express", "postgres-pgvector", "gemini-ai", "rag", "bullmq-redis"],
     sourceCode: "https://github.com/sh1v-max/AI-Backend",
     demo: "https://docmind-jet.vercel.app/",
     caseStudy: "/projects/docmind",

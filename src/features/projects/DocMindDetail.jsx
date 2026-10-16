@@ -1,11 +1,20 @@
 /* eslint-disable react/prop-types */
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Icon } from "@iconify/react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import homeImg from "../../assets/images/docmind/home.png";
+import processingImg from "../../assets/images/docmind/processing.png";
 import chatImg from "../../assets/images/docmind/chat.png";
+import sourcesImg from "../../assets/images/docmind/sources.png";
 import quizImg from "../../assets/images/docmind/quiz.png";
+import signupImg from "../../assets/images/docmind/signup.png";
+import phoneHomeImg from "../../assets/images/docmind/phone_home.png";
+import phoneChatImg from "../../assets/images/docmind/phone_chat.png";
+import phoneSidebarImg from "../../assets/images/docmind/phone_sidebar.png";
+import phoneQuizImg from "../../assets/images/docmind/phone_quiz.png";
+import phoneSignupImg from "../../assets/images/docmind/phone_signup.png";
 
 const LIVE_URL = "https://docmind-jet.vercel.app/";
 const API_URL = "https://ai-backend-docmind.onrender.com";
@@ -32,41 +41,47 @@ const techStack = {
     { name: "Drizzle ORM", icon: "simple-icons:drizzle", note: "Behind a repository layer" },
     { name: "Zod", icon: "simple-icons:zod", note: "Validates the model's output" },
     { name: "multer + pdf-parse", icon: "lucide:file-text", note: "PDF upload and text extraction" },
-    { name: "Render", icon: "simple-icons:render", note: "API hosting" },
+    { name: "BullMQ + Redis (Upstash)", icon: "logos:redis", note: "Background ingestion queue" },
+    { name: "JWT + bcryptjs", icon: "logos:jwt-icon", note: "Guest and account auth" },
+    { name: "express-rate-limit", icon: "lucide:gauge", note: "Throttles the /auth routes" },
+    { name: "Render", icon: "simple-icons:render", note: "API + worker hosting" },
   ],
   ai: [
     { name: "Gemini API", icon: "material-icon-theme:gemini-ai", note: "Plain fetch, no SDK" },
     { name: "gemini-embedding-001", icon: "lucide:binary", note: "3072-dim embeddings" },
     { name: "Server-Sent Events", icon: "lucide:radio", note: "Token-by-token streaming" },
     { name: "Structured output", icon: "lucide:braces", note: "JSON mode + responseSchema" },
-    { name: "React 19", icon: "logos:react", note: "Frontend client" },
+    { name: "React 19 + TypeScript", icon: "logos:react", note: "Frontend client" },
     { name: "Vite", icon: "logos:vitejs", note: "Build tool" },
-    { name: "EventSource", icon: "lucide:plug", note: "Browser side of the stream" },
+    { name: "fetch stream reader", icon: "lucide:plug", note: "Reads the SSE body with a Bearer token" },
+    { name: "react-markdown", icon: "simple-icons:markdown", note: "Formatted answers, no raw HTML" },
     { name: "Vercel", icon: "simple-icons:vercel", note: "Frontend hosting" },
   ],
 };
 
-// Three pipelines, each shown in the same numbered-step format TaskForge uses
+// Four pipelines, each shown in the same numbered-step format TaskForge uses
 // for its request pipeline. The numbers are real: 500-word chunks, 3072-dim
-// vectors, top-3 chunks, last 8 messages, 5 questions x 4 options.
+// vectors, top-3 chunks, last 8 messages, 5 questions x 4 options, 3 job
+// attempts.
 const pipelines = [
   {
     label: "Ingestion",
-    trigger: "POST /upload",
+    trigger: "POST /upload → BullMQ worker",
     steps: [
       { label: "Receive", detail: "multer keeps the PDF in memory (10 MB cap on a 512 MB free server)" },
-      { label: "Parse", detail: "pdf-parse pulls out the text layer" },
-      { label: "Chunk", detail: "Split into ~500-word pieces" },
-      { label: "Embed", detail: "Each chunk becomes 3072 numbers via gemini-embedding-001" },
-      { label: "Store", detail: "Rows in Postgres/pgvector, tagged with a documentId" },
+      { label: "Parse + chunk", detail: "pdf-parse pulls out the text, split into ~500-word pieces. No text at all? 400 right away" },
+      { label: "Queue", detail: "A documents row with status 'processing', a job in Redis, and a 202 back in about a second" },
+      { label: "Embed (worker)", detail: "The worker deletes any old chunks first, then turns each chunk into 3072 numbers" },
+      { label: "Store", detail: "Rows in Postgres/pgvector, then status 'ready' (or 'failed' after 3 attempts)" },
+      { label: "Poll", detail: "The browser checks GET /documents every 2 s until the PDF is ready" },
     ],
   },
   {
     label: "Chat",
-    trigger: "POST /chat · GET /chat-stream",
+    trigger: "POST /chat · POST /chat-stream",
     steps: [
       { label: "Embed the question", detail: "Same embedding model, so it lands in the same space" },
-      { label: "Vector search", detail: "pgvector returns the 3 closest chunks, in one PDF or across all of them" },
+      { label: "Vector search", detail: "pgvector returns the 3 closest chunks, in one PDF or across all of yours" },
       { label: "Load memory", detail: "Last 8 messages of this conversation from Postgres" },
       { label: "Build the prompt", detail: "Chunks + history + question, built in one shared function" },
       { label: "Generate", detail: "Gemini answers, streamed back over SSE piece by piece" },
@@ -84,18 +99,39 @@ const pipelines = [
       { label: "Shuffle", detail: "Options shuffled in code (Fisher-Yates), correctIndex remapped" },
     ],
   },
+  {
+    label: "Auth",
+    trigger: "every request",
+    steps: [
+      { label: "Guest on first visit", detail: "POST /auth/guest creates a real user row with no email, and signs a JWT" },
+      { label: "Bearer token", detail: "Every call sends Authorization: Bearer <JWT>, kept in localStorage" },
+      { label: "requireAuth", detail: "Checks signature and expiry, no database lookup, and sets req.user" },
+      { label: "Scoped SQL", detail: "Every repository call takes the user's id, so someone else's data is a 404" },
+      { label: "Sign up", detail: "Fills in the same guest row with an email and password hash, so files stay" },
+    ],
+  },
 ];
 
 const features = [
   {
-    icon: "lucide:file-up",
-    title: "Upload a PDF",
-    desc: "Drag and drop a PDF and it gets parsed, chunked, embedded and stored. Delete a document and its chunks and every chat about it go with it.",
+    icon: "lucide:paperclip",
+    title: "Attach a PDF and ask in one go",
+    desc: "The home screen is the chat box. Attach or drop a PDF, type the question and send. If the PDF is still processing, the question waits and goes out on its own.",
+  },
+  {
+    icon: "lucide:loader",
+    title: "Background ingestion",
+    desc: "Upload answers 202 in about a second. A BullMQ worker does the slow embedding, and the sidebar shows the file as Processing… until it's ready.",
+  },
+  {
+    icon: "lucide:user-round",
+    title: "Private space, no sign-up",
+    desc: "Every visitor silently gets a guest account and only sees their own documents and chats. Signing up later keeps them and works on any device.",
   },
   {
     icon: "lucide:messages-square",
     title: "Grounded answers with sources",
-    desc: "Answers come only from your document. The three passages used are shown under every reply, with the file name and their vector distance.",
+    desc: "Answers come only from your document, formatted as markdown. The three passages used are shown under every reply, with the file name and vector distance.",
   },
   {
     icon: "lucide:brain",
@@ -110,26 +146,50 @@ const features = [
   {
     icon: "lucide:library",
     title: "One PDF or all of them",
-    desc: "Search a single document or every uploaded one. In all-documents mode each answer names the PDF it came from.",
+    desc: "A picker inside the chat box searches a single document or every one you uploaded. In all-documents mode each answer names the PDF it came from.",
   },
   {
     icon: "lucide:clipboard-check",
     title: "Validated quizzes",
-    desc: "5 multiple-choice questions per document, checked with Zod before they reach the UI, then graded in the browser with a score.",
+    desc: "Pick a document, get 5 multiple-choice questions checked with Zod before they reach the UI, then graded in the browser with a score.",
   },
   {
-    icon: "lucide:history",
-    title: "Chat history",
-    desc: "A ChatGPT-style sidebar grouped by day. There is no sessions table: history is derived by grouping messages on their session id.",
+    icon: "lucide:file-text",
+    title: "A sample PDF for the curious",
+    desc: "No PDF handy? \"Try our sample\" uploads a short guide to DocMind itself, with starter questions it can actually answer.",
   },
   {
     icon: "lucide:layers",
     title: "Layered backend",
-    desc: "Routes stay thin, services never touch req/res, and only repositories touch SQL. The same pipeline can later run inside a background worker.",
+    desc: "Routes stay thin, services never touch req/res, and only repositories touch SQL. That's what let the ingestion pipeline move into a worker unchanged.",
   },
 ];
 
 const challenges = [
+  {
+    icon: "lucide:timer",
+    problem: "An idle queue worker would burn through the free Redis quota",
+    solution:
+      "A BullMQ worker keeps polling Redis even with nothing to do. Measured over 5 idle minutes: 118 Redis commands with the defaults, about 1M a month, double Upstash's free 500K. With drainDelay: 30 and a 5-minute stalled-job check it dropped to 19, about 164K a month. npm run step5 repeats the measurement.",
+  },
+  {
+    icon: "lucide:repeat",
+    problem: "A retried job could store every chunk twice",
+    solution:
+      "BullMQ retries failed jobs and re-runs ones whose worker died, so a job can run more than once. Each job starts by deleting the chunks its document already has, then stores all of them. Tested with a forced failure halfway through and with the server killed mid-job.",
+  },
+  {
+    icon: "lucide:key-round",
+    problem: "EventSource can't send an Authorization header",
+    solution:
+      "Once every route needed a Bearer token, the browser's EventSource stopped working: it only does GET and can't set headers. The client now reads the stream with fetch and parses the events itself, and /chat-stream moved to POST so the question stays out of the URL and the server logs.",
+  },
+  {
+    icon: "lucide:network",
+    problem: "The rate limiter saw every visitor as the same IP",
+    solution:
+      "On Render a request passes through Cloudflare and Render's own proxy first. The number of hops to trust wasn't guessed: the RateLimit-Policy header carries a hash of the key the limiter used, which can be compared with a hash of your own IP. The answer was 3 hops.",
+  },
   {
     icon: "lucide:scissors",
     problem: "The stream from Gemini produced nothing, even though the request worked",
@@ -137,31 +197,23 @@ const challenges = [
       "Gemini ends its SSE lines with \\r\\n, and a \\r\\n can be split across two network reads. Normalizing each chunk separately missed it. The fix was to normalize the whole buffer, split on the blank line between events, and keep the trailing half-event in the buffer for the next read.",
   },
   {
-    icon: "lucide:triangle-alert",
-    problem: "The browser couldn't see why a stream failed",
-    solution:
-      "EventSource can't read the body of a non-200 response, it only reports \"connection error\". And once an SSE response starts, the status code is already sent. So failures go out in-band as a named error event with status 200, and a small withErrorHandling wrapper handles both the JSON and the stream routes.",
-  },
-  {
     icon: "lucide:shuffle",
     problem: "Every quiz passed validation, but the answers had a pattern",
     solution:
       "Across 50 generated questions the correct answer sat in the four slots 22 / 36 / 32 / 10% of the time. Valid is not the same as good, so after Zod validation the options are shuffled in code and correctIndex is remapped. The model's habits don't leak into the UI.",
   },
-  {
-    icon: "lucide:bug",
-    problem: "A failed vector query printed 3072 numbers",
-    solution:
-      "Drizzle's error message includes the SQL and every bound parameter, and for vector search that's the whole embedding, which buries the real cause. summarizeError() prints just the first line, the cause chain (where ECONNRESET and friends live) and the first stack frame inside this codebase.",
-  },
 ];
 
 const apiRoutes = [
-  { method: "POST", path: "/upload", desc: "Upload a PDF: parse, chunk, embed, store" },
-  { method: "GET", path: "/documents", desc: "List uploaded documents" },
+  { method: "POST", path: "/auth/guest", desc: "Create a guest account → { token, user } (rate-limited)" },
+  { method: "POST", path: "/auth/register", desc: "Email + password. With a guest's token it upgrades that guest" },
+  { method: "POST", path: "/auth/login", desc: "Email + password → { token, user } (rate-limited)" },
+  { method: "GET", path: "/auth/me", desc: "Who the token belongs to" },
+  { method: "POST", path: "/upload", desc: "Parse, chunk, queue the embedding, answer 202 'processing'" },
+  { method: "GET", path: "/documents", desc: "Your documents, each with status processing / ready / failed" },
   { method: "DELETE", path: "/documents/:documentId", desc: "Delete a document, its chunks and its chats" },
   { method: "POST", path: "/chat", desc: "Ask a question, get { sessionId, answer, sources }" },
-  { method: "GET", path: "/chat-stream", desc: "Same pipeline, streamed over SSE" },
+  { method: "POST", path: "/chat-stream", desc: "Same pipeline and body, streamed over SSE" },
   { method: "GET", path: "/sessions", desc: "One summary per conversation, newest first" },
   { method: "GET", path: "/sessions/:sessionId/messages", desc: "Full transcript of one conversation" },
   { method: "DELETE", path: "/sessions/:sessionId", desc: "Delete one conversation" },
@@ -185,14 +237,53 @@ const methodColor = {
 // Kept on the page on purpose. A case study that only lists strengths reads
 // like marketing; naming the gaps shows I know where the edges are.
 const limitations = [
-  "Upload embeds chunks one by one inside the request, so big PDFs are slow. Background jobs (BullMQ + Redis) are the planned fix.",
+  "The queue worker shares the API's free 512 MB process, so a big upload can slow chat down a little. A separate worker service needs no code change (npm run worker).",
   "Chunking is a plain 500-word split, no overlap and no respect for paragraphs.",
+  "\"All documents\" search shares the top 3 chunks across every PDF, and can't answer questions about the collection itself, like \"which documents do I have?\".",
   "Memory is the last 8 messages. Older ones are dropped, not summarized.",
-  "No authentication and no automated tests yet, so on the live demo anyone with the link can upload and delete.",
+  "When Gemini is overloaded it returns 503 and the chat just says \"Streaming failed\".",
+  "Auth is deliberately simple: no refresh tokens, password reset or email verification, and no automated tests yet.",
 ];
+
+const desktopScreenshots = [
+  { src: homeImg,       alt: "DocMind home screen: the chat box with a paperclip to attach a PDF and a Try our sample link",               label: "Home" },
+  { src: processingImg, alt: "DocMind right after an upload: the PDF shows Processing… in the sidebar while the worker embeds it",        label: "Background Processing" },
+  { src: sourcesImg,    alt: "DocMind answer about which PDFs work, with the three source passages expanded and their vector distances",  label: "Answer + Sources" },
+  { src: chatImg,       alt: "DocMind conversation where 'explain that in simple words' is answered from the previous reply",              label: "Conversation Memory" },
+  { src: quizImg,       alt: "DocMind quiz on the sample PDF after checking answers, 5 of 5 correct",                                      label: "Quiz" },
+  { src: signupImg,     alt: "DocMind sign-up dialog telling a guest their document and chats will be saved to the new account",          label: "Guest → Account" },
+];
+
+const phoneScreenshots = [
+  { src: phoneHomeImg,    alt: "DocMind mobile — home screen",                         label: "Home" },
+  { src: phoneChatImg,    alt: "DocMind mobile — follow-up answered in bullet points", label: "Chat" },
+  { src: phoneSidebarImg, alt: "DocMind mobile — sidebar with documents and chats",    label: "Sidebar" },
+  { src: phoneQuizImg,    alt: "DocMind mobile — graded quiz, 4 of 5 correct",         label: "Quiz" },
+  { src: phoneSignupImg,  alt: "DocMind mobile — create account dialog",               label: "Sign Up" },
+];
+
+const allScreenshots = [...desktopScreenshots, ...phoneScreenshots];
+const shotIndex = (src) => allScreenshots.findIndex((s) => s.src === src);
 
 // ─── Component ─────────────────────────────────────────────────
 export default function DocMindDetail() {
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+
+  const closeLightbox = useCallback(() => setLightboxIndex(null), []);
+  const prev = useCallback(() => setLightboxIndex((i) => (i - 1 + allScreenshots.length) % allScreenshots.length), []);
+  const next = useCallback(() => setLightboxIndex((i) => (i + 1) % allScreenshots.length), []);
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const onKey = (e) => {
+      if (e.key === "Escape")     closeLightbox();
+      if (e.key === "ArrowLeft")  prev();
+      if (e.key === "ArrowRight") next();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightboxIndex, closeLightbox, prev, next]);
+
   return (
     <HelmetProvider>
       <Helmet>
@@ -235,13 +326,14 @@ export default function DocMindDetail() {
           >
             Upload a PDF, chat with it, and get quizzed on it. An AI backend built from scratch to
             understand how these products really work: embeddings, vector search, RAG, conversation
-            memory, streaming and structured output. No LangChain, no LLM SDK, just Express,
-            Postgres and plain HTTP calls to Gemini.
+            memory, streaming and structured output, plus the production parts around them, like
+            JWT auth with guest accounts and background jobs on BullMQ + Redis. No LangChain, no
+            LLM SDK, just Express, Postgres and plain HTTP calls to Gemini.
           </motion.p>
 
           {/* Tags */}
           <motion.div variants={fadeUp} className="mb-8 flex flex-wrap gap-2">
-            {["AI Backend", "RAG", "Vector Search", "SSE Streaming", "TypeScript", "PostgreSQL"].map((tag) => (
+            {["AI Backend", "RAG", "Vector Search", "SSE Streaming", "BullMQ + Redis", "JWT Auth", "TypeScript", "PostgreSQL"].map((tag) => (
               <span
                 key={tag}
                 className="border-accentColor/20 bg-accentColor/5 text-accentColor rounded-full border px-3 py-1 text-xs font-medium"
@@ -283,12 +375,13 @@ export default function DocMindDetail() {
           {/* Screenshot */}
           <motion.div
             variants={fadeUp}
-            className="border-explorerBorder overflow-hidden rounded-2xl border shadow-2xl"
+            className="border-explorerBorder cursor-zoom-in overflow-hidden rounded-2xl border shadow-2xl"
+            onClick={() => setLightboxIndex(shotIndex(sourcesImg))}
           >
             <img
-              src={homeImg}
-              alt="DocMind start screen: a drag-and-drop PDF upload area and chips for every document uploaded before, plus an All documents option"
-              width={1919} height={1079} loading="lazy" decoding="async"
+              src={sourcesImg}
+              alt="DocMind answering 'What kind of PDFs work?' from the sample PDF, with the three source passages and their vector distances shown under the reply"
+              width={1920} height={1080} loading="lazy" decoding="async"
               className="w-full object-cover object-top"
             />
           </motion.div>
@@ -306,9 +399,60 @@ export default function DocMindDetail() {
             <strong className="text-textColor">RAG</strong>. Replies{" "}
             <strong className="text-textColor">stream over Server-Sent Events</strong>, and quizzes
             use Gemini&apos;s structured-output mode with every reply{" "}
-            <strong className="text-textColor">validated by Zod</strong> before the UI sees it. A
-            small React client exercises every endpoint the way a real user would.
+            <strong className="text-textColor">validated by Zod</strong> before the UI sees it.
+            Around that core sit the parts a real product needs: every visitor gets a{" "}
+            <strong className="text-textColor">guest account behind a JWT</strong>, every query is
+            scoped to its owner, and the slow embedding step runs as a{" "}
+            <strong className="text-textColor">background job on BullMQ + Redis</strong>, so an
+            upload answers in about a second. A React client exercises every endpoint the way a
+            real user would.
           </p>
+        </Section>
+
+        {/* ── Desktop Screenshots ── */}
+        <Section title="Desktop Screenshots">
+          <div className="grid gap-4 sm:grid-cols-2">
+            {desktopScreenshots.map((s, i) => (
+              <motion.div
+                key={s.label}
+                variants={fadeUp} whileInView="show" initial="hidden" viewport={{ once: true, amount: 0.1 }}
+                className="border-explorerBorder group cursor-zoom-in overflow-hidden rounded-xl border"
+                onClick={() => setLightboxIndex(i)}
+              >
+                <div className="relative overflow-hidden">
+                  <img width={1920} height={1080} loading="lazy" decoding="async" src={s.src} alt={s.alt} className="w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover:bg-black/20">
+                    <Icon icon="lucide:zoom-in" width="28" className="text-white opacity-0 drop-shadow-lg transition-opacity duration-200 group-hover:opacity-100" />
+                  </div>
+                </div>
+                <p className="text-textMuted bg-articleBg border-explorerBorder border-t px-3 py-2 text-center text-xs font-medium">{s.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </Section>
+
+        {/* ── Mobile Screenshots ── */}
+        <Section title="Mobile Views">
+          <div className="overflow-x-auto pb-3">
+            <div className="flex gap-4" style={{ minWidth: "max-content" }}>
+              {phoneScreenshots.map((s, i) => (
+                <motion.div
+                  key={s.label}
+                  variants={fadeUp} whileInView="show" initial="hidden" viewport={{ once: true, amount: 0.1 }}
+                  className="border-explorerBorder group w-44 shrink-0 cursor-zoom-in overflow-hidden rounded-2xl border shadow-lg sm:w-52"
+                  onClick={() => setLightboxIndex(desktopScreenshots.length + i)}
+                >
+                  <div className="relative overflow-hidden">
+                    <img src={s.src} alt={s.alt} width={410} height={914} loading="lazy" decoding="async" className="w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]" />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover:bg-black/20">
+                      <Icon icon="lucide:zoom-in" width="24" className="text-white opacity-0 drop-shadow-lg transition-opacity duration-200 group-hover:opacity-100" />
+                    </div>
+                  </div>
+                  <p className="text-textMuted bg-articleBg border-explorerBorder border-t px-3 py-2 text-center text-xs font-medium">{s.label}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </Section>
 
         {/* ── Problem & Goal ── */}
@@ -322,8 +466,9 @@ export default function DocMindDetail() {
             </Card>
             <Card icon="lucide:target" label="The Goal">
               Learn one concept, build the smallest version of it, move on. Embeddings, then vector
-              search, then RAG, memory, streaming and structured output, each as a real feature
-              of one deployed app, all on free tiers with no card needed anywhere.
+              search, then RAG, memory, streaming, structured output, auth and background jobs,
+              each as a real feature of one deployed app, all on free tiers with no card needed
+              anywhere.
             </Card>
           </div>
         </Section>
@@ -339,11 +484,14 @@ export default function DocMindDetail() {
         {/* ── Architecture ── */}
         <Section title="Architecture">
           <p className="text-textSecondary mb-6 leading-relaxed">
-            Three pipelines do all the work. Routes stay thin,{" "}
+            Four pipelines do all the work. Routes stay thin,{" "}
             <strong className="text-textColor">services never touch req/res</strong>, and{" "}
-            <strong className="text-textColor">only repositories touch SQL</strong>. The chat
-            pipeline&apos;s first five steps live in one function shared by the normal and the
-            streaming route, so the prompt is only ever built in one place.
+            <strong className="text-textColor">only repositories touch SQL</strong>. That split is
+            what let ingestion move into a{" "}
+            <strong className="text-textColor">BullMQ worker</strong> without rewriting it: the
+            request does only what someone is waiting for and answers 202, the worker does the
+            rest. On the free tier the worker runs inside the API process; on every deploy it
+            finishes the job in progress before the server exits.
           </p>
           <div className="flex flex-col gap-4">
             {pipelines.map((p) => (
@@ -395,18 +543,21 @@ export default function DocMindDetail() {
         {/* ── Chat screenshot ── */}
         <Section title="The Chat">
           <p className="text-textSecondary mb-6 leading-relaxed">
-            Two things in this one conversation. Asked whether the PDF talks about AI, it says{" "}
-            <strong className="text-textColor">no, it doesn&apos;t mention AI at all</strong>{" "}
-            instead of making something up, because the answer has to come from the retrieved
-            chunks. And &quot;in simple words?&quot; works as a follow-up only because the{" "}
+            &quot;Explain that in simple words&quot; has no subject of its own. It works as a
+            follow-up only because the{" "}
             <strong className="text-textColor">last 8 messages</strong> go into the prompt, so the
-            model knows what &quot;it&quot; refers to.
+            model knows what &quot;that&quot; refers to. Each answer still has to come from the
+            retrieved chunks of the PDF, and the chat survives a page refresh because the
+            transcript lives in Postgres, not in the browser.
           </p>
-          <div className="border-explorerBorder overflow-hidden rounded-2xl border shadow-2xl">
+          <div
+            className="border-explorerBorder cursor-zoom-in overflow-hidden rounded-2xl border shadow-2xl"
+            onClick={() => setLightboxIndex(shotIndex(chatImg))}
+          >
             <img
               src={chatImg}
-              alt="DocMind chat on a Monolithic vs Microservices PDF: it says the document doesn't mention AI, then answers a follow-up 'in simple words?' from the conversation history"
-              width={1919} height={1079} loading="lazy" decoding="async"
+              alt="DocMind chat on the sample PDF: a detailed answer on how DocMind works, then the follow-up 'explain that in simple words, in 3 bullet points' answered from the conversation history"
+              width={1920} height={1080} loading="lazy" decoding="async"
               className="w-full object-cover object-top"
             />
           </div>
@@ -422,11 +573,14 @@ export default function DocMindDetail() {
             stored on the server, so a <code className="font-mono text-sm">/quiz/check</code>{" "}
             endpoint would only compare two numbers the browser already has.
           </p>
-          <div className="border-explorerBorder overflow-hidden rounded-2xl border shadow-2xl">
+          <div
+            className="border-explorerBorder cursor-zoom-in overflow-hidden rounded-2xl border shadow-2xl"
+            onClick={() => setLightboxIndex(shotIndex(quizImg))}
+          >
             <img
               src={quizImg}
-              alt="DocMind quiz generated from ReactJS-prep.pdf after checking answers, with the correct options marked in green and the score shown at the bottom"
-              width={1919} height={1079} loading="lazy" decoding="async"
+              alt="DocMind quiz generated from the sample PDF after checking answers, with the correct options marked in green and 5 of 5 correct shown at the bottom"
+              width={1920} height={1080} loading="lazy" decoding="async"
               className="w-full object-cover object-top"
             />
           </div>
@@ -467,12 +621,19 @@ export default function DocMindDetail() {
             </div>
           </div>
 
+          <p className="text-textMuted mt-3 text-xs leading-relaxed">
+            Every route except the health check and the three public auth routes needs{" "}
+            <code className="font-mono">Authorization: Bearer &lt;token&gt;</code> and only ever
+            sees the caller&apos;s own data.
+          </p>
+
           {/* The stream's event protocol is the part the frontend depends on
               exactly, so it gets its own small table rather than a footnote. */}
           <p className="text-textSecondary mb-3 mt-8 text-sm leading-relaxed">
-            <code className="font-mono">/chat-stream</code> is a{" "}
-            <strong className="text-textColor">GET</strong> on purpose, because the browser&apos;s
-            EventSource can only send GET requests. It sends these events, in order:
+            <code className="font-mono">/chat-stream</code> takes the same JSON body as{" "}
+            <code className="font-mono">/chat</code>. The browser reads it with{" "}
+            <strong className="text-textColor">fetch</strong> and parses the events itself, since
+            EventSource can&apos;t send a Bearer token. It sends these events, in order:
           </p>
           <div className="border-explorerBorder overflow-hidden rounded-2xl border">
             <div className="overflow-x-auto">
@@ -541,8 +702,10 @@ export default function DocMindDetail() {
           <div className="border-accentColor/20 bg-accentColor/5 rounded-2xl border p-5">
             <p className="text-accentColor mb-2 text-xs font-bold uppercase tracking-widest">Next up</p>
             <p className="text-textSecondary text-sm leading-relaxed">
-              Background jobs for PDF ingestion with BullMQ + Redis, then agents and tool calling,
-              multi-step workflows, and tests.
+              Agents and tool calling: a router in front of the chat, so &quot;hi&quot;, follow-ups,
+              &quot;which documents do I have?&quot; and &quot;quiz me&quot; each take the right path
+              instead of one fixed RAG pipeline. Then better prompts, multi-step workflows, and
+              tests.
             </p>
           </div>
         </Section>
@@ -556,6 +719,9 @@ export default function DocMindDetail() {
               { icon: "lucide:book-open", text: "RAG end to end: chunking, retrieval, prompt building, grounded answers" },
               { icon: "lucide:activity", text: "Streaming with SSE and async generators, and reading a byte stream by hand" },
               { icon: "lucide:shield-check", text: "Treating model output as untrusted input: ask for a shape, then verify it" },
+              { icon: "lucide:key-round", text: "JWT auth with guest accounts, and putting ownership checks in the SQL itself" },
+              { icon: "lucide:list-checks", text: "Background jobs with BullMQ + Redis: retries, idempotent jobs, graceful shutdown" },
+              { icon: "lucide:gauge", text: "Measuring before tuning: Redis command budgets and proxy hops, not guesses" },
               { icon: "lucide:layers", text: "Keeping routes, services and repositories apart so pipelines stay reusable" },
             ].map((item) => (
               <div key={item.text} className="border-explorerBorder bg-articleBg flex items-start gap-3 rounded-xl border p-4">
@@ -610,11 +776,87 @@ export default function DocMindDetail() {
         </motion.div>
 
       </article>
+
+      <Lightbox
+        screenshots={allScreenshots}
+        index={lightboxIndex}
+        onClose={closeLightbox}
+        onPrev={prev}
+        onNext={next}
+      />
     </HelmetProvider>
   );
 }
 
 // ─── Sub-components ────────────────────────────────────────────
+function Lightbox({ screenshots, index, onClose, onPrev, onNext }) {
+  const isOpen = index !== null;
+  const current = isOpen ? screenshots[index] : null;
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          key="lightbox-backdrop"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
+          onClick={onClose}
+        >
+          {/* Prev */}
+          <button
+            onClick={(e) => { e.stopPropagation(); onPrev(); }}
+            className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-2.5 text-white backdrop-blur-sm transition-colors hover:bg-white/25 sm:left-6"
+            aria-label="Previous image"
+          >
+            <Icon icon="lucide:chevron-left" width="22" />
+          </button>
+
+          {/* Image */}
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, scale: 0.93 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.93 }}
+            transition={{ duration: 0.2 }}
+            className="relative flex max-h-[90vh] max-w-5xl flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={current.src}
+              alt={current.alt}
+              decoding="async"
+              className="max-h-[82vh] max-w-full rounded-xl object-contain shadow-2xl"
+            />
+            <p className="mt-3 text-sm font-medium text-white/60">{current.label}</p>
+            <p className="text-xs text-white/30">{index + 1} / {screenshots.length}</p>
+          </motion.div>
+
+          {/* Next */}
+          <button
+            onClick={(e) => { e.stopPropagation(); onNext(); }}
+            className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-2.5 text-white backdrop-blur-sm transition-colors hover:bg-white/25 sm:right-6"
+            aria-label="Next image"
+          >
+            <Icon icon="lucide:chevron-right" width="22" />
+          </button>
+
+          {/* Close */}
+          <button
+            onClick={onClose}
+            className="absolute right-3 top-3 rounded-full bg-white/10 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/25 sm:right-6 sm:top-6"
+            aria-label="Close lightbox"
+          >
+            <Icon icon="lucide:x" width="20" />
+          </button>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 function Section({ title, children }) {
   return (
     <motion.section
