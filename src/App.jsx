@@ -21,7 +21,7 @@ import RouteFallback from "./components/RouteFallback";
 const About = lazy(() => import("./features/about/About"));
 const Contact = lazy(() => import("./features/contact/Contact"));
 const TaskForgeDetail = lazy(() => import("./features/projects/TaskForgeDetail"));
-const NetflixGPTDetail = lazy(() => import("./features/projects/NetflixGPTDetail"));
+const CinegraphDetail = lazy(() => import("./features/projects/CinegraphDetail"));
 const BiteSwiftDetail = lazy(() => import("./features/projects/BiteSwiftDetail"));
 const BookVerseDetail = lazy(() => import("./features/projects/BookVerseDetail"));
 const PortfolioDetail = lazy(() => import("./features/projects/PortfolioDetail"));
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
       { path: "/about", element: split(About) },
       { path: "/contact", element: split(Contact) },
       { path: "/projects/taskforge", element: split(TaskForgeDetail) },
-      { path: "/projects/cinegraph", element: split(NetflixGPTDetail) },
+      { path: "/projects/cinegraph", element: split(CinegraphDetail) },
       { path: "/projects/biteswift", element: split(BiteSwiftDetail) },
       { path: "/projects/bookverse", element: split(BookVerseDetail) },
       { path: "/projects/portfolio", element: split(PortfolioDetail) },

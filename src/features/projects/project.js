@@ -51,7 +51,7 @@ export const projects = [
       "AI recommendation engine for movies, TV and anime, with taste profiles and Gemini-powered picks.",
     image: cinegraph,
     tags: ["react-19", "redux-toolkit", "gemini-ai", "firebase", "tmdb-api"],
-    sourceCode: "https://github.com/sh1v-max/Netflix-GPT",
+    sourceCode: "https://github.com/sh1v-max/CineGraph",
     demo: "https://cinewatchgraph-ai.web.app",
     caseStudy: "/projects/cinegraph",
   },

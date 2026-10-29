@@ -220,7 +220,7 @@ export default function CinegraphDetail() {
               Live Demo
             </a>
             <a
-              href="https://github.com/sh1v-max/Netflix-GPT"
+              href="https://github.com/sh1v-max/CineGraph"
               target="_blank"
               rel="noopener noreferrer"
               className="border-accentColor/40 text-textColor hover:border-accentColor hover:bg-accentColor/10 inline-flex items-center gap-2 rounded-xl border-2 px-6 py-3 text-sm font-bold transition-all duration-200"
@@ -444,7 +444,7 @@ export default function CinegraphDetail() {
               className="bg-accentColor text-mainBg inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold transition-all duration-200 hover:opacity-90">
               <Icon icon="lucide:external-link" width="16" />Live Demo
             </a>
-            <a href="https://github.com/sh1v-max/Netflix-GPT" target="_blank" rel="noopener noreferrer"
+            <a href="https://github.com/sh1v-max/CineGraph" target="_blank" rel="noopener noreferrer"
               className="border-accentColor/40 text-textColor hover:border-accentColor hover:bg-accentColor/10 inline-flex items-center gap-2 rounded-xl border-2 px-6 py-3 text-sm font-bold transition-all duration-200">
               <Icon icon="mdi:github" width="16" />View Source
             </a>
