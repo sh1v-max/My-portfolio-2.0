@@ -20,8 +20,9 @@ export default function ViewCounter() {
     fetch(`${goatcounterBase}/counter/TOTAL.json`, { signal: controller.signal })
       .then((res) => (res.ok ? res.json() : null))
       // `count` arrives already formatted with thousands separators ("1,234").
+      // A brand-new account answers "0", which counts as "nothing to show".
       .then((data) => {
-        if (data?.count) setCount(data.count);
+        if (data?.count && data.count !== "0") setCount(data.count);
       })
       .catch(() => {});
 

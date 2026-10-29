@@ -28,7 +28,7 @@ export const stats = {
 // Pageviews are only sent from productionHost, never from localhost or Netlify
 // deploy previews, so testing doesn't inflate the count.
 export const analytics = {
-  goatcounterCode: "",
+  goatcounterCode: "singhshiv",
   productionHost: "singhshiv.netlify.app",
 };
 
