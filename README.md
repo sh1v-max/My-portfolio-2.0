@@ -44,6 +44,8 @@ A single-page-scroll developer portfolio built with React 18 and Tailwind CSS v4
 
 **Build Archive** — 33 focused UI experiments categorized by difficulty (Beginner / Intermediate / Advanced) and category (UI / API / Games / Forms / Logic), filterable and searchable. Surfaces on home as a full-bleed, counter-scrolling marquee.
 
+**Privacy-friendly analytics** — [GoatCounter](https://www.goatcounter.com/): no cookies, no personal data, so no consent banner. A small React Router hook reports each route change (the site never does a full page load between pages), and only from the production domain, so local development and deploy previews never count. The footer shows the site's total view count, read from GoatCounter's public counter endpoint and hidden until there's something to show.
+
 **Section rail navigation** — On home, a vertical dot rail (desktop, ≥1280px) tracks scroll position across all six sections and jumps to any of them; it takes the place of the floating email link on that one route, since the contact form is already on the page.
 
 **Performance** — Route-level code splitting (`React.lazy` + `Suspense`) keeps every page but Home out of the initial bundle. Images pass through `vite-imagetools` at build time (WebP, capped width) with no call-site changes. Lenis-driven smooth scroll.
@@ -69,6 +71,7 @@ A single-page-scroll developer portfolio built with React 18 and Tailwind CSS v4
 **Toasts:** react-hot-toast
 **Serverless:** Netlify Functions
 **Email:** Resend API
+**Analytics:** GoatCounter
 **GitHub Calendar:** react-github-calendar
 **Image pipeline:** vite-imagetools
 **Linting:** ESLint + eslint-plugin-react-hooks
