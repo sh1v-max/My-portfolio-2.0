@@ -21,6 +21,17 @@ export const stats = {
   themes: "6",
 };
 
+// GoatCounter: private dashboard at https://<code>.goatcounter.com, plus the
+// public "views" number in the footer. Leave goatcounterCode empty and both are
+// switched off, so the site works the same without an account.
+//
+// Pageviews are only sent from productionHost, never from localhost or Netlify
+// deploy previews, so testing doesn't inflate the count.
+export const analytics = {
+  goatcounterCode: "",
+  productionHost: "singhshiv.netlify.app",
+};
+
 // Grouped rather than one flat list: "React, Node, MongoDB, Git" in a single row
 // tells a reader what I have touched, but not where I actually work. The
 // grouping is the information.

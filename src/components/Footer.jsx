@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { personal } from "../data/config";
 import { useCopyToClipboard } from "../hooks/useCopyToClipboard";
+import ViewCounter from "./ViewCounter";
 
 function Footer() {
   const currentYear = new Date().getFullYear();
@@ -36,6 +37,7 @@ function Footer() {
           <p className="text-xs text-textMuted">
             © {currentYear} {personal.name}. All rights reserved.
           </p>
+          <ViewCounter />
         </div>
 
         {/* Right: Social Icons */}

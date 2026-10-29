@@ -9,6 +9,7 @@ import ScrollToTop from "./ScrollToTop";
 import { Toaster } from "react-hot-toast";
 import Lenis from "lenis";
 import { registerLenis, unregisterLenis } from "../lib/lenis";
+import { usePageTracking } from "../hooks/usePageTracking";
 
 const themeTokens = {
   github:    { bg: "#24292e", accent: "#f9826c" },
@@ -23,6 +24,7 @@ function Main() {
   const { theme } = useTheme();
   const tokens = themeTokens[theme] ?? themeTokens.github;
   const contentRef = useRef(null);
+  usePageTracking();
 
   useEffect(() => {
     const lenis = new Lenis({
